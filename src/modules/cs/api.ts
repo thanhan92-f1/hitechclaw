@@ -79,45 +79,25 @@ export async function getFaqCategories() {
   return res.json();
 }
 
-// ── xClaw Chat ──
+// ── xClaw Chat (via @xclaw-ai/chat-sdk) ──
+import { XClawClient } from '@xclaw-ai/chat-sdk';
+
 const XCLAW_BASE = '/xclaw-api';
+const xclawClient = new XClawClient({ baseUrl: XCLAW_BASE });
 
 export async function loginXClaw(email: string, password: string): Promise<{ token: string } | { error: string }> {
-  const res = await fetch(`${XCLAW_BASE}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
-  return res.json();
+  try {
+    const res = await xclawClient.login({ email, password });
+    return { token: res.token };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : 'Login failed' };
+  }
 }
 
 export function chatXClawStream(token: string, message: string, sessionId?: string, onDelta?: (text: string) => void): { cancel: () => void; done: Promise<string> } {
-  const controller = new AbortController();
-  const done = (async () => {
-    const res = await fetch(`${XCLAW_BASE}/api/chat`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-      body: JSON.stringify({ message, sessionId, stream: true }),
-      signal: controller.signal,
-    });
-    if (!res.ok) throw new Error(`Chat failed: ${res.status}`);
-    const reader = res.body?.getReader();
-    if (!reader) throw new Error('No response body');
-    const decoder = new TextDecoder();
-    let full = '';
-    while (true) {
-      const { done: finished, value } = await reader.read();
-      if (finished) break;
-      const chunk = decoder.decode(value, { stream: true });
-      for (const line of chunk.split('\n')) {
-        if (!line.startsWith('data: ')) continue;
-        try {
-          const data = JSON.parse(line.slice(6));
-          if (data.type === 'text-delta' && data.content) { full += data.content; onDelta?.(data.content); }
-        } catch { /* skip */ }
-      }
-    }
-    return full;
-  })();
-  return { cancel: () => controller.abort(), done };
+  xclawClient.setToken(token);
+  const handle = xclawClient.chatStream(message, {
+    onTextDelta: (delta) => onDelta?.(delta),
+  }, { sessionId });
+  return { cancel: handle.cancel, done: handle.done };
 }
