@@ -11,6 +11,10 @@ export default defineConfig({
         target: 'http://localhost:4000',
         changeOrigin: true,
       },
+      '/api/cs': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
       '/xclaw-api': {
         target: 'http://localhost:3000',
         changeOrigin: true,

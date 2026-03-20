@@ -15,6 +15,7 @@ import { buildMedicationCatalog } from './medications.js';
 import { seedPatients, seedAllergies, seedEncounters, seedPrescriptions } from './seed.js';
 import type { SOAPEncounter } from './seed.js';
 import { checkAllergyDrugConflicts } from './alert-engine.js';
+import { csRouter } from './cs/index.js';
 
 // ─── In-Memory Data Stores ──────────────────────────────────
 
@@ -1214,14 +1215,21 @@ app.get('/api/his/permissions', (c) => {
 });
 
 // ============================================================
+// Mount CS Module
+// ============================================================
+
+app.route('/', csRouter);
+
+// ============================================================
 // Start
 // ============================================================
 
 const PORT = Number(process.env.HIS_PORT) || 4000;
 
 serve({ fetch: app.fetch, port: PORT }, () => {
-  console.log(`\n🏥 HIS Mini Server running at http://localhost:${PORT}`);
-  console.log(`   FHIR R5 • Clinical Alert Engine • ${patients.size} patients • ${medications.size} medications`);
+  console.log(`\n🏥 Demo Integration Server running at http://localhost:${PORT}`);
+  console.log(`   ├─ HIS: FHIR R5 • ${patients.size} patients • ${medications.size} medications`);
+  console.log(`   └─ CS:  Tickets • Customers • FAQ`);
   console.log(`   📚 Knowledge: ${knowledgeDrugs.length} drugs • ${knowledgeInteractions.length} interactions • ${knowledgeICD10.length} ICD-10 codes`);
-  console.log(`   👥 Users: ${hisUsers.size} users • ${hisRoles.size} roles\n`);
+  console.log(`   👥 HIS Users: ${hisUsers.size} users • ${hisRoles.size} roles\n`);
 });
