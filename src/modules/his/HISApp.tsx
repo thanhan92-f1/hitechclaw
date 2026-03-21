@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
     Users, Pill, AlertTriangle, LayoutDashboard, MessageSquare, Activity,
-    Stethoscope, BookOpen, UserCog, LogOut, Eye, EyeOff, ArrowLeft,
+    Stethoscope, BookOpen, UserCog, LogOut, Eye, EyeOff, ArrowLeft, BarChart3,
 } from 'lucide-react';
 import { DashboardPage } from './pages/DashboardPage.js';
 import { PatientsPage } from './pages/PatientsPage.js';
@@ -11,6 +11,7 @@ import { ChatbotPage } from './pages/ChatbotPage.js';
 import { EncounterPage } from './pages/EncounterPage.js';
 import { KnowledgePage } from './pages/KnowledgePage.js';
 import { UserManagementPage } from './pages/UserManagementPage.js';
+import { ReportsPage } from './pages/ReportsPage.js';
 import { XClawWidget } from './components/XClawWidget.js';
 import { hisLogin, hisLogout, hisGetMe, setAuthToken } from './api.js';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +36,7 @@ export interface AuthUser {
     status: string;
 }
 
-type Page = 'dashboard' | 'patients' | 'encounter' | 'prescribe' | 'alerts' | 'knowledge' | 'chatbot' | 'users';
+type Page = 'dashboard' | 'patients' | 'encounter' | 'prescribe' | 'alerts' | 'knowledge' | 'chatbot' | 'users' | 'reports';
 
 const NAV: { id: Page; label: string; icon: typeof Users; permission?: string }[] = [
     { id: 'dashboard', label: 'Tổng quan', icon: LayoutDashboard },
@@ -46,6 +47,7 @@ const NAV: { id: Page; label: string; icon: typeof Users; permission?: string }[
     { id: 'knowledge', label: 'Knowledge Base', icon: BookOpen, permission: 'knowledge.read' },
     { id: 'chatbot', label: 'AI Trợ lý', icon: MessageSquare, permission: 'chat.use' },
     { id: 'users', label: 'Quản lý người dùng', icon: UserCog, permission: 'users.read' },
+    { id: 'reports', label: 'Báo cáo', icon: BarChart3, permission: 'reports.read' },
 ];
 
 function hasPermission(user: AuthUser, perm: string): boolean {
@@ -160,6 +162,7 @@ function LoginScreen({ onLogin }: { onLogin: (user: AuthUser) => void }) {
                             { email: 'doctor@his.local', pw: 'doctor123', role: 'Bác sĩ' },
                             { email: 'nurse@his.local', pw: 'nurse123', role: 'Điều dưỡng' },
                             { email: 'pharmacist@his.local', pw: 'pharma123', role: 'Dược sĩ' },
+                            { email: 'director@his.local', pw: 'director123', role: 'Giám đốc' },
                         ].map(a => (
                             <button key={a.email}
                                 onClick={() => { setEmail(a.email); setPassword(a.pw); }}
@@ -297,6 +300,7 @@ export function HISApp() {
                 {page === 'knowledge' && <KnowledgePage />}
                 {page === 'chatbot' && <ChatbotPage />}
                 {page === 'users' && <UserManagementPage />}
+                {page === 'reports' && <ReportsPage />}
             </main>
 
             <XClawWidget patientContext={currentPatient} />

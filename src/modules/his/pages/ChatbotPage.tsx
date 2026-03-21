@@ -90,6 +90,16 @@ function MermaidBlock({ code }: { code: string }) {
     );
 }
 
+// ─── Simple inline markdown → HTML (bold, italic, hr) ───
+
+function markdownToHtml(text: string): string {
+    return text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/_(.+?)_/g, '<em>$1</em>')
+        .replace(/^---$/gm, '<hr style="border-color:var(--his-border);margin:8px 0"/>');
+}
+
 // ─── Markdown-like renderer with mermaid support ───
 
 function MessageContent({ content }: { content: string }) {
@@ -115,14 +125,14 @@ function MessageContent({ content }: { content: string }) {
     }, [content]);
 
     if (segments.length === 1 && segments[0].type === 'text') {
-        return <span className="whitespace-pre-wrap">{content}</span>;
+        return <span className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: markdownToHtml(content) }} />;
     }
 
     return (
         <>
             {segments.map((seg, i) => {
                 if (seg.type === 'mermaid') return <MermaidBlock key={i} code={seg.content} />;
-                return <span key={i} className="whitespace-pre-wrap">{seg.content}</span>;
+                return <span key={i} className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: markdownToHtml(seg.content) }} />;
             })}
         </>
     );
@@ -204,10 +214,14 @@ function MessageActions({ message, onRate, onCopy, onRetry }: {
 // ─── Quick Prompts ───
 
 const QUICK_PROMPTS = [
-    { label: 'Tương tác thuốc', prompt: 'Kiểm tra tương tác giữa các thuốc phổ biến', icon: '💊' },
-    { label: 'Vẽ sơ đồ', prompt: 'Vẽ sơ đồ flowchart quy trình khám bệnh bằng mermaid', icon: '📊' },
-    { label: 'Liều dùng', prompt: 'Hướng dẫn liều dùng thuốc thông dụng cho người lớn', icon: '💉' },
-    { label: 'ICD-10', prompt: 'Tra cứu mã ICD-10 cho các bệnh thường gặp', icon: '📋' },
+    { label: 'Bệnh nhân hôm nay', prompt: 'Hôm nay có bao nhiêu bệnh nhân?', icon: '🏥' },
+    { label: 'Tình trạng nguy hiểm', prompt: 'Có tình trạng bệnh nguy hiểm không?', icon: '🔴' },
+    { label: 'Dị ứng nghiêm trọng', prompt: 'Bệnh nhân nào có dị ứng nghiêm trọng?', icon: '⚠️' },
+    { label: 'Đơn thuốc hoạt động', prompt: 'Đơn thuốc đang hoạt động?', icon: '💊' },
+    { label: 'Cần tái khám', prompt: 'Bệnh nhân nào cần tái khám?', icon: '📅' },
+    { label: 'Thai phụ', prompt: 'Bệnh nhân nào đang mang thai?', icon: '🤰' },
+    { label: 'Thuốc kê nhiều nhất', prompt: 'Thuốc nào được kê nhiều nhất?', icon: '📊' },
+    { label: 'Vẽ sơ đồ', prompt: 'Vẽ sơ đồ flowchart quy trình khám bệnh bằng mermaid', icon: '📐' },
 ];
 
 // ═══════════════════════════════════════════════════
@@ -228,6 +242,7 @@ export function ChatbotPage() {
     const [sessions, setSessions] = useState<ChatSession[]>([]);
     const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
     const [xclawSessionId, setXclawSessionId] = useState<string | undefined>();
+    const isNewLocalSession = useRef(false);
 
     // Stats
     const [chatStats, setChatStats] = useState<ChatStatsData | null>(null);
@@ -265,6 +280,11 @@ export function ChatbotPage() {
     // ─── Load messages for active session ───
     useEffect(() => {
         if (!activeSessionId) return;
+        // Skip server fetch for newly created local sessions (welcome message only)
+        if (isNewLocalSession.current) {
+            isNewLocalSession.current = false;
+            return;
+        }
         (async () => {
             try {
                 const res = await getChatMessages(activeSessionId);
@@ -284,11 +304,12 @@ export function ChatbotPage() {
     // ─── New session ───
     const startNewSession = async () => {
         const id = `chat-${Date.now().toString(36)}`;
+        isNewLocalSession.current = true;
         setActiveSessionId(id);
         setXclawSessionId(undefined);
         setMessages([{
             role: 'assistant',
-            content: 'Xin chào! Tôi là trợ lý AI của xClaw. Tôi có thể giúp bạn:\n\n• Tra cứu thông tin thuốc & tương tác\n• Kiểm tra mã ICD-10\n• Vẽ sơ đồ quy trình (flowchart, sequence diagram...)\n• Trả lời câu hỏi y khoa\n\nBạn có thể yêu cầu tôi vẽ sơ đồ bằng cách nói "vẽ sơ đồ..." hoặc "tạo flowchart..."',
+            content: 'Xin chào! Tôi là trợ lý AI của xClaw. Tôi có thể giúp bạn:\n\n• 🏥 **Truy vấn dữ liệu FHIR** — Hỏi về bệnh nhân, đơn thuốc, lượt khám, dị ứng\n• 💊 Tra cứu thông tin thuốc & tương tác\n• 📋 Kiểm tra mã ICD-10\n• 📐 Vẽ sơ đồ quy trình (flowchart, sequence diagram...)\n• 📊 Thống kê & báo cáo y khoa\n\n💡 Thử hỏi: _"Hôm nay có bao nhiêu bệnh nhân?"_ hoặc _"Có tình trạng bệnh nguy hiểm không?"_',
             timestamp: new Date(),
         }]);
         await loadSessions();
@@ -309,14 +330,6 @@ export function ChatbotPage() {
     const send = async (text?: string) => {
         const msg = (text || input).trim();
         if (!msg || sending) return;
-        if (!token) {
-            setMessages(prev => [...prev, {
-                role: 'assistant',
-                content: '⚠️ Chưa kết nối được tới xClaw AI. Hãy kiểm tra xClaw server đang chạy (port 3000).',
-                timestamp: new Date(),
-            }]);
-            return;
-        }
 
         setInput('');
 
@@ -334,6 +347,16 @@ export function ChatbotPage() {
             // Save user message to server
             const savedUser = await saveChatMessage(sid, { role: 'user', content: msg });
             userMsg.id = savedUser.message?.id;
+
+            // ─── AI Chat (xClaw) ───
+            if (!token) {
+                setMessages(prev => [...prev, {
+                    role: 'assistant',
+                    content: '⚠️ Chưa kết nối được tới xClaw AI. Hãy kiểm tra xClaw server đang chạy (port 3000).',
+                    timestamp: new Date(),
+                }]);
+                return;
+            }
 
             // Get context from history for better AI understanding
             let contextPrefix = '';
@@ -468,7 +491,7 @@ export function ChatbotPage() {
                     <div className="flex-1 min-w-0">
                         <h1 className="text-[13px] font-bold" style={{ color: 'var(--his-fg)' }}>xClaw AI Assistant</h1>
                         <p className="text-[10px]" style={{ color: 'var(--his-fg-muted)' }}>
-                            Trợ lý AI dược & y khoa • Hỗ trợ vẽ sơ đồ
+                            Trợ lý AI dược & y khoa • Truy vấn FHIR • Vẽ sơ đồ
                         </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -497,11 +520,11 @@ export function ChatbotPage() {
                             </div>
                             <h2 className="text-[15px] font-bold mb-1.5" style={{ color: 'var(--his-fg)' }}>AI Trợ lý xClaw</h2>
                             <p className="text-[12px] max-w-sm mb-6" style={{ color: 'var(--his-fg-muted)' }}>
-                                Tra cứu thuốc, kiểm tra tương tác, vẽ sơ đồ quy trình & nhiều hơn nữa
+                                Truy vấn dữ liệu FHIR, tra cứu thuốc, kiểm tra tương tác, vẽ sơ đồ & nhiều hơn nữa
                             </p>
 
                             {/* Quick prompts */}
-                            <div className="grid grid-cols-2 gap-2 max-w-md">
+                            <div className="grid grid-cols-2 gap-2 max-w-lg">
                                 {QUICK_PROMPTS.map((qp, i) => (
                                     <button key={i} onClick={() => { if (!activeSessionId) startNewSession().then(() => setTimeout(() => send(qp.prompt), 100)); else send(qp.prompt); }}
                                         className="text-left px-3 py-2.5 rounded-xl text-[12px] transition-all cursor-pointer hover:shadow-sm"
@@ -580,7 +603,7 @@ export function ChatbotPage() {
                             <textarea
                                 className="flex-1 resize-none bg-transparent border-none outline-none text-[13px] px-2 py-1.5 min-h-[36px] max-h-[120px]"
                                 style={{ color: 'var(--his-fg)' }}
-                                placeholder={token ? 'Nhập tin nhắn... (hỗ trợ vẽ sơ đồ — hãy thử "vẽ flowchart...")' : 'Đăng nhập để bắt đầu trò chuyện...'}
+                                placeholder='Hỏi dữ liệu bệnh nhân, thuốc, lượt khám... hoặc "vẽ flowchart..."'
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }}

@@ -741,6 +741,8 @@ const ALL_PERMISSIONS = [
   'knowledge.read', 'knowledge.write',
   // Chat AI
   'chat.use',
+  // Reports
+  'reports.read',
   // User Management
   'users.read', 'users.write', 'users.delete',
   // Roles
@@ -831,6 +833,14 @@ const seedRoles: Omit<HISRole, 'createdAt' | 'updatedAt'>[] = [
       'patients.read', 'patients.write', 'encounters.read',
     ], isSystem: true,
   },
+  {
+    id: 'role-director', name: 'Giám đốc', description: 'Xem báo cáo thống kê, giám sát hoạt động bệnh viện',
+    permissions: [
+      'patients.read', 'prescriptions.read', 'encounters.read',
+      'alerts.read', 'knowledge.read', 'reports.read',
+      'users.read', 'roles.read', 'chat.use',
+    ], isSystem: true,
+  },
 ];
 
 for (const r of seedRoles) {
@@ -870,6 +880,11 @@ const seedUsers: Omit<HISUser, 'createdAt' | 'updatedAt'>[] = [
     id: 'user-receptionist', name: 'Hoàng Văn E', email: 'reception@his.local',
     passwordHash: hashPassword('reception123'), role: 'role-receptionist',
     department: 'Lễ tân', status: 'active',
+  },
+  {
+    id: 'user-director', name: 'GĐ. Trần Minh Đức', email: 'director@his.local',
+    passwordHash: hashPassword('director123'), role: 'role-director',
+    department: 'Ban Giám Đốc', status: 'active',
   },
 ];
 
@@ -1198,6 +1213,9 @@ app.get('/api/his/permissions', (c) => {
     'AI Trợ lý': [
       { key: 'chat.use', label: 'Sử dụng AI chat' },
     ],
+    'Báo cáo': [
+      { key: 'reports.read', label: 'Xem báo cáo thống kê' },
+    ],
     'Người dùng': [
       { key: 'users.read', label: 'Xem danh sách' },
       { key: 'users.write', label: 'Thêm/sửa người dùng' },
@@ -1212,6 +1230,213 @@ app.get('/api/his/permissions', (c) => {
     ],
   };
   return c.json({ permissions: groups, allKeys: ALL_PERMISSIONS });
+});
+
+// ============================================================
+// Reports — Director Dashboard (Báo cáo Giám đốc)
+// ============================================================
+
+// Helper: calculate age from birthDate string
+function calcAge(birthDate: string): number {
+  const today = new Date();
+  const birth = new Date(birthDate);
+  let age = today.getFullYear() - birth.getFullYear();
+  const m = today.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+  return age;
+}
+
+// GET /api/his/reports/overview — Tổng quan bệnh viện
+app.get('/api/his/reports/overview', (c) => {
+  const authUser = getUserFromToken(c.req.header('Authorization'));
+  if (!authUser || !userHasPermission(authUser, 'reports.read')) {
+    return c.json({ error: 'Không có quyền xem báo cáo' }, 403);
+  }
+
+  const patientList = [...patients.values()];
+
+  // Gender distribution
+  const genderDist: Record<string, number> = { male: 0, female: 0, other: 0, unknown: 0 };
+  for (const p of patientList) genderDist[p.gender] = (genderDist[p.gender] || 0) + 1;
+
+  // Age groups
+  const ageGroups: Record<string, number> = { '0-17': 0, '18-30': 0, '31-45': 0, '46-60': 0, '61+': 0 };
+  for (const p of patientList) {
+    if (!p.birthDate) continue;
+    const age = calcAge(p.birthDate);
+    if (age < 18) ageGroups['0-17']++;
+    else if (age <= 30) ageGroups['18-30']++;
+    else if (age <= 45) ageGroups['31-45']++;
+    else if (age <= 60) ageGroups['46-60']++;
+    else ageGroups['61+']++;
+  }
+
+  // Department stats (from users)
+  const deptStats: Record<string, number> = {};
+  for (const u of hisUsers.values()) {
+    deptStats[u.department] = (deptStats[u.department] || 0) + 1;
+  }
+
+  // Active prescriptions
+  const activePrescriptions = [...prescriptions.values()].filter(p => p.status === 'active').length;
+
+  // Encounter stats
+  const encounterList = [...encounters.values()];
+  const encounterByStatus: Record<string, number> = {};
+  for (const e of encounterList) {
+    encounterByStatus[e.status] = (encounterByStatus[e.status] || 0) + 1;
+  }
+
+  return c.json({
+    summary: {
+      totalPatients: patientList.length,
+      totalPrescriptions: prescriptions.size,
+      activePrescriptions,
+      totalEncounters: encounterList.length,
+      totalAlerts: alertHistory.length,
+      criticalAlerts: alertHistory.filter(a => a.severity === 'critical').length,
+      totalUsers: hisUsers.size,
+    },
+    charts: {
+      genderDistribution: { labels: Object.keys(genderDist), values: Object.values(genderDist) },
+      ageGroups: { labels: Object.keys(ageGroups), values: Object.values(ageGroups) },
+      departmentStaff: { labels: Object.keys(deptStats), values: Object.values(deptStats) },
+      encounterStatus: { labels: Object.keys(encounterByStatus), values: Object.values(encounterByStatus) },
+    },
+  });
+});
+
+// GET /api/his/reports/prescriptions — Thống kê đơn thuốc
+app.get('/api/his/reports/prescriptions', (c) => {
+  const authUser = getUserFromToken(c.req.header('Authorization'));
+  if (!authUser || !userHasPermission(authUser, 'reports.read')) {
+    return c.json({ error: 'Không có quyền xem báo cáo' }, 403);
+  }
+
+  const rxList = [...prescriptions.values()];
+
+  // By medication
+  const byMed: Record<string, number> = {};
+  for (const rx of rxList) {
+    const name = rx.medication.display || 'Unknown';
+    byMed[name] = (byMed[name] || 0) + 1;
+  }
+
+  // By status
+  const byStatus: Record<string, number> = {};
+  for (const rx of rxList) {
+    byStatus[rx.status] = (byStatus[rx.status] || 0) + 1;
+  }
+
+  // By month (authoredOn)
+  const byMonth: Record<string, number> = {};
+  for (const rx of rxList) {
+    const month = rx.authoredOn.slice(0, 7); // YYYY-MM
+    byMonth[month] = (byMonth[month] || 0) + 1;
+  }
+  const sortedMonths = Object.keys(byMonth).sort();
+
+  // Overridden prescriptions (had alerts but were force-overridden)
+  const overridden = rxList.filter(rx =>
+    rx.note?.some(n => n.text?.includes('cảnh báo dị ứng')),
+  ).length;
+
+  return c.json({
+    summary: { total: rxList.length, overridden },
+    charts: {
+      byMedication: { labels: Object.keys(byMed), values: Object.values(byMed) },
+      byStatus: { labels: Object.keys(byStatus), values: Object.values(byStatus) },
+      byMonth: { labels: sortedMonths, values: sortedMonths.map(m => byMonth[m]) },
+    },
+  });
+});
+
+// GET /api/his/reports/alerts — Thống kê cảnh báo lâm sàng
+app.get('/api/his/reports/alerts', (c) => {
+  const authUser = getUserFromToken(c.req.header('Authorization'));
+  if (!authUser || !userHasPermission(authUser, 'reports.read')) {
+    return c.json({ error: 'Không có quyền xem báo cáo' }, 403);
+  }
+
+  // By severity
+  const bySeverity: Record<string, number> = {};
+  for (const a of alertHistory) {
+    bySeverity[a.severity] = (bySeverity[a.severity] || 0) + 1;
+  }
+
+  // By type
+  const byType: Record<string, number> = {};
+  for (const a of alertHistory) {
+    const type = a.type || 'unknown';
+    byType[type] = (byType[type] || 0) + 1;
+  }
+
+  // By date
+  const byDate: Record<string, number> = {};
+  for (const a of alertHistory) {
+    const date = a.timestamp.slice(0, 10); // YYYY-MM-DD
+    byDate[date] = (byDate[date] || 0) + 1;
+  }
+  const sortedDates = Object.keys(byDate).sort();
+
+  return c.json({
+    summary: {
+      total: alertHistory.length,
+      critical: alertHistory.filter(a => a.severity === 'critical').length,
+      high: alertHistory.filter(a => a.severity === 'high').length,
+    },
+    charts: {
+      bySeverity: { labels: Object.keys(bySeverity), values: Object.values(bySeverity) },
+      byType: { labels: Object.keys(byType), values: Object.values(byType) },
+      byDate: { labels: sortedDates, values: sortedDates.map(d => byDate[d]) },
+    },
+  });
+});
+
+// GET /api/his/reports/encounters — Thống kê lượt khám
+app.get('/api/his/reports/encounters', (c) => {
+  const authUser = getUserFromToken(c.req.header('Authorization'));
+  if (!authUser || !userHasPermission(authUser, 'reports.read')) {
+    return c.json({ error: 'Không có quyền xem báo cáo' }, 403);
+  }
+
+  const encList = [...encounters.values()];
+
+  // By status
+  const byStatus: Record<string, number> = {};
+  for (const e of encList) {
+    byStatus[e.status] = (byStatus[e.status] || 0) + 1;
+  }
+
+  // By date
+  const byDate: Record<string, number> = {};
+  for (const e of encList) {
+    byDate[e.date] = (byDate[e.date] || 0) + 1;
+  }
+  const sortedDates = Object.keys(byDate).sort();
+
+  // By patient (top patients by visit count)
+  const byPatient: Record<string, { name: string; count: number }> = {};
+  for (const e of encList) {
+    if (!byPatient[e.patientId]) {
+      byPatient[e.patientId] = { name: e.patientName, count: 0 };
+    }
+    byPatient[e.patientId].count++;
+  }
+  const topPatients = Object.values(byPatient).sort((a, b) => b.count - a.count).slice(0, 10);
+
+  return c.json({
+    summary: {
+      total: encList.length,
+      completed: encList.filter(e => e.status === 'completed').length,
+      inProgress: encList.filter(e => e.status === 'in-progress').length,
+    },
+    charts: {
+      byStatus: { labels: Object.keys(byStatus), values: Object.values(byStatus) },
+      byDate: { labels: sortedDates, values: sortedDates.map(d => byDate[d]) },
+      topPatients: { labels: topPatients.map(p => p.name), values: topPatients.map(p => p.count) },
+    },
+  });
 });
 
 // ============================================================
