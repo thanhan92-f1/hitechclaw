@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/necatiozmen/Documents/awesome-claude-skills/**)",
+      "Bash(for f:*)",
+      "Bash(do sed:*)"
+    ]
+  }
+}
