@@ -114,8 +114,8 @@ export default function HomePage() {
               <img
                 src="/logo.png"
                 alt="HiTechClaw Logo"
-                width={88}
-                height={88}
+                width={250}
+                height={120}
                 style={{ borderRadius: 21, display: 'block' }}
               />
             </div>
@@ -315,7 +315,7 @@ export default function HomePage() {
         <div className="section-divider mb-10" />
         <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-fd-muted-foreground">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="HiTechClaw Logo" width={24} height={24} className="rounded-md" />
+            <img src="/logo.png" alt="HiTechClaw Logo" width={250} height={120} className="rounded-md" />
             <span>
               MIT © <a href="https://github.com/thanhan92f-f1/hitechclaw" className="hover:text-fd-foreground transition-colors">HiTechClaw</a>
             </span>
