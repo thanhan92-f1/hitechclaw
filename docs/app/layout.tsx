@@ -10,8 +10,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'xClaw — AI Agent Platform',
-    template: '%s | xClaw',
+    default: 'HiTechClaw — AI Agent Platform',
+    template: '%s | HiTechClaw',
   },
   description:
     'Open-source AI Agent Platform with 10 LLM providers, 8 chat channels, visual workflows, and multi-tenant RBAC. Build AI agents in minutes.',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     'TypeScript',
     'Open Source',
     'Multi-Agent',
-    'xClaw',
+    'HiTechClaw',
     'ChatBot',
     'Automation',
     'DeepSeek',
@@ -32,24 +32,24 @@ export const metadata: Metadata = {
     'WhatsApp',
     'Zalo',
   ],
-  authors: [{ name: 'xDev.asia', url: 'https://xdev.asia' }],
+  authors: [{ name: 'xDev.asia', url: 'https://hitechclaw.com' }],
   creator: 'Tran Duc Duy',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://xclaw.xdev.asia',
-    title: 'xClaw — AI Agent Platform',
+    url: 'https://hitechclaw.com',
+    title: 'HiTechClaw — AI Agent Platform',
     description:
       'Open-source AI Agent Platform with 10 LLM providers, 8 chat channels, visual workflows.',
-    siteName: 'xClaw',
+    siteName: 'HiTechClaw',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'xClaw — AI Agent Platform',
+    title: 'HiTechClaw — AI Agent Platform',
     description:
       'Open-source AI Agent Platform with 10 LLM providers, 8 chat channels, visual workflows.',
   },
-  metadataBase: new URL('https://xclaw.xdev.asia'),
+  metadataBase: new URL('https://hitechclaw.com'),
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {

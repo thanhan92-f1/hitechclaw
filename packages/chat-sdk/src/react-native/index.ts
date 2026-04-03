@@ -1,5 +1,5 @@
 // ============================================================
-// @xclaw-ai/chat-sdk/react-native — React Native Compatibility
+// @hitechclaw-ai/chat-sdk/react-native — React Native Compatibility
 // ============================================================
 //
 // React Native's fetch doesn't support ReadableStream natively.
@@ -7,16 +7,16 @@
 // re-exports all React hooks (they work identically).
 //
 // Usage:
-//   import { XClawProvider, useChat, createReactNativeConfig } from '@xclaw-ai/chat-sdk/react-native';
+//   import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
 //
-//   const config = createReactNativeConfig({ baseUrl: 'https://api.xclaw.io', token: '...' });
-//   <XClawProvider config={config}><App /></XClawProvider>
+//   const config = createReactNativeConfig({ baseUrl: 'https://api.hitechclaw.io', token: '...' });
+//   <HiTechClawProvider config={config}><App /></HiTechClawProvider>
 //
 
-export { XClawProvider, useXClawClient, useChat, useSessions } from '../react/index.js';
-export type { XClawProviderProps, UseChatOptions, UseChatReturn, UseSessionsReturn } from '../react/index.js';
+export { HiTechClawProvider, useHiTechClawClient, useChat, useSessions } from '../react/index.js';
+export type { HiTechClawProviderProps, UseChatOptions, UseChatReturn, UseSessionsReturn } from '../react/index.js';
 
-import type { XClawConfig } from '../types.js';
+import type { HiTechClawConfig } from '../types.js';
 
 /**
  * SSE line parser for environments without ReadableStream.
@@ -48,24 +48,24 @@ export function parseSSELines(raw: string): Array<{ event?: string; data: string
 }
 
 /**
- * Create xClaw config optimized for React Native.
+ * Create HiTechClaw config optimized for React Native.
  *
  * If your React Native environment has proper streaming fetch (Hermes + RN 0.73+),
  * no polyfill is needed. Otherwise, pass a custom fetch or use react-native-sse.
  *
  * @example
  * ```tsx
- * import { createReactNativeConfig } from '@xclaw-ai/chat-sdk/react-native';
+ * import { createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
  *
  * const config = createReactNativeConfig({
- *   baseUrl: 'https://api.xclaw.io',
+ *   baseUrl: 'https://api.hitechclaw.io',
  *   token: 'your-jwt-token',
  * });
  * ```
  */
 export function createReactNativeConfig(
-    options: Omit<XClawConfig, 'fetch'> & { fetch?: typeof globalThis.fetch },
-): XClawConfig {
+    options: Omit<HiTechClawConfig, 'fetch'> & { fetch?: typeof globalThis.fetch },
+): HiTechClawConfig {
     return {
         timeout: 120_000, // longer timeout for mobile
         ...options,
@@ -83,11 +83,11 @@ export function createReactNativeConfig(
  * Uses polling instead of streaming — chat() calls will use stream: false.
  */
 export function createReactNativePollingConfig(
-    options: Omit<XClawConfig, 'fetch'>,
-): XClawConfig & { __polling: true } {
+    options: Omit<HiTechClawConfig, 'fetch'>,
+): HiTechClawConfig & { __polling: true } {
     return {
         timeout: 120_000,
         ...options,
         __polling: true,
-    } as XClawConfig & { __polling: true };
+    } as HiTechClawConfig & { __polling: true };
 }

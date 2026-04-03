@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/skill-hub",
+    "name": "@hitechclaw-ai/skill-hub",
     "version": "2.0.1",
-    "description": "xClaw Skill Hub — skill registry and marketplace",
+    "description": "HiTechClaw Skill Hub — skill registry and marketplace",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*",
-        "@xclaw-ai/core": "*"
+        "@hitechclaw-ai/shared": "*",
+        "@hitechclaw-ai/core": "*"
     }
 }

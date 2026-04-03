@@ -121,7 +121,7 @@ export class WebCrawler {
       const res = await fetch(url, {
         signal: controller.signal,
         headers: {
-          'User-Agent': 'xClaw-Bot/1.0 (Knowledge Crawler)',
+          'User-Agent': 'HiTechClaw-Bot/1.0 (Knowledge Crawler)',
           'Accept': 'text/html,application/xhtml+xml',
         },
       });

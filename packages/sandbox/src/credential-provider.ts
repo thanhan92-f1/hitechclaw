@@ -6,7 +6,7 @@
 // Credentials never touch the sandbox filesystem.
 
 import { randomUUID } from 'node:crypto';
-import type { SandboxProvider } from '@xclaw-ai/shared';
+import type { SandboxProvider } from '@hitechclaw-ai/shared';
 import type { SandboxManager } from './sandbox-manager.js';
 
 /** Raw credential data from integration_connections table */
@@ -55,8 +55,8 @@ export class CredentialProviderAdapter {
     }
 
     return {
-      id: `xclaw-${creds.integrationId}-${randomUUID().slice(0, 8)}`,
-      name: `xclaw-${creds.integrationId}`,
+      id: `hitechclaw-${creds.integrationId}-${randomUUID().slice(0, 8)}`,
+      name: `hitechclaw-${creds.integrationId}`,
       type: providerType,
       envVars,
     };

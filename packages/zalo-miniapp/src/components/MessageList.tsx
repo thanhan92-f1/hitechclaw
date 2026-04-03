@@ -24,7 +24,7 @@ export const MessageList: React.FC<MessageListProps> = ({ messages }) => {
         return (
             <div className="chat-empty">
                 <div className="chat-empty-icon">🤖</div>
-                <p className="chat-empty-title">xClaw AI</p>
+                <p className="chat-empty-title">HiTechClaw AI</p>
                 <p className="chat-empty-subtitle">Xin chào! Tôi có thể giúp gì cho bạn?</p>
             </div>
         );

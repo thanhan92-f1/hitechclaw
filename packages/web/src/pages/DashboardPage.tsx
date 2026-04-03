@@ -123,7 +123,7 @@ export function DashboardPage() {
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold" style={{ color: '#f4f4f5' }}>
-                                Welcome to xClaw
+                                Welcome to HiTechClaw
                             </h1>
                             <p className="text-sm" style={{ color: '#71717a' }}>
                                 Open-source AI Agent Platform — Multi-industry, Multi-tenant

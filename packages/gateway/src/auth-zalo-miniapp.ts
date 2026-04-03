@@ -3,13 +3,13 @@ import * as jose from 'jose';
 import {
   getDB, users, oauthAccounts, tenants,
   eq, and,
-} from '@xclaw-ai/db';
+} from '@hitechclaw-ai/db';
 import type { GatewayContext } from './gateway.js';
 import { seedDefaultRoles, assignRoleToUser, getUserPermissions } from './rbac.js';
 
 // ─── Zalo Mini App Auth ─────────────────────────────────────
-// Exchange Zalo access token (from zmp-sdk getAccessToken()) for xClaw JWT.
-// Flow: Mini App → getAccessToken() → POST /auth/zalo-miniapp → xClaw JWT
+// Exchange Zalo access token (from zmp-sdk getAccessToken()) for HiTechClaw JWT.
+// Flow: Mini App → getAccessToken() → POST /auth/zalo-miniapp → HiTechClaw JWT
 
 const ZALO_GRAPH_API = 'https://graph.zalo.me/v2.0/me';
 
@@ -42,7 +42,7 @@ export function createZaloMiniAppAuthRoutes(ctx: GatewayContext) {
   const app = new Hono();
   const jwtSecret = new TextEncoder().encode(ctx.config.jwtSecret);
 
-  // POST /auth/zalo-miniapp — Exchange Zalo access token for xClaw JWT
+  // POST /auth/zalo-miniapp — Exchange Zalo access token for HiTechClaw JWT
   app.post('/', async (c) => {
     try {
       const body = await c.req.json();
@@ -186,7 +186,7 @@ export function createZaloMiniAppAuthRoutes(ctx: GatewayContext) {
       // Get permissions
       const permissions = await getUserPermissions(user.id);
 
-      // Issue xClaw JWT
+      // Issue HiTechClaw JWT
       const token = await new jose.SignJWT({
         email: user.email,
         role: user.role,

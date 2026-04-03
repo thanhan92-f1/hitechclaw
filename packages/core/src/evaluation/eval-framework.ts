@@ -4,7 +4,7 @@ import type {
     EvalSuiteResult,
     EvalTestCase,
     TokenUsage
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import { randomUUID } from 'node:crypto';
 import type { Agent } from '../agent/agent.js';
 import type { LLMRouter } from '../llm/llm-router.js';

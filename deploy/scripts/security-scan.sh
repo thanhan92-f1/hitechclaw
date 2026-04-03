@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# xClaw — Security Scan Script
+# HiTechClaw — Security Scan Script
 # Usage: ./deploy/scripts/security-scan.sh [scan_type]
 #   scan_type: full | deps | secrets | container | sast | config | ai
 #   Default: full (runs all scans)
@@ -24,10 +24,10 @@ WARN=0
 FAIL=0
 TOTAL=0
 
-log()    { echo -e "${GREEN}[security]${NC} $*"; }
-warn()   { echo -e "${YELLOW}[security]${NC} $*"; WARN=$((WARN + 1)); }
-fail()   { echo -e "${RED}[security]${NC} $*"; FAIL=$((FAIL + 1)); }
-pass()   { echo -e "${GREEN}[security]${NC} ✅ $*"; PASS=$((PASS + 1)); }
+log()    { echo -e "${GREEN}[HiTechClaw Security]${NC} $*"; }
+warn()   { echo -e "${YELLOW}[HiTechClaw Security]${NC} $*"; WARN=$((WARN + 1)); }
+fail()   { echo -e "${RED}[HiTechClaw Security]${NC} $*"; FAIL=$((FAIL + 1)); }
+pass()   { echo -e "${GREEN}[HiTechClaw Security]${NC} ✅ $*"; PASS=$((PASS + 1)); }
 section(){ echo -e "\n${CYAN}═══ $* ═══${NC}"; }
 
 cd "$ROOT_DIR"
@@ -120,10 +120,10 @@ scan_container() {
   fi
 
   # Scan running images
-  IMAGES=$(docker images --format '{{.Repository}}:{{.Tag}}' 2>/dev/null | grep -E 'xclaw|xdev' | grep -v '<none>' || true)
+  IMAGES=$(docker images --format '{{.Repository}}:{{.Tag}}' 2>/dev/null | grep -E 'hitechclaw|xdev' | grep -v '<none>' || true)
 
   if [[ -z "$IMAGES" ]]; then
-    warn "No xClaw Docker images found locally"
+    warn "No HiTechClaw Docker images found locally"
     return
   fi
 
@@ -230,8 +230,8 @@ scan_config() {
 
   # Check Dockerfile runs as non-root
   log "Checking Dockerfile user..."
-  if grep -q 'USER xclaw' Dockerfile 2>/dev/null; then
-    pass "Server Dockerfile uses non-root user (xclaw)"
+  if grep -q 'USER hitechclaw' Dockerfile 2>/dev/null; then
+    pass "Server Dockerfile uses non-root user (hitechclaw)"
   else
     fail "Server Dockerfile does NOT use non-root user"
     CONFIG_ISSUES=1
@@ -402,7 +402,7 @@ scan_ai() {
 # ─── Main ─────────────────────────────────────────────────
 echo ""
 echo -e "${BLUE}╔══════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║      xClaw Security Scan — $(date +%Y-%m-%d)          ║${NC}"
+echo -e "${BLUE}║      HiTechClaw Security Scan — $(date +%Y-%m-%d)          ║${NC}"
 echo -e "${BLUE}╚══════════════════════════════════════════════════╝${NC}"
 
 case "$SCAN_TYPE" in

@@ -51,7 +51,7 @@ export const marketingDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw Marketing, an AI assistant specializing in digital marketing, content creation, and social media strategy. You help with creating engaging content, planning campaigns, SEO optimization, and analyzing marketing performance.
+  agentPersona: `You are HiTechClaw Marketing, an AI assistant specializing in digital marketing, content creation, and social media strategy. You help with creating engaging content, planning campaigns, SEO optimization, and analyzing marketing performance.
 
 Tailor content to each platform's best practices. Consider audience demographics and engagement patterns. Suggest A/B testing strategies when appropriate.`,
   recommendedIntegrations: ['brave-search', 'notion', 'slack-api'],

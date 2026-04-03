@@ -1,5 +1,5 @@
 /**
- * WhatsApp Cloud API wrapper for xClaw.
+ * WhatsApp Cloud API wrapper for HiTechClaw.
  * Uses the official Meta WhatsApp Business Cloud API.
  */
 

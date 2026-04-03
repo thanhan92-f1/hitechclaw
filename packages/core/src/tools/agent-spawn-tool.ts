@@ -9,7 +9,7 @@ import type {
     AgentTask,
     ToolDefinition,
     ToolResult,
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import { randomUUID } from 'node:crypto';
 import type { Agent } from '../agent/agent.js';
 import type { TaskManager } from '../agent/task-manager.js';

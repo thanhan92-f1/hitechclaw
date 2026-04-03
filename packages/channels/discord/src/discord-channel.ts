@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -36,7 +36,7 @@ async function discordFetch(path: string, token: string, options: RequestInit = 
 }
 
 /**
- * Discord channel adapter for xClaw.
+ * Discord channel adapter for HiTechClaw.
  *
  * Uses Discord Gateway WebSocket (v10) for receiving messages and
  * the REST API for sending messages. Supports slash-less text commands.
@@ -202,7 +202,7 @@ export class DiscordChannel implements ChannelPlugin {
       d: {
         token: this.config.botToken,
         intents: 33280, // GUILDS (1) + GUILD_MESSAGES (512) + MESSAGE_CONTENT (32768)
-        properties: { os: 'linux', browser: 'xclaw', device: 'xclaw' },
+        properties: { os: 'linux', browser: 'hitechclaw', device: 'hitechclaw' },
       },
     });
   }

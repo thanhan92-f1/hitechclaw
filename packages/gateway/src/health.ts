@@ -1,4 +1,4 @@
-import { getDB, getMongo } from '@xclaw-ai/db';
+import { getDB, getMongo } from '@hitechclaw-ai/db';
 import { sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 
@@ -113,7 +113,7 @@ export function createHealthRoutes() {
 
   app.get('/', (c) => {
     return c.json({
-      name: 'xClaw AI Agent Platform',
+      name: 'HiTechClaw AI Agent Platform',
       version: VERSION,
       docs: '/health',
     });

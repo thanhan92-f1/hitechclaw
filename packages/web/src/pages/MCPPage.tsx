@@ -30,7 +30,7 @@ interface MCPTool {
 
 // ─── Demo data ─────────────────────────────────────────────
 const DEMO_SERVERS: MCPServer[] = [
-    { id: 'demo-mcp-1', name: 'xClaw Dev Docs', type: 'stdio', command: 'node', args: ['packages/doc-mcp/dist/index.js'], enabled: true, status: 'connected', toolCount: 3, lastPing: '2026-03-31T10:00:00Z', description: 'Full-text search over xClaw developer documentation', builtIn: true },
+    { id: 'demo-mcp-1', name: 'HiTechClaw Dev Docs', type: 'stdio', command: 'node', args: ['packages/doc-mcp/dist/index.js'], enabled: true, status: 'connected', toolCount: 3, lastPing: '2026-03-31T10:00:00Z', description: 'Full-text search over HiTechClaw developer documentation', builtIn: true },
     { id: 'demo-mcp-2', name: 'GitHub MCP', type: 'stdio', command: 'npx', args: ['-y', '@modelcontextprotocol/server-github'], enabled: true, status: 'connected', toolCount: 12, lastPing: '2026-03-31T10:00:00Z', description: 'GitHub API — repos, issues, PRs, code search' },
     { id: 'demo-mcp-3', name: 'Filesystem MCP', type: 'stdio', command: 'npx', args: ['-y', '@modelcontextprotocol/server-filesystem', '/data'], enabled: true, status: 'connected', toolCount: 8, lastPing: '2026-03-31T09:58:00Z', description: 'Safe filesystem access with sandboxed directory' },
     { id: 'demo-mcp-4', name: 'PostgreSQL MCP', type: 'stdio', command: 'npx', args: ['-y', '@modelcontextprotocol/server-postgres'], enabled: true, status: 'connected', toolCount: 5, lastPing: '2026-03-31T09:59:00Z', description: 'Query PostgreSQL database with read-only access' },
@@ -39,7 +39,7 @@ const DEMO_SERVERS: MCPServer[] = [
 ];
 
 const DEMO_TOOLS: MCPTool[] = [
-    { name: 'search_docs', description: 'Full-text search across xClaw developer documentation', inputSchema: { type: 'object', properties: { query: { type: 'string' } } } },
+    { name: 'search_docs', description: 'Full-text search across HiTechClaw developer documentation', inputSchema: { type: 'object', properties: { query: { type: 'string' } } } },
     { name: 'read_doc', description: 'Read a specific documentation file by path', inputSchema: { type: 'object', properties: { path: { type: 'string' } } } },
     { name: 'list_docs', description: 'List all available documentation files', inputSchema: { type: 'object' } },
     { name: 'github_create_issue', description: 'Create a new issue in a GitHub repository', inputSchema: { type: 'object', properties: { repo: { type: 'string' }, title: { type: 'string' }, body: { type: 'string' } } } },
@@ -57,7 +57,7 @@ const DEMO_TOOLS: MCPTool[] = [
 
 const DEMO_INFO = {
     protocolVersion: '2024-11-05',
-    serverName: 'xClaw MCP Hub',
+    serverName: 'HiTechClaw MCP Hub',
     serverVersion: '1.0.0',
     capabilities: { tools: true, resources: true, prompts: true },
     transport: ['stdio', 'sse', 'http'],

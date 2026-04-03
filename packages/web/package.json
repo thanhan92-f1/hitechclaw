@@ -1,8 +1,8 @@
 {
-    "name": "@xclaw-ai/web",
+    "name": "@hitechclaw-ai/web",
     "version": "2.0.0",
     "private": true,
-    "description": "xClaw web dashboard",
+    "description": "HiTechClaw web dashboard",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -12,7 +12,7 @@
     "dependencies": {
         "@tailwindcss/typography": "^0.5.19",
         "@tailwindcss/vite": "^4.2.1",
-        "@xclaw-ai/chat-sdk": "*",
+        "@hitechclaw-ai/chat-sdk": "*",
         "@xyflow/react": "^12.10.1",
         "lucide-react": "^0.577.0",
         "react": "^19.0.0",

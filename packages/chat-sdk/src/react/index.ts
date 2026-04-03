@@ -1,9 +1,9 @@
 // ============================================================
-// @xclaw-ai/chat-sdk/react — Barrel Export
+// @hitechclaw-ai/chat-sdk/react — Barrel Export
 // ============================================================
 
-export { XClawProvider, useXClawClient } from './provider.js';
-export type { XClawProviderProps } from './provider.js';
+export { HiTechClawProvider, useHiTechClawClient } from './provider.js';
+export type { HiTechClawProviderProps } from './provider.js';
 export { useChat } from './use-chat.js';
 export type { UseChatOptions, UseChatReturn } from './use-chat.js';
 export { useSessions } from './use-sessions.js';

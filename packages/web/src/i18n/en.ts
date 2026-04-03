@@ -53,7 +53,7 @@ export const en: Translations = {
 
   // Dashboard
   'dashboard.title': 'Dashboard',
-  'dashboard.subtitle': 'xClaw AI Agent Platform — System Overview',
+  'dashboard.subtitle': 'HiTechClaw AI Agent Platform — System Overview',
   'dashboard.status': 'Status',
   'dashboard.online': 'Online',
   'dashboard.offline': 'Offline',
@@ -186,7 +186,7 @@ export const en: Translations = {
   'settings.security.rateLimit': 'Rate Limiting',
 
   // Setup Wizard
-  'setup.welcome': 'Welcome to xClaw!',
+  'setup.welcome': 'Welcome to HiTechClaw!',
   'setup.welcomeDesc': 'Let\'s configure your AI agent platform in a few quick steps.',
   'setup.agentName': 'Agent Name',
   'setup.language': 'AI Language',

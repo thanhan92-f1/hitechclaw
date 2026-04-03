@@ -14,7 +14,7 @@ const FEATURES = [
 export function LoginPage() {
     const { login } = useAuth();
     const { t } = useI18n();
-    const [email, setEmail] = useState('superadmin@xclaw.io');
+    const [email, setEmail] = useState('superadmin@hitechclaw.io');
     const [password, setPassword] = useState('password123');
     const [tenantSlug, setTenantSlug] = useState('');
     const [tenants, setTenants] = useState<Array<{ slug: string; name: string }>>([]);
@@ -70,13 +70,13 @@ export function LoginPage() {
                     <div className="flex items-center gap-3 mb-8">
                         <img
                             src="/logo.png"
-                            alt="xClaw Logo"
+                            alt="HiTechClaw Logo"
                             className="w-12 h-12 rounded-2xl"
                             style={{ boxShadow: '0 4px 20px rgba(99, 102, 241, 0.3)' }}
                         />
                         <div>
                             <h1 className="text-2xl font-bold tracking-tight" style={{ color: '#f4f4f5' }}>
-                                xClaw
+                                HiTechClaw
                             </h1>
                             <span
                                 className="text-[10px] px-2 py-0.5 rounded-full font-semibold"
@@ -139,11 +139,11 @@ export function LoginPage() {
                         <div className="flex flex-col items-center mb-8 md:hidden">
                             <img
                                 src="/logo.png"
-                                alt="xClaw Logo"
+                                alt="HiTechClaw Logo"
                                 className="w-14 h-14 rounded-2xl mb-3"
                                 style={{ boxShadow: '0 4px 20px rgba(99, 102, 241, 0.3)' }}
                             />
-                            <h1 className="text-xl font-bold" style={{ color: '#f4f4f5' }}>xClaw</h1>
+                            <h1 className="text-xl font-bold" style={{ color: '#f4f4f5' }}>HiTechClaw</h1>
                         </div>
 
                         {/* Desktop card header */}
@@ -161,7 +161,7 @@ export function LoginPage() {
                             <div className="flex gap-1 p-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)' }}>
                                 <button
                                     type="button"
-                                    onClick={() => { setIsSuperAdmin(true); setEmail('superadmin@xclaw.io'); }}
+                                    onClick={() => { setIsSuperAdmin(true); setEmail('superadmin@hitechclaw.io'); }}
                                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
                                     style={{
                                         background: isSuperAdmin ? 'rgba(99,102,241,0.15)' : 'transparent',
@@ -173,7 +173,7 @@ export function LoginPage() {
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => { setIsSuperAdmin(false); setEmail('admin@xclaw.io'); }}
+                                    onClick={() => { setIsSuperAdmin(false); setEmail('admin@hitechclaw.io'); }}
                                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
                                     style={{
                                         background: !isSuperAdmin ? 'rgba(99,102,241,0.15)' : 'transparent',
@@ -220,7 +220,7 @@ export function LoginPage() {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="login-input w-full px-4 py-3 rounded-xl text-sm outline-none"
-                                    placeholder="admin@xclaw.io"
+                                    placeholder="admin@hitechclaw.io"
                                     required
                                 />
                             </div>
@@ -271,7 +271,7 @@ export function LoginPage() {
                         {/* Bottom decoration */}
                         <div className="mt-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                             <p className="text-[11px] text-center" style={{ color: '#52525b' }}>
-                                Powered by xClaw AI Platform • v2.0
+                                Powered by HiTechClaw AI Platform • v2.0
                             </p>
                         </div>
                     </div>

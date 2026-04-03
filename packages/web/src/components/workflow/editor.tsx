@@ -174,7 +174,7 @@ function WorkflowEditorInner({
 
     const onDrop = useCallback((e: DragEvent) => {
         e.preventDefault();
-        const nodeType = e.dataTransfer.getData('application/xclaw-node-type');
+        const nodeType = e.dataTransfer.getData('application/hitechclaw-node-type');
         if (!nodeType || !NODE_CATALOG[nodeType]) return;
         if (!reactFlowInstance || !reactFlowWrapper.current) return;
 

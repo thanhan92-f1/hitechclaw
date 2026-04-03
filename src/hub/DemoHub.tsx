@@ -105,7 +105,7 @@ export function DemoHub() {
                         <span className="text-white text-lg font-bold">x</span>
                     </div>
                     <div>
-                        <h1 className="text-xl font-bold text-white">xClaw Demo Hub</h1>
+                        <h1 className="text-xl font-bold text-white">HiTechClaw Demo Hub</h1>
                         <p className="text-xs" style={{ color: 'rgba(148,163,184,0.7)' }}>
                             Demo tích hợp AI Agent vào các hệ thống thực tế
                         </p>
@@ -117,7 +117,7 @@ export function DemoHub() {
             <section className="max-w-6xl mx-auto px-6 pt-12 pb-8">
                 <h2 className="text-3xl font-bold text-white mb-2">Chọn module demo</h2>
                 <p className="text-sm" style={{ color: 'rgba(148,163,184,0.8)' }}>
-                    Mỗi module là một ứng dụng hoàn chỉnh, demo cách xClaw tích hợp AI
+                    Mỗi module là một ứng dụng hoàn chỉnh, demo cách HiTechClaw tích hợp AI
                     vào từng lĩnh vực cụ thể.
                 </p>
             </section>
@@ -190,7 +190,7 @@ export function DemoHub() {
             {/* Footer */}
             <footer className="border-t py-6 text-center" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
                 <p className="text-[11px]" style={{ color: 'rgba(148,163,184,0.5)' }}>
-                    xClaw Demo Integration App — <a href="https://github.com/xdev-asia-labs/xclaw-demo-integration-app" target="_blank" rel="noreferrer" className="underline">GitHub</a> — xDev Asia
+                    HiTechClaw Demo Integration App — <a href="https://github.com/xdev-asia-labs/hitechclaw-demo-integration-app" target="_blank" rel="noreferrer" className="underline">GitHub</a> — xDev Asia
                 </p>
             </footer>
         </div>

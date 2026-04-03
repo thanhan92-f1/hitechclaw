@@ -1,16 +1,16 @@
 /**
- * PluginManager — Central registry for xClaw plugins.
+ * PluginManager — Central registry for HiTechClaw plugins.
  *
  * Handles plugin registration, activation/deactivation, lifecycle hooks,
  * and provides PluginContext to each plugin.
  */
 
 import type {
-  XClawPlugin,
+  HiTechClawPlugin,
   PluginContext,
   PluginRegistryEntry,
   PluginStatus,
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 
 export interface PluginManagerDeps {
   /** MongoDB db instance for creating plugin collections */
@@ -39,7 +39,7 @@ export class PluginManager {
   /**
    * Register a plugin (does not activate it).
    */
-  register(plugin: XClawPlugin): void {
+  register(plugin: HiTechClawPlugin): void {
     if (this.plugins.has(plugin.id)) {
       throw new Error(`Plugin '${plugin.id}' is already registered`);
     }
@@ -62,7 +62,7 @@ export class PluginManager {
   /**
    * Register and immediately activate a plugin.
    */
-  async registerAndActivate(plugin: XClawPlugin, config?: Record<string, unknown>): Promise<void> {
+  async registerAndActivate(plugin: HiTechClawPlugin, config?: Record<string, unknown>): Promise<void> {
     this.register(plugin);
     if (config) {
       this.pluginConfigs.set(plugin.id, config);
@@ -148,7 +148,7 @@ export class PluginManager {
   /**
    * Get active plugins that declare API routes.
    */
-  getRoutePlugins(): Array<{ plugin: XClawPlugin; createRoutes: NonNullable<XClawPlugin['createRoutes']> }> {
+  getRoutePlugins(): Array<{ plugin: HiTechClawPlugin; createRoutes: NonNullable<HiTechClawPlugin['createRoutes']> }> {
     return this.listActive()
       .filter((e) => e.plugin.createRoutes)
       .map((e) => ({ plugin: e.plugin, createRoutes: e.plugin.createRoutes! }));
@@ -157,7 +157,7 @@ export class PluginManager {
   /**
    * Get active plugins that declare domain packs.
    */
-  getDomainPlugins(): XClawPlugin[] {
+  getDomainPlugins(): HiTechClawPlugin[] {
     return this.listActive()
       .filter((e) => e.plugin.domain)
       .map((e) => e.plugin);
@@ -166,7 +166,7 @@ export class PluginManager {
   /**
    * Get all frontend page declarations from active plugins.
    */
-  getPages(): Array<{ pluginId: string; pluginName: string; pluginIcon: string; pages: NonNullable<XClawPlugin['pages']> }> {
+  getPages(): Array<{ pluginId: string; pluginName: string; pluginIcon: string; pages: NonNullable<HiTechClawPlugin['pages']> }> {
     return this.listActive()
       .filter((e) => e.plugin.pages && e.plugin.pages.length > 0)
       .map((e) => ({
@@ -201,7 +201,7 @@ export class PluginManager {
   /**
    * Ensure MongoDB collections and indexes exist for a plugin.
    */
-  private async ensureCollections(plugin: XClawPlugin): Promise<void> {
+  private async ensureCollections(plugin: HiTechClawPlugin): Promise<void> {
     if (!plugin.collections) return;
 
     const db = this.deps.getMongoDb() as any;

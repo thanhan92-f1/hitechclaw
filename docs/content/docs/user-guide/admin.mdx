@@ -13,7 +13,7 @@ The Admin Panel provides system-level management capabilities. Access requires t
 
 ## Tenants
 
-xClaw supports multi-tenant architecture where each tenant operates with isolated data.
+HiTechClaw supports multi-tenant architecture where each tenant operates with isolated data.
 
 ### Viewing Tenants
 The Tenants tab shows all registered tenants with:
@@ -88,7 +88,7 @@ Export audit logs as CSV for compliance reporting.
 
 ## API Keys
 
-Manage API keys for programmatic access to the xClaw API.
+Manage API keys for programmatic access to the HiTechClaw API.
 
 ### Creating an API Key
 1. Click **+ New API Key**
@@ -111,7 +111,7 @@ Manage API keys for programmatic access to the xClaw API.
 ### Using API Keys
 Include the key in the `Authorization` header:
 ```
-Authorization: Bearer xclaw_sk_xxxxxxxxxxxxx
+Authorization: Bearer hitechclaw_sk_xxxxxxxxxxxxx
 ```
 
 ### Revoking Keys
@@ -153,4 +153,4 @@ Configure when automatic cleanup runs:
 - Review audit logs weekly for security monitoring
 - Rotate API keys regularly (every 90 days recommended)
 - Set up retention policies early — retroactive cleanup can be slow for large datasets
-- Use tenant isolation to serve multiple clients from a single xClaw deployment
+- Use tenant isolation to serve multiple clients from a single HiTechClaw deployment

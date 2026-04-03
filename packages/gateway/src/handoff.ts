@@ -8,7 +8,7 @@ import {
   escalationRulesCollection,
   messagesCollection,
   sessionsCollection,
-} from '@xclaw-ai/db';
+} from '@hitechclaw-ai/db';
 
 export function createHandoffRoutes() {
   const app = new Hono();

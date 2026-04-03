@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import { MSTeamsApi } from './msteams-api.js';
 import type { TeamsActivity } from './msteams-api.js';
 
@@ -9,7 +9,7 @@ export interface MSTeamsChannelConfig {
 }
 
 /**
- * Microsoft Teams channel adapter for xClaw.
+ * Microsoft Teams channel adapter for HiTechClaw.
  *
  * Uses the Bot Framework REST API via Bot Connector.
  * Messages arrive via webhook and responses are sent via the Bot Connector API.

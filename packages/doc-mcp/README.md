@@ -1,6 +1,6 @@
-# @xclaw-ai/doc-mcp
+# @hitechclaw-ai/doc-mcp
 
-MCP Server cho kho tài liệu developer của xClaw platform. Khi VS Code AI (Copilot, Claude, etc.) code, nó sẽ tự động gọi MCP server này để tìm tài liệu liên quan trong kho.
+MCP Server cho kho tài liệu developer của HiTechClaw platform. Khi VS Code AI (Copilot, Claude, etc.) code, nó sẽ tự động gọi MCP server này để tìm tài liệu liên quan trong kho.
 
 ## Architecture
 
@@ -37,7 +37,7 @@ packages/doc-mcp/        ← MCP Server
 ```json
 {
     "servers": {
-        "xclaw-dev-docs": {
+        "hitechclaw-dev-docs": {
             "type": "stdio",
             "command": "npx",
             "args": ["tsx", "packages/doc-mcp/src/bin.ts"],

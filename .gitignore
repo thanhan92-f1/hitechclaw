@@ -5,3 +5,4 @@ dist/
 *.tsbuildinfo
 /Core/
 /core/
+python claw_transform.py

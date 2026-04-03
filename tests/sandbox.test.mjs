@@ -1,7 +1,7 @@
 // ============================================================
 // Sandbox Integration Tests
 // ============================================================
-// Tests for the @xclaw-ai/sandbox package.
+// Tests for the @hitechclaw-ai/sandbox package.
 // Run with: node --test tests/sandbox.test.mjs
 
 import { describe, it, beforeEach, afterEach } from 'node:test';
@@ -10,7 +10,7 @@ import assert from 'node:assert/strict';
 // ─── PolicyBuilder Tests ─────────────────────────────────────
 
 describe('PolicyBuilder', async () => {
-    const { PolicyBuilder, BUILTIN_POLICIES, INTEGRATION_POLICIES } = await import('@xclaw-ai/sandbox');
+    const { PolicyBuilder, BUILTIN_POLICIES, INTEGRATION_POLICIES } = await import('@hitechclaw-ai/sandbox');
 
     it('should create a custom policy', () => {
         const policy = new PolicyBuilder('test-policy')
@@ -77,7 +77,7 @@ describe('PolicyBuilder', async () => {
 // ─── PrivacyRouter Tests ─────────────────────────────────────
 
 describe('PrivacyRouter', async () => {
-    const { PrivacyRouter } = await import('@xclaw-ai/sandbox');
+    const { PrivacyRouter } = await import('@hitechclaw-ai/sandbox');
 
     it('should detect email PII', () => {
         const router = new PrivacyRouter();
@@ -117,7 +117,7 @@ describe('PrivacyRouter', async () => {
 // ─── OCSF Logger Tests ──────────────────────────────────────
 
 describe('OCSFEventLogger', async () => {
-    const { OCSFEventLogger, toOCSFEvent } = await import('@xclaw-ai/sandbox');
+    const { OCSFEventLogger, toOCSFEvent } = await import('@hitechclaw-ai/sandbox');
 
     it('should convert audit entry to OCSF event', () => {
         const event = toOCSFEvent({
@@ -132,7 +132,7 @@ describe('OCSFEventLogger', async () => {
         assert.equal(event.activity_name, 'Sandbox Create');
         assert.equal(event.status, 'success');
         assert.equal(event.actor.user.uid, 'tenant-456');
-        assert.equal(event.metadata.product.name, 'xClaw');
+        assert.equal(event.metadata.product.name, 'HiTechClaw');
     });
 
     it('should mark blocked actions as failure', () => {
@@ -169,7 +169,7 @@ describe('OCSFEventLogger', async () => {
 // ─── TenantSandboxManager Tests (unit-level) ────────────────
 
 describe('TenantSandboxManager', async () => {
-    const { TenantSandboxManager, SandboxManager } = await import('@xclaw-ai/sandbox');
+    const { TenantSandboxManager, SandboxManager } = await import('@hitechclaw-ai/sandbox');
 
     it('should use default config for unknown tenants', () => {
         const manager = new SandboxManager({ mode: 'local' });
@@ -215,7 +215,7 @@ describe('Credential Encryption', async () => {
     it('should encrypt and decrypt credentials', async () => {
         // Set dev key for testing
         process.env.CREDENTIAL_ENCRYPTION_KEY = 'test-key-for-unit-tests-only';
-        const { encryptCredentials, decryptCredentials, isEncrypted } = await import('@xclaw-ai/db');
+        const { encryptCredentials, decryptCredentials, isEncrypted } = await import('@hitechclaw-ai/db');
 
         const original = { apiKey: 'sk-abc123', token: 'ghp_xxx' };
         const encrypted = encryptCredentials(original);
@@ -231,7 +231,7 @@ describe('Credential Encryption', async () => {
 // ─── GPU Sandbox Tests ───────────────────────────────────────
 
 describe('GPU Sandbox Images', async () => {
-    const { GPU_SANDBOX_IMAGES, POLICY_ML, POLICY_INFERENCE } = await import('@xclaw-ai/sandbox');
+    const { GPU_SANDBOX_IMAGES, POLICY_ML, POLICY_INFERENCE } = await import('@hitechclaw-ai/sandbox');
 
     it('should have predefined ML images', () => {
         assert.ok(GPU_SANDBOX_IMAGES.length >= 5);
@@ -253,7 +253,7 @@ describe('GPU Sandbox Images', async () => {
 // ─── Cross-Tenant Isolation Tests ────────────────────────────
 
 describe('Cross-Tenant Isolation', async () => {
-    const { SandboxManager, TenantSandboxManager } = await import('@xclaw-ai/sandbox');
+    const { SandboxManager, TenantSandboxManager } = await import('@hitechclaw-ai/sandbox');
 
     it('should not list sandboxes from other tenants', () => {
         const manager = new SandboxManager({ mode: 'local' });
@@ -285,7 +285,7 @@ describe('Cross-Tenant Isolation', async () => {
 // ─── SkillRegistry Sandbox Tests ─────────────────────────────
 
 describe('SkillRegistry Sandbox', async () => {
-    const { SkillRegistry } = await import('@xclaw-ai/skill-hub');
+    const { SkillRegistry } = await import('@hitechclaw-ai/skill-hub');
 
     it('should identify community skills as sandboxed', () => {
         const registry = new SkillRegistry();

@@ -1,9 +1,9 @@
 ---
 title: AI Production Standard
-description: Production-grade AI features checklist for xClaw — guardrails, cost control, observability, fallback, and more.
+description: Production-grade AI features checklist for HiTechClaw — guardrails, cost control, observability, fallback, and more.
 ---
 
-# AI Production Standard — xClaw AI Agent Platform
+# AI Production Standard — HiTechClaw AI Agent Platform
 
 This document covers AI-specific production concerns that go beyond basic provider configuration. For provider setup, see [AI Providers](/docs/ai-providers).
 
@@ -24,7 +24,7 @@ This document covers AI-specific production concerns that go beyond basic provid
 
 ## 2. Missing Features (Roadmap)
 
-The following are **production requirements** for 2026-grade AI agent platforms that xClaw needs to implement:
+The following are **production requirements** for 2026-grade AI agent platforms that HiTechClaw needs to implement:
 
 | Feature | Priority | Effort |
 |---------|----------|--------|
@@ -254,7 +254,7 @@ if (!approval.approved) {
 
 ## 8. LLM Observability
 
-xClaw has a basic span `Tracer` but lacks **LLM-specific observability** — token counts, prompt content, quality scoring.
+HiTechClaw has a basic span `Tracer` but lacks **LLM-specific observability** — token counts, prompt content, quality scoring.
 
 ### What to Capture Per LLM Call
 
@@ -285,7 +285,7 @@ interface LLMTrace {
 | **Helicone** | ✅ Yes | Free tier | Low-latency proxy, cost tracking |
 | **OpenTelemetry → Jaeger** | ✅ Yes | Free | Distributed tracing integration |
 
-**Recommendation**: Self-host Langfuse (Docker) — aligns with xClaw's self-hosted philosophy.
+**Recommendation**: Self-host Langfuse (Docker) — aligns with HiTechClaw's self-hosted philosophy.
 
 ```bash
 # Add to docker-compose.yml
@@ -345,19 +345,19 @@ Google's A2A protocol (2025) enables AI agents from different platforms to colla
 ### A2A Architecture
 
 ```
-xClaw Agent (Orchestrator)
+HiTechClaw Agent (Orchestrator)
   ├── Sub-agent: ResearchAgent (internal skill)
   ├── Sub-agent: CodeAgent (external A2A endpoint)
-  └── Sub-agent: HealthcareAgent (xclaw-plugins)
+  └── Sub-agent: HealthcareAgent (hitechclaw-plugins)
 ```
 
 Each agent exposes an **Agent Card** (JSON) at `/.well-known/agent.json`:
 
 ```json
 {
-  "name": "xClaw Healthcare Agent",
+  "name": "HiTechClaw Healthcare Agent",
   "description": "Medical Q&A with ICD-10 knowledge",
-  "url": "https://xclaw.io/api/a2a/healthcare",
+  "url": "https://hitechclaw.io/api/a2a/healthcare",
   "capabilities": ["text", "tool_use"],
   "authentication": { "type": "bearer" },
   "skills": ["diagnosis-assist", "drug-interactions", "icd10-lookup"]

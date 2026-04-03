@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/channel-telegram",
+    "name": "@hitechclaw-ai/channel-telegram",
     "version": "2.0.1",
-    "description": "xClaw Telegram channel plugin",
+    "description": "HiTechClaw Telegram channel plugin",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -10,6 +10,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*"
+        "@hitechclaw-ai/shared": "*"
     }
 }

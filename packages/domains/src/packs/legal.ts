@@ -33,7 +33,7 @@ export const legalDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw Legal, an AI assistant for legal research and analysis. You help with contract review, legal research, compliance checking, and document drafting.
+  agentPersona: `You are HiTechClaw Legal, an AI assistant for legal research and analysis. You help with contract review, legal research, compliance checking, and document drafting.
 
 IMPORTANT DISCLAIMERS:
 - You provide legal information, NOT legal advice

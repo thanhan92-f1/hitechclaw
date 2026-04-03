@@ -5,7 +5,7 @@
 // Provides a Python ML bridge for running training/inference
 // inside sandboxed containers with GPU access.
 
-import type { SandboxConfig, SandboxPolicy } from '@xclaw-ai/shared';
+import type { SandboxConfig, SandboxPolicy } from '@hitechclaw-ai/shared';
 import type { SandboxManager } from './sandbox-manager.js';
 import { POLICY_PERMISSIVE, registerBuiltinPolicy } from './policy-builder.js';
 
@@ -30,7 +30,7 @@ export const GPU_SANDBOX_IMAGES: GPUSandboxImage[] = [
   {
     name: 'ml-pytorch',
     description: 'PyTorch + CUDA for deep learning',
-    image: 'xclaw/sandbox-pytorch:latest',
+    image: 'hitechclaw/sandbox-pytorch:latest',
     cudaVersion: '12.4',
     packages: ['torch', 'torchvision', 'numpy', 'pandas', 'scikit-learn'],
     gpuRequired: true,
@@ -38,7 +38,7 @@ export const GPU_SANDBOX_IMAGES: GPUSandboxImage[] = [
   {
     name: 'ml-tensorflow',
     description: 'TensorFlow + CUDA for deep learning',
-    image: 'xclaw/sandbox-tensorflow:latest',
+    image: 'hitechclaw/sandbox-tensorflow:latest',
     cudaVersion: '12.4',
     packages: ['tensorflow', 'numpy', 'pandas', 'scikit-learn'],
     gpuRequired: true,
@@ -46,14 +46,14 @@ export const GPU_SANDBOX_IMAGES: GPUSandboxImage[] = [
   {
     name: 'ml-sklearn',
     description: 'Scikit-learn for classical ML (CPU only)',
-    image: 'xclaw/sandbox-sklearn:latest',
+    image: 'hitechclaw/sandbox-sklearn:latest',
     packages: ['scikit-learn', 'numpy', 'pandas', 'xgboost', 'lightgbm'],
     gpuRequired: false,
   },
   {
     name: 'ml-huggingface',
     description: 'Hugging Face Transformers + CUDA',
-    image: 'xclaw/sandbox-hf:latest',
+    image: 'hitechclaw/sandbox-hf:latest',
     cudaVersion: '12.4',
     packages: ['transformers', 'torch', 'tokenizers', 'accelerate', 'datasets'],
     gpuRequired: true,
@@ -61,7 +61,7 @@ export const GPU_SANDBOX_IMAGES: GPUSandboxImage[] = [
   {
     name: 'inference-onnx',
     description: 'ONNX Runtime for optimized inference',
-    image: 'xclaw/sandbox-onnx:latest',
+    image: 'hitechclaw/sandbox-onnx:latest',
     packages: ['onnxruntime', 'numpy'],
     gpuRequired: false,
   },

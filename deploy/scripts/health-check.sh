@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# xClaw — Health Check Script
+# HiTechClaw — Health Check Script
 # Usage: ./deploy/scripts/health-check.sh [base_url]
 # Checks: liveness → readiness → deep health
 # ============================================================
@@ -37,7 +37,7 @@ check() {
 }
 
 echo "═══════════════════════════════════════════"
-echo " xClaw Health Check — $BASE_URL"
+echo " HiTechClaw Health Check — $BASE_URL"
 echo "═══════════════════════════════════════════"
 echo ""
 

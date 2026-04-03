@@ -15,13 +15,13 @@ Trigger an immediate rollback if ANY of these occur within 30 minutes after depl
 
 ```bash
 # Rollback server to a specific tag
-./deploy/scripts/rollback.sh xclaw sha-abc1234
+./deploy/scripts/rollback.sh hitechclaw sha-abc1234
 
 # Rollback web frontend
 ./deploy/scripts/rollback.sh web sha-abc1234
 
 # Interactive (lists available images)
-./deploy/scripts/rollback.sh xclaw
+./deploy/scripts/rollback.sh hitechclaw
 ```
 
 ## Manual Rollback Steps
@@ -30,21 +30,21 @@ Trigger an immediate rollback if ANY of these occur within 30 minutes after depl
 
 ```bash
 # List recent server images
-docker images --filter "reference=ghcr.io/xdev-asia/xclaw-server*" \
+docker images --filter "reference=ghcr.io/xdev-asia/hitechclaw-server*" \
   --format "{{.Tag}}\t{{.CreatedAt}}" | head -10
 
 # Or check GHCR for available tags
-# https://github.com/xdev-asia/xClaw/pkgs/container/xclaw-server
+# https://github.com/xdev-asia/hitechclaw/pkgs/container/hitechclaw-server
 ```
 
 ### 2. Pin and Restart
 
 ```bash
 # Set the image to the known good version
-export XCLAW_SERVER_IMAGE=ghcr.io/xdev-asia/xclaw-server:sha-abc1234
+export hitechclaw_SERVER_IMAGE=ghcr.io/xdev-asia/hitechclaw-server:sha-abc1234
 
 # Restart only the affected service
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps xclaw
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps hitechclaw
 ```
 
 ### 3. Verify Rollback
@@ -57,7 +57,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps 
 
 ```bash
 # Check logs from the failed deployment
-docker compose logs --since 1h xclaw | grep -i "error\|fatal\|panic"
+docker compose logs --since 1h hitechclaw | grep -i "error\|fatal\|panic"
 
 # Check the deep health endpoint
 curl -s http://localhost:5001/health/deep | python3 -m json.tool

@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/db",
+    "name": "@hitechclaw-ai/db",
     "version": "2.2.0",
-    "description": "xClaw database layer — Drizzle ORM + PostgreSQL",
+    "description": "HiTechClaw database layer — Drizzle ORM + PostgreSQL",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
         "studio": "npx drizzle-kit@0.31.10 studio"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*",
+        "@hitechclaw-ai/shared": "*",
         "drizzle-orm": "^0.39.0",
         "mongodb": "^7.1.0",
         "postgres": "^3.4.0"

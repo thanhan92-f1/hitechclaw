@@ -161,7 +161,7 @@ async function main() {
     log('6️⃣  Update Tenant A — Vietnamese + Healthcare', {});
     const updateA = await api('PUT', '/api/settings', {
         aiLanguage: 'vi',
-        agentName: 'xClaw Bệnh viện',
+        agentName: 'HiTechClaw Bệnh viện',
         enableWebSearch: false,
     }, tokenA);
     if (updateA.data?.ok) {
@@ -176,7 +176,7 @@ async function main() {
     log('7️⃣  Update Tenant B — English + Developer', {});
     const updateB = await api('PUT', '/api/settings', {
         aiLanguage: 'en',
-        agentName: 'xClaw DevBot',
+        agentName: 'HiTechClaw DevBot',
         enableWebSearch: true,
     }, tokenB);
     if (updateB.data?.ok) {

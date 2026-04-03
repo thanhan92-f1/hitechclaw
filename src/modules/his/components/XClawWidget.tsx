@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type FormEvent } from 'react';
 import { MessageSquare, X, Minimize2, Maximize2, Loader2, Send, Bot, Trash2 } from 'lucide-react';
-import { loginXClaw, chatXClaw } from '../api';
+import { loginHiTechClaw, chatHiTechClaw } from '../api';
 import type { PatientContext } from '../App';
 
 interface ChatMessage {
@@ -21,7 +21,7 @@ function buildSystemMsg(pc: PatientContext): ChatMessage {
     };
 }
 
-const STORAGE_PREFIX = 'xclaw-widget-';
+const STORAGE_PREFIX = 'hitechclaw-widget-';
 
 function saveChat(patientId: string, msgs: ChatMessage[], sid: string | undefined) {
     try {
@@ -41,7 +41,7 @@ function loadChat(patientId: string): { messages: ChatMessage[]; sessionId: stri
     } catch { return null; }
 }
 
-export function XClawWidget({ patientContext }: { patientContext: PatientContext | null }) {
+export function HiTechClawWidget({ patientContext }: { patientContext: PatientContext | null }) {
     const [open, setOpen] = useState(false);
     const [minimized, setMinimized] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -90,7 +90,7 @@ export function XClawWidget({ patientContext }: { patientContext: PatientContext
 
     const ensureToken = async (): Promise<string> => {
         if (token) return token;
-        const res = await loginXClaw('doctor@his.local', 'doctor123');
+        const res = await loginHiTechClaw('doctor@his.local', 'doctor123');
         if ('error' in res) throw new Error(res.error);
         setToken(res.token);
         return res.token;
@@ -121,7 +121,7 @@ export function XClawWidget({ patientContext }: { patientContext: PatientContext
 
         try {
             const t = await ensureToken();
-            const res = await chatXClaw(t, buildMessage(text), sessionId, 'healthcare');
+            const res = await chatHiTechClaw(t, buildMessage(text), sessionId, 'healthcare');
             if (res.sessionId) setSessionId(res.sessionId);
             setMessages((prev) => [...prev, { id: `a-${Date.now()}`, role: 'assistant', content: res.content, timestamp: new Date() }]);
         } catch (err: unknown) {
@@ -175,7 +175,7 @@ export function XClawWidget({ patientContext }: { patientContext: PatientContext
                         background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
                         animation: pulse ? 'widget-pulse 2s ease-in-out infinite' : undefined,
                     }}
-                    title="Mở xClaw AI Assistant"
+                    title="Mở HiTechClaw AI Assistant"
                 >
                     <MessageSquare size={24} color="#fff" />
                     <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[8px] font-bold flex items-center justify-center"
@@ -205,7 +205,7 @@ export function XClawWidget({ patientContext }: { patientContext: PatientContext
                             <MessageSquare size={14} color="#38bdf8" />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <span className="text-xs font-semibold text-white">xClaw AI</span>
+                            <span className="text-xs font-semibold text-white">HiTechClaw AI</span>
                             {patientContext && (
                                 <span className="ml-1.5 text-[10px] px-1.5 py-0.5 rounded truncate"
                                     style={{ background: 'rgba(16,185,129,0.15)', color: '#10b981' }}>
@@ -236,10 +236,10 @@ export function XClawWidget({ patientContext }: { patientContext: PatientContext
                                     <div className="flex flex-col items-center justify-center h-full text-center py-8">
                                         <Bot size={32} style={{ color: 'var(--his-primary)', opacity: 0.5 }} />
                                         <p className="text-xs mt-3 font-medium" style={{ color: 'var(--his-fg-muted)' }}>
-                                            {patientContext ? `Hỏi xClaw AI về ${patientContext.name}` : 'Chọn bệnh nhân để có ngữ cảnh'}
+                                            {patientContext ? `Hỏi HiTechClaw AI về ${patientContext.name}` : 'Chọn bệnh nhân để có ngữ cảnh'}
                                         </p>
                                         <p className="text-[10px] mt-1" style={{ color: 'var(--his-fg-muted)', opacity: 0.6 }}>
-                                            Healthcare domain • xClaw v2
+                                            Healthcare domain • HiTechClaw v2
                                         </p>
                                     </div>
                                 )}

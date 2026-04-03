@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import type { LLMMessage, LLMResponse, ToolDefinition, StreamEvent, ToolCall } from '@xclaw-ai/shared';
+import type { LLMMessage, LLMResponse, ToolDefinition, StreamEvent, ToolCall } from '@hitechclaw-ai/shared';
 import type { LLMAdapter } from './llm-router.js';
 
 /**
@@ -168,8 +168,8 @@ export class OpenRouterAdapter implements LLMAdapter {
       apiKey: config.apiKey || process.env.OPENROUTER_API_KEY,
       baseURL: 'https://openrouter.ai/api/v1',
       defaultHeaders: {
-        'HTTP-Referer': 'https://xclaw.ai',
-        'X-Title': 'xClaw AI Platform',
+        'HTTP-Referer': 'https://hitechclaw.ai',
+        'X-Title': 'HiTechClaw AI Platform',
       },
     });
     this.model = config.model || 'meta-llama/llama-3.1-70b-instruct';

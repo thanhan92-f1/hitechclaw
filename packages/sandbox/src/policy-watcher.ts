@@ -6,7 +6,7 @@
 
 import { watch, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
-import type { SandboxPolicy } from '@xclaw-ai/shared';
+import type { SandboxPolicy } from '@hitechclaw-ai/shared';
 import { loadPolicyFromYAML, BUILTIN_POLICIES } from './policy-builder.js';
 
 export interface PolicyWatcherOptions {

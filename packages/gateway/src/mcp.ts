@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { DomainPack } from '@xclaw-ai/domains';
-import type { Agent } from '@xclaw-ai/core';
+import type { DomainPack } from '@hitechclaw-ai/domains';
+import type { Agent } from '@hitechclaw-ai/core';
 import { MCPClientManager, type MCPServerConfig } from './mcp-client.js';
 
 // ─── MCP Server Registry ────────────────────────────────────
@@ -39,7 +39,7 @@ const mcpServers: MCPServerConfig[] = [
     name: 'PostgreSQL',
     type: 'stdio',
     command: 'npx',
-    args: ['-y', '@anthropic-ai/mcp-server-postgres', 'postgresql://localhost:5432/xclaw'],
+    args: ['-y', '@anthropic-ai/mcp-server-postgres', 'postgresql://localhost:5432/hitechclaw'],
     enabled: false,
     status: 'disconnected',
     toolCount: 0,
@@ -205,8 +205,8 @@ export function createMCPRoutes(domainPacks?: DomainPack[], agent?: Agent) {
     return c.json({ tools, total: tools.length });
   });
 
-  // ─── MCP xClaw Tool Exposure ────────────────────────────
-  // Expose xClaw domain tools as MCP-compatible format
+  // ─── MCP HiTechClaw Tool Exposure ────────────────────────────
+  // Expose HiTechClaw domain tools as MCP-compatible format
 
   // GET /mcp/tools — List all available tools in MCP format
   app.get('/tools', (c) => {
@@ -277,7 +277,7 @@ export function createMCPRoutes(domainPacks?: DomainPack[], agent?: Agent) {
   // ─── MCP Server Info ──────────────────────────────────
   app.get('/info', (c) => {
     return c.json({
-      name: 'xClaw',
+      name: 'HiTechClaw',
       version: '2.1.0',
       protocolVersion: '2024-11-05',
       capabilities: {
@@ -285,7 +285,7 @@ export function createMCPRoutes(domainPacks?: DomainPack[], agent?: Agent) {
         resources: { subscribe: false, listChanged: false },
       },
       serverInfo: {
-        name: 'xClaw AI Agent Platform',
+        name: 'HiTechClaw AI Agent Platform',
         version: '2.1.0',
       },
     });

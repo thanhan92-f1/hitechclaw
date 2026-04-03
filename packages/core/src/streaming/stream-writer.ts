@@ -1,4 +1,4 @@
-import type { StreamEvent } from '@xclaw-ai/shared';
+import type { StreamEvent } from '@hitechclaw-ai/shared';
 
 /**
  * Converts an AsyncGenerator of StreamEvents to an SSE-formatted ReadableStream.

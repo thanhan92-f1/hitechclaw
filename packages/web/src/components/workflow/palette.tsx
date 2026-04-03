@@ -7,7 +7,7 @@ export function NodePalette() {
     const categories = Object.entries(CATEGORY_LABELS);
 
     const onDragStart = (e: DragEvent, nodeType: string) => {
-        e.dataTransfer.setData('application/xclaw-node-type', nodeType);
+        e.dataTransfer.setData('application/hitechclaw-node-type', nodeType);
         e.dataTransfer.effectAllowed = 'move';
     };
 

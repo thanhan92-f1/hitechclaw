@@ -1,17 +1,17 @@
 ---
 title: AI Data Security
-description: OWASP LLM Top 10 aligned security implementation for xClaw AI Agent Platform
+description: OWASP LLM Top 10 aligned security implementation for HiTechClaw AI Agent Platform
 ---
 
 # AI Data Security
 
-xClaw implements a defense-in-depth security architecture aligned with the **OWASP Top 10 for LLM Applications 2025**. This document covers every security layer, what it protects against, and how it's configured.
+HiTechClaw implements a defense-in-depth security architecture aligned with the **OWASP Top 10 for LLM Applications 2025**. This document covers every security layer, what it protects against, and how it's configured.
 
 ---
 
 ## 1. Threat Model — OWASP LLM Top 10 (2025)
 
-| # | Threat | xClaw Mitigation | Status |
+| # | Threat | HiTechClaw Mitigation | Status |
 |---|--------|-------------------|--------|
 | LLM01 | Prompt Injection | `PromptInjectionDetector` — 14 regex heuristics, weighted scoring | ✅ Implemented |
 | LLM02 | Sensitive Information Disclosure | PII scanner (`pii.ts`), output sanitizer blocks system prompt leakage | ✅ Implemented |
@@ -65,7 +65,7 @@ User Input
 Orchestrates input and output guardrails in sequence. Fail-fast: first failing guardrail blocks the request.
 
 ```typescript
-import { GuardrailPipeline, PromptInjectionDetector, OutputSanitizer, TopicScopeGuard } from '@xclaw-ai/core';
+import { GuardrailPipeline, PromptInjectionDetector, OutputSanitizer, TopicScopeGuard } from '@hitechclaw-ai/core';
 
 const pipeline = new GuardrailPipeline();
 pipeline.addInputGuardrail(new PromptInjectionDetector());
@@ -147,7 +147,7 @@ const collections = rag.listCollections('tenant-123');
 Sliding-window rate limiter per tenant, running in-memory:
 
 ```typescript
-import { LLMRateLimiter } from '@xclaw-ai/core';
+import { LLMRateLimiter } from '@hitechclaw-ai/core';
 
 const limiter = new LLMRateLimiter(60, 60_000); // 60 requests per 60 seconds
 

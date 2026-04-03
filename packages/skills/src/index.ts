@@ -1,4 +1,4 @@
-// @xclaw-ai/skills — Built-in skills collection
+// @hitechclaw-ai/skills — Built-in skills collection
 
 export { reportGenSkill } from './report-gen.js';
 export { textToFhirSkill } from './text-to-fhir.js';

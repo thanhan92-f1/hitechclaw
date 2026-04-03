@@ -1,5 +1,5 @@
 // ============================================================
-// @xclaw-ai/doc-mcp — MCP Server for Dev Documentation
+// @hitechclaw-ai/doc-mcp — MCP Server for Dev Documentation
 // ============================================================
 //
 // Exposes developer documentation knowledge base as MCP tools.
@@ -24,7 +24,7 @@ export interface DocMcpServerOptions {
 export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     const {
         docsRoot,
-        name = 'xclaw-dev-docs',
+        name = 'hitechclaw-dev-docs',
         version = '1.0.0',
     } = options;
 
@@ -36,7 +36,7 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     // ─── Tool: search_docs ──────────────────────────────────
     server.tool(
         'search_docs',
-        'Search the xClaw developer documentation knowledge base. Use this to find coding conventions, architecture patterns, API documentation, code examples, and troubleshooting guides. Returns matched documents with relevance scores and snippets.',
+        'Search the HiTechClaw developer documentation knowledge base. Use this to find coding conventions, architecture patterns, API documentation, code examples, and troubleshooting guides. Returns matched documents with relevance scores and snippets.',
         {
             query: z.string().describe(
                 'Search query — can be keywords, questions, or topics. Examples: "gateway route pattern", "drizzle schema", "MCP integration", "ESM import convention"',
@@ -129,7 +129,7 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
                 content: [{
                     type: 'text' as const,
                     text: [
-                        `# xClaw Dev Documentation`,
+                        `# HiTechClaw Dev Documentation`,
                         `Total: ${stats.totalDocs} documents | ${stats.totalWords.toLocaleString()} words`,
                         `Tags: ${stats.tags.join(', ') || 'none'}`,
                         '',
@@ -189,7 +189,7 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
             const categories = store.listCategories();
 
             const overview = [
-                '# xClaw Developer Documentation Knowledge Base',
+                '# HiTechClaw Developer Documentation Knowledge Base',
                 '',
                 `Total documents: ${stats.totalDocs}`,
                 `Categories: ${categories.join(', ')}`,

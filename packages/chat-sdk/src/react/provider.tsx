@@ -1,25 +1,25 @@
 // ============================================================
-// @xclaw-ai/chat-sdk/react — React Context & Provider
+// @hitechclaw-ai/chat-sdk/react — React Context & Provider
 // ============================================================
 
 import { createContext, useContext, useMemo, useRef, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { XClawClient } from '../client.js';
-import type { XClawConfig } from '../types.js';
+import { HiTechClawClient } from '../client.js';
+import type { HiTechClawConfig } from '../types.js';
 
-const XClawContext = createContext<XClawClient | null>(null);
+const HiTechClawContext = createContext<HiTechClawClient | null>(null);
 
-export interface XClawProviderProps {
-    config: XClawConfig;
+export interface HiTechClawProviderProps {
+    config: HiTechClawConfig;
     children: ReactNode;
 }
 
-/** Provider that makes XClawClient available to all child hooks */
-export function XClawProvider({ config, children }: XClawProviderProps) {
-    const clientRef = useRef<XClawClient | null>(null);
+/** Provider that makes HiTechClawClient available to all child hooks */
+export function HiTechClawProvider({ config, children }: HiTechClawProviderProps) {
+    const clientRef = useRef<HiTechClawClient | null>(null);
 
     const client = useMemo(() => {
-        clientRef.current = new XClawClient(config);
+        clientRef.current = new HiTechClawClient(config);
         return clientRef.current;
     }, [config.baseUrl, config.token]);
 
@@ -31,17 +31,17 @@ export function XClawProvider({ config, children }: XClawProviderProps) {
     }, [config.token]);
 
     return (
-        <XClawContext value={client}>
+        <HiTechClawContext value={client}>
             {children}
-        </XClawContext>
+        </HiTechClawContext>
     );
 }
 
-/** Get the XClawClient from context */
-export function useXClawClient(): XClawClient {
-    const client = useContext(XClawContext);
+/** Get the HiTechClawClient from context */
+export function useHiTechClawClient(): HiTechClawClient {
+    const client = useContext(HiTechClawContext);
     if (!client) {
-        throw new Error('useXClawClient must be used within <XClawProvider>');
+        throw new Error('useHiTechClawClient must be used within <HiTechClawProvider>');
     }
     return client;
 }

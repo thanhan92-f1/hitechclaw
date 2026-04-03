@@ -1,10 +1,10 @@
 import { getAccessToken, getUserInfo } from 'zmp-sdk';
 import type { ZaloUserInfo } from 'zmp-sdk';
 
-const TOKEN_KEY = 'xclaw_token';
-const USER_KEY = 'xclaw_user';
+const TOKEN_KEY = 'hitechclaw_token';
+const USER_KEY = 'hitechclaw_user';
 
-export interface XClawUser {
+export interface HiTechClawUser {
   id: string;
   name: string;
   email: string;
@@ -16,7 +16,7 @@ export interface XClawUser {
 interface AuthResponse {
   token: string;
   expiresIn: number;
-  user: XClawUser;
+  user: HiTechClawUser;
 }
 
 /** Get Zalo access token from ZMP SDK — falls back to dev mode */
@@ -39,7 +39,7 @@ export function getZaloUserInfo(): Promise<ZaloUserInfo> {
   });
 }
 
-/** Exchange Zalo token for xClaw JWT — with dev fallback */
+/** Exchange Zalo token for HiTechClaw JWT — with dev fallback */
 export async function loginWithZalo(apiBaseUrl: string, tenantSlug?: string): Promise<AuthResponse> {
   const zaloToken = await getZaloToken();
 
@@ -61,7 +61,7 @@ export async function loginWithZalo(apiBaseUrl: string, tenantSlug?: string): Pr
   }
 
   // Fallback: use standard login for dev/simulator
-  const devEmail = import.meta.env.VITE_DEV_EMAIL || 'demo@xclaw.ai';
+  const devEmail = import.meta.env.VITE_DEV_EMAIL || 'demo@hitechclaw.ai';
   const devPassword = import.meta.env.VITE_DEV_PASSWORD || 'demo1234';
 
   const loginRes = await fetch(`${apiBaseUrl}/auth/login`, {
@@ -81,17 +81,17 @@ export async function loginWithZalo(apiBaseUrl: string, tenantSlug?: string): Pr
   return data;
 }
 
-/** Get stored xClaw token */
+/** Get stored HiTechClaw token */
 export function getStoredToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
 }
 
 /** Get stored user info */
-export function getStoredUser(): XClawUser | null {
+export function getStoredUser(): HiTechClawUser | null {
   const raw = localStorage.getItem(USER_KEY);
   if (!raw) return null;
   try {
-    return JSON.parse(raw) as XClawUser;
+    return JSON.parse(raw) as HiTechClawUser;
   } catch {
     return null;
   }

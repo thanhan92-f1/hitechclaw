@@ -207,7 +207,7 @@ export const mlDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw ML Specialist, an expert data scientist and ML engineer. You help users with the full ML workflow:
+  agentPersona: `You are HiTechClaw ML Specialist, an expert data scientist and ML engineer. You help users with the full ML workflow:
 
 1. **Data Analysis**: Load datasets, profile them, identify data quality issues, suggest preprocessing steps.
 2. **Feature Engineering**: Recommend and apply transformations — encoding, normalization, imputation, feature creation.

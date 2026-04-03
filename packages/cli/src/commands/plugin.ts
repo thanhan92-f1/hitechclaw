@@ -1,10 +1,10 @@
 /**
- * Plugin CLI commands — scaffold, validate, and package xClaw plugins.
+ * Plugin CLI commands — scaffold, validate, and package HiTechClaw plugins.
  *
  * Usage:
- *   xclaw plugin create <name>    Create a new plugin scaffold
- *   xclaw plugin validate [dir]   Validate plugin structure
- *   xclaw plugin pack [dir]       Package plugin for distribution
+ *   hitechclaw plugin create <name>    Create a new plugin scaffold
+ *   hitechclaw plugin validate [dir]   Validate plugin structure
+ *   hitechclaw plugin pack [dir]       Package plugin for distribution
  */
 
 import * as fs from 'node:fs';
@@ -12,9 +12,9 @@ import * as path from 'node:path';
 
 const PLUGIN_TEMPLATE_FILES: Record<string, string | ((name: string) => string)> = {
   'package.json': (name: string) => JSON.stringify({
-    name: `@xclaw-plugins/${name}`,
+    name: `@hitechclaw-plugins/${name}`,
     version: '0.1.0',
-    description: `xClaw plugin: ${name}`,
+    description: `HiTechClaw plugin: ${name}`,
     type: 'module',
     main: 'dist/index.js',
     types: 'dist/index.d.ts',
@@ -22,14 +22,14 @@ const PLUGIN_TEMPLATE_FILES: Record<string, string | ((name: string) => string)>
       build: 'tsc -b',
       dev: 'tsc -b --watch',
     },
-    xclaw: {
+    hitechclaw: {
       type: 'plugin',
       skills: [],
       pages: [],
     },
     dependencies: {
-      '@xclaw-ai/core': '*',
-      '@xclaw-ai/shared': '*',
+      '@hitechclaw-ai/core': '*',
+      '@hitechclaw-ai/shared': '*',
     },
   }, null, 2),
 
@@ -57,15 +57,15 @@ export default plugin;
 
   'README.md': (name: string) => `# ${name}
 
-xClaw plugin.
+HiTechClaw plugin.
 
 ## Installation
 
-Add to your xClaw setup:
+Add to your HiTechClaw setup:
 
 \`\`\`json
 {
-  "plugins": ["@xclaw-plugins/${name}"]
+  "plugins": ["@hitechclaw-plugins/${name}"]
 }
 \`\`\`
 
@@ -115,7 +115,7 @@ export function pluginValidate(dir: string) {
 
   if (!pkg.name) errors.push('Missing "name" in package.json');
   if (!pkg.version) errors.push('Missing "version" in package.json');
-  if (!pkg.xclaw) errors.push('Missing "xclaw" field in package.json');
+  if (!pkg.hitechclaw) errors.push('Missing "hitechclaw" field in package.json');
   if (pkg.type !== 'module') errors.push('"type" must be "module"');
 
   const srcIndex = path.join(dir, 'src', 'index.ts');
