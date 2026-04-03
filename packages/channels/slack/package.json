@@ -1,6 +1,6 @@
 {
     "name": "@hitechclaw/channel-slack",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "HiTechClaw Slack channel plugin using Bolt SDK",
     "type": "module",
     "main": "dist/index.js",
