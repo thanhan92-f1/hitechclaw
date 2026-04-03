@@ -25,7 +25,7 @@
         }
     },
     "bin": {
-        "hitechclaw-chat-mcp": "./dist/mcp/bin.js"
+        "hitechclaw-chat-mcp": "dist/mcp/bin.js"
     },
     "files": [
         "dist",
@@ -52,7 +52,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/xdev-asia-labs/hitechclaw",
+        "url": "git+https://github.com/xdev-asia-labs/hitechclaw.git",
         "directory": "packages/chat-sdk"
     },
     "homepage": "https://github.com/xdev-asia-labs/hitechclaw/tree/main/packages/chat-sdk",
