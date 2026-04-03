@@ -1,6 +1,6 @@
 [submodule "hitechclaw-plugins"]
 	path = hitechclaw-plugins
-	url = https://github.com/xdev-asia-labs/hitechclaw-plugins.git
+	url = https://github.com/thanhan92-f1/hitechclaw-plugins.git
 [submodule "hitechclaw-demo-integration-app"]
 	path = hitechclaw-demo-integration-app
-	url = https://github.com/xdev-asia-labs/hitechclaw-demo-integration-app.git
+	url = https://github.com/thanhan92-f1/hitechclaw-demo-integration-app.git
