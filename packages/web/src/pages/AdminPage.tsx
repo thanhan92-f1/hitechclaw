@@ -24,7 +24,7 @@ import {
 
 // re-use existing tenant API via raw apiFetch
 async function apiFetch(path: string, init?: RequestInit) {
-    const token = localStorage.getItem('xclaw_token');
+    const token = localStorage.getItem('hitechclaw_token');
     const headers: Record<string, string> = { ...(init?.headers as Record<string, string>) };
     if (token) headers['Authorization'] = `Bearer ${token}`;
     if (init?.body && !(init.body instanceof FormData)) headers['Content-Type'] = 'application/json';
@@ -55,7 +55,7 @@ type Tab = 'tenants' | 'audit' | 'apiKeys' | 'retention';
 
 // ─── Demo data ─────────────────────────────────────────────
 const DEMO_TENANTS = [
-    { id: 'tenant-001', name: 'xClaw Development', slug: 'xclaw-dev', plan: 'enterprise', status: 'active', createdAt: '2026-01-15T08:00:00Z' },
+    { id: 'tenant-001', name: 'HiTechClaw Development', slug: 'hitechclaw-dev', plan: 'enterprise', status: 'active', createdAt: '2026-01-15T08:00:00Z' },
     { id: 'tenant-002', name: 'TeeForge.AI', slug: 'teeforge', plan: 'pro', status: 'active', createdAt: '2026-02-01T10:00:00Z' },
     { id: 'tenant-003', name: 'Hospital Demo', slug: 'hospital-demo', plan: 'pro', status: 'active', createdAt: '2026-02-20T14:00:00Z' },
     { id: 'tenant-004', name: 'Sandbox Tenant', slug: 'sandbox', plan: 'free', status: 'suspended', createdAt: '2026-03-10T09:00:00Z' },
@@ -65,10 +65,10 @@ const DEMO_AUDIT_LOGS = [
     { _id: 'aud-1', createdAt: '2026-03-31T10:12:00Z', action: 'user.login', userId: 'admin', metadata: { method: 'password', ip: '192.168.1.100' } },
     { _id: 'aud-2', createdAt: '2026-03-31T10:05:00Z', action: 'agent.config.update', userId: 'admin', metadata: { configId: 'default', model: 'qwen2.5:14b' } },
     { _id: 'aud-3', createdAt: '2026-03-31T09:50:00Z', action: 'workflow.create', userId: 'admin', metadata: { name: 'Slack Alert on Error' } },
-    { _id: 'aud-4', createdAt: '2026-03-31T09:30:00Z', action: 'channel.activate', userId: 'admin', metadata: { channel: 'telegram', name: 'xClaw Bot' } },
+    { _id: 'aud-4', createdAt: '2026-03-31T09:30:00Z', action: 'channel.activate', userId: 'admin', metadata: { channel: 'telegram', name: 'HiTechClaw Bot' } },
     { _id: 'aud-5', createdAt: '2026-03-30T16:20:00Z', action: 'role.assign', userId: 'admin', metadata: { role: 'doctor', targetUser: 'drsmith@hospital.com' } },
     { _id: 'aud-6', createdAt: '2026-03-30T15:00:00Z', action: 'tenant.settings.update', userId: 'admin', metadata: { key: 'securityPolicy', value: 'strict' } },
-    { _id: 'aud-7', createdAt: '2026-03-30T11:30:00Z', action: 'user.create', userId: 'admin', metadata: { email: 'devuser@xclaw.dev', role: 'developer' } },
+    { _id: 'aud-7', createdAt: '2026-03-30T11:30:00Z', action: 'user.create', userId: 'admin', metadata: { email: 'devuser@hitechclaw.dev', role: 'developer' } },
     { _id: 'aud-8', createdAt: '2026-03-29T14:00:00Z', action: 'apikey.create', userId: 'admin', metadata: { keyName: 'CI/CD Pipeline', scopes: ['read', 'write'] } },
     { _id: 'aud-9', createdAt: '2026-03-29T10:00:00Z', action: 'plugin.install', userId: 'admin', metadata: { plugin: 'healthcare', version: '1.0.0' } },
     { _id: 'aud-10', createdAt: '2026-03-28T09:00:00Z', action: 'user.login', userId: 'devuser', metadata: { method: 'oauth', provider: 'github' } },

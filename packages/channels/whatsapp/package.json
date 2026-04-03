@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/channel-whatsapp",
+    "name": "@hitechclaw-ai/channel-whatsapp",
     "version": "2.0.0",
-    "description": "xClaw WhatsApp channel plugin via Cloud API",
+    "description": "HiTechClaw WhatsApp channel plugin via Cloud API",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -10,6 +10,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*"
+        "@hitechclaw-ai/shared": "*"
     }
 }

@@ -21,14 +21,14 @@
 docker compose ps
 
 # Check recent logs
-docker compose logs --since 10m xclaw 2>&1 | grep -ic "error"
+docker compose logs --since 10m hitechclaw 2>&1 | grep -ic "error"
 ```
 
 ### 2. Identify Root Cause
 
 | Symptom | Likely Cause | Quick Fix |
 |---------|-------------|-----------|
-| `/health` returns 503 | Server crashed | `docker compose restart xclaw` |
+| `/health` returns 503 | Server crashed | `docker compose restart hitechclaw` |
 | `/health/ready` fails | DB connection lost | Restart database services |
 | `/health/deep` shows degraded | Specific dependency down | Check the failing component |
 | High latency (>2s) | DB slow queries / OOM | Check logs, increase resources |
@@ -40,7 +40,7 @@ docker compose logs --since 10m xclaw 2>&1 | grep -ic "error"
 **If the issue is the latest deploy:**
 
 ```bash
-./deploy/scripts/rollback.sh xclaw <previous-tag>
+./deploy/scripts/rollback.sh hitechclaw <previous-tag>
 ```
 
 **If a database is unresponsive:**
@@ -56,7 +56,7 @@ docker compose restart postgres  # or mongodb, redis
 docker stats --no-stream
 
 # Restart the offending service
-docker compose restart xclaw
+docker compose restart hitechclaw
 ```
 
 ### 4. Communicate

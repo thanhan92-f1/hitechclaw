@@ -3,15 +3,15 @@ services:
   postgres:
     image: postgres:18-alpine
     environment:
-      POSTGRES_USER: xclaw
-      POSTGRES_PASSWORD: xclaw
-      POSTGRES_DB: xclaw
+      POSTGRES_USER: hitechclaw
+      POSTGRES_PASSWORD: hitechclaw
+      POSTGRES_DB: hitechclaw
     ports:
       - "5456:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U xclaw"]
+      test: ["CMD-SHELL", "pg_isready -U hitechclaw"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -40,8 +40,8 @@ services:
       timeout: 5s
       retries: 5
 
-  # ─── xClaw Server ───────────────────────────────────────
-  xclaw:
+  # ─── HiTechClaw Server ────────────────────────────────────
+  hitechclaw:
     build:
       context: .
       dockerfile: Dockerfile
@@ -52,13 +52,13 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=5001
-      - DATABASE_URL=postgresql://xclaw:xclaw@postgres:5432/xclaw
-      - MONGODB_URL=mongodb://mongodb:27017/xclaw
+      - DATABASE_URL=postgresql://hitechclaw:hitechclaw@postgres:5432/hitechclaw
+      - MONGODB_URL=mongodb://mongodb:27017/hitechclaw
       - REDIS_URL=redis://redis:6379
       - OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
       - CORS_ORIGINS=http://localhost,http://localhost:3001,http://localhost:5002
       - OPENSHELL_ENABLED=false
-      - CREDENTIAL_ENCRYPTION_KEY=${CREDENTIAL_ENCRYPTION_KEY:-xclaw-dev-credential-key-do-not-use-in-prod}
+      - CREDENTIAL_ENCRYPTION_KEY=${CREDENTIAL_ENCRYPTION_KEY:-hitechclaw-dev-credential-key-do-not-use-in-prod}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     # Disable IPv6 in container — Node.js fetch (undici) hangs on ENETUNREACH IPv6 in Docker
@@ -81,7 +81,7 @@ services:
     ports:
       - "3001:80"
     depends_on:
-      - xclaw
+      - hitechclaw
 
 volumes:
   pgdata:

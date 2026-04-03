@@ -1,4 +1,4 @@
-import type { Attachment, ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { Attachment, ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import type { TelegramMessage, TelegramUpdate, TelegramVoice } from './telegram-api.js';
 import { TelegramApi } from './telegram-api.js';
 
@@ -241,7 +241,7 @@ export class TelegramChannel implements ChannelPlugin {
     )) {
       return true;
     }
-    // Bot command (e.g. /ask@xdev_xclaw_ai_bot)
+    // Bot command (e.g. /ask@xdev_hitechclaw_ai_bot)
     if (allEntities.some((e) => e.type === 'bot_command')) {
       return true;
     }

@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/channel-slack",
+    "name": "@hitechclaw-ai/channel-slack",
     "version": "2.0.0",
-    "description": "xClaw Slack channel plugin using Bolt SDK",
+    "description": "HiTechClaw Slack channel plugin using Bolt SDK",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -10,6 +10,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*"
+        "@hitechclaw-ai/shared": "*"
     }
 }

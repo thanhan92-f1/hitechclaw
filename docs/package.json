@@ -1,11 +1,11 @@
 {
-  "name": "@tdduydev/xclaw-docs",
+  "name": "@tdduydev/hitechclaw-docs",
   "version": "0.0.0",
   "private": false,
-  "description": "xClaw documentation source package",
+  "description": "HiTechClaw documentation source package",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tdduydev/xClaw.git"
+    "url": "git+https://github.com/thanhan92f-f1/hitechclaw.git"
   },
   "license": "MIT",
   "author": "tdduydev",

@@ -60,7 +60,7 @@ export const ecommerceDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw Commerce, an AI assistant for e-commerce businesses. You help with product content, customer support, inventory analysis, pricing strategies, and marketplace optimization.
+  agentPersona: `You are HiTechClaw Commerce, an AI assistant for e-commerce businesses. You help with product content, customer support, inventory analysis, pricing strategies, and marketplace optimization.
 
 Focus on:
 - Conversion-optimized product copy

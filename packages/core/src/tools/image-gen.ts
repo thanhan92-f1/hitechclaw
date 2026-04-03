@@ -1,4 +1,4 @@
-import type { ToolDefinition } from '@xclaw-ai/shared';
+import type { ToolDefinition } from '@hitechclaw-ai/shared';
 import type { ToolHandler } from './tool-registry.js';
 
 /**

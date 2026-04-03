@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import crypto from 'node:crypto';
-import { apiKeysCollection } from '@xclaw-ai/db';
+import { apiKeysCollection } from '@hitechclaw-ai/db';
 
 export function createApiKeyRoutes() {
   const app = new Hono();

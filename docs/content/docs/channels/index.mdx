@@ -1,9 +1,9 @@
 ---
 title: Chat Channels
-description: Connect xClaw to messaging platforms — Telegram, Slack, WhatsApp, Zalo, Facebook Messenger, MS Teams, and more.
+description: Connect HiTechClaw to messaging platforms — Telegram, Slack, WhatsApp, Zalo, Facebook Messenger, MS Teams, and more.
 ---
 
-xClaw supports **9 messaging channels** out of the box. Each channel is implemented as a `ChannelPlugin` that handles incoming messages and sends responses.
+HiTechClaw supports **9 messaging channels** out of the box. Each channel is implemented as a `ChannelPlugin` that handles incoming messages and sends responses.
 
 ## Supported Channels
 
@@ -50,11 +50,11 @@ Each channel connection is linked to an **Agent Configuration** that determines 
 
 ## Smart Message Routing
 
-xClaw automatically detects signals in incoming messages and adjusts how they are processed:
+HiTechClaw automatically detects signals in incoming messages and adjusts how they are processed:
 
 ### Vision Routing (Image Attachments)
 
-When a user sends an image (Telegram photo, WhatsApp media, etc.), xClaw **hard-switches** to the configured vision model instead of the default text model:
+When a user sends an image (Telegram photo, WhatsApp media, etc.), HiTechClaw **hard-switches** to the configured vision model instead of the default text model:
 
 ```
 ollama-vision → gemini → openai → ollama (fallback)
@@ -67,17 +67,17 @@ VISION_PROVIDER=ollama      # ollama | gemini | openai
 VISION_MODEL=llava:13b      # e.g. qwen2.5vl:7b, gemma3:12b
 ```
 
-> If `VISION_MODEL` is not set, xClaw reuses `LLM_MODEL` (only works if that model supports vision).
+> If `VISION_MODEL` is not set, HiTechClaw reuses `LLM_MODEL` (only works if that model supports vision).
 
 ### Realtime Search Hint
 
-When a message mentions time-sensitive topics (news, weather, prices, scores), xClaw prepends a routing instruction to the prompt telling the agent to use web-search tools first — no config required.
+When a message mentions time-sensitive topics (news, weather, prices, scores), HiTechClaw prepends a routing instruction to the prompt telling the agent to use web-search tools first — no config required.
 
 Keywords detected (Vietnamese + English): `today`, `latest`, `breaking`, `weather`, `price`, `stock`, `hôm nay`, `mới nhất`, `thời tiết`, `tỷ giá`, `kết quả`, `trực tiếp`, and more.
 
 ## Webhook Infrastructure
 
-Facebook Messenger, WhatsApp, and Zalo use inbound webhooks. xClaw exposes a unified route:
+Facebook Messenger, WhatsApp, and Zalo use inbound webhooks. HiTechClaw exposes a unified route:
 
 ```
 GET  /webhooks/channels/:connectionId   ← Platform verification (hub.challenge)

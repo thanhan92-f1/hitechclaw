@@ -1,6 +1,6 @@
-# xClaw AI — Zalo Mini App
+# HiTechClaw AI — Zalo Mini App
 
-Ứng dụng chat AI chạy trong Zalo dưới dạng Mini App (ZMP), kết nối với xClaw backend qua REST API + SSE streaming.
+Ứng dụng chat AI chạy trong Zalo dưới dạng Mini App (ZMP), kết nối với HiTechClaw backend qua REST API + SSE streaming.
 
 ## Kiến trúc
 
@@ -8,14 +8,14 @@
 ┌──────────────────────────┐
 │     Zalo App (mobile)    │
 │  ┌────────────────────┐  │
-│  │  xClaw Mini App    │  │
+│  │  HiTechClaw Mini App    │  │
 │  │  (React + ZMP UI)  │  │
 │  └────────┬───────────┘  │
 └───────────┼──────────────┘
             │ HTTPS
             ▼
 ┌──────────────────────────┐
-│  xClaw Backend (Hono)    │
+│  HiTechClaw Backend (Hono)    │
 │  POST /auth/zalo-miniapp │
 │  POST /api/chat (SSE)    │
 │  GET  /api/chat/convs    │
@@ -36,7 +36,7 @@
 - **Zalo Developer Account** tại [developers.zalo.me](https://developers.zalo.me)
 - **Zalo OA** (bắt buộc để phân phối Mini App)
 - **ZMP CLI**: `npm install -g zmp-cli`
-- **xClaw backend** đang chạy (Docker Compose)
+- **HiTechClaw backend** đang chạy (Docker Compose)
 
 ## Setup
 
@@ -55,7 +55,7 @@ zmp login
 Tạo file `.env` trong thư mục này:
 
 ```env
-VITE_API_URL=https://your-xclaw-api.com
+VITE_API_URL=https://your-hitechclaw-api.com
 VITE_TENANT_SLUG=default
 ```
 
@@ -64,7 +64,7 @@ Cập nhật `app-config.json` với App ID từ Zalo Developer:
 ```json
 {
   "app": {
-    "title": "xClaw AI",
+    "title": "HiTechClaw AI",
     ...
   }
 }
@@ -105,8 +105,8 @@ packages/zalo-miniapp/
     ├── app.tsx           # Root component (tabs, auth)
     ├── env.d.ts          # Type declarations
     ├── lib/
-    │   ├── api.ts        # XClawClient singleton
-    │   └── zalo-auth.ts  # Zalo SDK → xClaw JWT bridge
+    │   ├── api.ts        # HiTechClawClient singleton
+    │   └── zalo-auth.ts  # Zalo SDK → HiTechClaw JWT bridge
     ├── components/
     │   ├── ChatBubble.tsx    # Message bubble (markdown)
     │   ├── ChatInput.tsx     # Input with auto-resize
@@ -136,7 +136,7 @@ packages/zalo-miniapp/
 
 ### `POST /auth/zalo-miniapp`
 
-Exchange Zalo access token for xClaw JWT.
+Exchange Zalo access token for HiTechClaw JWT.
 
 **Request:**
 

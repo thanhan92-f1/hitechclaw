@@ -791,7 +791,7 @@ ${context}
 
     try {
       const res = await fetch(sourceUrl, {
-        headers: { 'User-Agent': 'xClaw-Bot/1.0 (Knowledge Refresh)' },
+        headers: { 'User-Agent': 'HiTechClaw-Bot/1.0 (Knowledge Refresh)' },
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const html = await res.text();

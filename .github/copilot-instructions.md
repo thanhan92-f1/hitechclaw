@@ -1,12 +1,12 @@
-# xClaw AI Agent Platform — Copilot Instructions
+# HiTechClaw AI Agent Platform — Copilot Instructions
 
 ## Project Overview
 
-xClaw is a TypeScript monorepo (npm workspaces) for a general-purpose multi-industry AI agent platform with plugin-based skills, multi-channel messaging, RBAC, multi-tenant architecture, and dual-database design. Communication may be in Vietnamese.
+HiTechClaw is a TypeScript monorepo (npm workspaces) for a general-purpose multi-industry AI agent platform with plugin-based skills, multi-channel messaging, RBAC, multi-tenant architecture, and dual-database design. Communication may be in Vietnamese.
 
 ## Monorepo Structure
 
-- `packages/shared` — Foundation types (`@xclaw-ai/shared`), imported by every other package
+- `packages/shared` — Foundation types (`@hitechclaw-ai/shared`), imported by every other package
 - `packages/core` — Agent engine, SkillManager, ToolRegistry, LLM, memory, workflow
 - `packages/db` — Dual-database layer: Drizzle ORM (PostgreSQL) + MongoDB driver
 - `packages/skills` — Built-in skills using `defineSkill()` helper
@@ -22,9 +22,6 @@ xClaw is a TypeScript monorepo (npm workspaces) for a general-purpose multi-indu
 - `data/knowledge-packs/*` — Data-only plugin packages
 
 ### Git Submodules
-
-- `xclaw-plugins/` — Official plugins (TeeForge.AI, Healthcare) → [xdev-asia-labs/xclaw-plugins](https://github.com/xdev-asia-labs/xclaw-plugins)
-- `xclaw-demo-integration-app/` — HIS-Mini demo integration app → [xdev-asia-labs/xclaw-demo-integration-app](https://github.com/xdev-asia-labs/xclaw-demo-integration-app)
 
 Plugins are **not** inside `packages/`. They live in external repos linked as git submodules. Clone with `git clone --recurse-submodules`.
 
@@ -44,8 +41,8 @@ Plugins are **not** inside `packages/`. They live in external repos linked as gi
 
 ## Coding Patterns
 
-- Define shared types/interfaces in `@xclaw-ai/shared`, import with `import type { ... }`
-- Skills use `defineSkill()` from `@xclaw-ai/core`
+- Define shared types/interfaces in `@hitechclaw-ai/shared`, import with `import type { ... }`
+- Skills use `defineSkill()` from `@hitechclaw-ai/core`
 - Gateway routes use Hono with `try/catch` and `err instanceof Error ? err.message : 'Failed'`
 - State management: Zustand stores in `packages/web/src/stores/`
 - Seed data must be **idempotent** — always check existence before inserting
@@ -56,7 +53,7 @@ Plugins are **not** inside `packages/`. They live in external repos linked as gi
 
 - **Always use Docker Compose**: `docker compose up --build`
 - Do NOT run `npm run build` or `npm test` directly on host
-- View logs: `docker compose logs -f xclaw`
+- View logs: `docker compose logs -f hitechclaw`
 
 ## Security (DevSecOps)
 

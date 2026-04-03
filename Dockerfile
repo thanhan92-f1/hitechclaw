@@ -1,5 +1,5 @@
 # ============================================================
-# xClaw v2.1.0 — Multi-stage Docker build
+# HiTechClaw v2.1.0 — Multi-stage Docker build
 # ============================================================
 
 FROM node:20-alpine AS base
@@ -63,8 +63,8 @@ FROM base AS runner
 ENV NODE_ENV=production
 
 # Run as non-root user for security
-RUN addgroup -g 1001 -S xclaw && \
-    adduser -S xclaw -u 1001 -G xclaw
+RUN addgroup -g 1001 -S hitechclaw && \
+    adduser -S hitechclaw -u 1001 -G hitechclaw
 
 # Copy built artifacts
 COPY --from=deps /app/node_modules ./node_modules
@@ -108,9 +108,9 @@ COPY --from=builder /app/packages/server/dist ./packages/server/dist
 COPY --from=builder /app/packages/server/package.json ./packages/server/
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/data/dev-docs ./data/dev-docs
-RUN chown -R xclaw:xclaw ./data
+RUN chown -R hitechclaw:hitechclaw ./data
 
-USER xclaw
+USER hitechclaw
 EXPOSE 3000
 
 CMD ["node", "packages/server/dist/index.js"]

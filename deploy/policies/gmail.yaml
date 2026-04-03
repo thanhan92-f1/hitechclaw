@@ -1,4 +1,4 @@
-# OpenShell Gmail Integration Policy for xClaw
+# OpenShell Gmail Integration Policy for HiTechClaw
 # Allows access only to Google APIs for Gmail/Calendar operations.
 
 name: gmail

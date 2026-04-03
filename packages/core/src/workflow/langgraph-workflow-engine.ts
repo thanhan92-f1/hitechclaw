@@ -1,7 +1,7 @@
 // ============================================================
 // LangGraph Workflow Engine — Execute visual workflows via LangGraph
 // ============================================================
-// Converts xClaw Workflow definitions into LangGraph StateGraphs.
+// Converts HiTechClaw Workflow definitions into LangGraph StateGraphs.
 // Drop-in replacement for the legacy WorkflowEngine with the same
 // execute() / validate() contract, plus LangGraph benefits:
 // - Checkpointing/resumability
@@ -25,7 +25,7 @@ import type {
     WorkflowNode,
     WorkflowNodeType,
     WorkflowSandboxConfig,
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import { randomUUID } from 'node:crypto';
 import vm from 'node:vm';
 import type { EventBus } from '../agent/event-bus.js';

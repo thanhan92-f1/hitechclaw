@@ -5,7 +5,7 @@
 // security events for sandbox operations. These events can be
 // forwarded to SIEM systems.
 
-import type { SandboxAuditEntry } from '@xclaw-ai/shared';
+import type { SandboxAuditEntry } from '@hitechclaw-ai/shared';
 
 /**
  * OCSF Activity ID for sandbox events.
@@ -77,7 +77,7 @@ export interface OCSFSecurityEvent {
 
 const METADATA = {
   version: '1.1.0',
-  product: { name: 'xClaw', vendor_name: 'xDev Asia', version: '2.1.0' },
+  product: { name: 'HiTechClaw', vendor_name: 'xDev Asia', version: '2.1.0' },
   log_name: 'sandbox_security',
 };
 

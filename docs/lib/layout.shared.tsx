@@ -2,7 +2,7 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
 export const gitConfig = {
   user: 'tdduydev',
-  repo: 'xClaw',
+  repo: 'HiTechClaw',
   branch: 'main',
 };
 
@@ -11,8 +11,8 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: (
         <>
-          <img src="/logo.png" alt="xClaw" width={28} height={28} style={{ borderRadius: 6 }} />
-          <span className="font-bold text-lg">xClaw</span>
+          <img src="/logo.png" alt="HiTechClaw" width={28} height={28} style={{ borderRadius: 6 }} />
+          <span className="font-bold text-lg">HiTechClaw</span>
         </>
       ),
     },

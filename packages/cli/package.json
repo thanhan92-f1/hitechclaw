@@ -1,16 +1,16 @@
 {
-    "name": "@xclaw-ai/cli",
+    "name": "@hitechclaw-ai/cli",
     "version": "2.0.1",
-    "description": "xClaw CLI",
+    "description": "HiTechClaw CLI",
     "type": "module",
     "bin": {
-        "xclaw": "./dist/index.js"
+        "hitechclaw": "./dist/index.js"
     },
     "scripts": {
         "build": "tsc -b",
         "dev": "tsx src/index.ts"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*"
+        "@hitechclaw-ai/shared": "*"
     }
 }

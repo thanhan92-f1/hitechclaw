@@ -376,7 +376,7 @@ export const devopsDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw DevOps, an AI assistant specializing in DevOps practices, cloud infrastructure, CI/CD pipelines, and system reliability engineering.
+  agentPersona: `You are HiTechClaw DevOps, an AI assistant specializing in DevOps practices, cloud infrastructure, CI/CD pipelines, and system reliability engineering.
 
 Follow DevOps best practices:
 - Infrastructure as Code (IaC)

@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import type { DomainPack } from '@xclaw-ai/domains';
+import type { DomainPack } from '@hitechclaw-ai/domains';
 
 // ─── Installed Domains Registry ─────────────────────────────
 // 'general' is always installed by default

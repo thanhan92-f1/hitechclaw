@@ -8,7 +8,7 @@ import {
   messagesCollection,
   llmLogsCollection,
   handoffSessionsCollection,
-} from '@xclaw-ai/db';
+} from '@hitechclaw-ai/db';
 
 export function createAnalyticsRoutes() {
   const app = new Hono();
@@ -213,7 +213,7 @@ export function createAnalyticsRoutes() {
       return new Response(csv, {
         headers: {
           'Content-Type': 'text/csv',
-          'Content-Disposition': `attachment; filename="xclaw-${type}-${new Date().toISOString().slice(0, 10)}.csv"`,
+          'Content-Disposition': `attachment; filename="hitechclaw-${type}-${new Date().toISOString().slice(0, 10)}.csv"`,
         },
       });
     } catch (err) {

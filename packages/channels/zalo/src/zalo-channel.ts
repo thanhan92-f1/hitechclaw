@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import { ZaloApi } from './zalo-api.js';
 import type { ZaloWebhookEvent } from './zalo-api.js';
 
@@ -10,7 +10,7 @@ export interface ZaloChannelConfig {
 }
 
 /**
- * Zalo OA channel adapter for xClaw.
+ * Zalo OA channel adapter for HiTechClaw.
  *
  * Uses the Zalo Official Account Open API v3.
  * Messages arrive via webhook and responses are sent via the OA API.

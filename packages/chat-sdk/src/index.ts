@@ -1,14 +1,14 @@
 // ============================================================
-// @xclaw-ai/chat-sdk — Main Entry Point
+// @hitechclaw-ai/chat-sdk — Main Entry Point
 // ============================================================
 
 // Core client
-export { XClawClient, XClawError } from './client.js';
+export { HiTechClawClient, HiTechClawError } from './client.js';
 
 // All types
 export type {
     // Config
-    XClawConfig,
+    HiTechClawConfig,
 
     // Chat
     ChatRequest,

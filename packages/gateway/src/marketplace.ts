@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import type { DomainPack } from '@xclaw-ai/domains';
+import type { DomainPack } from '@hitechclaw-ai/domains';
 import { getInstalledDomainIds } from './domains.js';
 
 export interface MarketplaceItem {
@@ -69,7 +69,7 @@ export function createMarketplaceRoutes(domainPacks: DomainPack[]) {
           name: skill.name,
           description: skill.description,
           version: skill.version ?? '1.0.0',
-          author: `xClaw – ${domain.name}`,
+          author: `HiTechClaw – ${domain.name}`,
           category: cat,
           rating: 0,
           downloads: 0,

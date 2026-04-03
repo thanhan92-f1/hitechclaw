@@ -7,7 +7,7 @@ const args = process.argv.slice(2);
 const command = args[0];
 const subcommand = args[1];
 
-console.log('🐾 xClaw CLI v2.0.0');
+console.log('🐾 HiTechClaw CLI v2.0.0');
 
 // Simple flag parser: --key value or --key=value
 function parseFlags(argv: string[]): Record<string, string> {
@@ -32,7 +32,7 @@ switch (command) {
   case 'plugin': {
     switch (subcommand) {
       case 'create':
-        if (!args[2]) { console.error('Usage: xclaw plugin create <name>'); process.exit(1); }
+        if (!args[2]) { console.error('Usage: hitechclaw plugin create <name>'); process.exit(1); }
         pluginCreate(args[2], args[3]);
         break;
       case 'validate':
@@ -42,7 +42,7 @@ switch (command) {
         pluginPack(args[2] ?? process.cwd());
         break;
       default:
-        console.log('Usage: xclaw plugin <create|validate|pack>');
+        console.log('Usage: hitechclaw plugin <create|validate|pack>');
     }
     break;
   }
@@ -68,12 +68,12 @@ switch (command) {
         });
         break;
       default:
-        console.log('Usage: xclaw user <create|register>');
+        console.log('Usage: hitechclaw user <create|register>');
         console.log('');
-        console.log('  xclaw user create --name <name> --email <email> --password <pass> [--role member|admin|viewer]');
-        console.log('    Add a user to the current tenant (requires XCLAW_TOKEN)');
+        console.log('  hitechclaw user create --name <name> --email <email> --password <pass> [--role member|admin|viewer]');
+        console.log('    Add a user to the current tenant (requires HITECHCLAW_TOKEN)');
         console.log('');
-        console.log('  xclaw user register --name <name> --email <email> --password <pass> --tenant-name <name> --tenant-slug <slug>');
+        console.log('  hitechclaw user register --name <name> --email <email> --password <pass> --tenant-name <name> --tenant-slug <slug>');
         console.log('    Register a new tenant + owner account');
     }
     break;
@@ -89,26 +89,26 @@ switch (command) {
         docsList(args[2]);
         break;
       case 'search':
-        if (!args[2]) { console.error('Usage: xclaw docs search <query>'); process.exit(1); }
+        if (!args[2]) { console.error('Usage: hitechclaw docs search <query>'); process.exit(1); }
         docsSearch(args.slice(2).join(' '));
         break;
       case 'add':
-        if (!args[2] || !args[3]) { console.error('Usage: xclaw docs add <path> <title> [--tags t1,t2]'); process.exit(1); }
+        if (!args[2] || !args[3]) { console.error('Usage: hitechclaw docs add <path> <title> [--tags t1,t2]'); process.exit(1); }
         docsAdd(args[2], args[3], flags['tags'] ?? '');
         break;
       default:
-        console.log('Usage: xclaw docs <init|list|search|add>');
+        console.log('Usage: hitechclaw docs <init|list|search|add>');
         console.log('');
-        console.log('  xclaw docs init              Initialize dev-docs directory');
-        console.log('  xclaw docs list [category]   List documentation files');
-        console.log('  xclaw docs search <query>    Search documentation');
-        console.log('  xclaw docs add <path> <title> [--tags t1,t2]  Add new document');
+        console.log('  hitechclaw docs init              Initialize dev-docs directory');
+        console.log('  hitechclaw docs list [category]   List documentation files');
+        console.log('  hitechclaw docs search <query>    Search documentation');
+        console.log('  hitechclaw docs add <path> <title> [--tags t1,t2]  Add new document');
     }
     break;
   }
 
   default:
-    console.log('Usage: xclaw <command>');
+    console.log('Usage: hitechclaw <command>');
     console.log('Commands:');
     console.log('  plugin create <name>   Scaffold a new plugin');
     console.log('  plugin validate [dir]  Validate plugin structure');

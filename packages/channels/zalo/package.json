@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/channel-zalo",
+    "name": "@hitechclaw-ai/channel-zalo",
     "version": "2.0.0",
-    "description": "xClaw Zalo OA channel plugin",
+    "description": "HiTechClaw Zalo OA channel plugin",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -10,6 +10,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*"
+        "@hitechclaw-ai/shared": "*"
     }
 }

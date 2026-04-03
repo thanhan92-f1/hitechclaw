@@ -1,5 +1,5 @@
 ---
-description: "Use when working with DevOps, CI/CD, Docker, docker-compose, Dockerfile, deployment, monitoring, backup, or infrastructure in xClaw"
+description: "Use when working with DevOps, CI/CD, Docker, docker-compose, Dockerfile, deployment, monitoring, backup, or infrastructure in HiTechClaw"
 applyTo: [".github/workflows/**", "docker-compose*.yml", "Dockerfile", "packages/server/**", "deploy/**", "scripts/**"]
 ---
 # DevOps & Docker Instructions
@@ -11,7 +11,7 @@ applyTo: [".github/workflows/**", "docker-compose*.yml", "Dockerfile", "packages
 | postgres | postgres:18-alpine | 5432 | internal | Config/structured data |
 | mongodb | mongo:7 | 27018 | internal | AI/conversational data |
 | redis | redis:8-alpine | 6379 | internal | Cache |
-| xclaw | built from Dockerfile | 5001 | 5001 | API server |
+| hitechclaw | built from Dockerfile | 5001 | 5001 | API server |
 | web | packages/web/Dockerfile | 3000 | 3000 | Frontend (Nginx) |
 
 ## Build & Run
@@ -24,7 +24,7 @@ docker compose up --build
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 # View logs
-docker compose logs -f xclaw
+docker compose logs -f hitechclaw
 ```
 
 - **Never** run `npm run build` or `npm test` directly on host
@@ -43,7 +43,7 @@ Each step wrapped in try/catch.
 ## Dockerfile Notes
 
 - Multi-stage build: deps → builder → runner
-- Non-root user `xclaw` (UID 1001) in runner stage
+- Non-root user `hitechclaw` (UID 1001) in runner stage
 - SQL migrations explicitly copied: `cp -r src/migrations dist/migrations`
 - Final stage: slim Node image with only `dist/` and `node_modules/`
 
@@ -67,7 +67,7 @@ Each step wrapped in try/catch.
 
 All operational scripts are in `deploy/scripts/`:
 - `deploy.sh [dev|staging|production]` — Full deploy with health checks
-- `rollback.sh [xclaw|web] [tag]` — Rollback to specific image
+- `rollback.sh [hitechclaw|web] [tag]` — Rollback to specific image
 - `health-check.sh [base_url]` — Verify all health endpoints
 - `backup-postgres.sh [dir]` — PostgreSQL backup
 - `backup-mongodb.sh [dir]` — MongoDB backup

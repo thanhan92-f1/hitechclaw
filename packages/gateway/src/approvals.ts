@@ -1,4 +1,4 @@
-import type { ApprovalManager } from '@xclaw-ai/core';
+import type { ApprovalManager } from '@hitechclaw-ai/core';
 import { Hono } from 'hono';
 
 export function createApprovalRoutes(approvalManager: ApprovalManager) {

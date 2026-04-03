@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/ml",
+    "name": "@hitechclaw-ai/ml",
     "version": "2.1.1",
-    "description": "xClaw ML/AutoML Engine — Dataset management, model training, AutoML pipelines, and model registry",
+    "description": "HiTechClaw ML/AutoML Engine — Dataset management, model training, AutoML pipelines, and model registry",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*",
+        "@hitechclaw-ai/shared": "*",
         "zod": "^3.23.0"
     }
 }

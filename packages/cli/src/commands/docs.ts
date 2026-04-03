@@ -16,7 +16,7 @@ export function docsList(category?: string): void {
     const docsRoot = getDocsRoot();
     if (!existsSync(docsRoot)) {
         console.log('📂 No dev-docs directory found at:', docsRoot);
-        console.log('   Run: xclaw docs init');
+        console.log('   Run: hitechclaw docs init');
         return;
     }
 
@@ -47,7 +47,7 @@ export function docsList(category?: string): void {
 export function docsSearch(query: string): void {
     const docsRoot = getDocsRoot();
     if (!existsSync(docsRoot)) {
-        console.log('📂 No dev-docs directory found. Run: xclaw docs init');
+        console.log('📂 No dev-docs directory found. Run: hitechclaw docs init');
         return;
     }
 
@@ -139,7 +139,7 @@ export function docsInit(): void {
     const readmePath = resolve(docsRoot, 'README.md');
     if (!existsSync(readmePath)) {
         writeFileSync(readmePath, [
-            '# xClaw Developer Documentation',
+            '# HiTechClaw Developer Documentation',
             '',
             'Kho tài liệu dành cho developer, được AI code assistants truy cập qua MCP.',
             '',

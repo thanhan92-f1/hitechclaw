@@ -5,7 +5,7 @@ import {
     sessionsCollection,
     type MongoAgentConfig,
     type MongoChannelConnection,
-} from '@xclaw-ai/db';
+} from '@hitechclaw-ai/db';
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 import type { GatewayContext } from './gateway.js';
@@ -520,7 +520,7 @@ export function createAgentsRoutes(ctx?: GatewayContext) {
             { key: 'secretKey', label: 'Secret Key', type: 'password', required: false, placeholder: 'Webhook verification (optional)' },
             { key: 'accessToken', label: 'Access Token', type: 'password', required: false, placeholder: 'Optional — for sending messages via API' },
           ],
-          setupGuide: 'Tạo app tại developers.zalo.me → Liên kết OA → Cấu hình Webhook URL tới xClaw',
+          setupGuide: 'Tạo app tại developers.zalo.me → Liên kết OA → Cấu hình Webhook URL tới HiTechClaw',
         },
         {
           id: 'msteams',

@@ -3,21 +3,21 @@ name: devops
 description: >-
   Use when working with DevOps tasks: CI/CD pipelines, Docker deployment, production deploy,
   rollback, backup/restore databases, health checks, monitoring, incident response,
-  infrastructure configuration, or security hardening in xClaw.
+  infrastructure configuration, or security hardening in HiTechClaw.
   DO NOT USE FOR: application code changes, frontend UI, database schema design.
 ---
 
-# DevOps Skill — xClaw Platform
+# DevOps Skill — HiTechClaw Platform
 
 ## Overview
 
-xClaw uses Docker Compose for all environments. The platform runs 5 services:
-PostgreSQL 18, MongoDB 7, Redis 8, xClaw API server (Node.js/Hono), and Web frontend (Nginx).
+HiTechClaw uses Docker Compose for all environments. The platform runs 5 services:
+PostgreSQL 18, MongoDB 7, Redis 8, HiTechClaw API server (Node.js/Hono), and Web frontend (Nginx).
 
 ## Directory Layout
 
 ```
-xClaw/
+HiTechClaw/
 ├── docker-compose.yml              # Dev environment (default)
 ├── docker-compose.prod.yml         # Production overrides
 ├── Dockerfile                      # Server multi-stage build
@@ -63,7 +63,7 @@ xClaw/
 ## Procedure: Rollback
 
 1. Read the runbook: `deploy/runbooks/rollback.md`
-2. Quick: `./deploy/scripts/rollback.sh xclaw <tag>`
+2. Quick: `./deploy/scripts/rollback.sh hitechclaw <tag>`
 3. Always verify health after rollback
 
 ## Procedure: Backup & Restore
@@ -89,7 +89,7 @@ When modifying `.github/workflows/*.yml`:
 
 1. Read the runbook: `deploy/runbooks/incident-response.md`
 2. Run `./deploy/scripts/health-check.sh` to assess
-3. Check Docker logs: `docker compose logs --since 10m xclaw`
+3. Check Docker logs: `docker compose logs --since 10m hitechclaw`
 4. Escalation: SEV-1/2 → immediate rollback, SEV-3/4 → investigate
 
 ## Health Endpoints
@@ -108,13 +108,13 @@ When modifying `.github/workflows/*.yml`:
 - **ALWAYS** backup databases before deploying migration changes
 - **ALWAYS** run health checks after every deployment
 - **ALWAYS** use `docker compose -f docker-compose.yml -f docker-compose.prod.yml` for production
-- Server Dockerfile uses non-root user `xclaw` (UID 1001) for security
+- Server Dockerfile uses non-root user `hitechclaw` (UID 1001) for security
 
 ## Docker Image Registry
 
 - Registry: `ghcr.io/xdev-asia/`
-- Server: `ghcr.io/xdev-asia/xclaw-server`
-- Web: `ghcr.io/xdev-asia/xclaw-web`
+- Server: `ghcr.io/xdev-asia/hitechclaw-server`
+- Web: `ghcr.io/xdev-asia/hitechclaw-web`
 - Tags: `latest`, `v2.1.0`, `sha-abc1234`, `develop`
 
 ## Environment Differences

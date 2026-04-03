@@ -1,4 +1,4 @@
-import type { ConversationMessage, ConversationSummary, LLMMessage } from '@xclaw-ai/shared';
+import type { ConversationMessage, ConversationSummary, LLMMessage } from '@hitechclaw-ai/shared';
 import type { LLMRouter } from '../llm/llm-router.js';
 
 const SUMMARIZE_PROMPT = `You are a conversation summarizer. Condense the following conversation into a concise summary that preserves all key facts, decisions, user preferences, and action items. Output ONLY the summary, no preamble.`;

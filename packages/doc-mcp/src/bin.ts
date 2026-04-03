@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // ============================================================
-// @xclaw-ai/doc-mcp — Standalone MCP Server Entry Point
+// @hitechclaw-ai/doc-mcp — Standalone MCP Server Entry Point
 // ============================================================
 //
-// Run:  npx @xclaw-ai/doc-mcp
+// Run:  npx @hitechclaw-ai/doc-mcp
 //       DOCS_ROOT=/path/to/docs node dist/bin.js
 //
 // Environment:

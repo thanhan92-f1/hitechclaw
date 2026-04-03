@@ -78,7 +78,7 @@ export function ChatPage() {
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
     const [sessionId, setSessionId] = useState(() => {
-        const saved = localStorage.getItem('xclaw-last-session');
+        const saved = localStorage.getItem('hitechclaw-last-session');
         return saved || `session-${Date.now()}`;
     });
     const [attachments, setAttachments] = useState<ChatAttachment[]>([]);
@@ -96,7 +96,7 @@ export function ChatPage() {
     const [conversations, setConversations] = useState<ConversationSummary[]>([]);
     const isComposingRef = useRef(false);
     const [sidebarOpen, setSidebarOpen] = useState(() => {
-        const saved = localStorage.getItem('xclaw-sidebar-open');
+        const saved = localStorage.getItem('hitechclaw-sidebar-open');
         return saved !== null ? saved === 'true' : true; // default open
     });
     const [renamingId, setRenamingId] = useState<string | null>(null);
@@ -135,12 +135,12 @@ export function ChatPage() {
 
     // Persist sidebar state
     useEffect(() => {
-        localStorage.setItem('xclaw-sidebar-open', String(sidebarOpen));
+        localStorage.setItem('hitechclaw-sidebar-open', String(sidebarOpen));
     }, [sidebarOpen]);
 
     // Persist last sessionId
     useEffect(() => {
-        localStorage.setItem('xclaw-last-session', sessionId);
+        localStorage.setItem('hitechclaw-last-session', sessionId);
     }, [sessionId]);
 
     useEffect(() => {
@@ -195,7 +195,7 @@ export function ChatPage() {
 
     // Auto-load last conversation on mount
     useEffect(() => {
-        const lastSession = localStorage.getItem('xclaw-last-session');
+        const lastSession = localStorage.getItem('hitechclaw-last-session');
         if (lastSession && lastSession !== sessionId) return;
         if (lastSession) {
             getConversation(lastSession)
@@ -515,7 +515,7 @@ export function ChatPage() {
                         {/* Sidebar header */}
                         <div className="flex items-center justify-between px-3 h-12 shrink-0 border-b" style={{ borderColor: 'var(--color-border)' }}>
                             <div className="flex items-center gap-1.5">
-                                <img src="/logo.png" alt="xClaw" className="w-4 h-4" />
+                                <img src="/logo.png" alt="HiTechClaw" className="w-4 h-4" />
                                 <span className="text-xs font-semibold" style={{ color: 'var(--color-fg)' }}>Chats</span>
                             </div>
                             <div className="flex items-center gap-1">
@@ -727,7 +727,7 @@ export function ChatPage() {
                                                         background: !activeAgentConfigId ? 'var(--color-primary-soft)' : 'transparent',
                                                     }}
                                                 >
-                                                    <img src="/logo.png" alt="xClaw" className="w-3 h-3" />
+                                                    <img src="/logo.png" alt="HiTechClaw" className="w-3 h-3" />
                                                     <div className="flex-1 min-w-0">
                                                         <div className="text-xs font-medium truncate">Use global model (no agent override)</div>
                                                         <div className="text-[10px]" style={{ color: 'var(--color-fg-muted)' }}>
@@ -746,7 +746,7 @@ export function ChatPage() {
                                                             background: ac._id === activeAgentConfigId ? 'var(--color-primary-soft)' : 'transparent',
                                                         }}
                                                     >
-                                                        <img src="/logo.png" alt="xClaw" className="w-3 h-3" />
+                                                        <img src="/logo.png" alt="HiTechClaw" className="w-3 h-3" />
                                                         <div className="flex-1 min-w-0">
                                                             <div className="text-xs font-medium truncate">{ac.name}</div>
                                                             <div className="text-[10px]" style={{ color: 'var(--color-fg-muted)' }}>
@@ -937,7 +937,7 @@ export function ChatPage() {
                                 onKeyDown={handleKeyDown}
                                 onCompositionStart={() => { isComposingRef.current = true; }}
                                 onCompositionEnd={() => { isComposingRef.current = false; }}
-                                placeholder={`Hỏi ${activeDomainInfo?.name || 'xClaw'} bất kì điều gì... (Shift+Enter xuống dòng)`}
+                                placeholder={`Hỏi ${activeDomainInfo?.name || 'HiTechClaw'} bất kì điều gì... (Shift+Enter xuống dòng)`}
                                 rows={1}
                                 className="w-full resize-none pl-3 pr-3 py-2.5 rounded-xl text-sm border outline-none transition-colors"
                                 style={{
@@ -1057,7 +1057,7 @@ function ChatBubble({
                     className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5 overflow-hidden"
                     style={{ background: 'linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.15))', boxShadow: '0 2px 6px rgba(99,102,241,0.15)' }}
                 >
-                    <img src="/logo.png" alt="xClaw" className="w-5 h-5" />
+                    <img src="/logo.png" alt="HiTechClaw" className="w-5 h-5" />
                 </div>
             )}
             <div className="max-w-[80%] min-w-0">
@@ -1462,9 +1462,9 @@ function EmptyState({
                     className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 overflow-hidden"
                     style={{ boxShadow: '0 6px 20px rgba(99,102,241,0.35)' }}
                 >
-                    <img src="/logo.png" alt="xClaw" className="w-14 h-14" />
+                    <img src="/logo.png" alt="HiTechClaw" className="w-14 h-14" />
                 </div>
-                <h3 className="text-xl font-bold mb-1 text-center" style={{ color: 'var(--color-fg)' }}>xClaw AI Chat</h3>
+                <h3 className="text-xl font-bold mb-1 text-center" style={{ color: 'var(--color-fg)' }}>HiTechClaw AI Chat</h3>
                 <p className="text-xs text-center mb-8" style={{ color: 'var(--color-fg-muted)' }}>
                     RAG-enhanced multi-domain AI assistant. Select a domain and start chatting.
                 </p>

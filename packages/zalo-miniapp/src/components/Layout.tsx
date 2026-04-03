@@ -2,9 +2,9 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { ChatPage } from '../pages/ChatPage';
 import { HistoryPage } from '../pages/HistoryPage';
 import { loginWithZalo, getStoredToken, getStoredUser } from '../lib/zalo-auth';
-import type { XClawUser } from '../lib/zalo-auth';
+import type { HiTechClawUser } from '../lib/zalo-auth';
 import { setApiToken, getApiBaseUrl } from '../lib/api';
-import xclaw from '../lib/api';
+import hitechclaw from '../lib/api';
 import type { Message } from './MessageList';
 
 type Tab = 'chat' | 'history';
@@ -12,7 +12,7 @@ type Tab = 'chat' | 'history';
 const Layout: React.FC = () => {
     const [tab, setTab] = useState<Tab>('chat');
     const [sessionId, setSessionId] = useState(crypto.randomUUID());
-    const [user, setUser] = useState<XClawUser | null>(getStoredUser());
+    const [user, setUser] = useState<HiTechClawUser | null>(getStoredUser());
     const [authLoading, setAuthLoading] = useState(!getStoredToken());
     const [authError, setAuthError] = useState<string | null>(null);
 

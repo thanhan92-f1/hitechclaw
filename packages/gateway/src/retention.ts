@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { retentionPoliciesCollection, getMongo } from '@xclaw-ai/db';
+import { retentionPoliciesCollection, getMongo } from '@hitechclaw-ai/db';
 
 export function createRetentionRoutes() {
   const app = new Hono();

@@ -3,8 +3,8 @@
 // ============================================================
 
 import type { MiddlewareHandler } from 'hono';
-import { activityLogsCollection } from '@xclaw-ai/db';
-import type { MongoActivityLog } from '@xclaw-ai/db';
+import { activityLogsCollection } from '@hitechclaw-ai/db';
+import type { MongoActivityLog } from '@hitechclaw-ai/db';
 import crypto from 'node:crypto';
 
 // Paths to skip logging (health checks, static, etc.)

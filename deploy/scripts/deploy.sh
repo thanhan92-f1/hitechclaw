@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ============================================================
-# xClaw — Deploy Helper Script
+# HiTechClaw — Deploy Helper Script
 # Usage: ./deploy/scripts/deploy.sh [environment] [service]
 #   environment: dev | staging | production (default: dev)
-#   service:     all | xclaw | web (default: all)
+#   service:     all | hitechclaw | web (default: all)
 # ============================================================
 set -euo pipefail
 
@@ -43,7 +43,7 @@ case "$ENV" in
     ;;
   *)
     err "Unknown environment: $ENV"
-    echo "Usage: $0 [dev|staging|production] [all|xclaw|web]"
+    echo "Usage: $0 [dev|staging|production] [all|hitechclaw|web]"
     exit 1
     ;;
 esac
@@ -73,7 +73,7 @@ if [[ "$ENV" == "dev" ]]; then
 else
   log "Pulling latest images..."
   if [[ "$SERVICE" == "all" ]]; then
-    $COMPOSE_CMD pull xclaw web 2>/dev/null || warn "Pull failed, using local images"
+    $COMPOSE_CMD pull hitechclaw web 2>/dev/null || warn "Pull failed, using local images"
   else
     $COMPOSE_CMD pull "$SERVICE" 2>/dev/null || warn "Pull failed, using local image"
   fi
@@ -108,7 +108,7 @@ done
 
 if [[ $RETRY -ge $MAX_RETRIES ]]; then
   err "❌ Health check failed after $MAX_RETRIES attempts"
-  err "Run: docker compose logs -f xclaw"
+  err "Run: docker compose logs -f hitechclaw"
   exit 1
 fi
 

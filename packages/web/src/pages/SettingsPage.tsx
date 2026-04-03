@@ -609,7 +609,7 @@ function OverviewTab({ health, models, domains, activeModel }: { health: any; mo
                     <InfoCell label="Version" value={health?.version ?? '—'} />
                     <InfoCell label="Uptime" value={health ? formatUptime(health.uptime) : '—'} />
                     <InfoCell label="Last Check" value={health ? new Date(health.timestamp).toLocaleString() : '—'} />
-                    <InfoCell label="Platform" value="xClaw v2" />
+                    <InfoCell label="Platform" value="HiTechClaw v2" />
                     <InfoCell label="Runtime" value="Node.js + Hono" />
                 </div>
             </Section>
@@ -964,7 +964,7 @@ function SecurityTab() {
                 <div className="grid grid-cols-2 gap-2">
                     <ConfigCard label="Method" value="JWT" unit="" desc="JSON Web Token HS256" />
                     <ConfigCard label="Token Expiry" value="24h" unit="" desc="Access token lifetime" />
-                    <ConfigCard label="Issuer" value="xClaw" unit="" desc="Token issuer claim" />
+                    <ConfigCard label="Issuer" value="HiTechClaw" unit="" desc="Token issuer claim" />
                     <ConfigCard label="Algorithm" value="HS256" unit="" desc="HMAC SHA-256 signing" />
                 </div>
             </Section>

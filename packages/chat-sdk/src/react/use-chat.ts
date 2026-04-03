@@ -1,9 +1,9 @@
 // ============================================================
-// @xclaw-ai/chat-sdk/react — useChat Hook
+// @hitechclaw-ai/chat-sdk/react — useChat Hook
 // ============================================================
 
 import { useState, useCallback, useRef } from 'react';
-import { useXClawClient } from './provider.js';
+import { useHiTechClawClient } from './provider.js';
 import type { ChatMessage, StreamHandle, TokenUsage, ToolResult } from '../types.js';
 
 export interface UseChatOptions {
@@ -53,7 +53,7 @@ function genId(prefix: string): string {
 
 /** Main hook for chat interactions — works with React and React Native */
 export function useChat(options: UseChatOptions = {}): UseChatReturn {
-    const client = useXClawClient();
+    const client = useHiTechClawClient();
     const [sessionId] = useState(() => options.sessionId ?? genId('session'));
     const [messages, setMessages] = useState<ChatMessage[]>(options.initialMessages ?? []);
     const [isStreaming, setIsStreaming] = useState(false);

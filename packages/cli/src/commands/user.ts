@@ -1,13 +1,13 @@
 /**
- * User CLI commands — create users via xClaw API.
+ * User CLI commands — create users via HiTechClaw API.
  *
  * Usage:
- *   xclaw user create --name "John" --email john@example.com --password secret123
- *   xclaw user create --name "John" --email john@example.com --password secret123 --role admin
+ *   hitechclaw user create --name "John" --email john@example.com --password secret123
+ *   hitechclaw user create --name "John" --email john@example.com --password secret123 --role admin
  *
  * Required env vars:
- *   XCLAW_URL    Base URL of the xClaw server (default: http://localhost:5001)
- *   XCLAW_TOKEN  JWT token of an admin/owner user
+ *   HITECHCLAW_URL    Base URL of the HiTechClaw server (default: http://localhost:5001)
+ *   HITECHCLAW_TOKEN  JWT token of an admin/owner user
  */
 
 export async function userCreate(options: {
@@ -16,12 +16,12 @@ export async function userCreate(options: {
   password: string;
   role?: string;
 }) {
-  const baseUrl = process.env['XCLAW_URL'] ?? 'http://localhost:5001';
-  const token = process.env['XCLAW_TOKEN'];
+  const baseUrl = process.env['HITECHCLAW_URL'] ?? 'http://localhost:5001';
+  const token = process.env['HITECHCLAW_TOKEN'];
 
   if (!token) {
-    console.error('❌ XCLAW_TOKEN env var is required.');
-    console.error('   Get a token via: xclaw login --email <email> --password <password>');
+    console.error('❌ HITECHCLAW_TOKEN env var is required.');
+    console.error('   Get a token via: hitechclaw login --email <email> --password <password>');
     process.exit(1);
   }
 
@@ -70,7 +70,7 @@ export async function userRegister(options: {
   tenantName: string;
   tenantSlug: string;
 }) {
-  const baseUrl = process.env['XCLAW_URL'] ?? 'http://localhost:5001';
+  const baseUrl = process.env['HITECHCLAW_URL'] ?? 'http://localhost:5001';
   const { name, email, password, tenantName, tenantSlug } = options;
 
   if (!name || !email || !password || !tenantName || !tenantSlug) {
@@ -105,7 +105,7 @@ export async function userRegister(options: {
     console.log(`   Token:    ${token}`);
     console.log('');
     console.log('   Save your token:');
-    console.log(`   export XCLAW_TOKEN="${token}"`);
+    console.log(`   export HITECHCLAW_TOKEN="${token}"`);
   } catch (err) {
     console.error(`❌ Request failed: ${err instanceof Error ? err.message : String(err)}`);
     process.exit(1);

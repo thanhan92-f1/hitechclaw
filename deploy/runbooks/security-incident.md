@@ -1,6 +1,6 @@
 # Security Incident Response Runbook
 
-> xClaw Platform — Security-specific incident procedures  
+> HiTechClaw Platform — Security-specific incident procedures  
 > Last updated: 2025
 
 ## Severity Classification
@@ -40,16 +40,16 @@
 
 ```bash
 # Check recent errors in application logs
-docker compose logs --since=1h xclaw | grep -iE 'error|blocked|unauthorized|injection'
+docker compose logs --since=1h hitechclaw | grep -iE 'error|blocked|unauthorized|injection'
 
 # Check guardrail blocks
-docker compose logs --since=1h xclaw | grep 'GUARDRAIL_BLOCK\|checkInput.*blocked'
+docker compose logs --since=1h hitechclaw | grep 'GUARDRAIL_BLOCK\|checkInput.*blocked'
 
 # Check rate limiter events
-docker compose logs --since=1h xclaw | grep 'rate.*limit\|429\|too many'
+docker compose logs --since=1h hitechclaw | grep 'rate.*limit\|429\|too many'
 
 # Check auth failures
-docker compose logs --since=1h xclaw | grep -iE 'auth.*fail|invalid.*token|403'
+docker compose logs --since=1h hitechclaw | grep -iE 'auth.*fail|invalid.*token|403'
 
 # Check for unusual MongoDB activity
 docker compose exec mongodb mongosh --eval "db.messages.find({createdAt: {\$gte: new Date(Date.now()-3600000)}}).count()"
@@ -65,7 +65,7 @@ Choose containment strategy based on incident type:
 
 ```bash
 # 1. Rotate JWT secret immediately
-docker compose exec xclaw sh -c "echo 'JWT_SECRET must be changed in .env'"
+docker compose exec hitechclaw sh -c "echo 'JWT_SECRET must be changed in .env'"
 
 # 2. Invalidate all sessions (Redis flush)
 docker compose exec redis redis-cli FLUSHDB
@@ -86,11 +86,11 @@ docker compose exec mongodb mongosh --eval "db.messages.find({createdAt: {\$gte:
 # Adjust nginx/reverse proxy to block attacker IP
 
 # 2. Take affected service offline
-docker compose stop xclaw
+docker compose stop hitechclaw
 
 # 3. Preserve logs for forensics BEFORE restarting
 mkdir -p /tmp/incident-$(date +%Y%m%d)
-docker compose logs xclaw > /tmp/incident-$(date +%Y%m%d)/xclaw.log 2>&1
+docker compose logs hitechclaw > /tmp/incident-$(date +%Y%m%d)/hitechclaw.log 2>&1
 docker compose logs mongodb > /tmp/incident-$(date +%Y%m%d)/mongodb.log 2>&1
 docker compose logs postgres > /tmp/incident-$(date +%Y%m%d)/postgres.log 2>&1
 
@@ -103,10 +103,10 @@ docker compose logs postgres > /tmp/incident-$(date +%Y%m%d)/postgres.log 2>&1
 
 ```bash
 # 1. Check what was leaked
-docker compose logs --since=24h xclaw | grep -A5 'GUARDRAIL_BLOCK\|output.*sanitiz'
+docker compose logs --since=24h hitechclaw | grep -A5 'GUARDRAIL_BLOCK\|output.*sanitiz'
 
 # 2. Check if system prompts were exposed
-docker compose logs --since=24h xclaw | grep -i 'system.*prompt\|you are\|instructions'
+docker compose logs --since=24h hitechclaw | grep -i 'system.*prompt\|you are\|instructions'
 
 # 3. If data from wrong tenant was returned
 docker compose exec mongodb mongosh --eval "
@@ -201,7 +201,7 @@ curl -X POST http://localhost:5001/api/chat/send \
 
 ```bash
 # Watch logs for 24h after incident
-docker compose logs -f xclaw | grep -iE 'error|blocked|unauthorized|injection|403|429'
+docker compose logs -f hitechclaw | grep -iE 'error|blocked|unauthorized|injection|403|429'
 
 # Monitor resource usage for anomalies
 docker stats --no-stream
@@ -248,7 +248,7 @@ docker stats --no-stream
 
 ## Quick Reference: OWASP Top 10 for LLM (2025)
 
-| Threat | xClaw Mitigation | Check |
+| Threat | HiTechClaw Mitigation | Check |
 |--------|-------------------|-------|
 | LLM01: Prompt Injection | `prompt-injection-detector.ts` | `security-scan.sh ai` |
 | LLM02: Sensitive Info Disclosure | `output-sanitizer.ts` | Log grep for leaked patterns |

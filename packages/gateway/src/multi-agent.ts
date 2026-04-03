@@ -1,5 +1,5 @@
-import type { MultiAgentOrchestrator } from '@xclaw-ai/core';
-import type { AgentOrchestrationMode, MultiAgentTask } from '@xclaw-ai/shared';
+import type { MultiAgentOrchestrator } from '@hitechclaw-ai/core';
+import type { AgentOrchestrationMode, MultiAgentTask } from '@hitechclaw-ai/shared';
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 

@@ -26,7 +26,7 @@ export const tenantSettings = pgTable('tenant_settings', {
   llmTemperature: integer('llm_temperature'), // stored as integer x100 (e.g. 70 = 0.7)
   llmMaxTokens: integer('llm_max_tokens'),
   // Agent persona
-  agentName: text('agent_name').notNull().default('xClaw Assistant'),
+  agentName: text('agent_name').notNull().default('HiTechClaw Assistant'),
   systemPrompt: text('system_prompt'), // null = use platform default
   // Language
   aiLanguage: text('ai_language').notNull().default('auto'),
@@ -54,7 +54,7 @@ export const tenantSettings = pgTable('tenant_settings', {
     cpuLimit: '0.5',
     memoryLimit: '512Mi',
     gpuEnabled: false,
-  }), // TenantSandboxConfig from @xclaw-ai/shared
+  }), // TenantSandboxConfig from @hitechclaw-ai/shared
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 }, (table) => [

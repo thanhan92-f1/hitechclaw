@@ -1,8 +1,8 @@
 {
-    "name": "@xclaw-ai/zalo-miniapp",
+    "name": "@hitechclaw-ai/zalo-miniapp",
     "version": "1.0.0",
     "private": true,
-    "description": "xClaw AI Chat — Zalo Mini App",
+    "description": "HiTechClaw AI Chat — Zalo Mini App",
     "browserslist": [
         "Android >= 5",
         "IOS >= 9.3",
@@ -18,7 +18,7 @@
         "deploy": "zmp deploy"
     },
     "dependencies": {
-        "@xclaw-ai/chat-sdk": "*",
+        "@hitechclaw-ai/chat-sdk": "*",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-markdown": "^9.0.3",

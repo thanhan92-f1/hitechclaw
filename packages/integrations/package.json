@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/integrations",
+    "name": "@hitechclaw-ai/integrations",
     "version": "2.1.1",
-    "description": "xClaw Integration Layer — Connect to external services (Gmail, Telegram, GitHub, Notion, etc.)",
+    "description": "HiTechClaw Integration Layer — Connect to external services (Gmail, Telegram, GitHub, Notion, etc.)",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*",
+        "@hitechclaw-ai/shared": "*",
         "zod": "^3.24.0"
     }
 }

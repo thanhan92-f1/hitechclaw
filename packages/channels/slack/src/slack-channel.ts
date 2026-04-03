@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import { SlackApi } from './slack-api.js';
 import type { SlackMessage } from './slack-api.js';
 
@@ -13,7 +13,7 @@ export interface SlackChannelConfig {
 }
 
 /**
- * Slack channel adapter for xClaw.
+ * Slack channel adapter for HiTechClaw.
  *
  * Uses the Slack Web API with polling for incoming messages.
  * For production use, consider switching to Socket Mode or Events API

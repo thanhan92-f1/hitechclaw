@@ -1,8 +1,8 @@
 {
-    "name": "xclaw",
+    "name": "hitechclaw",
     "version": "2.0.0",
     "private": true,
-    "description": "xClaw — Open-source AI Agent Platform with multi-agent orchestration, streaming, MCP, and visual workflow builder",
+    "description": "HiTechClaw — Open-source AI Agent Platform with multi-agent orchestration, streaming, MCP, and visual workflow builder",
     "workspaces": [
         "packages/shared",
         "packages/db",

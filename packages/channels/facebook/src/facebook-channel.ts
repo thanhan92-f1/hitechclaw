@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import type { FacebookWebhookEvent } from './facebook-api.js';
 import { FacebookApi } from './facebook-api.js';
 
@@ -9,7 +9,7 @@ export interface FacebookChannelConfig {
 }
 
 /**
- * Facebook Messenger channel adapter for xClaw.
+ * Facebook Messenger channel adapter for HiTechClaw.
  * Receives messages from webhook events and replies via Send API.
  */
 export class FacebookChannel implements ChannelPlugin {
