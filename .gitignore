@@ -7,3 +7,4 @@ dist/
 /core/
 claw_transform.py
 github.md
+.npmrc
