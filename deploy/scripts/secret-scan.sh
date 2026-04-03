@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# xClaw — Secret Detection Script
+# HiTechClaw — Secret Detection Script
 # Usage: ./deploy/scripts/secret-scan.sh [mode]
 #   mode: quick | deep | pre-commit
 #   Default: quick (scan working tree only)
@@ -26,7 +26,7 @@ fail() { echo -e "${RED}[secret-scan]${NC} $*"; FINDINGS=$((FINDINGS + 1)); }
 cd "$ROOT_DIR"
 
 echo ""
-echo -e "${CYAN}═══ xClaw Secret Detection ($MODE) ═══${NC}"
+echo -e "${CYAN}═══ HiTechClaw Secret Detection ($MODE) ═══${NC}"
 echo ""
 
 # ─── Pattern Definitions ──────────────────────────────────

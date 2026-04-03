@@ -1,8 +1,8 @@
 /**
- * xClaw Embeddable Chat Widget
+ * HiTechClaw Embeddable Chat Widget
  *
  * Usage:
- *   <script src="https://your-xclaw-host/xclaw-widget.js"
+ *   <script src="https://your-hitechclaw-host/hitechclaw-widget.js"
  *     data-token="embed-token"
  *     data-position="bottom-right"
  *     data-theme="light"
@@ -15,8 +15,8 @@
     'use strict';
 
     // Prevent double-init
-    if (window.__xclawWidget) return;
-    window.__xclawWidget = true;
+    if (window.__hitechclawWidget) return;
+    window.__hitechclawWidget = true;
 
     // Read config from script tag
     var script = document.currentScript || document.querySelector('script[data-token]');
@@ -27,7 +27,7 @@
         title: script?.getAttribute('data-title') || 'Chat',
         primaryColor: script?.getAttribute('data-primary-color') || '#6366f1',
         initialMessage: script?.getAttribute('data-initial-message') || '',
-        baseUrl: script?.getAttribute('data-base-url') || script?.src.replace(/\/xclaw-widget\.js.*$/, '') || '',
+        baseUrl: script?.getAttribute('data-base-url') || script?.src.replace(/\/hitechclaw-widget\.js.*$/, '') || '',
     };
 
     // Styles
@@ -47,53 +47,53 @@
 
     // Create container
     var container = document.createElement('div');
-    container.id = 'xclaw-widget-root';
+    container.id = 'hitechclaw-widget-root';
     container.innerHTML = '';
 
     // Inject styles
     var style = document.createElement('style');
     style.textContent = [
-        '#xclaw-widget-root *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}',
-        '#xclaw-widget-btn{position:fixed;' + pos + 'width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:99999;transition:transform .2s}',
-        '#xclaw-widget-btn:hover{transform:scale(1.08)}',
-        '#xclaw-widget-btn svg{width:24px;height:24px;fill:white}',
-        '#xclaw-widget-panel{position:fixed;' + pos + 'width:380px;height:520px;border-radius:16px;overflow:hidden;display:none;flex-direction:column;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.18)}',
-        '#xclaw-widget-panel.open{display:flex}',
-        '#xclaw-widget-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between}',
-        '#xclaw-widget-header h3{margin:0;font-size:15px;font-weight:600}',
-        '#xclaw-widget-close{background:none;border:none;cursor:pointer;padding:4px;border-radius:6px}',
-        '#xclaw-widget-close:hover{opacity:.7}',
-        '#xclaw-widget-messages{flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px}',
-        '.xclaw-msg{max-width:80%;padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.5;word-break:break-word}',
-        '.xclaw-msg.user{align-self:flex-end;border-bottom-right-radius:4px}',
-        '.xclaw-msg.bot{align-self:flex-start;border-bottom-left-radius:4px}',
-        '#xclaw-widget-input{padding:12px 16px;display:flex;gap:8px}',
-        '#xclaw-widget-input input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid;font-size:14px;outline:none}',
-        '#xclaw-widget-input input:focus{border-color:' + config.primaryColor + '}',
-        '#xclaw-widget-input button{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:500}',
-        '@media(max-width:500px){#xclaw-widget-panel{width:calc(100vw - 16px);height:calc(100vh - 80px);' + (config.position.includes('left') ? 'left:8px' : 'right:8px') + ';bottom:72px;border-radius:12px}}',
+        '#hitechclaw-widget-root *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}',
+        '#hitechclaw-widget-btn{position:fixed;' + pos + 'width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:99999;transition:transform .2s}',
+        '#hitechclaw-widget-btn:hover{transform:scale(1.08)}',
+        '#hitechclaw-widget-btn svg{width:24px;height:24px;fill:white}',
+        '#hitechclaw-widget-panel{position:fixed;' + pos + 'width:380px;height:520px;border-radius:16px;overflow:hidden;display:none;flex-direction:column;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.18)}',
+        '#hitechclaw-widget-panel.open{display:flex}',
+        '#hitechclaw-widget-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between}',
+        '#hitechclaw-widget-header h3{margin:0;font-size:15px;font-weight:600}',
+        '#hitechclaw-widget-close{background:none;border:none;cursor:pointer;padding:4px;border-radius:6px}',
+        '#hitechclaw-widget-close:hover{opacity:.7}',
+        '#hitechclaw-widget-messages{flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px}',
+        '.hitechclaw-msg{max-width:80%;padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.5;word-break:break-word}',
+        '.hitechclaw-msg.user{align-self:flex-end;border-bottom-right-radius:4px}',
+        '.hitechclaw-msg.bot{align-self:flex-start;border-bottom-left-radius:4px}',
+        '#hitechclaw-widget-input{padding:12px 16px;display:flex;gap:8px}',
+        '#hitechclaw-widget-input input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid;font-size:14px;outline:none}',
+        '#hitechclaw-widget-input input:focus{border-color:' + config.primaryColor + '}',
+        '#hitechclaw-widget-input button{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:500}',
+        '@media(max-width:500px){#hitechclaw-widget-panel{width:calc(100vw - 16px);height:calc(100vh - 80px);' + (config.position.includes('left') ? 'left:8px' : 'right:8px') + ';bottom:72px;border-radius:12px}}',
     ].join('\n');
     document.head.appendChild(style);
 
     // Button
     var btn = document.createElement('button');
-    btn.id = 'xclaw-widget-btn';
+    btn.id = 'hitechclaw-widget-btn';
     btn.style.background = config.primaryColor;
     btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>';
     container.appendChild(btn);
 
     // Panel
     var panel = document.createElement('div');
-    panel.id = 'xclaw-widget-panel';
+    panel.id = 'hitechclaw-widget-panel';
     panel.style.background = bgColor;
     panel.style.border = '1px solid ' + borderColor;
     panel.innerHTML = [
-        '<div id="xclaw-widget-header" style="background:' + config.primaryColor + '">',
+        '<div id="hitechclaw-widget-header" style="background:' + config.primaryColor + '">',
         '  <h3 style="color:white">' + escapeHtml(config.title) + '</h3>',
-        '  <button id="xclaw-widget-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>',
+        '  <button id="hitechclaw-widget-close"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>',
         '</div>',
-        '<div id="xclaw-widget-messages"></div>',
-        '<div id="xclaw-widget-input">',
+        '<div id="hitechclaw-widget-messages"></div>',
+        '<div id="hitechclaw-widget-input">',
         '  <input type="text" placeholder="Type a message..." style="background:' + bgSecondary + ';border-color:' + borderColor + ';color:' + fgColor + '"/>',
         '  <button style="background:' + config.primaryColor + ';color:white">Send</button>',
         '</div>',
@@ -103,10 +103,10 @@
 
     // State
     var sessionId = 'widget-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-    var messagesEl = panel.querySelector('#xclaw-widget-messages');
-    var inputEl = panel.querySelector('#xclaw-widget-input input');
-    var sendBtn = panel.querySelector('#xclaw-widget-input button');
-    var closeBtn = panel.querySelector('#xclaw-widget-close');
+    var messagesEl = panel.querySelector('#hitechclaw-widget-messages');
+    var inputEl = panel.querySelector('#hitechclaw-widget-input input');
+    var sendBtn = panel.querySelector('#hitechclaw-widget-input button');
+    var closeBtn = panel.querySelector('#hitechclaw-widget-close');
 
     // ─── Widget Analytics ──────────────────────────────────
     var analyticsQueue = [];
@@ -181,7 +181,7 @@
 
     function addMessage(text, role) {
         var div = document.createElement('div');
-        div.className = 'xclaw-msg ' + role;
+        div.className = 'hitechclaw-msg ' + role;
         if (role === 'user') {
             div.style.background = config.primaryColor;
             div.style.color = 'white';

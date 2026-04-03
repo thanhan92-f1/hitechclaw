@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/sandbox",
+    "name": "@hitechclaw-ai/sandbox",
     "version": "2.1.0",
-    "description": "xClaw sandbox — OpenShell integration for isolated agent tool execution",
+    "description": "HiTechClaw sandbox — OpenShell integration for isolated agent tool execution",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -16,6 +16,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*"
+        "@hitechclaw-ai/shared": "*"
     }
 }

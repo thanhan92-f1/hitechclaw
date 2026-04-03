@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import xclaw from '../lib/api';
+import hitechclaw from '../lib/api';
 
 interface ConversationSummary {
     id: string;
@@ -20,7 +20,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({ onSelectSession }) => 
     const loadConversations = useCallback(async () => {
         setLoading(true);
         try {
-            const data = await xclaw.listSessions();
+            const data = await hitechclaw.listSessions();
             setConversations(data.conversations || []);
         } catch {
             // Silently fail
@@ -36,7 +36,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({ onSelectSession }) => 
     const handleDelete = async (e: React.MouseEvent, sessionId: string) => {
         e.stopPropagation();
         try {
-            await xclaw.deleteSession(sessionId);
+            await hitechclaw.deleteSession(sessionId);
             setConversations((prev) => prev.filter((c) => c.id !== sessionId));
         } catch {
             // Silently fail

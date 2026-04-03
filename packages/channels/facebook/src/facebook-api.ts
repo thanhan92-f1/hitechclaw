@@ -1,5 +1,5 @@
 /**
- * Facebook Messenger Send API wrapper for xClaw.
+ * Facebook Messenger Send API wrapper for HiTechClaw.
  * Uses Meta Graph API v18.0 endpoints.
  */
 

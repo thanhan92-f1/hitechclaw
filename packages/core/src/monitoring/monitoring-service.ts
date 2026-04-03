@@ -6,7 +6,7 @@ import { randomUUID } from 'node:crypto';
 import type {
   LogLevel, AuditAction, AuditLogEntry, SystemLogEntry,
   SystemMetrics, TraceSpan,
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import type { EventBus } from '../agent/event-bus.js';
 
 export interface MonitoringStore {

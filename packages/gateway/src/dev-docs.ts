@@ -3,8 +3,8 @@
 // ============================================================
 
 import { Hono } from 'hono';
-import { DocStore } from '@xclaw-ai/doc-mcp';
-import type { DocEntry, DocVersion } from '@xclaw-ai/doc-mcp';
+import { DocStore } from '@hitechclaw-ai/doc-mcp';
+import type { DocEntry, DocVersion } from '@hitechclaw-ai/doc-mcp';
 import { resolve } from 'node:path';
 
 export function createDevDocsRoutes() {

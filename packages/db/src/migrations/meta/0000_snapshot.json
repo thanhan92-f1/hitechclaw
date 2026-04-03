@@ -655,7 +655,7 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "default": "'xClaw Assistant'"
+          "default": "'HiTechClaw Assistant'"
         },
         "system_prompt": {
           "name": "system_prompt",

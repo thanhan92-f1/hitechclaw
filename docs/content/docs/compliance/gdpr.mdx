@@ -1,15 +1,15 @@
 ---
 title: GDPR Compliance
-description: How xClaw implements GDPR data protection requirements for EU users and tenants.
+description: How HiTechClaw implements GDPR data protection requirements for EU users and tenants.
 ---
 
 # GDPR Compliance
 
-This document describes how xClaw implements the requirements of the General Data Protection Regulation (EU) 2016/679 for processing personal data.
+This document describes how HiTechClaw implements the requirements of the General Data Protection Regulation (EU) 2016/679 for processing personal data.
 
 ## Lawful Basis for Processing
 
-xClaw processes personal data under the following lawful bases:
+HiTechClaw processes personal data under the following lawful bases:
 
 | Data Category | Lawful Basis | Purpose |
 |--------------|-------------|---------|
@@ -59,7 +59,7 @@ xClaw processes personal data under the following lawful bases:
 
 ### Multi-Tenant Isolation
 
-xClaw enforces strict tenant isolation as a core architectural principle:
+HiTechClaw enforces strict tenant isolation as a core architectural principle:
 
 ```
 Request → Auth Middleware → Tenant Middleware → Route Handler
@@ -87,7 +87,7 @@ Request → Auth Middleware → Tenant Middleware → Route Handler
 
 ## Data Retention (Art. 5(1)(e))
 
-xClaw implements configurable data retention policies:
+HiTechClaw implements configurable data retention policies:
 
 | Setting | Description | Default |
 |---------|-------------|---------|
@@ -116,7 +116,7 @@ xClaw implements configurable data retention policies:
 
 ### Sub-Processors
 
-xClaw may transmit conversation data to the following categories of sub-processors for AI inference:
+HiTechClaw may transmit conversation data to the following categories of sub-processors for AI inference:
 
 - **LLM Providers**: Ollama (self-hosted), OpenAI, Anthropic, Google Gemini, Mistral, Groq
 - **Search Providers**: Brave Search, Tavily (when configured)

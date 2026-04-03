@@ -5,7 +5,7 @@
 // LLM formats into a human-readable answer.
 // ─────────────────────────────────────────────────────────────
 
-import { defineSkill } from '@xclaw-ai/core';
+import { defineSkill } from '@hitechclaw-ai/core';
 
 // Base URL is resolved at runtime (env var or default)
 function hisBaseUrl(): string {
@@ -26,7 +26,7 @@ export const textToFhirSkill = defineSkill({
     name: 'Text-to-FHIR Query',
     version: '1.0.0',
     description: 'Query hospital FHIR data via natural language. Provides tools to retrieve patients, encounters, prescriptions, allergies, medications, and aggregate statistics from the Hospital Information System.',
-    author: 'xClaw',
+    author: 'HiTechClaw',
     category: 'healthcare',
     tags: ['fhir', 'his', 'hospital', 'text-to-sql', 'query', 'healthcare'],
     tools: [],           // filled below for manifest only

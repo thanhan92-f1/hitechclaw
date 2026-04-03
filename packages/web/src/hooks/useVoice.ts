@@ -74,7 +74,7 @@ export function useVoice(options: UseVoiceOptions = {}): UseVoiceReturn {
       formData.append('audio', blob, 'recording.webm');
       if (language) formData.append('language', language);
 
-      const token = localStorage.getItem('xclaw_token');
+      const token = localStorage.getItem('hitechclaw_token');
       const res = await fetch(`${API_BASE}/api/voice/transcribe`, {
         method: 'POST',
         headers: token ? { Authorization: `Bearer ${token}` } : {},

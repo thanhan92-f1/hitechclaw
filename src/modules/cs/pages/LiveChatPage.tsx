@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, RotateCcw } from 'lucide-react';
-import { chatXClawStream, loginXClaw } from '../api.js';
+import { chatHiTechClawStream, loginHiTechClaw } from '../api.js';
 
 interface Message {
     id: string;
@@ -21,7 +21,7 @@ export function LiveChatPage() {
     const cancelRef = useRef<(() => void) | null>(null);
 
     useEffect(() => {
-        loginXClaw('admin@xclaw.io', 'password123').then(res => {
+        loginHiTechClaw('admin@hitechclaw.io', 'password123').then(res => {
             if ('token' in res) setToken(res.token);
         }).catch(() => { /* ignore */ });
     }, []);
@@ -43,7 +43,7 @@ export function LiveChatPage() {
         setStreaming(true);
 
         try {
-            const { cancel, done } = chatXClawStream(token, text, sessionId, (delta) => {
+            const { cancel, done } = chatHiTechClawStream(token, text, sessionId, (delta) => {
                 setMessages(prev => prev.map(m => m.id === botId ? { ...m, content: m.content + delta } : m));
             });
             cancelRef.current = cancel;
@@ -71,7 +71,7 @@ export function LiveChatPage() {
                     </div>
                     <div>
                         <h2 className="text-[14px] font-bold" style={{ color: 'var(--cs-fg)' }}>AI Live Chat</h2>
-                        <p className="text-[11px]" style={{ color: 'var(--cs-fg-muted)' }}>Trợ lý AI hỗ trợ khách hàng — powered by xClaw</p>
+                        <p className="text-[11px]" style={{ color: 'var(--cs-fg-muted)' }}>Trợ lý AI hỗ trợ khách hàng — powered by HiTechClaw</p>
                     </div>
                 </div>
                 <button onClick={handleReset}
@@ -118,7 +118,7 @@ export function LiveChatPage() {
                 {!token && (
                     <div className="text-[11px] text-center mb-2 px-3 py-1.5 rounded-lg"
                         style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b' }}>
-                        Đang kết nối xClaw AI...
+                        Đang kết nối HiTechClaw AI...
                     </div>
                 )}
                 <div className="flex gap-2">

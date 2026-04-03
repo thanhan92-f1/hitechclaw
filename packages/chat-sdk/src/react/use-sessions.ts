@@ -1,9 +1,9 @@
 // ============================================================
-// @xclaw-ai/chat-sdk/react — useSessions Hook
+// @hitechclaw-ai/chat-sdk/react — useSessions Hook
 // ============================================================
 
 import { useState, useCallback, useEffect } from 'react';
-import { useXClawClient } from './provider.js';
+import { useHiTechClawClient } from './provider.js';
 import type { ChatMessage, ConversationSummary } from '../types.js';
 
 export interface UseSessionsReturn {
@@ -23,7 +23,7 @@ export interface UseSessionsReturn {
 
 /** Hook for managing chat sessions */
 export function useSessions(): UseSessionsReturn {
-    const client = useXClawClient();
+    const client = useHiTechClawClient();
     const [sessions, setSessions] = useState<ConversationSummary[]>([]);
     const [loading, setLoading] = useState(false);
 

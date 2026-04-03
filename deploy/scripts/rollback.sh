@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # ============================================================
-# xClaw — Rollback Script
+# HiTechClaw — Rollback Script
 # Usage: ./deploy/scripts/rollback.sh [service] [image_tag]
-#   service:   xclaw | web (default: xclaw)
+#   service:   hitechclaw | web (default: hitechclaw)
 #   image_tag: Docker image tag to rollback to (e.g. sha-abc1234)
 # ============================================================
 set -euo pipefail
 
-SERVICE="${1:-xclaw}"
+SERVICE="${1:-hitechclaw}"
 TAG="${2:-}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -28,22 +28,22 @@ COMPOSE_CMD="docker compose -f docker-compose.yml -f docker-compose.prod.yml"
 # ─── Determine rollback target ─────────────────────────────
 if [[ -z "$TAG" ]]; then
   log "No tag specified. Listing recent images..."
-  docker images --filter "reference=ghcr.io/xdev-asia/xclaw-*" --format "{{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | head -10
+  docker images --filter "reference=ghcr.io/xdev-asia/hitechclaw-*" --format "{{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | head -10
   echo ""
   read -rp "Enter image tag to rollback to: " TAG
 fi
 
 case "$SERVICE" in
-  xclaw)
-    IMAGE="ghcr.io/xdev-asia/xclaw-server:${TAG}"
-    ENV_VAR="XCLAW_SERVER_IMAGE"
+  hitechclaw)
+    IMAGE="ghcr.io/xdev-asia/hitechclaw-server:${TAG}"
+    ENV_VAR="HITECHCLAW_SERVER_IMAGE"
     ;;
   web)
-    IMAGE="ghcr.io/xdev-asia/xclaw-web:${TAG}"
-    ENV_VAR="XCLAW_WEB_IMAGE"
+    IMAGE="ghcr.io/xdev-asia/hitechclaw-web:${TAG}"
+    ENV_VAR="HITECHCLAW_WEB_IMAGE"
     ;;
   *)
-    err "Unknown service: $SERVICE (use 'xclaw' or 'web')"
+    err "Unknown service: $SERVICE (use 'hitechclaw' or 'web')"
     exit 1
     ;;
 esac

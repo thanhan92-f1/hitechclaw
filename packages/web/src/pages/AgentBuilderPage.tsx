@@ -124,7 +124,7 @@ const DEMO_TOOLS: ToolBlock[] = [
     { id: 'chrome_open_page', name: 'chrome_open_page', description: 'Open Chrome and navigate to a URL for browser automation workflows', source: 'mcp' },
     { id: 'chrome_take_screenshot', name: 'chrome_take_screenshot', description: 'Capture webpage screenshots after search/navigation', source: 'mcp' },
     { id: 'vision_analyze_screenshot', name: 'vision_analyze_screenshot', description: 'Analyze captured screenshots for insights, errors, or UI issues', source: 'builtin' },
-    { id: 'search_docs', name: 'search_docs', description: 'Full-text search across xClaw dev documentation', source: 'mcp' },
+    { id: 'search_docs', name: 'search_docs', description: 'Full-text search across HiTechClaw dev documentation', source: 'mcp' },
     { id: 'github_create_issue', name: 'github_create_issue', description: 'Create a new issue in a GitHub repository', source: 'mcp' },
     { id: 'github_search_code', name: 'github_search_code', description: 'Search code across GitHub repositories', source: 'mcp' },
     { id: 'fs_read_file', name: 'fs_read_file', description: 'Read contents of a file within the sandboxed directory', source: 'mcp' },
@@ -155,7 +155,7 @@ export function AgentBuilderPage() {
     useEffect(() => {
         // Load tenant settings (configured provider/model for this tenant)
         fetch('/api/settings', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('xclaw_token')}` },
+            headers: { Authorization: `Bearer ${localStorage.getItem('hitechclaw_token')}` },
         })
             .then((r) => r.json())
             .then((data) => {
@@ -175,7 +175,7 @@ export function AgentBuilderPage() {
 
         // Load available skills from domains
         fetch('/api/marketplace/skills', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('xclaw_token')}` },
+            headers: { Authorization: `Bearer ${localStorage.getItem('hitechclaw_token')}` },
         })
             .then((r) => r.json())
             .then((data) => {
@@ -192,7 +192,7 @@ export function AgentBuilderPage() {
 
         // Load saved agents for sub-agent selection
         fetch('/api/agents', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('xclaw_token')}` },
+            headers: { Authorization: `Bearer ${localStorage.getItem('hitechclaw_token')}` },
         })
             .then((r) => r.json())
             .then((data) => setSavedAgents(data.agents || []))
@@ -200,7 +200,7 @@ export function AgentBuilderPage() {
 
         // Load available MCP tools
         fetch('/api/mcp/tools', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('xclaw_token')}` },
+            headers: { Authorization: `Bearer ${localStorage.getItem('hitechclaw_token')}` },
         })
             .then((r) => r.json())
             .then((data) => {
@@ -222,7 +222,7 @@ export function AgentBuilderPage() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('xclaw_token')}`,
+                    Authorization: `Bearer ${localStorage.getItem('hitechclaw_token')}`,
                 },
                 body: JSON.stringify({
                     name: config.name,

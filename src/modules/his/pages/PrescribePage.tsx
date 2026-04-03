@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Pill, Search, AlertTriangle, CheckCircle, ShieldAlert, Loader2, ChevronDown, X, Bot, Sparkles } from 'lucide-react';
-import { getPatients, getMedications, createPrescription, checkClinicalAlert, loginXClaw, aiCheckPrescription, getPatientAllergies } from '../api';
+import { getPatients, getMedications, createPrescription, checkClinicalAlert, loginHiTechClaw, aiCheckPrescription, getPatientAllergies } from '../api';
 
 interface Patient { id: string; name: { text: string }[]; identifier: { value: string }[] }
 interface Medication {
@@ -35,12 +35,12 @@ export function PrescribePage() {
     const [submitting, setSubmitting] = useState(false);
     const [result, setResult] = useState<{ type: 'success' | 'blocked' | 'overridden'; message: string } | null>(null);
 
-    // xClaw AI check state
+    // HiTechClaw AI check state
     const [aiChecking, setAiChecking] = useState(false);
     const [aiResult, setAiResult] = useState<string | null>(null);
     const [showAiPanel, setShowAiPanel] = useState(false);
-    const [xclawToken, setXclawToken] = useState<string | null>(null);
-    const [xclawSessionId, setXclawSessionId] = useState<string | undefined>(undefined);
+    const [hitechclawToken, setHitechclawToken] = useState<string | null>(null);
+    const [hitechclawSessionId, setHitechclawSessionId] = useState<string | undefined>(undefined);
 
     // Load data
     useEffect(() => {
@@ -66,7 +66,7 @@ export function PrescribePage() {
         }
     }, [selectedPatient?.id, selectedMed?.id]);
 
-    // xClaw AI prescription check
+    // HiTechClaw AI prescription check
     const handleAiCheck = async () => {
         if (!selectedPatient || !selectedMed) return;
         setAiChecking(true);
@@ -74,12 +74,12 @@ export function PrescribePage() {
         setShowAiPanel(true);
         try {
             // Auto-login if no token
-            let token = xclawToken;
+            let token = hitechclawToken;
             if (!token) {
-                const auth = await loginXClaw('doctor@his.local', 'doctor123');
+                const auth = await loginHiTechClaw('doctor@his.local', 'doctor123');
                 if ('error' in auth) throw new Error(auth.error);
                 token = auth.token;
-                setXclawToken(token);
+                setHitechclawToken(token);
             }
             // Fetch patient allergies
             const allergyData = await getPatientAllergies(selectedPatient.id);
@@ -87,11 +87,11 @@ export function PrescribePage() {
             const medName = selectedMed.code.coding[0]?.display;
             const ingredients = selectedMed.ingredient.map((i) => i.item.concept.coding[0]?.display).filter(Boolean);
 
-            const res = await aiCheckPrescription(token!, selectedPatient.name[0]?.text, allergyNames, medName, ingredients, `${dosage}, ${frequency}, ${route}`, xclawSessionId);
+            const res = await aiCheckPrescription(token!, selectedPatient.name[0]?.text, allergyNames, medName, ingredients, `${dosage}, ${frequency}, ${route}`, hitechclawSessionId);
             setAiResult(res.content || 'Không nhận được phản hồi từ AI.');
-            if (res.sessionId) setXclawSessionId(res.sessionId);
+            if (res.sessionId) setHitechclawSessionId(res.sessionId);
         } catch (err: unknown) {
-            const msg = err instanceof Error ? err.message : 'Lỗi kết nối xClaw';
+            const msg = err instanceof Error ? err.message : 'Lỗi kết nối HiTechClaw';
             setAiResult(`❌ ${msg}`);
         } finally {
             setAiChecking(false);
@@ -320,13 +320,13 @@ export function PrescribePage() {
                     </div>
                 )}
 
-                {/* xClaw AI Check Section */}
+                {/* HiTechClaw AI Check Section */}
                 {selectedPatient && selectedMed && !checking && (
                     <div className="rounded-xl border p-4 space-y-3" style={{ borderColor: '#8b5cf6', background: 'linear-gradient(135deg, #f5f3ff, #ede9fe)' }}>
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <Bot size={18} style={{ color: '#7c3aed' }} />
-                                <span className="text-xs font-bold" style={{ color: '#7c3aed' }}>xClaw AI — Kiểm tra đơn thuốc</span>
+                                <span className="text-xs font-bold" style={{ color: '#7c3aed' }}>HiTechClaw AI — Kiểm tra đơn thuốc</span>
                                 <span className="text-[9px] px-1.5 py-0.5 rounded-full font-semibold text-white" style={{ background: 'linear-gradient(135deg, #7c3aed, #2563eb)' }}>AI</span>
                             </div>
                             <button
@@ -338,12 +338,12 @@ export function PrescribePage() {
                                 {aiChecking ? (
                                     <><Loader2 size={12} className="animate-spin" /> Đang hỏi AI...</>
                                 ) : (
-                                    <><Sparkles size={12} /> Hỏi xClaw AI</>
+                                    <><Sparkles size={12} /> Hỏi HiTechClaw AI</>
                                 )}
                             </button>
                         </div>
                         <p className="text-[10px]" style={{ color: '#6b7280' }}>
-                            Gửi thông tin đơn thuốc đến xClaw AI (domain Healthcare) để kiểm tra tương tác thuốc, liều dùng, và đưa ra khuyến nghị lâm sàng.
+                            Gửi thông tin đơn thuốc đến HiTechClaw AI (domain Healthcare) để kiểm tra tương tác thuốc, liều dùng, và đưa ra khuyến nghị lâm sàng.
                         </p>
 
                         {/* AI Result Panel */}
@@ -358,7 +358,7 @@ export function PrescribePage() {
                                 {aiChecking ? (
                                     <div className="flex items-center gap-2 py-4 justify-center">
                                         <Loader2 size={16} className="animate-spin" style={{ color: '#7c3aed' }} />
-                                        <span className="text-xs" style={{ color: '#7c3aed' }}>xClaw AI đang phân tích đơn thuốc...</span>
+                                        <span className="text-xs" style={{ color: '#7c3aed' }}>HiTechClaw AI đang phân tích đơn thuốc...</span>
                                     </div>
                                 ) : aiResult ? (
                                     <div className="text-xs leading-relaxed whitespace-pre-wrap" style={{ color: 'var(--his-fg)' }}>

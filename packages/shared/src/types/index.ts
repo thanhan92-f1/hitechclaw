@@ -1,5 +1,5 @@
 // ============================================================
-// xClaw Shared Types — Foundation for the entire platform
+// HiTechClaw Shared Types — Foundation for the entire platform
 // ============================================================
 
 // ─── LLM Provider Types ─────────────────────────────────────
@@ -854,14 +854,14 @@ export interface WorkflowSandboxConfig {
   memoryLimitMb?: number;
 }
 
-// ─── xClaw Plugin System ────────────────────────────────────
+// ─── HiTechClaw Plugin System ────────────────────────────────────
 
 export type PluginType = 'domain' | 'integration' | 'full-stack';
 
 export type PluginStatus = 'registered' | 'active' | 'inactive' | 'error';
 
 /**
- * XClawPlugin — The universal plugin interface for extending xClaw.
+ * HiTechClawPlugin — The universal plugin interface for extending HiTechClaw.
  *
  * A plugin can provide:
  * - Domain pack (agent persona + skills + tools)
@@ -872,7 +872,7 @@ export type PluginStatus = 'registered' | 'active' | 'inactive' | 'error';
  *
  * Each plugin is a self-contained package that registers with the core PluginManager.
  */
-export interface XClawPlugin {
+export interface HiTechClawPlugin {
   /** Unique plugin identifier, e.g. 'shirtgen', 'his-mini' */
   id: string;
   /** Display name */
@@ -997,7 +997,7 @@ export interface PluginContext {
 }
 
 export interface PluginRegistryEntry {
-  plugin: XClawPlugin;
+  plugin: HiTechClawPlugin;
   status: PluginStatus;
   activatedAt?: string;
   error?: string;

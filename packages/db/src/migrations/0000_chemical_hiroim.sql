@@ -59,7 +59,7 @@ CREATE TABLE "tenant_settings" (
 	"llm_base_url" text,
 	"llm_temperature" integer,
 	"llm_max_tokens" integer,
-	"agent_name" text DEFAULT 'xClaw Assistant' NOT NULL,
+	"agent_name" text DEFAULT 'HiTechClaw Assistant' NOT NULL,
 	"system_prompt" text,
 	"ai_language" text DEFAULT 'auto' NOT NULL,
 	"ai_language_custom" text,

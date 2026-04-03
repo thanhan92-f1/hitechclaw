@@ -323,7 +323,7 @@ export class ImageGenService {
       '4': { class_type: 'EmptyLatentImage', inputs: { width: req.width || 1024, height: req.height || 1024, batch_size: 1 } },
       '5': { class_type: 'KSampler', inputs: { model: ['1', 0], positive: ['2', 0], negative: ['3', 0], latent_image: ['4', 0], seed, steps: req.steps || 20, cfg: req.guidanceScale || 7.5, sampler_name: 'euler', scheduler: 'normal' } },
       '6': { class_type: 'VAEDecode', inputs: { samples: ['5', 0], vae: ['1', 2] } },
-      '7': { class_type: 'SaveImage', inputs: { images: ['6', 0], filename_prefix: 'xclaw' } },
+      '7': { class_type: 'SaveImage', inputs: { images: ['6', 0], filename_prefix: 'hitechclaw' } },
     };
   }
 

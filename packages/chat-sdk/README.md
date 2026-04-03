@@ -1,23 +1,23 @@
-# @xclaw-ai/chat-sdk
+# @hitechclaw-ai/chat-sdk
 
-> React & React Native SDK for [xClaw AI Agent Platform](https://github.com/xdev-asia-labs/xclaw) — streaming chat, session management, and MCP integration.
+> React & React Native SDK for [HiTechClaw AI Agent Platform](https://github.com/xdev-asia-labs/hitechclaw) — streaming chat, session management, and MCP integration.
 
 ## Installation
 
 ```bash
-npm install @xclaw-ai/chat-sdk
+npm install @hitechclaw-ai/chat-sdk
 ```
 
 ## Quick Start — React
 
 ```tsx
-import { XClawProvider, useChat } from '@xclaw-ai/chat-sdk/react';
+import { HiTechClawProvider, useChat } from '@hitechclaw-ai/chat-sdk/react';
 
 function App() {
   return (
-    <XClawProvider config={{ baseUrl: 'https://api.xclaw.io', token: 'your-jwt' }}>
+    <HiTechClawProvider config={{ baseUrl: 'https://api.hitechclaw.io', token: 'your-jwt' }}>
       <Chat />
-    </XClawProvider>
+    </HiTechClawProvider>
   );
 }
 
@@ -45,18 +45,18 @@ function Chat() {
 ## Quick Start — React Native
 
 ```tsx
-import { XClawProvider, useChat, createReactNativeConfig } from '@xclaw-ai/chat-sdk/react-native';
+import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
 
 const config = createReactNativeConfig({
-  baseUrl: 'https://api.xclaw.io',
+  baseUrl: 'https://api.hitechclaw.io',
   token: 'your-jwt',
 });
 
 export default function App() {
   return (
-    <XClawProvider config={config}>
+    <HiTechClawProvider config={config}>
       <ChatScreen />
-    </XClawProvider>
+    </HiTechClawProvider>
   );
 }
 ```
@@ -64,10 +64,10 @@ export default function App() {
 ## Core Client (No React)
 
 ```typescript
-import { XClawClient } from '@xclaw-ai/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
 
-const client = new XClawClient({
-  baseUrl: 'https://api.xclaw.io',
+const client = new HiTechClawClient({
+  baseUrl: 'https://api.hitechclaw.io',
   token: 'your-jwt',
 });
 
@@ -85,7 +85,7 @@ await done;
 
 ## API Reference
 
-### `XClawClient`
+### `HiTechClawClient`
 
 | Method | Description |
 |--------|-------------|
@@ -152,7 +152,7 @@ const {
 ### Config Options
 
 ```typescript
-interface XClawConfig {
+interface HiTechClawConfig {
   baseUrl: string;          // Required — server URL
   token?: string;           // JWT token
   defaultDomain?: string;   // Default domain specialization
@@ -169,7 +169,7 @@ interface XClawConfig {
 
 ## MCP Server Integration
 
-The SDK includes a built-in MCP (Model Context Protocol) server, allowing AI agents like Claude, Copilot, or any MCP-compatible tool to interact with xClaw.
+The SDK includes a built-in MCP (Model Context Protocol) server, allowing AI agents like Claude, Copilot, or any MCP-compatible tool to interact with HiTechClaw.
 
 ### Setup
 
@@ -178,12 +178,12 @@ Add to your MCP configuration (e.g., `.vscode/mcp.json`, `claude_desktop_config.
 ```json
 {
   "servers": {
-    "xclaw": {
+    "hitechclaw": {
       "command": "node",
-      "args": ["node_modules/@xclaw-ai/chat-sdk/dist/mcp/bin.js"],
+      "args": ["node_modules/@hitechclaw-ai/chat-sdk/dist/mcp/bin.js"],
       "env": {
-        "XCLAW_BASE_URL": "https://api.xclaw.io",
-        "XCLAW_TOKEN": "your-jwt-token"
+        "HITECHCLAW_BASE_URL": "https://api.hitechclaw.io",
+        "HITECHCLAW_TOKEN": "your-jwt-token"
       }
     }
   }
@@ -193,29 +193,29 @@ Add to your MCP configuration (e.g., `.vscode/mcp.json`, `claude_desktop_config.
 Or run standalone:
 
 ```bash
-XCLAW_BASE_URL=https://api.xclaw.io XCLAW_TOKEN=... npx xclaw-chat-mcp
+HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx hitechclaw-chat-mcp
 ```
 
 ### MCP Tools
 
 | Tool | Description |
 |------|-------------|
-| `xclaw_chat` | Send a message and get a response |
-| `xclaw_chat_stream` | Send message with streaming (returns complete text) |
-| `xclaw_list_sessions` | List all chat sessions |
-| `xclaw_get_messages` | Get messages in a session |
-| `xclaw_delete_session` | Delete a session |
-| `xclaw_feedback` | Submit correction feedback |
-| `xclaw_login` | Authenticate with credentials |
+| `hitechclaw_chat` | Send a message and get a response |
+| `hitechclaw_chat_stream` | Send message with streaming (returns complete text) |
+| `hitechclaw_list_sessions` | List all chat sessions |
+| `hitechclaw_get_messages` | Get messages in a session |
+| `hitechclaw_delete_session` | Delete a session |
+| `hitechclaw_feedback` | Submit correction feedback |
+| `hitechclaw_login` | Authenticate with credentials |
 
 ### Programmatic MCP Server
 
 ```typescript
-import { XClawClient } from '@xclaw-ai/chat-sdk';
-import { createMcpServer } from '@xclaw-ai/chat-sdk/mcp';
+import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
+import { createMcpServer } from '@hitechclaw-ai/chat-sdk/mcp';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
-const client = new XClawClient({ baseUrl: '...', token: '...' });
+const client = new HiTechClawClient({ baseUrl: '...', token: '...' });
 const server = createMcpServer(client);
 await server.connect(new StdioServerTransport());
 ```
@@ -230,8 +230,8 @@ import type {
   ChatSession,
   StreamEvent,
   TokenUsage,
-  XClawConfig,
-} from '@xclaw-ai/chat-sdk';
+  HiTechClawConfig,
+} from '@hitechclaw-ai/chat-sdk';
 ```
 
 ## License

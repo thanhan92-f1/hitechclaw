@@ -5,7 +5,7 @@ import {
     BarChart3, History, X, Sparkles,
 } from 'lucide-react';
 import {
-    loginXClaw, chatXClaw, getChatSessions, createChatSession,
+    loginHiTechClaw, chatHiTechClaw, getChatSessions, createChatSession,
     deleteChatSession, getChatMessages, saveChatMessage, rateChatMessage,
     getChatContext, getChatStats,
 } from '../api';
@@ -229,7 +229,7 @@ const QUICK_PROMPTS = [
 // ═══════════════════════════════════════════════════
 
 export function ChatbotPage() {
-    // Auth - auto-login to xClaw
+    // Auth - auto-login to HiTechClaw
     const [token, setToken] = useState<string | null>(null);
 
     // Messages
@@ -241,7 +241,7 @@ export function ChatbotPage() {
     // Sessions
     const [sessions, setSessions] = useState<ChatSession[]>([]);
     const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
-    const [xclawSessionId, setXclawSessionId] = useState<string | undefined>();
+    const [hitechclawSessionId, setHitechclawSessionId] = useState<string | undefined>();
     const isNewLocalSession = useRef(false);
 
     // Stats
@@ -265,15 +265,15 @@ export function ChatbotPage() {
 
     useEffect(() => { loadSessions(); loadStats(); }, [loadSessions, loadStats]);
 
-    // ─── Auto-login to xClaw ───
+    // ─── Auto-login to HiTechClaw ───
     useEffect(() => {
         (async () => {
             try {
-                const res = await loginXClaw('doctor@his.local', 'doctor123');
+                const res = await loginHiTechClaw('doctor@his.local', 'doctor123');
                 if ('token' in res && res.token) {
                     setToken(res.token);
                 }
-            } catch { /* xClaw not available */ }
+            } catch { /* HiTechClaw not available */ }
         })();
     }, []);
 
@@ -306,10 +306,10 @@ export function ChatbotPage() {
         const id = `chat-${Date.now().toString(36)}`;
         isNewLocalSession.current = true;
         setActiveSessionId(id);
-        setXclawSessionId(undefined);
+        setHitechclawSessionId(undefined);
         setMessages([{
             role: 'assistant',
-            content: 'Xin chào! Tôi là trợ lý AI của xClaw. Tôi có thể giúp bạn:\n\n• 🏥 **Truy vấn dữ liệu FHIR** — Hỏi về bệnh nhân, đơn thuốc, lượt khám, dị ứng\n• 💊 Tra cứu thông tin thuốc & tương tác\n• 📋 Kiểm tra mã ICD-10\n• 📐 Vẽ sơ đồ quy trình (flowchart, sequence diagram...)\n• 📊 Thống kê & báo cáo y khoa\n\n💡 Thử hỏi: _"Hôm nay có bao nhiêu bệnh nhân?"_ hoặc _"Có tình trạng bệnh nguy hiểm không?"_',
+            content: 'Xin chào! Tôi là trợ lý AI của HiTechClaw. Tôi có thể giúp bạn:\n\n• 🏥 **Truy vấn dữ liệu FHIR** — Hỏi về bệnh nhân, đơn thuốc, lượt khám, dị ứng\n• 💊 Tra cứu thông tin thuốc & tương tác\n• 📋 Kiểm tra mã ICD-10\n• 📐 Vẽ sơ đồ quy trình (flowchart, sequence diagram...)\n• 📊 Thống kê & báo cáo y khoa\n\n💡 Thử hỏi: _"Hôm nay có bao nhiêu bệnh nhân?"_ hoặc _"Có tình trạng bệnh nguy hiểm không?"_',
             timestamp: new Date(),
         }]);
         await loadSessions();
@@ -348,11 +348,11 @@ export function ChatbotPage() {
             const savedUser = await saveChatMessage(sid, { role: 'user', content: msg });
             userMsg.id = savedUser.message?.id;
 
-            // ─── AI Chat (xClaw) ───
+            // ─── AI Chat (HiTechClaw) ───
             if (!token) {
                 setMessages(prev => [...prev, {
                     role: 'assistant',
-                    content: '⚠️ Chưa kết nối được tới xClaw AI. Hãy kiểm tra xClaw server đang chạy (port 3000).',
+                    content: '⚠️ Chưa kết nối được tới HiTechClaw AI. Hãy kiểm tra HiTechClaw server đang chạy (port 3000).',
                     timestamp: new Date(),
                 }]);
                 return;
@@ -373,8 +373,8 @@ export function ChatbotPage() {
                 ? `${contextPrefix}${msg}\n\nHãy trả lời bằng mermaid code block (\`\`\`mermaid). Nếu cần giải thích thêm thì viết bên ngoài code block.`
                 : `${contextPrefix}${msg}`;
 
-            const res = await chatXClaw(token, enhancedMsg, xclawSessionId);
-            setXclawSessionId(res.sessionId);
+            const res = await chatHiTechClaw(token, enhancedMsg, hitechclawSessionId);
+            setHitechclawSessionId(res.sessionId);
 
             const assistantMsg: Message = {
                 role: 'assistant', content: res.content || '(Không có phản hồi)', timestamp: new Date(),
@@ -389,7 +389,7 @@ export function ChatbotPage() {
         } catch {
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                content: '⚠️ Không thể kết nối tới xClaw AI. Kiểm tra server hoặc đăng nhập lại.',
+                content: '⚠️ Không thể kết nối tới HiTechClaw AI. Kiểm tra server hoặc đăng nhập lại.',
                 timestamp: new Date(),
             }]);
         } finally {
@@ -489,7 +489,7 @@ export function ChatbotPage() {
                         <Bot size={18} style={{ color: 'var(--his-primary)' }} />
                     </div>
                     <div className="flex-1 min-w-0">
-                        <h1 className="text-[13px] font-bold" style={{ color: 'var(--his-fg)' }}>xClaw AI Assistant</h1>
+                        <h1 className="text-[13px] font-bold" style={{ color: 'var(--his-fg)' }}>HiTechClaw AI Assistant</h1>
                         <p className="text-[10px]" style={{ color: 'var(--his-fg-muted)' }}>
                             Trợ lý AI dược & y khoa • Truy vấn FHIR • Vẽ sơ đồ
                         </p>
@@ -498,12 +498,12 @@ export function ChatbotPage() {
                         {token ? (
                             <span className="flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full"
                                 style={{ background: 'var(--his-success-soft)', color: 'var(--his-success)' }}>
-                                <Wifi size={10} /> Đã kết nối xClaw
+                                <Wifi size={10} /> Đã kết nối HiTechClaw
                             </span>
                         ) : (
                             <span className="flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full"
                                 style={{ background: 'var(--his-danger-soft)', color: 'var(--his-danger)' }}>
-                                <WifiOff size={10} /> xClaw chưa kết nối
+                                <WifiOff size={10} /> HiTechClaw chưa kết nối
                             </span>
                         )}
                     </div>
@@ -518,7 +518,7 @@ export function ChatbotPage() {
                                 style={{ background: 'var(--his-primary-soft)' }}>
                                 <Sparkles size={28} style={{ color: 'var(--his-primary)' }} />
                             </div>
-                            <h2 className="text-[15px] font-bold mb-1.5" style={{ color: 'var(--his-fg)' }}>AI Trợ lý xClaw</h2>
+                            <h2 className="text-[15px] font-bold mb-1.5" style={{ color: 'var(--his-fg)' }}>AI Trợ lý HiTechClaw</h2>
                             <p className="text-[12px] max-w-sm mb-6" style={{ color: 'var(--his-fg-muted)' }}>
                                 Truy vấn dữ liệu FHIR, tra cứu thuốc, kiểm tra tương tác, vẽ sơ đồ & nhiều hơn nữa
                             </p>
@@ -620,7 +620,7 @@ export function ChatbotPage() {
                         </div>
                         {!token && (
                             <p className="text-[10px] mt-2 text-center flex items-center justify-center gap-1" style={{ color: 'var(--his-fg-muted)' }}>
-                                <WifiOff size={10} /> Chưa kết nối — nhấn Đăng nhập để kết nối xClaw AI
+                                <WifiOff size={10} /> Chưa kết nối — nhấn Đăng nhập để kết nối HiTechClaw AI
                             </p>
                         )}
                     </div>

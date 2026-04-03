@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 // ============================================================
-// @xclaw-ai/chat-sdk MCP Server — Standalone entry point
+// @hitechclaw-ai/chat-sdk MCP Server — Standalone entry point
 // ============================================================
 //
-// Run:  XCLAW_BASE_URL=https://... XCLAW_TOKEN=... npx @xclaw-ai/chat-sdk mcp
+// Run:  HITECHCLAW_BASE_URL=https://... HITECHCLAW_TOKEN=... npx @hitechclaw-ai/chat-sdk mcp
 //       node dist/mcp/bin.js
 //
 
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { XClawClient } from '../client.js';
+import { HiTechClawClient } from '../client.js';
 import { createMcpServer } from './server.js';
 
-const baseUrl = process.env['XCLAW_BASE_URL'];
-const token = process.env['XCLAW_TOKEN'];
+const baseUrl = process.env['HITECHCLAW_BASE_URL'];
+const token = process.env['HITECHCLAW_TOKEN'];
 
 if (!baseUrl) {
-    console.error('Error: XCLAW_BASE_URL environment variable is required');
-    console.error('Example: XCLAW_BASE_URL=https://api.xclaw.io XCLAW_TOKEN=... npx @xclaw-ai/chat-sdk mcp');
+    console.error('Error: HITECHCLAW_BASE_URL environment variable is required');
+    console.error('Example: HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx @hitechclaw-ai/chat-sdk mcp');
     process.exit(1);
 }
 
-const client = new XClawClient({
+const client = new HiTechClawClient({
     baseUrl,
     token,
 });

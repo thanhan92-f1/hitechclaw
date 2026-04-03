@@ -4,7 +4,7 @@
 // Calls the gateway /api/report/* endpoints internally.
 // ─────────────────────────────────────────────────────────
 
-import { defineSkill } from '@xclaw-ai/core';
+import { defineSkill } from '@hitechclaw-ai/core';
 
 function gatewayBase(): string {
   return process.env.GATEWAY_INTERNAL_URL || 'http://localhost:3000';
@@ -29,7 +29,7 @@ export const reportGenSkill = defineSkill({
     name: 'Report & Chart Generator',
     version: '1.0.0',
     description: 'Generate Excel spreadsheets, SVG charts (bar, line, pie), and AI-powered business reports from natural language. Supports invoice/table data generation, data visualisation, and full report packages with summary + Excel + chart.',
-    author: 'xClaw',
+    author: 'HiTechClaw',
     category: 'productivity',
     tags: ['excel', 'xlsx', 'chart', 'report', 'invoice', 'visualisation', 'business'],
     tools: [],

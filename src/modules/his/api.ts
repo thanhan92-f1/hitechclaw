@@ -141,11 +141,11 @@ export async function updateEncounter(id: string, data: { subjective?: string; o
   return res.json();
 }
 
-// ── xClaw Chat ──
-const XCLAW_BASE = '/xclaw-api';
+// ── HiTechClaw Chat ──
+const HITECHCLAW_BASE = '/hitechclaw-api';
 
-export async function loginXClaw(email: string, password: string): Promise<{ token: string } | { error: string }> {
-  const res = await fetch(`${XCLAW_BASE}/auth/login`, {
+export async function loginHiTechClaw(email: string, password: string): Promise<{ token: string } | { error: string }> {
+  const res = await fetch(`${HITECHCLAW_BASE}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -153,8 +153,8 @@ export async function loginXClaw(email: string, password: string): Promise<{ tok
   return res.json();
 }
 
-export async function chatXClaw(token: string, message: string, sessionId?: string, domainId?: string): Promise<{ content: string; sessionId: string }> {
-  const res = await fetch(`${XCLAW_BASE}/api/chat`, {
+export async function chatHiTechClaw(token: string, message: string, sessionId?: string, domainId?: string): Promise<{ content: string; sessionId: string }> {
+  const res = await fetch(`${HITECHCLAW_BASE}/api/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
     body: JSON.stringify({ message, sessionId, stream: false, domainId }),
@@ -163,11 +163,11 @@ export async function chatXClaw(token: string, message: string, sessionId?: stri
   return res.json();
 }
 
-export function chatXClawStream(token: string, message: string, sessionId?: string, onDelta?: (text: string) => void): { cancel: () => void; done: Promise<string> } {
+export function chatHiTechClawStream(token: string, message: string, sessionId?: string, onDelta?: (text: string) => void): { cancel: () => void; done: Promise<string> } {
   const controller = new AbortController();
 
   const done = (async () => {
-    const res = await fetch(`${XCLAW_BASE}/api/chat`, {
+    const res = await fetch(`${HITECHCLAW_BASE}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ message, sessionId, stream: true }),
@@ -201,7 +201,7 @@ export function chatXClawStream(token: string, message: string, sessionId?: stri
   return { cancel: () => controller.abort(), done };
 }
 
-// ── xClaw AI: Prescription Check ──
+// ── HiTechClaw AI: Prescription Check ──
 export async function aiCheckPrescription(
   token: string,
   patientName: string,
@@ -226,10 +226,10 @@ Hãy phân tích đơn thuốc này:
 
 Trả lời ngắn gọn, rõ ràng bằng tiếng Việt.`;
 
-  return chatXClaw(token, prompt, sessionId, 'healthcare');
+  return chatHiTechClaw(token, prompt, sessionId, 'healthcare');
 }
 
-// ── xClaw AI: Read Patient Record ──
+// ── HiTechClaw AI: Read Patient Record ──
 export async function aiReadPatientRecord(
   token: string,
   patientData: {
@@ -268,7 +268,7 @@ P: ${e.plan || 'N/A'}`).join('\n\n') : 'Chưa có lượt khám'}
     prompt += `\n\nHãy tóm tắt bệnh án này, đánh giá tình trạng hiện tại, và đưa ra khuyến nghị theo dõi tiếp theo. Trả lời bằng tiếng Việt.`;
   }
 
-  return chatXClaw(token, prompt, sessionId, 'healthcare');
+  return chatHiTechClaw(token, prompt, sessionId, 'healthcare');
 }
 
 // ============================================================

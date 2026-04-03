@@ -3,12 +3,12 @@
 // Inspired by claude-code memdir/ + agentMemory.ts pattern
 //
 // Maintains a MEMORY.md file per agent type in one of three scopes:
-//   user    → ~/.xclaw/agent-memory/<agentType>/MEMORY.md
-//   project → <cwd>/.xclaw/agent-memory/<agentType>/MEMORY.md
+//   user    → ~/.hitechclaw/agent-memory/<agentType>/MEMORY.md
+//   project → <cwd>/.hitechclaw/agent-memory/<agentType>/MEMORY.md
 //   session → in-memory only (not persisted to disk)
 // ============================================================
 
-import type { AgentMemoryScope } from '@xclaw-ai/shared';
+import type { AgentMemoryScope } from '@hitechclaw-ai/shared';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join, normalize } from 'node:path';
@@ -51,14 +51,14 @@ export function resolveAgentMemoryPath(
   const safeName = sanitizeAgentTypeForPath(agentType);
 
   if (scope === 'user') {
-    return join(homedir(), '.xclaw', 'agent-memory', safeName, AGENT_MEMORY_FILENAME);
+    return join(homedir(), '.hitechclaw', 'agent-memory', safeName, AGENT_MEMORY_FILENAME);
   }
   if (scope === 'project') {
     const base = projectRoot ?? process.cwd();
-    return join(base, '.xclaw', 'agent-memory', safeName, AGENT_MEMORY_FILENAME);
+    return join(base, '.hitechclaw', 'agent-memory', safeName, AGENT_MEMORY_FILENAME);
   }
   // session scope — in-memory only, this path is never written to disk
-  return join('/tmp', 'xclaw-session-memory', safeName, AGENT_MEMORY_FILENAME);
+  return join('/tmp', 'hitechclaw-session-memory', safeName, AGENT_MEMORY_FILENAME);
 }
 
 /**

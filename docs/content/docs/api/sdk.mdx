@@ -1,37 +1,37 @@
 ---
 title: Chat SDK
-description: "@xclaw-ai/chat-sdk — React, React Native & Node.js SDK for xClaw AI Agent Platform"
+description: "@hitechclaw-ai/chat-sdk — React, React Native & Node.js SDK for HiTechClaw AI Agent Platform"
 ---
 
-The official SDK for integrating xClaw chat into any JavaScript/TypeScript application. Supports React hooks, React Native, Node.js, and MCP server integration.
+The official SDK for integrating HiTechClaw chat into any JavaScript/TypeScript application. Supports React hooks, React Native, Node.js, and MCP server integration.
 
 ```bash
-npm install @xclaw-ai/chat-sdk
+npm install @hitechclaw-ai/chat-sdk
 ```
 
 ## Package Exports
 
 | Import Path | Description |
 |---|---|
-| `@xclaw-ai/chat-sdk` | Core `XClawClient` + all types |
-| `@xclaw-ai/chat-sdk/react` | React hooks (`useChat`, `useSessions`, `XClawProvider`) |
-| `@xclaw-ai/chat-sdk/react-native` | React Native compatibility layer |
-| `@xclaw-ai/chat-sdk/mcp` | MCP server for AI coding assistants |
+| `@hitechclaw-ai/chat-sdk` | Core `HiTechClawClient` + all types |
+| `@hitechclaw-ai/chat-sdk/react` | React hooks (`useChat`, `useSessions`, `HiTechClawProvider`) |
+| `@hitechclaw-ai/chat-sdk/react-native` | React Native compatibility layer |
+| `@hitechclaw-ai/chat-sdk/mcp` | MCP server for AI coding assistants |
 
 ---
 
 ## Quick Start — React
 
-Wrap your app with `XClawProvider`, then use `useChat` in any child component:
+Wrap your app with `HiTechClawProvider`, then use `useChat` in any child component:
 
 ```tsx
-import { XClawProvider, useChat } from '@xclaw-ai/chat-sdk/react';
+import { HiTechClawProvider, useChat } from '@hitechclaw-ai/chat-sdk/react';
 
 function App() {
   return (
-    <XClawProvider config={{ baseUrl: 'https://api.xclaw.io', token: 'your-jwt' }}>
+    <HiTechClawProvider config={{ baseUrl: 'https://api.hitechclaw.io', token: 'your-jwt' }}>
       <Chat />
-    </XClawProvider>
+    </HiTechClawProvider>
   );
 }
 
@@ -63,18 +63,18 @@ function Chat() {
 ## Quick Start — React Native
 
 ```tsx
-import { XClawProvider, useChat, createReactNativeConfig } from '@xclaw-ai/chat-sdk/react-native';
+import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
 
 const config = createReactNativeConfig({
-  baseUrl: 'https://api.xclaw.io',
+  baseUrl: 'https://api.hitechclaw.io',
   token: 'your-jwt',
 });
 
 export default function App() {
   return (
-    <XClawProvider config={config}>
+    <HiTechClawProvider config={config}>
       <ChatScreen />
-    </XClawProvider>
+    </HiTechClawProvider>
   );
 }
 ```
@@ -85,13 +85,13 @@ export default function App() {
 
 ## Core Client (No React)
 
-Use `XClawClient` directly in Node.js, Bun, Deno, or any JavaScript runtime:
+Use `HiTechClawClient` directly in Node.js, Bun, Deno, or any JavaScript runtime:
 
 ```typescript
-import { XClawClient } from '@xclaw-ai/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
 
-const client = new XClawClient({
-  baseUrl: 'https://api.xclaw.io',
+const client = new HiTechClawwClient({
+  baseUrl: 'https://api.hitechclaw.io',
   token: 'your-jwt',
 });
 
@@ -112,8 +112,8 @@ await done;
 ## Configuration
 
 ```typescript
-interface XClawConfig {
-  /** xClaw server base URL (e.g., "https://api.xclaw.io") */
+interface HiTechClawConfig {
+  /** HiTechClaw server base URL (e.g., "https://api.hitechclaw.io") */
   baseUrl: string;
   /** Authentication token (Bearer) */
   token?: string;
@@ -134,7 +134,7 @@ interface XClawConfig {
 
 ## API Reference
 
-### `XClawClient`
+### `HiTechClawClient`
 
 #### Authentication
 
@@ -146,7 +146,7 @@ interface XClawConfig {
 
 ```typescript
 // Login
-const { token, user } = await client.login({ email: 'admin@xclaw.io', password: '...' });
+const { token, user } = await client.login({ email: 'admin@hitechclaw.io', password: '...' });
 
 // Or set token directly
 client.setToken('eyJ...');
@@ -286,28 +286,28 @@ const {
 } = useSessions();
 ```
 
-#### `XClawProvider`
+#### `HiTechClawProvider`
 
 React context provider. Must wrap any component using `useChat` or `useSessions`.
 
 ```tsx
-<XClawProvider config={{
-  baseUrl: 'https://api.xclaw.io',
+<HiTechClawProvider config={{
+  baseUrl: 'https://api.hitechclaw.io',
   token: authToken,
   defaultDomain: 'general',
 }}>
   {children}
-</XClawProvider>
+</HiTechClawProvider>
 ```
 
 The provider syncs token changes without recreating the client instance.
 
-#### `useXClawClient()`
+#### `useHiTechClawwClient()`
 
-Access the underlying `XClawClient` instance directly from any child component:
+Access the underlying `HiTechClawClient` instance directly from any child component:
 
 ```typescript
-const client = useXClawClient();
+const client = useHiTechClawClient();
 const data = await client.listSessions();
 ```
 
@@ -341,9 +341,9 @@ Add to your MCP client configuration:
 ```json
 {
   "mcpServers": {
-    "xclaw": {
+    "hitechclaw": {
       "command": "npx",
-      "args": ["@xclaw-ai/chat-sdk", "--base-url", "http://localhost:18789", "--token", "your-jwt"]
+      "args": ["@hitechclaw-ai/chat-sdk", "--base-url", "http://localhost:18789", "--token", "your-jwt"]
     }
   }
 }
@@ -353,33 +353,33 @@ Add to your MCP client configuration:
 
 | Tool | Description |
 |---|---|
-| `xclaw_chat` | Send a message and get AI response |
-| `xclaw_chat_stream` | Send a message with streaming |
-| `xclaw_list_sessions` | List all chat sessions |
-| `xclaw_get_messages` | Get messages for a session |
-| `xclaw_delete_session` | Delete a session |
-| `xclaw_upload_file` | Upload a file attachment |
-| `xclaw_feedback` | Submit correction feedback |
+| `hitechclaw_chat` | Send a message and get AI response |
+| `hitechclaw_chat_stream` | Send a message with streaming |
+| `hitechclaw_list_sessions` | List all chat sessions |
+| `hitechclaw_get_messages` | Get messages for a session |
+| `hitechclaw_delete_session` | Delete a session |
+| `hitechclaw_upload_file` | Upload a file attachment |
+| `hitechclaw_feedback` | Submit correction feedback |
 
 ### Resources
 
 | URI | Description |
 |---|---|
-| `xclaw://sessions` | List of all current sessions |
+| `hitechclaw://sessions` | List of all current sessions |
 
 ---
 
 ## Error Handling
 
-All SDK methods throw `XClawError` on failure:
+All SDK methods throw `hitechclawError` on failure:
 
 ```typescript
-import { XClawError } from '@xclaw-ai/chat-sdk';
+import { HiTechClawError } from '@hitechclaw-ai/chat-sdk';
 
 try {
   await client.chat('Hello');
 } catch (err) {
-  if (err instanceof XClawError) {
+  if (err instanceof HiTechClawError) {
     console.error(err.status);      // HTTP status code
     console.error(err.body);        // Raw response body
     console.error(err.message);     // Human-readable message
@@ -395,7 +395,7 @@ All types are fully exported:
 
 ```typescript
 import type {
-  XClawConfig,
+  HiTechClawConfig,
   ChatRequest,
   ChatResponse,
   ChatMessage,
@@ -412,5 +412,5 @@ import type {
   LoginRequest,
   LoginResponse,
   UploadResponse,
-} from '@xclaw-ai/chat-sdk';
+} from '@hitechclaw-ai/chat-sdk';
 ```

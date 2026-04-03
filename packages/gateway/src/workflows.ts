@@ -4,10 +4,10 @@
 
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
-import { getDB, workflows, workflowExecutions, eq, and, desc } from '@xclaw-ai/db';
-import type { ValidationError } from '@xclaw-ai/core';
-import type { IWorkflowEngine } from '@xclaw-ai/shared';
-import type { Workflow, WorkflowNode, WorkflowEdge } from '@xclaw-ai/shared';
+import { getDB, workflows, workflowExecutions, eq, and, desc } from '@hitechclaw-ai/db';
+import type { ValidationError } from '@hitechclaw-ai/core';
+import type { IWorkflowEngine } from '@hitechclaw-ai/shared';
+import type { Workflow, WorkflowNode, WorkflowEdge } from '@hitechclaw-ai/shared';
 
 // Normalize API-format nodes/edges to full WorkflowNode/WorkflowEdge shapes
 function normalizeNode(raw: any): WorkflowNode {

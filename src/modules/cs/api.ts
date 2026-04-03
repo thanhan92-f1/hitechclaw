@@ -79,24 +79,24 @@ export async function getFaqCategories() {
   return res.json();
 }
 
-// ── xClaw Chat (via @xclaw-ai/chat-sdk) ──
-import { XClawClient } from '@xclaw-ai/chat-sdk';
+// ── HiTechClaw Chat (via @hitechclaw-ai/chat-sdk) ──
+import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
 
-const XCLAW_BASE = '/xclaw-api';
-const xclawClient = new XClawClient({ baseUrl: XCLAW_BASE });
+const HITECHCLAW_BASE = '/hitechclaw-api';
+const hitechclawClient = new HiTechClawClient({ baseUrl: HITECHCLAW_BASE });
 
-export async function loginXClaw(email: string, password: string): Promise<{ token: string } | { error: string }> {
+export async function loginHiTechClaw(email: string, password: string): Promise<{ token: string } | { error: string }> {
   try {
-    const res = await xclawClient.login({ email, password });
+    const res = await hitechclawClient.login({ email, password });
     return { token: res.token };
   } catch (err) {
     return { error: err instanceof Error ? err.message : 'Login failed' };
   }
 }
 
-export function chatXClawStream(token: string, message: string, sessionId?: string, onDelta?: (text: string) => void): { cancel: () => void; done: Promise<string> } {
-  xclawClient.setToken(token);
-  const handle = xclawClient.chatStream(message, {
+export function chatHiTechClawStream(token: string, message: string, sessionId?: string, onDelta?: (text: string) => void): { cancel: () => void; done: Promise<string> } {
+  hitechclawClient.setToken(token);
+  const handle = hitechclawClient.chatStream(message, {
     onTextDelta: (delta) => onDelta?.(delta),
   }, { sessionId });
   return { cancel: handle.cancel, done: handle.done };

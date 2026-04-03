@@ -40,7 +40,7 @@ export function EmbedChatPage() {
                 await apiLogin('embed@his.local', 'embed');
                 setReady(true);
             } catch {
-                setError('Không thể kết nối xClaw. Vui lòng thử lại.');
+                setError('Không thể kết nối HiTechClaw. Vui lòng thử lại.');
             }
         };
         init();
@@ -62,7 +62,7 @@ export function EmbedChatPage() {
             <div className="flex items-center justify-center h-screen" style={{ background: 'var(--color-bg)' }}>
                 <div className="flex items-center gap-3">
                     <div className="animate-spin w-5 h-5 border-2 border-t-transparent rounded-full" style={{ borderColor: 'var(--color-primary)', borderTopColor: 'transparent' }} />
-                    <span className="text-xs" style={{ color: 'var(--color-fg-muted)' }}>Đang kết nối xClaw AI...</span>
+                    <span className="text-xs" style={{ color: 'var(--color-fg-muted)' }}>Đang kết nối HiTechClaw AI...</span>
                 </div>
             </div>
         );
@@ -71,7 +71,7 @@ export function EmbedChatPage() {
     // In embed mode, collapse the chat sidebar by default for compact view
     useEffect(() => {
         if (ready) {
-            localStorage.setItem('xclaw-sidebar-open', 'false');
+            localStorage.setItem('hitechclaw-sidebar-open', 'false');
         }
     }, [ready]);
 

@@ -14,7 +14,7 @@ import type {
   SandboxStatus,
   SandboxAuditEntry,
   SandboxPolicy,
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 
 const execFileAsync = promisify(execFile);
 

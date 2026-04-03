@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/chat-sdk",
+    "name": "@hitechclaw-ai/chat-sdk",
     "version": "1.2.0",
-    "description": "xClaw Chat SDK — React & React Native client for xClaw AI Agent Platform",
+    "description": "HiTechClaw Chat SDK — React & React Native client for HiTechClaw AI Agent Platform",
     "type": "module",
     "main": "./dist/index.js",
     "module": "./dist/index.js",
@@ -25,7 +25,7 @@
         }
     },
     "bin": {
-        "xclaw-chat-mcp": "./dist/mcp/bin.js"
+        "hitechclaw-chat-mcp": "./dist/mcp/bin.js"
     },
     "files": [
         "dist",
@@ -38,7 +38,7 @@
         "mcp": "node dist/mcp/bin.js"
     },
     "keywords": [
-        "xclaw",
+        "hitechclaw",
         "ai",
         "chat",
         "sdk",
@@ -52,10 +52,10 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/xdev-asia-labs/xclaw",
+        "url": "https://github.com/xdev-asia-labs/hitechclaw",
         "directory": "packages/chat-sdk"
     },
-    "homepage": "https://github.com/xdev-asia-labs/xclaw/tree/main/packages/chat-sdk",
+    "homepage": "https://github.com/xdev-asia-labs/hitechclaw/tree/main/packages/chat-sdk",
     "peerDependencies": {
         "react": ">=18.0.0"
     },

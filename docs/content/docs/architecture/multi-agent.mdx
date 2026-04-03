@@ -3,11 +3,11 @@ title: Multi-Agent Orchestration
 description: Deep dive into agent hierarchies, workflow agents, transfer protocol, and A2A inter-agent communication.
 ---
 
-xClaw supports multi-agent orchestration — multiple AI agents working together within a single platform. Agents can be organized into hierarchies, composed into workflow patterns (sequential, parallel, loop), and communicate across services via the A2A protocol.
+HiTechClaw supports multi-agent orchestration — multiple AI agents working together within a single platform. Agents can be organized into hierarchies, composed into workflow patterns (sequential, parallel, loop), and communicate across services via the A2A protocol.
 
 ## Overview
 
-The multi-agent system consists of 3 core modules in `@xclaw-ai/core`:
+The multi-agent system consists of 3 core modules in `@hitechclaw-ai/core`:
 
 | Module | File | Purpose |
 |--------|------|---------|
@@ -95,7 +95,7 @@ Workflow agents compose multiple agents into execution patterns. Unlike visual w
 Executes sub-agents one after another. Each agent receives the previous agent's output via shared state.
 
 ```typescript
-import { createWorkflowAgent } from '@xclaw-ai/core';
+import { createWorkflowAgent } from '@hitechclaw-ai/core';
 
 const pipeline = createWorkflowAgent({
   id: 'research-pipeline',
@@ -176,7 +176,7 @@ function createWorkflowAgent(config: WorkflowAgentConfig):
 
 ## A2A Protocol
 
-The Agent-to-Agent (A2A) protocol enables inter-service communication between xClaw agents — whether local or remote.
+The Agent-to-Agent (A2A) protocol enables inter-service communication between HiTechClaw agents — whether local or remote.
 
 ### Components
 
@@ -226,7 +226,7 @@ interface A2ATaskResult {
 ### Usage Example
 
 ```typescript
-import { A2AServer, A2ARegistry, RemoteA2AAgent } from '@xclaw-ai/core';
+import { A2AServer, A2ARegistry, RemoteA2AAgent } from '@hitechclaw-ai/core';
 
 // Expose a local agent as A2A service
 const registry = new A2ARegistry();

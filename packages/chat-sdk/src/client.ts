@@ -1,9 +1,9 @@
 // ============================================================
-// @xclaw-ai/chat-sdk — Core Client
+// @hitechclaw-ai/chat-sdk — Core Client
 // ============================================================
 
 import type {
-    XClawConfig,
+    HiTechClawConfig,
     ChatRequest,
     ChatResponse,
     LoginRequest,
@@ -19,11 +19,11 @@ import type {
     TokenUsage,
 } from './types.js';
 
-export class XClawClient {
-    private config: Required<Pick<XClawConfig, 'baseUrl' | 'timeout'>> & XClawConfig;
+export class HiTechClawClient {
+    private config: Required<Pick<HiTechClawConfig, 'baseUrl' | 'timeout'>> & HiTechClawConfig;
     private _fetch: typeof globalThis.fetch;
 
-    constructor(config: XClawConfig) {
+    constructor(config: HiTechClawConfig) {
         this.config = {
             timeout: 60_000,
             ...config,
@@ -152,7 +152,7 @@ export class XClawClient {
 
         if (!res.ok) {
             const body = await res.text();
-            throw new XClawError(`Upload failed: ${res.status}`, res.status, body);
+            throw new HiTechClawError(`Upload failed: ${res.status}`, res.status, body);
         }
 
         return res.json();
@@ -203,7 +203,7 @@ export class XClawClient {
 
         if (!res.ok) {
             const body = await res.text();
-            throw new XClawError(`Request failed: ${res.status}`, res.status, body);
+            throw new HiTechClawError(`Request failed: ${res.status}`, res.status, body);
         }
 
         return res.json() as Promise<T>;
@@ -234,11 +234,11 @@ export class XClawClient {
 
         if (!res.ok) {
             const body = await res.text();
-            throw new XClawError(`Chat stream failed: ${res.status}`, res.status, body);
+            throw new HiTechClawError(`Chat stream failed: ${res.status}`, res.status, body);
         }
 
         const reader = res.body?.getReader();
-        if (!reader) throw new XClawError('No response body', 0, '');
+        if (!reader) throw new HiTechClawError('No response body', 0, '');
 
         const decoder = new TextDecoder();
         let accumulated = '';
@@ -316,13 +316,13 @@ export class XClawClient {
 
 // ─── Error Class ────────────────────────────────────────────
 
-export class XClawError extends Error {
+export class HiTechClawError extends Error {
     constructor(
         message: string,
         public readonly status: number,
         public readonly body: string,
     ) {
         super(message);
-        this.name = 'XClawError';
+        this.name = 'HiTechClawError';
     }
 }

@@ -8,7 +8,7 @@ import type {
     ToolCall,
     ToolDefinition,
     ToolResult
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import { randomUUID } from 'node:crypto';
 import type { ChatOptions } from '../llm/llm-router.js';
 import { LLMRouter } from '../llm/llm-router.js';
@@ -29,7 +29,7 @@ export interface AdditionalTool {
   handler: (args: Record<string, unknown>) => Promise<unknown>;
 }
 
-/** Sandbox executor interface — decoupled from @xclaw-ai/sandbox to avoid circular deps */
+/** Sandbox executor interface — decoupled from @hitechclaw-ai/sandbox to avoid circular deps */
 export interface SandboxToolExecutor {
   execute(
     call: ToolCall,

@@ -1,25 +1,25 @@
-import type { ConversationDetailResponse, ConversationSummary, StreamEvent } from '@xclaw-ai/chat-sdk';
-import { XClawClient } from '@xclaw-ai/chat-sdk';
+import type { ConversationDetailResponse, ConversationSummary, StreamEvent } from '@hitechclaw-ai/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
 
 const API_BASE = '';
 
-let authToken: string | null = localStorage.getItem('xclaw_token');
+let authToken: string | null = localStorage.getItem('hitechclaw_token');
 
-// Shared XClawClient instance
-const xclaw = new XClawClient({ baseUrl: API_BASE, token: authToken ?? undefined });
+// Shared HiTechClawClient instance
+const hitechclaw = new HiTechClawClient({ baseUrl: API_BASE, token: authToken ?? undefined });
 
-/** Access the shared XClawClient instance */
-export function getXClawClient() { return xclaw; }
+/** Access the shared HiTechClawClient instance */
+export function getHiTechClawClient() { return hitechclaw; }
 
 export function setToken(token: string) {
   authToken = token;
-  localStorage.setItem('xclaw_token', token);
-  xclaw.setToken(token);
+  localStorage.setItem('hitechclaw_token', token);
+  hitechclaw.setToken(token);
 }
 
 export function clearToken() {
   authToken = null;
-  localStorage.removeItem('xclaw_token');
+  localStorage.removeItem('hitechclaw_token');
 }
 
 export function getToken(): string | null {
@@ -149,10 +149,10 @@ export async function getHealth() {
   return res.json();
 }
 
-// ─── Chat (via @xclaw-ai/chat-sdk) ──────────────────────────
+// ─── Chat (via @hitechclaw-ai/chat-sdk) ──────────────────────────
 
 export async function sendChat(message: string, sessionId: string, domainId?: string, agentConfigId?: string) {
-  return xclaw.chat(message, { sessionId, domainId, agentConfigId });
+  return hitechclaw.chat(message, { sessionId, domainId, agentConfigId });
 }
 
 export async function* streamChat(message: string, sessionId: string, webSearch = false, domainId?: string, agentConfigId?: string): AsyncGenerator<StreamEvent> {
@@ -160,7 +160,7 @@ export async function* streamChat(message: string, sessionId: string, webSearch 
   let resolve: (() => void) | null = null;
   let done = false;
 
-  xclaw.chatStream(message, {
+  hitechclaw.chatStream(message, {
     onTextDelta: (delta) => {
       events.push({ type: 'text-delta', delta });
       resolve?.();
@@ -225,29 +225,29 @@ export async function submitChatFeedback(
   feedback: 'positive' | 'negative',
   correction?: string,
 ) {
-  return xclaw.feedback({ originalQuestion, aiAnswer, feedback, correction });
+  return hitechclaw.feedback({ originalQuestion, aiAnswer, feedback, correction });
 }
 
-// ─── Conversation History (via @xclaw-ai/chat-sdk) ──────────
+// ─── Conversation History (via @hitechclaw-ai/chat-sdk) ──────────
 
 export async function getConversations(): Promise<ConversationSummary[]> {
-  return xclaw.listSessions();
+  return hitechclaw.listSessions();
 }
 
 export async function getConversation(id: string): Promise<ConversationDetailResponse> {
-  return xclaw.getConversation(id);
+  return hitechclaw.getConversation(id);
 }
 
 export async function renameConversation(id: string, title: string) {
-  return xclaw.renameSession(id, title);
+  return hitechclaw.renameSession(id, title);
 }
 
 export async function deleteConversation(id: string) {
-  return xclaw.deleteSession(id);
+  return hitechclaw.deleteSession(id);
 }
 
 export async function saveChatMessage(sessionId: string, content: string) {
-  return xclaw.saveMessage(sessionId, content);
+  return hitechclaw.saveMessage(sessionId, content);
 }
 
 // ─── Image Generation ───────────────────────────────────────
@@ -755,7 +755,7 @@ export async function getModelInfo(name: string) {
 // ─── File Attachments ───────────────────────────────────────
 
 export async function uploadChatAttachment(file: File, _sessionId: string) {
-  return xclaw.uploadFile(file, file.name);
+  return hitechclaw.uploadFile(file, file.name);
 }
 
 // ─── Global Search ──────────────────────────────────────────

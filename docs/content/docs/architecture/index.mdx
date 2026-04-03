@@ -1,9 +1,9 @@
 ---
 title: System Architecture
-description: Component overview, data flow, and technology stack of the xClaw AI Agent Platform.
+description: Component overview, data flow, and technology stack of the HiTechClaw AI Agent Platform.
 ---
 
-xClaw is an open-source AI Agent platform built as a TypeScript monorepo with 14 packages. It provides a pluggable skill system, streaming chat, RAG engine, visual workflow builder, and multi-LLM support.
+HiTechClaw is an open-source AI Agent platform built as a TypeScript monorepo with 14 packages. It provides a pluggable skill system, streaming chat, RAG engine, visual workflow builder, and multi-LLM support.
 
 ## High-Level Architecture
 
@@ -26,19 +26,19 @@ The monorepo contains 14 npm workspace packages:
 
 | Package | Purpose | Key Dependencies |
 |---------|---------|-----------------|
-| `@xclaw-ai/shared` | Type definitions (1196+ lines), constants, schemas | None |
-| `@xclaw-ai/db` | Database layer | `@xclaw-ai/shared` |
-| `@xclaw-ai/core` | Agent engine: LLM, memory, tools, RAG, tracing, streaming, multi-agent | `@xclaw-ai/shared` |
-| `@xclaw-ai/integrations` | Third-party service integrations | `@xclaw-ai/shared`, `@xclaw-ai/db` |
-| `@xclaw-ai/domains` | Domain-specific logic packs | `@xclaw-ai/shared`, `@xclaw-ai/db` |
-| `@xclaw-ai/ml` | Machine learning, AutoML, reinforcement learning (bandit) | `@xclaw-ai/shared`, `@xclaw-ai/core` |
-| `@xclaw-ai/skills` | AI agent skill packs (tools) | `@xclaw-ai/shared`, `@xclaw-ai/core` |
-| `@xclaw-ai/skill-hub` | Skill marketplace registry | `@xclaw-ai/shared`, `@xclaw-ai/core` |
-| `@xclaw-ai/gateway` | Express + WebSocket API server | `@xclaw-ai/core`, all providers |
-| `@xclaw-ai/channels/*` | Telegram (grammY), Discord (discord.js) | `@xclaw-ai/gateway` |
-| `@xclaw-ai/cli` | Command-line interface | `@xclaw-ai/core` |
-| `@xclaw-ai/server` | Server entry point | `@xclaw-ai/gateway` |
-| `@xclaw-ai/web` | React frontend | Standalone (API client) |
+| `@hitechclaw-ai/shared` | Type definitions (1196+ lines), constants, schemas | None |
+| `@hitechclaw-ai/db` | Database layer | `@hitechclaw-ai/shared` |
+| `@hitechclaw-ai/core` | Agent engine: LLM, memory, tools, RAG, tracing, streaming, multi-agent | `@hitechclaw-ai/shared` |
+| `@hitechclaw-ai/integrations` | Third-party service integrations | `@hitechclaw-ai/shared`, `@hitechclaw-ai/db` |
+| `@hitechclaw-ai/domains` | Domain-specific logic packs | `@hitechclaw-ai/shared`, `@hitechclaw-ai/db` |
+| `@hitechclaw-ai/ml` | Machine learning, AutoML, reinforcement learning (bandit) | `@hitechclaw-ai/shared`, `@hitechclaw-ai/core` |
+| `@hitechclaw-ai/skills` | AI agent skill packs (tools) | `@hitechclaw-ai/shared`, `@hitechclaw-ai/core` |
+| `@hitechclaw-ai/skill-hub` | Skill marketplace registry | `@hitechclaw-ai/shared`, `@hitechclaw-ai/core` |
+| `@hitechclaw-ai/gateway` | Express + WebSocket API server | `@hitechclaw-ai/core`, all providers |
+| `@hitechclaw-ai/channels/*` | Telegram (grammY), Discord (discord.js) | `@hitechclaw-ai/gateway` |
+| `@hitechclaw-ai/cli` | Command-line interface | `@hitechclaw-ai/core` |
+| `@hitechclaw-ai/server` | Server entry point | `@hitechclaw-ai/gateway` |
+| `@hitechclaw-ai/web` | React frontend | Standalone (API client) |
 
 ## Agent Core Components
 
@@ -75,7 +75,7 @@ The `Agent` class is the central orchestrator. It wires up 6 core subsystems + 3
 
 ## Type System
 
-All shared types are in `@xclaw-ai/shared` (`src/types/index.ts`, 1196+ lines). Key type categories:
+All shared types are in `@hitechclaw-ai/shared` (`src/types/index.ts`, 1196+ lines). Key type categories:
 
 | Category | Types | Description |
 |----------|-------|-------------|

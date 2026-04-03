@@ -39,8 +39,8 @@ interface SettingsState {
   setLoaded: (loaded: boolean) => void;
 }
 
-const storedTheme = (localStorage.getItem('xclaw_theme') as ThemeMode | null) ?? 'system';
-const storedSidebar = localStorage.getItem('xclaw_sidebar_collapsed') === 'true';
+const storedTheme = (localStorage.getItem('hitechclaw_theme') as ThemeMode | null) ?? 'system';
+const storedSidebar = localStorage.getItem('hitechclaw_sidebar_collapsed') === 'true';
 
 export const useSettingsStore = create<SettingsState>((set) => ({
   aiLanguage: 'auto',
@@ -57,11 +57,11 @@ export const useSettingsStore = create<SettingsState>((set) => ({
   setAiLanguageCustom: (aiLanguageCustom) => set({ aiLanguageCustom }),
   setUiLocale: (uiLocale) => set({ uiLocale }),
   setTheme: (theme) => {
-    localStorage.setItem('xclaw_theme', theme);
+    localStorage.setItem('hitechclaw_theme', theme);
     set({ theme });
   },
   setSidebarCollapsed: (sidebarCollapsed) => {
-    localStorage.setItem('xclaw_sidebar_collapsed', String(sidebarCollapsed));
+    localStorage.setItem('hitechclaw_sidebar_collapsed', String(sidebarCollapsed));
     set({ sidebarCollapsed });
   },
   setWebSearchEnabled: (webSearchEnabled) => set({ webSearchEnabled }),

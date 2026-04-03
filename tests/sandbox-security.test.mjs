@@ -10,7 +10,7 @@ import assert from 'node:assert/strict';
 // ─── Policy Enforcement Tests ────────────────────────────────
 
 describe('Policy Enforcement', async () => {
-    const { PolicyBuilder, BUILTIN_POLICIES } = await import('@xclaw-ai/sandbox');
+    const { PolicyBuilder, BUILTIN_POLICIES } = await import('@hitechclaw-ai/sandbox');
 
     it('strict policy should not allow privilege escalation', () => {
         const strict = BUILTIN_POLICIES['strict'];
@@ -60,7 +60,7 @@ describe('Policy Enforcement', async () => {
 describe('Credential Security', async () => {
     it('encrypted credentials should not contain plaintext', async () => {
         process.env.CREDENTIAL_ENCRYPTION_KEY = 'test-key-for-security-tests';
-        const { encryptCredentials } = await import('@xclaw-ai/db');
+        const { encryptCredentials } = await import('@hitechclaw-ai/db');
 
         const secret = 'super-secret-api-key-12345';
         const encrypted = encryptCredentials({ apiKey: secret });
@@ -71,7 +71,7 @@ describe('Credential Security', async () => {
 
     it('different encryptions of same data should produce different ciphertext', async () => {
         process.env.CREDENTIAL_ENCRYPTION_KEY = 'test-key-for-security-tests';
-        const { encryptCredentials } = await import('@xclaw-ai/db');
+        const { encryptCredentials } = await import('@hitechclaw-ai/db');
 
         const data = { token: 'test-token' };
         const enc1 = encryptCredentials(data);
@@ -82,7 +82,7 @@ describe('Credential Security', async () => {
 
     it('should fail to decrypt with wrong key', async () => {
         process.env.CREDENTIAL_ENCRYPTION_KEY = 'key-1';
-        const { encryptCredentials } = await import('@xclaw-ai/db');
+        const { encryptCredentials } = await import('@hitechclaw-ai/db');
         const encrypted = encryptCredentials({ test: 'data' });
 
         // Change key
@@ -96,7 +96,7 @@ describe('Credential Security', async () => {
 // ─── PII Protection Tests ────────────────────────────────────
 
 describe('PII Protection', async () => {
-    const { PrivacyRouter } = await import('@xclaw-ai/sandbox');
+    const { PrivacyRouter } = await import('@hitechclaw-ai/sandbox');
 
     it('should detect all common PII types', () => {
         const router = new PrivacyRouter();
@@ -141,7 +141,7 @@ describe('PII Protection', async () => {
 // ─── Sandbox Pool Security ───────────────────────────────────
 
 describe('Sandbox Pool Security', async () => {
-    const { SandboxManager } = await import('@xclaw-ai/sandbox');
+    const { SandboxManager } = await import('@hitechclaw-ai/sandbox');
 
     it('should enforce max pool size', () => {
         const manager = new SandboxManager({ maxPoolSize: 3, mode: 'local' });
@@ -164,7 +164,7 @@ describe('Sandbox Pool Security', async () => {
 // ─── OCSF Event Integrity ──────────────────────────────────
 
 describe('OCSF Event Integrity', async () => {
-    const { toOCSFEvent } = await import('@xclaw-ai/sandbox');
+    const { toOCSFEvent } = await import('@hitechclaw-ai/sandbox');
 
     it('should always include required OCSF fields', () => {
         const actions = ['create', 'connect', 'execute', 'policy-update', 'destroy', 'blocked'];
@@ -201,6 +201,6 @@ describe('OCSF Event Integrity', async () => {
         const serialized = JSON.stringify(event);
         // The details are in unmapped field — this is intentional for SIEM systems
         // but we verify the structure is correct
-        assert.ok(event.metadata.product.name === 'xClaw');
+        assert.ok(event.metadata.product.name === 'HiTechClaw');
     });
 });

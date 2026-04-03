@@ -2,7 +2,7 @@ import type {
     AgentTransferRequest,
     SubAgentRef,
     ToolDefinition
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import { Agent } from './agent.js';
 import { EventBus } from './event-bus.js';
 

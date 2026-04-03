@@ -3,7 +3,7 @@
 // ============================================================
 
 import { Hono } from 'hono';
-import { getMongo } from '@xclaw-ai/db';
+import { getMongo } from '@hitechclaw-ai/db';
 
 interface WidgetEvent {
   event: string;

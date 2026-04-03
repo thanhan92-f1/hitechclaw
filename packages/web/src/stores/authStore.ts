@@ -19,20 +19,20 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  token: localStorage.getItem('xclaw_token'),
+  token: localStorage.getItem('hitechclaw_token'),
   loading: true,
   setUser: (user) => set({ user }),
   setToken: (token) => {
     if (token) {
-      localStorage.setItem('xclaw_token', token);
+      localStorage.setItem('hitechclaw_token', token);
     } else {
-      localStorage.removeItem('xclaw_token');
+      localStorage.removeItem('hitechclaw_token');
     }
     set({ token });
   },
   setLoading: (loading) => set({ loading }),
   logout: () => {
-    localStorage.removeItem('xclaw_token');
+    localStorage.removeItem('hitechclaw_token');
     set({ user: null, token: null });
   },
 }));

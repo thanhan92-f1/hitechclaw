@@ -4,7 +4,7 @@ import * as jose from 'jose';
 import {
   getDB, users, oauthAccounts, tenants,
   eq, and,
-} from '@xclaw-ai/db';
+} from '@hitechclaw-ai/db';
 import type { GatewayContext } from './gateway.js';
 import { seedDefaultRoles, assignRoleToUser } from './rbac.js';
 import { authMiddleware } from './auth.js';

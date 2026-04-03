@@ -4,7 +4,7 @@
  */
 
 import { Hono } from 'hono';
-import type { PluginManager } from '@xclaw-ai/core';
+import type { PluginManager } from '@hitechclaw-ai/core';
 
 export function createPluginRoutes(pluginManager: PluginManager) {
   const app = new Hono();

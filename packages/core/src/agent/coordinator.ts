@@ -11,7 +11,7 @@ import type {
     AgentConfig,
     AgentDefinition,
     CoordinatorConfig
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import type { ChatOptions } from '../llm/llm-router.js';
 import {
     BUILT_IN_AGENT_DEFINITIONS,
@@ -203,12 +203,12 @@ export function createInheritingAgentFactory(
 
 /**
  * Check whether coordinator mode should be active for a given config.
- * Reads XCLAW_COORDINATOR_MODE env var if not explicitly set in config.
+ * Reads HITECHCLAW_COORDINATOR_MODE env var if not explicitly set in config.
  */
 export function isCoordinatorModeEnabled(config?: CoordinatorConfig): boolean {
   if (config !== undefined) {
     return config.enabled;
   }
-  return process.env.XCLAW_COORDINATOR_MODE === '1' ||
-    process.env.XCLAW_COORDINATOR_MODE === 'true';
+  return process.env.HITECHCLAW_COORDINATOR_MODE === '1' ||
+    process.env.HITECHCLAW_COORDINATOR_MODE === 'true';
 }

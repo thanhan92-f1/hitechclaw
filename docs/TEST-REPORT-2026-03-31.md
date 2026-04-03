@@ -1,4 +1,4 @@
-# xClaw v2.1.0 --- Báo Cáo Kiểm Tra & Phân Tích Tính Năng
+# HiTechClaw v2.1.0 --- Báo Cáo Kiểm Tra & Phân Tích Tính Năng
 
 > Ngày kiểm tra: 31/03/2026
 > Model test: Ollama `qwen2.5:1.5b` (local, ~1B params)
@@ -55,7 +55,7 @@
 
 | # | Lỗi                                             | File                           | Fix                                                   |
 | - | ----------------------------------------------- | ------------------------------ | ----------------------------------------------------- |
-| 1 | `@xclaw-ai/chat-sdk` export resolution failed   | `packages/web/Dockerfile`      | Thêm `npx tsc -b packages/chat-sdk` trước vite build  |
+| 1 | `@hitechclaw-ai/chat-sdk` export resolution failed   | `packages/web/Dockerfile`      | Thêm `npx tsc -b packages/chat-sdk` trước vite build  |
 | 2 | langgraph TypeScript strict type errors (4 lỗi) | `langgraph-workflow-engine.ts` | Cast dynamic node IDs `as any`                        |
 | 3 | Missing `data/dev-docs/` directory              | Dockerfile COPY                | Tạo directory + README.md                             |
 | 4 | `host.docker.internal` not resolving (Linux)    | `docker-compose.yml`           | Thêm `extra_hosts: host.docker.internal:host-gateway` |
@@ -119,7 +119,7 @@
 
 | # | Tính năng                          | Lý do                                                                                                      | Effort |
 | - | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------ |
-| 1 | **Multi-Agent Collaboration**      | Nhiều agent phối hợp giải 1 task phức tạp (như CrewAI, AutoGen). xClaw có 1 agent, cần orchestration layer | High   |
+| 1 | **Multi-Agent Collaboration**      | Nhiều agent phối hợp giải 1 task phức tạp (như CrewAI, AutoGen). HiTechClaw có 1 agent, cần orchestration layer | High   |
 | 2 | **Agent Memory Graph**             | Knowledge graph cho agent memory thay vì flat memory. Agent nhớ context qua conversations                  | High   |
 | 3 | **Tool Use Marketplace (MCP Hub)** | Community đóng góp MCP tools, auto-discovery. Modelcontextprotocol.io ecosystem                            | Medium |
 | 4 | **Evaluation & Benchmarking**      | Built-in eval framework: accuracy, hallucination rate, latency per domain. So sánh models                  | Medium |

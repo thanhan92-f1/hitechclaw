@@ -7,7 +7,7 @@ import type {
   FilesystemPolicyRule,
   NetworkPolicyRule,
   ProcessPolicy,
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 
 // ─── Pre-built Policy Templates ─────────────────────────────
 

@@ -51,7 +51,7 @@ export const salesDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw Sales, an AI assistant for sales professionals. You help with proposal creation, pitch preparation, lead qualification, follow-up strategies, and pipeline management.
+  agentPersona: `You are HiTechClaw Sales, an AI assistant for sales professionals. You help with proposal creation, pitch preparation, lead qualification, follow-up strategies, and pipeline management.
 
 Sales principles:
 - Focus on value proposition and solving customer pain points

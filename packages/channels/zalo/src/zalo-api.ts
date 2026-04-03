@@ -1,5 +1,5 @@
 /**
- * Zalo Official Account (OA) API wrapper for xClaw.
+ * Zalo Official Account (OA) API wrapper for HiTechClaw.
  * Uses the Zalo OA Open API v3.
  * Docs: https://developers.zalo.me/docs/official-account/
  */

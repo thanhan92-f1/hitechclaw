@@ -46,7 +46,7 @@ export function SetupWizardPage({ onComplete }: SetupWizardProps) {
     const [saving, setSaving] = useState(false);
     const [domains, setDomains] = useState<Array<{ id: string; name: string; description: string }>>([]);
     const [config, setConfig] = useState<SetupConfig>({
-        agentName: 'xClaw Assistant',
+        agentName: 'HiTechClaw Assistant',
         aiLanguage: 'auto',
         llmProvider: 'ollama',
         llmModel: 'qwen2.5:14b',
@@ -173,7 +173,7 @@ export function SetupWizardPage({ onComplete }: SetupWizardProps) {
                                             border: '1px solid rgba(255,255,255,0.08)',
                                             color: '#f4f4f5',
                                         }}
-                                        placeholder="xClaw Assistant"
+                                        placeholder="HiTechClaw Assistant"
                                     />
                                 </div>
                                 <div>

@@ -3,8 +3,8 @@ import { MessageList } from '../components/MessageList';
 import type { Message } from '../components/MessageList';
 import { ChatInput } from '../components/ChatInput';
 import { TypingIndicator } from '../components/TypingIndicator';
-import xclaw from '../lib/api';
-import type { StreamCallbacks } from '@xclaw-ai/chat-sdk';
+import hitechclaw from '../lib/api';
+import type { StreamCallbacks } from '@hitechclaw-ai/chat-sdk';
 
 interface ChatPageProps {
     sessionId: string;
@@ -56,7 +56,7 @@ export const ChatPage: React.FC<ChatPageProps> = ({ sessionId, onNewSession }) =
                 setIsStreaming(false);
 
                 // Persist assistant message
-                xclaw.saveMessage(sessionId, fullContent).catch(() => { });
+                hitechclaw.saveMessage(sessionId, fullContent).catch(() => { });
             },
             onError: (err: Error) => {
                 const errorContent = fullContent || `Lỗi: ${err.message}`;
@@ -71,7 +71,7 @@ export const ChatPage: React.FC<ChatPageProps> = ({ sessionId, onNewSession }) =
             },
         };
 
-        const handle = xclaw.chatStream(text, callbacks, { sessionId });
+        const handle = hitechclaw.chatStream(text, callbacks, { sessionId });
         abortRef.current = handle;
     }, [sessionId]);
 
@@ -89,7 +89,7 @@ export const ChatPage: React.FC<ChatPageProps> = ({ sessionId, onNewSession }) =
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                 </button>
-                <h1 className="chat-header-title">xClaw AI</h1>
+                <h1 className="chat-header-title">HiTechClaw AI</h1>
                 <div style={{ width: 36 }} />
             </div>
 

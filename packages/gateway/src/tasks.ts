@@ -1,4 +1,4 @@
-import type { TaskManager } from '@xclaw-ai/core';
+import type { TaskManager } from '@hitechclaw-ai/core';
 import { Hono } from 'hono';
 
 /**

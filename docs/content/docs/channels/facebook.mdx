@@ -1,6 +1,6 @@
 ---
 title: Facebook Messenger
-description: Connect xClaw to Facebook Messenger via the Meta Graph API webhook.
+description: Connect HiTechClaw to Facebook Messenger via the Meta Graph API webhook.
 ---
 
 ## Prerequisites
@@ -20,7 +20,7 @@ description: Connect xClaw to Facebook Messenger via the Meta Graph API webhook.
 
 ### 2. Configure Webhook
 
-xClaw exposes a universal channel webhook at:
+HiTechClaw exposes a universal channel webhook at:
 
 ```
 GET  https://your-domain/webhooks/channels/:connectionId   ← Meta verification
@@ -30,16 +30,16 @@ POST https://your-domain/webhooks/channels/:connectionId   ← Incoming messages
 In the Meta Developer Portal:
 1. Go to **Messenger** → **Webhooks** → **Add Callback URL**
 2. Set **Callback URL** to `https://your-domain/webhooks/channels/<connectionId>`
-3. Set **Verify Token** to the same value you enter in xClaw
+3. Set **Verify Token** to the same value you enter in HiTechClaw
 4. Subscribe to the **messages** and **messaging_postbacks** fields
 
-> **Tip**: Get `<connectionId>` from the channel card in xClaw after saving the configuration.
+> **Tip**: Get `<connectionId>` from the channel card in HiTechClaw after saving the configuration.
 
-### 3. Configure in xClaw
+### 3. Configure in HiTechClaw
 
 1. Navigate to **Channels** → **Add Channel** → **Facebook Messenger**
 2. Fill in the fields below
-3. Click **Test Connection** — xClaw calls the Graph API and returns your page name
+3. Click **Test Connection** — HiTechClaw calls the Graph API and returns your page name
 4. Click **Activate**
 
 ## Configuration Fields
@@ -56,7 +56,7 @@ In the Meta Developer Portal:
 - **Incoming text**: Processed via the universal channel message handler
 - **Postbacks**: `payload` field from quick-reply buttons is treated as a user message
 - **Outgoing**: Sent via `POST /v18.0/me/messages` to the Graph API
-- **Webhook verification**: Meta sends a `GET` with `hub.challenge` — xClaw verifies the token and echoes the challenge
+- **Webhook verification**: Meta sends a `GET` with `hub.challenge` — HiTechClaw verifies the token and echoes the challenge
 
 ## Features
 

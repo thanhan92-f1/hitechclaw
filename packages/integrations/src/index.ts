@@ -1,4 +1,4 @@
-// @xclaw-ai/integrations — Integration Layer
+// @hitechclaw-ai/integrations — Integration Layer
 // Connect AI agents to external services
 
 export { defineIntegration } from './base/define-integration.js';
