@@ -1,5 +1,5 @@
 {
-  "name": "@tdduydev/hitechclaw-docs",
+  "name": "@hitechclaw/hitechclaw-docs",
   "version": "0.0.0",
   "private": false,
   "description": "HiTechClaw documentation source package",
@@ -8,7 +8,7 @@
     "url": "git+https://github.com/thanhan92f-f1/hitechclaw.git"
   },
   "license": "MIT",
-  "author": "tdduydev",
+  "author": "thanhan92f-f1",
   "publishConfig": {
     "access": "public"
   },
