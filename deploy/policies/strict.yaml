@@ -1,4 +1,4 @@
-# OpenShell Strict Policy for xClaw
+# OpenShell Strict Policy for HiTechClaw
 # Maximum isolation: no filesystem access, no network, minimal processes.
 # Used for untrusted community marketplace skills.
 

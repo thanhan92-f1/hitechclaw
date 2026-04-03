@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="packages/web/public/logo.png" alt="xClaw" width="80" height="80" />
+  <img src="packages/web/public/logo.png" alt="HiTechClaw" width="80" height="80" />
 </p>
 
-<h1 align="center">xClaw</h1>
+<h1 align="center">HiTechClaw</h1>
 
 <p align="center">
   <strong>Open-source AI Agent Platform — Multi-industry, Multi-tenant, Plugin-based</strong>
@@ -15,14 +15,14 @@
   <a href="#api-reference">API</a> •
   <a href="#domain-packs">Domains</a> •
   <a href="#integrations">Integrations</a> •
-  <a href="https://xclaw.xdev.asia/docs">Docs</a>
+  <a href="https://hitechclaw.com/docs">Docs</a>
 </p>
 
 ---
 
 ## Overview
 
-xClaw is a TypeScript monorepo platform for building and deploying AI agents across any industry. It provides a visual workflow builder, RAG pipeline, multi-LLM support, plugin-based domain packs, and a full RBAC multi-tenant architecture — all running on a dual-database design (PostgreSQL + MongoDB).
+HiTechClaw is a TypeScript monorepo platform for building and deploying AI agents across any industry. It provides a visual workflow builder, RAG pipeline, multi-LLM support, plugin-based domain packs, and a full RBAC multi-tenant architecture — all running on a dual-database design (PostgreSQL + MongoDB).
 
 **Key capabilities:**
 
@@ -49,8 +49,8 @@ xClaw is a TypeScript monorepo platform for building and deploying AI agents acr
 ### 1. Clone & configure
 
 ```bash
-git clone --recurse-submodules https://github.com/xdev-asia/xClaw.git
-cd xClaw
+git clone --recurse-submodules https://github.com/thanhan92-f1/hitechclaw.git
+cd hitechclaw
 cp .env.example .env   # edit with your API keys if needed
 ```
 
@@ -70,18 +70,18 @@ This starts 5 services:
 
 | Service      | Port   | Description                    |
 |-------------|--------|-------------------------------|
-| **xclaw**   | `3000` | API server (Hono)             |
-| **web**     | `3001` | Frontend (React + Nginx)      |
-| **postgres**| `5432` | PostgreSQL 18 (config data)   |
-| **mongodb** | `27018`| MongoDB 7 (AI/chat data)      |
-| **redis**   | `6379` | Redis 8 (cache)               |
+| **hitechclaw**   | `3000` | API server (Hono)             |
+| **web**          | `3001` | Frontend (React + Nginx)      |
+| **postgres**     | `5432` | PostgreSQL 18 (config data)   |
+| **mongodb**      | `27018`| MongoDB 7 (AI/chat data)      |
+| **redis**        | `6379` | Redis 8 (cache)               |
 
 ### 3. Login
 
 Open [http://localhost:3001](http://localhost:3001) and sign in:
 
 ```
-Email:    admin@xclaw.io
+Email:    admin@hitechclaw.com
 Password: password123
 ```
 
@@ -95,12 +95,12 @@ The server auto-detects Ollama at `http://localhost:11434`.
 
 ## Architecture
 
-![xClaw System Architecture](docs/architecture.png)
+![HiTechClaw System Architecture](docs/architecture.png)
 
 ### Dual-Database Design
 
 | Database       | Purpose                        | Tables/Collections                                                                                              |
-|---------------|-------------------------------|----------------------------------------------------------------------------------------------------------------|
+|--------------- |-------------------------------|----------------------------------------------------------------------------------------------------------------|
 | **PostgreSQL** | Config & structured data       | tenants, tenantSettings, users, roles, permissions, rolePermissions, userRoles, oauthAccounts, workflows, workflowExecutions, integrationConnections, webhooks, userDomainPreferences |
 | **MongoDB**    | AI & conversational data       | sessions, messages, memory_entries, agent_configs, audit_logs, system_logs                                       |
 | **Redis**      | Cache layer                    | Session cache, rate limiting                                                                                    |
@@ -108,20 +108,20 @@ The server auto-detects Ollama at `http://localhost:11434`.
 ## Monorepo Structure
 
 ```
-xClaw/
+HiTechClaw/
 ├── packages/
-│   ├── shared/          # @xclaw-ai/shared — Foundation types
-│   ├── core/            # @xclaw-ai/core — Agent engine, LLM, RAG, workflow, monitoring
-│   ├── db/              # @xclaw-ai/db — Drizzle ORM (PG) + MongoDB driver
-│   ├── gateway/         # @xclaw-ai/gateway — Hono HTTP server, REST API, auth
-│   ├── server/          # @xclaw-ai/server — Entry point, startup orchestration
-│   ├── integrations/    # @xclaw-ai/integrations — 11 service connectors
-│   ├── domains/         # @xclaw-ai/domains — 13 industry domain packs
-│   ├── skills/          # @xclaw-ai/skills — Built-in skills (defineSkill)
-│   ├── skill-hub/       # @xclaw-ai/skill-hub — Marketplace, MCP adapters
-│   ├── ml/              # @xclaw-ai/ml — 12 ML algorithms, AutoML
-│   ├── cli/             # @xclaw-ai/cli — CLI (commander.js)
-│   ├── doc-mcp/         # @xclaw-ai/doc-mcp — Dev Docs MCP server
+│   ├── shared/          # @hitechclaw-ai/shared — Foundation types
+│   ├── core/            # @hitechclaw-ai/core — Agent engine, LLM, RAG, workflow, monitoring
+│   ├── db/              # @hitechclaw-ai/db — Drizzle ORM (PG) + MongoDB driver
+│   ├── gateway/         # @hitechclaw-ai/gateway — Hono HTTP server, REST API, auth
+│   ├── server/          # @hitechclaw-ai/server — Entry point, startup orchestration
+│   ├── integrations/    # @hitechclaw-ai/integrations — 11 service connectors
+│   ├── domains/         # @hitechclaw-ai/domains — 13 industry domain packs
+│   ├── skills/          # @hitechclaw-ai/skills — Built-in skills (defineSkill)
+│   ├── skill-hub/       # @hitechclaw-ai/skill-hub — Marketplace, MCP adapters
+│   ├── ml/              # @hitechclaw-ai/ml — 12 ML algorithms, AutoML
+│   ├── cli/             # @hitechclaw-ai/cli — CLI (commander.js)
+│   ├── doc-mcp/         # @hitechclaw-ai/doc-mcp — Dev Docs MCP server
 │   ├── web/             # React + Tailwind frontend
 │   └── channels/        # Channel plugins
 │       ├── telegram/    # Telegram bot
@@ -130,8 +130,8 @@ xClaw/
 │       ├── whatsapp/    # WhatsApp Business API
 │       ├── zalo/        # Zalo Official Account
 │       └── msteams/     # Microsoft Teams
-├── xclaw-plugins/       # [submodule] Official plugins (TeeForge, Healthcare)
-├── xclaw-demo-integration-app/  # [submodule] HIS-Mini demo integration app
+├── hitechclaw-plugins/       # [submodule] Official plugins (TeeForge, Healthcare)
+├── hitechclaw-demo-integration-app/  # [submodule] HIS-Mini demo integration app
 ├── data/
 │   ├── dev-docs/        # Developer documentation knowledge base (Markdown)
 │   └── knowledge-packs/ # Data-only plugin packages (drug DB, ICD-10, etc.)
@@ -145,14 +145,14 @@ xClaw/
 
 | Submodule | Path | Repository | Description |
 |-----------|------|------------|-------------|
-| **xclaw-plugins** | `xclaw-plugins/` | [xdev-asia-labs/xclaw-plugins](https://github.com/xdev-asia-labs/xclaw-plugins) | Official plugin packages (TeeForge.AI, Healthcare) |
-| **xclaw-demo-integration-app** | `xclaw-demo-integration-app/` | [xdev-asia-labs/xclaw-demo-integration-app](https://github.com/xdev-asia-labs/xclaw-demo-integration-app) | HIS-Mini demo — Hospital Information System integration app |
+| **hitechclaw-plugins** | `hitechclaw-plugins/` | [thanhan92-f1/hitechclaw-plugins](https://github.com/thanhan92-f1/hitechclaw-plugins) | Official plugin packages (TeeForge.AI, Healthcare) |
+| **hitechclaw-demo-integration-app** | `hitechclaw-demo-integration-app/` | [thanhan92-f1/hitechclaw-demo-integration-app](https://github.com/thanhan92-f1/hitechclaw-demo-integration-app) | HIS-Mini demo — Hospital Information System integration app |
 
 ## Features
 
 ### Chat Channels
 
-Connect xClaw to any messaging platform:
+Connect HiTechClaw to any messaging platform:
 
 | Channel | Type | Connection Method |
 |---------|------|------------------|
@@ -314,7 +314,7 @@ GET  /api/mcp/servers           # MCP server discovery
 | `DATABASE_URL`     | —                              | PostgreSQL connection string   |
 | `MONGODB_URL`      | —                              | MongoDB connection string      |
 | `REDIS_URL`        | —                              | Redis connection string        |
-| `JWT_SECRET`       | `xclaw-dev-secret-change-me`   | JWT signing secret             |
+| `JWT_SECRET`       | `hitechclaw-dev-secret-change-me`   | JWT signing secret             |
 | `LLM_PROVIDER`     | `openai`                       | `openai` / `anthropic` / `ollama` / `google` / `groq` / `mistral` / `deepseek` / `xai` / `openrouter` / `perplexity` |
 | `LLM_MODEL`        | auto-detected                  | Model name                     |
 | `OPENAI_API_KEY`   | —                              | OpenAI API key                 |
@@ -350,10 +350,10 @@ GET  /api/mcp/servers           # MCP server discovery
 docker compose up --build
 
 # Rebuild only the backend
-docker compose up --build xclaw
+docker compose up --build hitechclaw
 
 # View logs
-docker compose logs -f xclaw
+docker compose logs -f hitechclaw
 
 # Stop all
 docker compose down
@@ -413,7 +413,7 @@ npm run test          # Run tests (vitest)
 npm run lint          # Lint all packages
 
 # CLI
-npm run cli -- <command>   # Run xClaw CLI
+npm run cli -- <command>   # Run HiTechClaw CLI
 ```
 
 ### Project References
@@ -428,7 +428,7 @@ shared → db → core → integrations → domains → ml → skills → skill-
 
 ```bash
 # Clone with submodules
-git clone --recurse-submodules https://github.com/xdev-asia/xClaw.git
+git clone --recurse-submodules https://github.com/thanhan92-f1/hitechclaw.git
 
 # Update submodules to latest
 git submodule update --remote --merge
@@ -439,4 +439,4 @@ git submodule update --init --recursive
 
 ## License
 
-MIT © [xDev Asia](https://xdev.asia)
+MIT © [HiTechClaw by Pho Tue SoftWare Solutions JSC](https://hitechclaw.com)

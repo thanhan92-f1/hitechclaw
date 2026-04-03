@@ -3,15 +3,15 @@ name: devsecops
 description: >-
   Use when performing security audits, vulnerability scanning, SAST/DAST, secret detection,
   dependency auditing, container hardening, compliance checks, AI/LLM security (OWASP Top 10 for LLM),
-  guardrail configuration, and security incident response in xClaw.
+  guardrail configuration, and security incident response in HiTechClaw.
   DO NOT USE FOR: general application features, frontend UI, database schema design.
 ---
 
-# DevSecOps Skill — xClaw Platform
+# DevSecOps Skill — HiTechClaw Platform
 
 ## Overview
 
-xClaw requires security at every layer: infrastructure, CI/CD pipeline, application code,
+HiTechClaw requires security at every layer: infrastructure, CI/CD pipeline, application code,
 AI guardrails, and multi-tenant data isolation. This skill covers all security operations.
 
 ## Security Architecture
@@ -44,7 +44,7 @@ AI guardrails, and multi-tenant data isolation. This skill covers all security o
 ## Directory Layout
 
 ```
-xClaw/
+HiTechClaw/
 ├── packages/core/src/guardrails/
 │   ├── types.ts                    # GuardrailResult, GuardrailContext
 │   ├── guardrail-pipeline.ts       # Pipeline orchestrator (fail-fast)
@@ -99,12 +99,12 @@ Individual scan types:
 
 | Check | How to Verify | Expected |
 |-------|---------------|----------|
-| Non-root user | `grep 'USER xclaw' Dockerfile` | Present |
+| Non-root user | `grep 'USER hitechclaw' Dockerfile` | Present |
 | Minimal base image | `grep 'FROM.*alpine' Dockerfile` | Alpine-based |
-| No secrets in image | `docker history xclaw-server:latest` | No env secrets |
+| No secrets in image | `docker history hitechclaw-server:latest` | No env secrets |
 | DB ports hidden (prod) | `grep 'ports: \[\]' docker-compose.prod.yml` | All DBs have `[]` |
 | Resource limits | Check `deploy.resources.limits` in prod compose | Memory + CPU set |
-| Health checks | `docker inspect --format='{{.State.Health}}' xclaw` | healthy |
+| Health checks | `docker inspect --format='{{.State.Health}}' hitechclaw` | healthy |
 | Read-only rootfs | Optional: `read_only: true` in compose | Recommended |
 | No new privileges | Optional: `security_opt: [no-new-privileges:true]` | Recommended |
 
@@ -140,9 +140,9 @@ Individual scan types:
 
 ### Database Password Rotation
 1. Generate new password: `openssl rand -base64 32`
-2. Update PostgreSQL: `ALTER USER xclaw PASSWORD '<new>';`
+2. Update PostgreSQL: `ALTER USER hitechclaw PASSWORD '<new>';`
 3. Update `.env`: `PG_PASSWORD=<new-password>`
-4. Restart xclaw service: `docker compose restart xclaw`
+4. Restart hitechclaw service: `docker compose restart hitechclaw`
 5. Verify: `./deploy/scripts/health-check.sh`
 
 ## Procedure: Security Incident Response

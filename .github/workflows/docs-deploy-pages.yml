@@ -41,7 +41,7 @@ jobs:
         run: npm run build:docs
         env:
           NEXT_OUTPUT: export
-          NEXT_PUBLIC_DOCS_URL: https://xclaw.xdev.asia
+          NEXT_PUBLIC_DOCS_URL: https://hitechclaw.com
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

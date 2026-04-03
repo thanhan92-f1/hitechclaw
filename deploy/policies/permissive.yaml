@@ -1,4 +1,4 @@
-# OpenShell Permissive Policy for xClaw
+# OpenShell Permissive Policy for HiTechClaw
 # For trusted built-in skills that need broader access.
 # Still denies network by default — add specific rules per integration.
 

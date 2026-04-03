@@ -1,4 +1,4 @@
-# OpenShell Web Search Policy for xClaw
+# OpenShell Web Search Policy for HiTechClaw
 # Allows access to Tavily and Brave search APIs.
 
 name: web-search
