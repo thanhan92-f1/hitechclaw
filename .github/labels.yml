@@ -1,0 +1,43 @@
+- name: "bug"
+  color: "d73a4a"
+  description: "Something is not working"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "New feature or improvement"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Documentation changes"
+
+- name: "ci"
+  color: "5319e7"
+  description: "CI/CD pipeline related changes"
+
+- name: "devops"
+  color: "0e8a16"
+  description: "Infrastructure, Docker, deployment"
+
+- name: "security"
+  color: "b60205"
+  description: "Security related updates or findings"
+
+- name: "dependencies"
+  color: "0366d6"
+  description: "Dependency updates"
+
+- name: "needs-triage"
+  color: "fbca04"
+  description: "Needs initial review and classification"
+
+- name: "priority:high"
+  color: "d93f0b"
+  description: "High priority item"
+
+- name: "priority:medium"
+  color: "fbca04"
+  description: "Medium priority item"
+
+- name: "priority:low"
+  color: "0e8a16"
+  description: "Low priority item"

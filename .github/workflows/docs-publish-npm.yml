@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -36,7 +36,7 @@ jobs:
 
       - name: Publish to npmjs.org
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets['NPM_TOKEN'] }}
         run: |
           if npm view "${{ steps.pkg.outputs.name }}@${{ steps.pkg.outputs.version }}" --registry https://registry.npmjs.org >/dev/null 2>&1; then
             echo "Version ${{ steps.pkg.outputs.version }} already exists on npmjs, skipping."

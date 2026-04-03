@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability report
+    url: https://github.com/thanhan92-f1/ai-all-in-one-cloud-service-cloud-gpu/security/advisories/new
+    about: Report vulnerabilities privately via GitHub Security Advisories.
+  - name: Project documentation
+    url: https://github.com/thanhan92-f1/ai-all-in-one-cloud-service-cloud-gpu/tree/main/docs
+    about: Please check docs before opening a question/issue.

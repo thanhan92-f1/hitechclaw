@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Docker: up --build",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "compose",
+                "up",
+                "--build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/xClaw-main"
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: down",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "compose",
+                "down"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/xClaw-main"
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: logs xclaw",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "compose",
+                "logs",
+                "-f",
+                "xclaw"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/xClaw-main"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker: compose config",
+            "type": "shell",
+            "command": "docker",
+            "args": [
+                "compose",
+                "config"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/xClaw-main"
+            },
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}

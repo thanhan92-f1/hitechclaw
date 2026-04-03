@@ -1,0 +1,43 @@
+# Pull Request label rules
+
+# Documentation
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docs/**"
+          - "**/*.md"
+
+# CI/CD and automation
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+          - ".github/dependabot.yml"
+
+# DevOps and deployment
+devops:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "deploy/**"
+          - "docker-compose*.yml"
+          - "Dockerfile"
+          - "packages/web/Dockerfile"
+
+# Security
+security:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "packages/core/src/guardrails/**"
+          - "deploy/scripts/security-*.sh"
+          - "deploy/scripts/secret-*.sh"
+          - ".trivyignore"
+          - ".gitleaksignore"
+
+# Dependencies
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/package.json"
+          - "**/package-lock.json"
+          - "**/pnpm-lock.yaml"
+          - "**/yarn.lock"

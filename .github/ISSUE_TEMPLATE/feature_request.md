@@ -1,20 +1,38 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+about: Propose a new capability or enhancement
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+assignees: []
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Problem statement
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+<!-- What user/business problem are you trying to solve? -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Proposed solution
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+<!-- Describe the desired behavior and outcome -->
+
+## Scope
+
+- [ ] Core platform
+- [ ] Gateway/API
+- [ ] Database
+- [ ] Web UI
+- [ ] Docs
+- [ ] DevOps/CI
+- [ ] Security/Guardrails
+
+## Alternatives considered
+
+<!-- Optional: describe alternatives and trade-offs -->
+
+## Impact
+
+<!-- Who benefits? Any migration/compatibility impact? -->
+
+## Additional context
+
+<!-- Mockups, examples, references -->

@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -33,7 +33,7 @@ jobs:
       - name: Build docs site
         run: npm run build:docs
         env:
-          NEXT_PUBLIC_DOCS_URL: https://xclaw.xdev.asia
+          NEXT_PUBLIC_DOCS_URL: https://docs.claw.org.vn
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3

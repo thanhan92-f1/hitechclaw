@@ -106,7 +106,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           registry-url: https://registry.npmjs.org
 
@@ -146,8 +146,9 @@ jobs:
           done
 
       - name: Bump version & publish changed packages
+        id: publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets['NPM_TOKEN'] }}
         run: |
           CHANGED='${{ needs.detect-changes.outputs.changed }}'
           BUMP_TYPE="${{ steps.bump.outputs.type }}"
@@ -191,16 +192,18 @@ jobs:
           done
 
           if [[ -n "$PUBLISHED" ]]; then
+            echo "published=$PUBLISHED" >> "$GITHUB_OUTPUT"
             echo "PUBLISHED=$PUBLISHED" >> "$GITHUB_ENV"
           fi
 
       - name: Refresh root lockfile
-        if: env.PUBLISHED != ''
+        if: steps.publish.outputs.published != ''
         run: npm run lock:sync
 
       - name: Commit version bumps & tag
-        if: env.PUBLISHED != ''
+        if: steps.publish.outputs.published != ''
         run: |
+          PUBLISHED="${{ steps.publish.outputs.published }}"
           git add package-lock.json packages/*/package.json packages/channels/*/package.json
           COMMIT_MSG="chore: release$(echo "$PUBLISHED" | tr ' ' '\n' | sed 's/^/ /')"
           git commit -m "$COMMIT_MSG [skip ci]" || echo "Nothing to commit"

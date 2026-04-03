@@ -1,0 +1,25 @@
+# Global defaults
+* @thanhan92f1
+
+# CI/CD and automation
+/.github/workflows/ @thanhan92f1
+/.github/dependabot.yml @thanhan92f1
+
+# Security and operations
+/deploy/ @thanhan92f1
+/Dockerfile @thanhan92f1
+/docker-compose*.yml @thanhan92f1
+
+# Core platform packages
+/packages/core/ @thanhan92f1
+/packages/db/ @thanhan92f1
+/packages/gateway/ @thanhan92f1
+/packages/server/ @thanhan92f1
+
+# Frontend
+/packages/web/ @thanhan92f1
+
+# Plugins and channels
+/packages/channels/ @thanhan92f1
+/packages/integrations/ @thanhan92f1
+/packages/domains/ @thanhan92f1
