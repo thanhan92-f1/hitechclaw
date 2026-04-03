@@ -1,0 +1,127 @@
+---
+title: System Architecture
+description: Component overview, data flow, and technology stack of the xClaw AI Agent Platform.
+---
+
+xClaw is an open-source AI Agent platform built as a TypeScript monorepo with 14 packages. It provides a pluggable skill system, streaming chat, RAG engine, visual workflow builder, and multi-LLM support.
+
+## High-Level Architecture
+
+<img src="/diagrams/high-level-architecture.png" alt="High-Level Architecture" className="rounded-xl border border-slate-700 my-4" />
+
+The platform is organized into 4 layers:
+
+| Layer | Components | Responsibility |
+|-------|-----------|----------------|
+| **Clients** | Web UI, Telegram, Discord, CLI, REST API | User-facing interfaces |
+| **Gateway** | Hono + WebSocket server, 13 route modules | API routing, auth, session management |
+| **Agent Core** | Agent, LLM Router, EventBus, Memory, Tools, RAG, Tracer, Streaming | AI orchestration engine |
+| **Providers** | OpenAI, Anthropic, Ollama, Google, Groq + Skills + Integrations | External services and data |
+
+## Package Dependency Graph
+
+<img src="/diagrams/package-dependency.png" alt="Package Dependency Graph" className="rounded-xl border border-slate-700 my-4" />
+
+The monorepo contains 14 npm workspace packages:
+
+| Package | Purpose | Key Dependencies |
+|---------|---------|-----------------|
+| `@xclaw-ai/shared` | Type definitions (1196+ lines), constants, schemas | None |
+| `@xclaw-ai/db` | Database layer | `@xclaw-ai/shared` |
+| `@xclaw-ai/core` | Agent engine: LLM, memory, tools, RAG, tracing, streaming, multi-agent | `@xclaw-ai/shared` |
+| `@xclaw-ai/integrations` | Third-party service integrations | `@xclaw-ai/shared`, `@xclaw-ai/db` |
+| `@xclaw-ai/domains` | Domain-specific logic packs | `@xclaw-ai/shared`, `@xclaw-ai/db` |
+| `@xclaw-ai/ml` | Machine learning, AutoML, reinforcement learning (bandit) | `@xclaw-ai/shared`, `@xclaw-ai/core` |
+| `@xclaw-ai/skills` | AI agent skill packs (tools) | `@xclaw-ai/shared`, `@xclaw-ai/core` |
+| `@xclaw-ai/skill-hub` | Skill marketplace registry | `@xclaw-ai/shared`, `@xclaw-ai/core` |
+| `@xclaw-ai/gateway` | Express + WebSocket API server | `@xclaw-ai/core`, all providers |
+| `@xclaw-ai/channels/*` | Telegram (grammY), Discord (discord.js) | `@xclaw-ai/gateway` |
+| `@xclaw-ai/cli` | Command-line interface | `@xclaw-ai/core` |
+| `@xclaw-ai/server` | Server entry point | `@xclaw-ai/gateway` |
+| `@xclaw-ai/web` | React frontend | Standalone (API client) |
+
+## Agent Core Components
+
+<img src="/diagrams/agent-core.png" alt="Agent Core Components" className="rounded-xl border border-slate-700 my-4" />
+
+The `Agent` class is the central orchestrator. It wires up 6 core subsystems + 3 extensions:
+
+### Core Subsystems
+
+| Subsystem | File | Purpose |
+|-----------|------|---------|
+| **LLMRouter** | `llm/llm-router.ts` | Multi-provider LLM abstraction with 6 adapter types |
+| **EventBus** | `agent/event-bus.ts` | Pub/sub event system with wildcard listeners |
+| **MemoryManager** | `memory/memory-manager.ts` | Conversation history + vector memory |
+| **ToolRegistry** | `tools/tool-registry.ts` | Tool registration, execution, approval |
+| **Tracer** | `tracing/tracer.ts` | OpenTelemetry-like span tracking |
+| **StreamWriter** | `streaming/stream-writer.ts` | SSE streaming protocol |
+
+### Extensions
+
+| Extension | File | Purpose |
+|-----------|------|---------|
+| **RAG Engine** | `rag/rag-engine.ts` | Retrieval-Augmented Generation with vector search |
+| **Skill Manager** | `skills/skill-manager.ts` | Hot-loadable plugin system with RL-based skill selection |
+| **Graph Engine** | `graph/graph-engine.ts` | BFS workflow execution |
+
+### Multi-Agent
+
+| Module | File | Purpose |
+|--------|------|--------|
+| **AgentHierarchy** | `agent/agent-hierarchy.ts` | Agent tree with parent/child relationships and `transfer_to_agent` delegation |
+| **WorkflowAgents** | `agent/workflow-agents.ts` | Sequential, Parallel, and Loop agent composition patterns |
+| **A2A Protocol** | `a2a/a2a-protocol.ts` | Agent-to-Agent communication for remote/cross-service agents |
+
+## Type System
+
+All shared types are in `@xclaw-ai/shared` (`src/types/index.ts`, 1196+ lines). Key type categories:
+
+| Category | Types | Description |
+|----------|-------|-------------|
+| **LLM** | `LLMProvider`, `LLMConfig`, `LLMMessage`, `LLMResponse`, `TokenUsage` | 12 providers: OpenAI, Anthropic, Ollama, Google, Groq, Mistral, DeepSeek, xAI, OpenRouter, Perplexity, HuggingFace, Custom |
+| **Streaming** | `StreamEvent` (8 event types) | `text-delta`, `tool-call-start/args/end`, `tool-result`, `meta`, `finish`, `error` |
+| **Tools** | `ToolDefinition`, `ToolCall`, `ToolResult` | Parameter schemas, approval flags, timeout |
+| **Skills** | `SkillManifest`, `SkillCategory` (16 categories), `SkillConfigField` | Plugin manifests with config fields |
+| **Workflows** | `Workflow`, `WorkflowNode`, `WorkflowNodeType` (16 types), `WorkflowEdge` | Visual workflow definitions |
+| **Memory** | `MemoryEntry` (5 types), `ConversationMessage` | Vector storage with embeddings |
+| **Gateway** | `GatewayConfig`, `GatewaySession`, `GatewayMessage` (14 message types) | WebSocket protocol |
+| **Channels** | `ChannelPlugin`, `IncomingMessage`, `OutgoingMessage` | Multi-platform messaging |
+| **Integrations** | `IntegrationDefinition`, `IntegrationAction`, `IntegrationTrigger` | 16 categories, 5 auth types |
+| **Tracing** | `TraceSpan`, `SpanEvent` | 6 span kinds: agent, llm, tool, workflow, memory, custom |
+| **Domains** | `DomainPackDefinition` | Industry-specific agent configurations |
+| **Multi-Agent** | `SubAgentRef`, `WorkflowAgentConfig`, `AgentTransferRequest`, `A2AAgentCard`, `A2ATask` | Agent hierarchy, workflow composition, A2A protocol |
+
+## Security Model
+
+| Layer | Mechanism |
+|-------|-----------|
+| **Authentication** | JWT-based auth with session management |
+| **Tool Execution** | `requiresApproval` flag, configurable timeouts |
+| **Shell Commands** | Blocklist (`rm -rf`, `mkfs`, etc.) via `security.blockedCommands` |
+| **API Keys** | Server-side only, masked in config responses |
+| **LLM Safety** | Max iteration limit (`maxToolIterations`) prevents infinite loops |
+| **Network** | `requireApprovalForNetwork` flag for HTTP tools |
+| **Code Execution** | Sandboxed `new Function()` in workflow code nodes |
+
+## Technology Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | TypeScript 5.7+ (ES2022 target) |
+| Frontend | React 19, Vite 6, Tailwind CSS, React Flow 12, Zustand 5 |
+| Backend | Node.js 20+, Hono, WebSocket (ws) |
+| LLM | OpenAI, Anthropic, Ollama, Google, Groq, Mistral |
+| Search | RAG with vector embeddings, cosine similarity |
+| Build | npm workspaces, TypeScript project references |
+| Deploy | Docker multi-stage, docker-compose |
+
+## Deep Dive
+
+<Cards>
+  <Card title="Chat Flow & Streaming" href="/docs/architecture/chat-flow" description="Tool-calling loop, streaming protocol, SSE events" />
+  <Card title="Gateway & Routes" href="/docs/architecture/gateway" description="13 route modules, WebSocket, authentication" />
+  <Card title="Memory & RAG" href="/docs/architecture/memory-rag" description="Vector memory, RAG engine, document processing" />
+  <Card title="Workflow Engine" href="/docs/architecture/workflow-engine" description="BFS execution, 16 node types, custom handlers" />
+  <Card title="Multi-Agent Orchestration" href="/docs/architecture/multi-agent" description="Agent hierarchy, workflow agents, transfer protocol, A2A" />
+</Cards>

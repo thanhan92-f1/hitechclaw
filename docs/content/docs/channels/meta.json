@@ -1,0 +1,14 @@
+{
+  "title": "Chat Channels",
+  "pages": [
+    "index",
+    "telegram",
+    "discord",
+    "slack",
+    "whatsapp",
+    "zalo",
+    "facebook",
+    "msteams",
+    "webchat"
+  ]
+}
