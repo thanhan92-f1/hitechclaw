@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="packages/web/public/logo.png" alt="HiTechClaw" width="80" height="80" />
+  <img src="packages/web/public/logo.png" alt="HiTechClaw" width="150" height="80" />
 </p>
 
 <h1 align="center">HiTechClaw</h1>
