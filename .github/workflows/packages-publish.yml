@@ -182,6 +182,7 @@ jobs:
             if npm view "${PKG_NAME}@${NEW_VERSION}" --registry https://registry.npmjs.org >/dev/null 2>&1; then
               echo "  ⚠️  $PKG_NAME@$NEW_VERSION already exists, skipping"
             else
+              npm run build --workspace "$pkg_dir" --if-present
               npm publish --workspace "$pkg_dir" --access public --registry https://registry.npmjs.org
               echo "  ✅ Published $PKG_NAME@$NEW_VERSION"
               PUBLISHED="$PUBLISHED $PKG_NAME@$NEW_VERSION"

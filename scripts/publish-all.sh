@@ -39,6 +39,7 @@ for pkg in "${PACKAGES[@]}"; do
   if npm view "${NAME}@${VERSION}" --registry https://registry.npmjs.org >/dev/null 2>&1; then
     echo "⚠️  $NAME@$VERSION already exists, skipping"
   else
+    npm run build --workspace "$pkg" --if-present
     echo "📦 Publishing $NAME@$VERSION..."
     npm publish --workspace "$pkg" --access public --otp="$OTP" 2>&1 | tail -1
     echo "✅ $NAME@$VERSION published"
