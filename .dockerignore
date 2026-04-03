@@ -1,0 +1,10 @@
+node_modules
+dist
+.git
+backup
+*.md
+.env
+data
+!data/dev-docs
+coverage
+.DS_Store

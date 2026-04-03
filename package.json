@@ -1,0 +1,53 @@
+{
+    "name": "xclaw",
+    "version": "2.0.0",
+    "private": true,
+    "description": "xClaw — Open-source AI Agent Platform with multi-agent orchestration, streaming, MCP, and visual workflow builder",
+    "workspaces": [
+        "packages/shared",
+        "packages/db",
+        "packages/core",
+        "packages/sandbox",
+        "packages/integrations",
+        "packages/domains",
+        "packages/ml",
+        "packages/skills",
+        "packages/skill-hub",
+        "packages/gateway",
+        "packages/channels/*",
+        "packages/cli",
+        "packages/server",
+        "packages/web",
+        "packages/chat-sdk",
+        "packages/doc-mcp",
+        "packages/zalo-miniapp",
+        "docs"
+    ],
+    "scripts": {
+        "dev": "concurrently -k \"npm run dev:server\" \"npm run dev:web\"",
+        "dev:server": "npm run build:server && concurrently -k \"npm run dev -w packages/shared\" \"npm run dev -w packages/db\" \"npm run dev -w packages/core\" \"npm run dev -w packages/integrations\" \"npm run dev -w packages/domains\" \"npm run dev -w packages/ml\" \"npm run dev -w packages/skills\" \"npm run dev -w packages/gateway\" \"npm run dev -w packages/channels/telegram\" \"npm run dev -w packages/channels/facebook\" \"npm run dev -w packages/server\"",
+        "dev:web": "npm run dev -w packages/web",
+        "dev:docs": "npm run dev -w docs",
+        "build": "npm run build -w packages/shared && npm run build -w packages/db && npm run build -w packages/core && npm run build -w packages/integrations && npm run build -w packages/domains && npm run build -w packages/ml && npm run build -w packages/skills && npm run build -w packages/skill-hub && npm run build -w packages/gateway && npm run build -w packages/server && npm run build -w packages/web && npm run build -w docs",
+        "build:docs": "npm run build -w docs",
+        "build:server": "npm run build -w packages/shared && npm run build -w packages/db && npm run build -w packages/core && npm run build -w packages/integrations && npm run build -w packages/domains && npm run build -w packages/ml && npm run build -w packages/skills && npm run build -w packages/gateway && npm run build -w packages/channels/telegram && npm run build -w packages/channels/facebook && npm run build -w packages/server",
+        "cli": "tsx packages/cli/src/index.ts",
+        "test": "vitest",
+        "lint": "eslint packages/*/src --ext .ts,.tsx",
+        "lock:sync": "npm install --package-lock-only",
+        "db:generate": "npm run generate -w packages/db",
+        "db:migrate": "npm run migrate -w packages/db",
+        "db:studio": "npm run studio -w packages/db"
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.0",
+        "typescript": "^5.8.0",
+        "vitest": "^3.0.0",
+        "eslint": "^9.0.0",
+        "tsx": "^4.19.0"
+    },
+    "engines": {
+        "node": ">=20.0.0",
+        "npm": ">=10.0.0"
+    }
+}

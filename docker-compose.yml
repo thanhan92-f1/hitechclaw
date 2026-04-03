@@ -1,0 +1,88 @@
+services:
+  # ─── PostgreSQL ──────────────────────────────────────────
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: xclaw
+      POSTGRES_PASSWORD: xclaw
+      POSTGRES_DB: xclaw
+    ports:
+      - "5456:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U xclaw"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ─── MongoDB (AI data: sessions, messages, memory) ──────
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ─── Redis ───────────────────────────────────────────────
+  redis:
+    image: redis:8-alpine
+    ports:
+      - "6386:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ─── xClaw Server ───────────────────────────────────────
+  xclaw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5001"
+    env_file:
+      - .env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5001
+      - DATABASE_URL=postgresql://xclaw:xclaw@postgres:5432/xclaw
+      - MONGODB_URL=mongodb://mongodb:27017/xclaw
+      - REDIS_URL=redis://redis:6379
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
+      - CORS_ORIGINS=http://localhost,http://localhost:3001,http://localhost:5002
+      - OPENSHELL_ENABLED=false
+      - CREDENTIAL_ENCRYPTION_KEY=${CREDENTIAL_ENCRYPTION_KEY:-xclaw-dev-credential-key-do-not-use-in-prod}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Disable IPv6 in container — Node.js fetch (undici) hangs on ENETUNREACH IPv6 in Docker
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ─── Web Frontend (Nginx) ─────────────────────────────
+  web:
+    build:
+      context: .
+      dockerfile: packages/web/Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      - xclaw
+
+volumes:
+  pgdata:
+  mongodata:

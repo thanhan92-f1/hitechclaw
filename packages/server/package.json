@@ -1,0 +1,33 @@
+{
+    "name": "@xclaw-ai/server",
+    "version": "2.0.0",
+    "private": true,
+    "description": "xClaw server entry point — bootstraps Gateway + Agent + Skills",
+    "type": "module",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc -b",
+        "dev": "tsx --watch src/index.ts",
+        "start": "node dist/index.js"
+    },
+    "dependencies": {
+        "@xclaw-ai/shared": "*",
+        "@xclaw-ai/core": "*",
+        "@xclaw-ai/db": "*",
+        "@xclaw-ai/gateway": "*",
+        "@xclaw-ai/integrations": "*",
+        "@xclaw-ai/domains": "*",
+        "@xclaw-ai/ml": "*",
+        "@xclaw-ai/sandbox": "*",
+        "@xclaw-ai/skills": "*",
+        "@xclaw-ai/channel-telegram": "*",
+        "@xclaw-ai/channel-slack": "*",
+        "@xclaw-ai/channel-facebook": "*",
+        "@xclaw-ai/channel-whatsapp": "*",
+        "@xclaw-ai/channel-zalo": "*",
+        "@xclaw-ai/channel-discord": "*",
+        "@xclaw-ai/channel-msteams": "*",
+        "@hono/node-server": "^1.14.0",
+        "dotenv": "^16.4.0"
+    }
+}

@@ -1,0 +1,155 @@
+---
+title: AI Providers
+description: xClaw supports 12 LLM providers — configure via environment variables or per-agent settings.
+---
+
+xClaw includes **12 LLM providers** via a pluggable adapter system. All adapters implement the `LLMAdapter` interface for consistent chat and streaming.
+
+## Supported Providers
+
+| Provider | Base URL | Default Model | Tool Calling |
+|----------|----------|---------------|-------------|
+| **OpenAI** | `api.openai.com` | `gpt-4o-mini` | ✅ |
+| **Anthropic** | `api.anthropic.com` | `claude-sonnet-4-20250514` | ✅ |
+| **Google** | `generativelanguage.googleapis.com` | `gemini-2.0-flash` | ✅ |
+| **Groq** | `api.groq.com` | `llama-3.3-70b-versatile` | ✅ |
+| **Mistral** | `api.mistral.ai` | `mistral-large-latest` | ✅ |
+| **DeepSeek** | `api.deepseek.com` | `deepseek-chat` | ✅ |
+| **xAI (Grok)** | `api.x.ai/v1` | `grok-2` | ✅ |
+| **OpenRouter** | `openrouter.ai/api/v1` | `llama-3.1-70b-instruct` | ✅ |
+| **Perplexity** | `api.perplexity.ai` | `llama-3.1-sonar-large-128k-online` | ❌ |
+| **Ollama** | `localhost:11434` | Auto-detected | ✅ |
+| **HuggingFace** | `api-inference.huggingface.co` | varies by model | ❌ |
+| **Custom** | user-defined | user-defined | depends |
+
+## Configuration
+
+### Environment Variables
+
+Set the default provider and API keys in `.env`:
+
+```bash
+LLM_PROVIDER=openai
+LLM_MODEL=gpt-4o
+LLM_TEMPERATURE=0.7
+LLM_MAX_TOKENS=4096
+
+# API Keys (set whichever provider(s) you use)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+DEEPSEEK_API_KEY=sk-...
+XAI_API_KEY=xai-...
+OPENROUTER_API_KEY=sk-or-...
+PERPLEXITY_API_KEY=pplx-...
+GOOGLE_API_KEY=...
+GROQ_API_KEY=gsk_...
+MISTRAL_API_KEY=...
+```
+
+### Per-Agent Configuration
+
+Each agent can override the tenant defaults with its own provider/model:
+
+1. Open **Agent Builder** → select or create an agent
+2. Go to the **Settings** tab
+3. Choose a **Provider** from the 12 available options (tenant default is marked ★)
+4. The **Model** field auto-fills with the provider's recommended default
+5. Adjust **Temperature** and **Max Tokens** as needed
+6. Save — this agent will always use its configured provider/model regardless of tenant defaults
+
+## OpenAI-Compatible Providers
+
+DeepSeek, xAI, OpenRouter, and Perplexity all use OpenAI-compatible APIs. They share the same adapter code with different `baseURL`:
+
+```typescript
+// DeepSeek
+new OpenAI({ apiKey: 'sk-...', baseURL: 'https://api.deepseek.com' });
+
+// xAI (Grok)
+new OpenAI({ apiKey: 'xai-...', baseURL: 'https://api.x.ai/v1' });
+
+// OpenRouter — gateway for 100+ models
+new OpenAI({ apiKey: 'sk-or-...', baseURL: 'https://openrouter.ai/api/v1' });
+
+// Perplexity — search-augmented AI
+new OpenAI({ apiKey: 'pplx-...', baseURL: 'https://api.perplexity.ai' });
+```
+
+## Local Models (Ollama)
+
+Run models locally with zero API cost:
+
+```bash
+# Install Ollama
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Pull a model
+ollama pull qwen2.5:14b
+
+# xClaw auto-detects at http://localhost:11434
+```
+
+Set `LLM_PROVIDER=ollama` and `LLM_MODEL=qwen2.5:14b` in your `.env`.
+
+## Vision Model Routing
+
+When image attachments are detected (e.g. a Telegram photo), xClaw **hard-switches** to a dedicated vision model instead of the default text model. The router tries providers in order and falls back automatically:
+
+```
+ollama-vision → gemini → openai → ollama
+```
+
+### Configuration
+
+```bash
+# Vision model (used only when images are attached)
+VISION_PROVIDER=ollama          # ollama | gemini | openai
+VISION_MODEL=llava:13b          # e.g. qwen2.5vl:7b, gemma3:12b, llava:34b
+
+# Default text model (used for text-only messages)
+LLM_PROVIDER=ollama
+LLM_MODEL=qwen2.5:14b
+```
+
+If `VISION_MODEL` is not set, `LLM_MODEL` is used for both — this only works if the model supports vision (e.g. `gemma3:12b`, `qwen2.5vl:7b`).
+
+### Pull a Vision Model (Ollama)
+
+```bash
+# Lightweight (7B)
+ollama pull qwen2.5vl:7b
+
+# Balanced (13B)
+ollama pull llava:13b
+
+# High quality (34B)
+ollama pull llava:34b
+```
+
+### How It Works
+
+The `chat()` call in the channel handler passes `ChatOptions.fallbackChain` when images are present:
+
+```typescript
+const llmOptions = hasImages
+  ? { fallbackChain: ['ollama-vision', 'gemini', 'openai', 'ollama'] }
+  : undefined;
+
+await agent.chat(sessionId, message, ragContext, imageDataUrls, undefined, llmOptions);
+```
+
+The `LLMRouter` registers the Ollama vision adapter under the key `'ollama-vision'` so it can be selected independently of the default `'ollama'` text adapter. Both can run simultaneously with different models.
+
+## Automatic Routing (LLMRouter)
+
+Beyond vision, `LLMRouter` supports task-complexity routing via `ChatOptions.taskComplexity`:
+
+| Value | Chain Order |
+|-------|------------|
+| `'fast'` | groq → ollama → openai → anthropic |
+| `'smart'` | anthropic → openai → mistral → groq |
+| `'cheap'` | ollama → deepseek → groq → mistral → openai |
+
+```typescript
+await agent.chat(sessionId, msg, rag, undefined, undefined, { taskComplexity: 'smart' });
+```

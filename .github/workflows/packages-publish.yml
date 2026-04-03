@@ -30,6 +30,7 @@ permissions:
   packages: write
 
 env:
+  NPM_TOKEN_SECRET_NAME: NPM_TOKEN
   # Build order respects dependency graph
   BUILD_ORDER: >-
     packages/shared
@@ -148,7 +149,7 @@ jobs:
       - name: Bump version & publish changed packages
         id: publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets['NPM_TOKEN'] }}
+          NODE_AUTH_TOKEN: ${{ secrets[env.NPM_TOKEN_SECRET_NAME] }}
         run: |
           CHANGED='${{ needs.detect-changes.outputs.changed }}'
           BUMP_TYPE="${{ steps.bump.outputs.type }}"
