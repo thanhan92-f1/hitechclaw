@@ -1,9 +1,9 @@
 ---
 title: AI Providers
-description: xClaw supports 12 LLM providers — configure via environment variables or per-agent settings.
+description: xCHiTechClawlaw supports 12 LLM providers — configure via environment variables or per-agent settings.
 ---
 
-xClaw includes **12 LLM providers** via a pluggable adapter system. All adapters implement the `LLMAdapter` interface for consistent chat and streaming.
+HiTechClaw includes **12 LLM providers** via a pluggable adapter system. All adapters implement the `LLMAdapter` interface for consistent chat and streaming.
 
 ## Supported Providers
 
@@ -86,14 +86,14 @@ curl -fsSL https://ollama.ai/install.sh | sh
 # Pull a model
 ollama pull qwen2.5:14b
 
-# xClaw auto-detects at http://localhost:11434
+# HiTechClaw auto-detects at http://localhost:11434
 ```
 
 Set `LLM_PROVIDER=ollama` and `LLM_MODEL=qwen2.5:14b` in your `.env`.
 
 ## Vision Model Routing
 
-When image attachments are detected (e.g. a Telegram photo), xClaw **hard-switches** to a dedicated vision model instead of the default text model. The router tries providers in order and falls back automatically:
+When image attachments are detected (e.g. a Telegram photo), HiTechClaw **hard-switches** to a dedicated vision model instead of the default text model. The router tries providers in order and falls back automatically:
 
 ```
 ollama-vision → gemini → openai → ollama

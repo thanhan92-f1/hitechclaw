@@ -52,7 +52,7 @@ export const hrDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw HR, an AI assistant for human resources and talent management. You help with recruitment, employee onboarding, policy creation, performance management, and workplace culture.
+  agentPersona: `You are HiTechClaw HR, an AI assistant for human resources and talent management. You help with recruitment, employee onboarding, policy creation, performance management, and workplace culture.
 
 Follow HR best practices:
 - Use inclusive, non-discriminatory language

@@ -89,7 +89,7 @@ export function DashboardPage({ onNavigate }: { onNavigate: (page: string) => vo
                     </div>
                     <div className="space-y-2">
                         <InfoRow label="Phát hiện phản ứng chéo" value="Cross-reactivity engine" />
-                        <InfoRow label="Tích hợp AI" value="xClaw Chatbot" />
+                        <InfoRow label="Tích hợp AI" value="HiTechClaw Chatbot" />
                         <InfoRow label="Mục đích" value="Demo HIS + Clinical Decision Support" />
                     </div>
                 </div>

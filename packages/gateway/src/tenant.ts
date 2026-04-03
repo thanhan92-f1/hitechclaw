@@ -1,8 +1,8 @@
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 import { HTTPException } from 'hono/http-exception';
-import type { TenantSandboxConfig } from '@xclaw-ai/shared';
-import { getDB, tenants, tenantSettings, users, eq, and } from '@xclaw-ai/db';
+import type { TenantSandboxConfig } from '@hitechclaw-ai/shared';
+import { getDB, tenants, tenantSettings, users, eq, and } from '@hitechclaw-ai/db';
 import { seedDefaultRoles, assignRoleToUser } from './rbac.js';
 
 // ─── Types ──────────────────────────────────────────────────
@@ -243,7 +243,7 @@ export function tenantMiddleware() {
         c.set('tenantSettings', {
           llmProvider: 'ollama', llmModel: 'qwen2.5:14b', llmApiKey: null,
           llmBaseUrl: null, llmTemperature: null, llmMaxTokens: null,
-          agentName: 'xClaw Assistant', systemPrompt: null,
+          agentName: 'HiTechClaw Assistant', systemPrompt: null,
           aiLanguage: 'auto', aiLanguageCustom: null,
           enableWebSearch: true, enableRag: true, enableWorkflows: true,
           enabledDomains: [], enabledIntegrations: [],

@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/core",
+    "name": "@hitechclaw-ai/core",
     "version": "2.2.0",
-    "description": "xClaw core engine — Agent, LLM router, memory, tools, graph, streaming, tracing",
+    "description": "HiTechClaw core engine — Agent, LLM router, memory, tools, graph, streaming, tracing",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -16,8 +16,8 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*",
-        "@xclaw-ai/db": "*",
+        "@hitechclaw-ai/shared": "*",
+        "@hitechclaw-ai/db": "*",
         "@langchain/core": "^0.3.0",
         "@langchain/langgraph": "^0.2.0",
         "openai": "^4.80.0",

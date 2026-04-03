@@ -53,7 +53,7 @@ export const vi: Translations = {
 
   // Dashboard
   'dashboard.title': 'Tổng quan',
-  'dashboard.subtitle': 'xClaw AI Agent Platform — Tổng quan hệ thống',
+  'dashboard.subtitle': 'HiTechClaw AI Agent Platform — Tổng quan hệ thống',
   'dashboard.status': 'Trạng thái',
   'dashboard.online': 'Trực tuyến',
   'dashboard.offline': 'Ngoại tuyến',
@@ -186,7 +186,7 @@ export const vi: Translations = {
   'settings.security.rateLimit': 'Giới hạn tần suất',
 
   // Setup Wizard
-  'setup.welcome': 'Chào mừng đến xClaw!',
+  'setup.welcome': 'Chào mừng đến HiTechClaw!',
   'setup.welcomeDesc': 'Hãy cấu hình nền tảng AI agent của bạn qua vài bước nhanh.',
   'setup.agentName': 'Tên Agent',
   'setup.language': 'Ngôn ngữ AI',

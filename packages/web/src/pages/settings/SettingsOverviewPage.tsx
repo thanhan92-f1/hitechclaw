@@ -48,7 +48,7 @@ export function SettingsOverviewPage() {
                     <InfoCell label={t('settings.overview.version')} value={health?.version ?? '—'} />
                     <InfoCell label={t('settings.overview.uptime')} value={health ? formatUptime(health.uptime) : '—'} />
                     <InfoCell label={t('settings.overview.lastCheck')} value={health ? new Date(health.timestamp).toLocaleString() : '—'} />
-                    <InfoCell label={t('settings.overview.platform')} value="xClaw v2" />
+                    <InfoCell label={t('settings.overview.platform')} value="HiTechClaw v2" />
                     <InfoCell label={t('settings.overview.runtime')} value="Node.js + Hono" />
                 </div>
             </Section>

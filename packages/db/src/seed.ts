@@ -92,7 +92,7 @@ const PLATFORM_TENANT = {
 
 const SUPER_ADMIN = {
   name: 'Super Admin',
-  email: 'superadmin@xclaw.io',
+  email: 'superadmin@hitechclaw.io',
   password: 'password123',
   role: 'super_admin' as const,
 };
@@ -100,15 +100,15 @@ const SUPER_ADMIN = {
 const DEFAULT_TENANT_ID = 'default';
 const DEFAULT_TENANT = {
   id: DEFAULT_TENANT_ID,
-  name: 'xClaw',
-  slug: 'xclaw',
+  name: 'HiTechClaw',
+  slug: 'hitechclaw',
   plan: 'pro' as const,
   status: 'active' as const,
 };
 
 const DEFAULT_ADMIN = {
   name: 'Admin',
-  email: 'admin@xclaw.io',
+  email: 'admin@hitechclaw.io',
   password: 'password123',
   role: 'owner' as const,
 };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Users, Plus, Search, Phone, MapPin, AlertTriangle, X, Shield, Bot, Sparkles, Loader2, FileText } from 'lucide-react';
-import { getPatients, getPatient, createPatient, addAllergy, deleteAllergy, getPrescriptions, getEncounters, loginXClaw, aiReadPatientRecord } from '../api';
+import { getPatients, getPatient, createPatient, addAllergy, deleteAllergy, getPrescriptions, getEncounters, loginHiTechClaw, aiReadPatientRecord } from '../api';
 import type { PatientContext } from '../App';
 
 interface Patient {
@@ -29,11 +29,11 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
     const [showCreate, setShowCreate] = useState(false);
     const [showAddAllergy, setShowAddAllergy] = useState(false);
 
-    // xClaw AI state
+    // HiTechClaw AI state
     const [aiLoading, setAiLoading] = useState(false);
     const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);
     const [showAiPanel, setShowAiPanel] = useState(false);
-    const [xclawToken, setXclawToken] = useState<string | null>(null);
+    const [hitechclawToken, setHitechclawToken] = useState<string | null>(null);
     const [aiQuestion, setAiQuestion] = useState('');
 
     const load = () => getPatients(search || undefined).then((d) => setPatients(d.patients));
@@ -67,12 +67,12 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
         setAiAnalysis(null);
         setShowAiPanel(true);
         try {
-            let token = xclawToken;
+            let token = hitechclawToken;
             if (!token) {
-                const auth = await loginXClaw('doctor@his.local', 'doctor123');
+                const auth = await loginHiTechClaw('doctor@his.local', 'doctor123');
                 if ('error' in auth) throw new Error(auth.error);
                 token = auth.token;
-                setXclawToken(token);
+                setHitechclawToken(token);
             }
             // Gather full patient data
             const [rxData, encounterData] = await Promise.all([
@@ -102,7 +102,7 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
             const res = await aiReadPatientRecord(token!, patientData, question || undefined);
             setAiAnalysis(res.content || 'Không nhận được phản hồi từ AI.');
         } catch (err: unknown) {
-            const msg = err instanceof Error ? err.message : 'Lỗi kết nối xClaw';
+            const msg = err instanceof Error ? err.message : 'Lỗi kết nối HiTechClaw';
             setAiAnalysis(`❌ ${msg}`);
         } finally {
             setAiLoading(false);
@@ -274,12 +274,12 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
                             )}
                         </div>
 
-                        {/* xClaw AI — Đọc bệnh án */}
+                        {/* HiTechClaw AI — Đọc bệnh án */}
                         <div className="rounded-xl border p-5" style={{ borderColor: '#8b5cf6', background: 'linear-gradient(135deg, #f5f3ff, #ede9fe)' }}>
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2">
                                     <Bot size={18} style={{ color: '#7c3aed' }} />
-                                    <h3 className="text-sm font-semibold" style={{ color: '#7c3aed' }}>xClaw AI — Đọc bệnh án</h3>
+                                    <h3 className="text-sm font-semibold" style={{ color: '#7c3aed' }}>HiTechClaw AI — Đọc bệnh án</h3>
                                     <span className="text-[9px] px-1.5 py-0.5 rounded-full font-semibold text-white" style={{ background: 'linear-gradient(135deg, #7c3aed, #2563eb)' }}>AI</span>
                                 </div>
                                 <button
@@ -296,7 +296,7 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
                                 </button>
                             </div>
                             <p className="text-[10px] mb-3" style={{ color: '#6b7280' }}>
-                                Gửi toàn bộ hồ sơ bệnh nhân (dị ứng, đơn thuốc, lượt khám) đến xClaw AI để tổng hợp và phân tích.
+                                Gửi toàn bộ hồ sơ bệnh nhân (dị ứng, đơn thuốc, lượt khám) đến HiTechClaw AI để tổng hợp và phân tích.
                             </p>
 
                             {/* Custom question input */}
@@ -331,7 +331,7 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
                                     {aiLoading ? (
                                         <div className="flex items-center gap-2 py-6 justify-center">
                                             <Loader2 size={16} className="animate-spin" style={{ color: '#7c3aed' }} />
-                                            <span className="text-xs" style={{ color: '#7c3aed' }}>xClaw AI đang đọc hồ sơ bệnh nhân...</span>
+                                            <span className="text-xs" style={{ color: '#7c3aed' }}>HiTechClaw AI đang đọc hồ sơ bệnh nhân...</span>
                                         </div>
                                     ) : aiAnalysis ? (
                                         <div className="text-xs leading-relaxed whitespace-pre-wrap" style={{ color: 'var(--his-fg)' }}>

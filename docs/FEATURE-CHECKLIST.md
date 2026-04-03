@@ -1,4 +1,4 @@
-# xClaw --- Feature Development Checklist
+# HiTechClaw --- Feature Development Checklist
 
 > Master checklist for platform optimization and feature development.
 > Generated from project audit + industry research (2026).
@@ -7,13 +7,13 @@
 
 ## ✅ Recently Completed (This Session)
 
--   [x] **Multi-agent hierarchy (Google ADK-inspired)** --- `AgentHierarchy` class with parent/child relationships and `transfer_to_agent` delegation, `SequentialWorkflowAgent`, `ParallelWorkflowAgent`, `LoopWorkflowAgent`, `createWorkflowAgent()` factory in `@xclaw-ai/core`
+-   [x] **Multi-agent hierarchy (Google ADK-inspired)** --- `AgentHierarchy` class with parent/child relationships and `transfer_to_agent` delegation, `SequentialWorkflowAgent`, `ParallelWorkflowAgent`, `LoopWorkflowAgent`, `createWorkflowAgent()` factory in `@hitechclaw-ai/core`
 
 -   [x] **A2A Protocol** --- `A2AServer`, `RemoteA2AAgent`, `A2ARegistry` for cross-service agent-to-agent communication in `packages/core/src/a2a/`
 
 -   [x] **transfer_to_agent tool** --- LLM-driven agent delegation: injected into agent tool set when `allowTransfer=true`, orchestrator detects and routes in `Agent.chat()` / `chatStream()`
 
--   [x] **Multi-agent types** --- `SubAgentRef`, `WorkflowAgentType`, `WorkflowAgentConfig`, `WorkflowAgentResult`, `AgentTransferRequest`, `A2AAgentCard`, `A2ACapability`, `A2ATask`, `A2ATaskResult`, `A2AArtifact` added to `@xclaw-ai/shared`; `AgentConfig` extended with `subAgents` + `allowTransfer`
+-   [x] **Multi-agent types** --- `SubAgentRef`, `WorkflowAgentType`, `WorkflowAgentConfig`, `WorkflowAgentResult`, `AgentTransferRequest`, `A2AAgentCard`, `A2ACapability`, `A2ATask`, `A2ATaskResult`, `A2AArtifact` added to `@hitechclaw-ai/shared`; `AgentConfig` extended with `subAgents` + `allowTransfer`
 
 -   [x] **Agent Builder: Provider selector** --- 12-provider dropdown (`openai`, `anthropic`, `ollama`, `google`, `groq`, `mistral`, `deepseek`, `xai`, `openrouter`, `perplexity`, `huggingface`, `custom`) with auto-default model per provider, **★ Tenant Default** badge, non-tenant provider warning
 
@@ -232,7 +232,7 @@
 
 ### 15. Plugin Ecosystem
 
--   [x] Plugin CLI (`xclaw plugin create`, `xclaw plugin publish`) --- `cli/src/commands/plugin.ts` (create, validate, pack)
+-   [x] Plugin CLI (`hitechclaw plugin create`, `hitechclaw plugin publish`) --- `cli/src/commands/plugin.ts` (create, validate, pack)
 -   [ ] Plugin versioning and dependency resolution
 -   [x] Plugin marketplace (integrated with Skill Hub) --- Existing `marketplace.ts` routes
 -   [ ] Plugin sandbox (isolated execution environment)
@@ -241,7 +241,7 @@
 ### 16. Embedding / Widget
 
 -   [x] EmbedChatPage exists (token-based auth)
--   [x] Embeddable widget script (`<script src="xclaw-widget.js">`) --- `xclaw-widget.js` self-contained IIFE
+-   [x] Embeddable widget script (`<script src="hitechclaw-widget.js">`) --- `hitechclaw-widget.js` self-contained IIFE
 -   [x] Widget customization (position, theme, initial message) --- data attributes: position, theme, title, primary-color, initial-message
 -   [x] Widget analytics (conversion tracking) --- `trackEvent()` in widget (loaded/opened/closed/message_sent/response_received), `POST/GET /api/widget/analytics` backend
 

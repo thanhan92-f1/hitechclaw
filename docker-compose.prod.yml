@@ -1,5 +1,5 @@
 # ============================================================
-# xClaw Production Docker Compose
+# HiTechClaw Production Docker Compose
 # Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 # ============================================================
 
@@ -51,17 +51,17 @@ services:
           memory: 512M
           cpus: "0.5"
 
-  # ─── xClaw Server ────────────────────────────────────
-  xclaw:
-    image: ${XCLAW_SERVER_IMAGE:-ghcr.io/xdev-asia/xclaw-server:latest}
+  # ─── HiTechClaw Server ────────────────────────────────────
+  hitechclaw:
+    image: ${HITECHCLAW_SERVER_IMAGE:-ghcr.io/xdev-asia/hitechclaw-server:latest}
     build: !reset null
     restart: unless-stopped
     environment:
       - NODE_ENV=production
       - HOST=0.0.0.0
       - PORT=5001
-      - DATABASE_URL=postgresql://xclaw:${PG_PASSWORD}@postgres:5432/xclaw
-      - MONGODB_URL=mongodb://mongodb:27017/xclaw
+      - DATABASE_URL=postgresql://hitechclaw:${PG_PASSWORD}@postgres:5432/hitechclaw
+      - MONGODB_URL=mongodb://mongodb:27017/hitechclaw
       - REDIS_URL=redis://redis:6379
       - CORS_ORIGINS=http://localhost:3101,http://127.0.0.1:3101,http://0.0.0.0:3101
     ports: !override
@@ -79,7 +79,7 @@ services:
 
   # ─── Web Frontend ──────────────────────────────────────
   web:
-    image: ${XCLAW_WEB_IMAGE:-ghcr.io/xdev-asia/xclaw-web:latest}
+    image: ${HITECHCLAW_WEB_IMAGE:-ghcr.io/xdev-asia/hitechclaw-web:latest}
     build: !reset null
     restart: unless-stopped
     ports: !override

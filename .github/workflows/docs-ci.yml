@@ -36,4 +36,5 @@ jobs:
       - name: Build docs site
         run: npm run build:docs
         env:
-          NEXT_PUBLIC_DOCS_URL: https://xclaw.xdev.asia
+          NEXT_PUBLIC_DOCS_URL: https://hitechclaw.com
+

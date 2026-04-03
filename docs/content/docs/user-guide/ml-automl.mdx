@@ -138,7 +138,7 @@ View and manage all trained models.
 
 ## Reinforcement Learning — Bandit Skill Selection
 
-xClaw includes a **Multi-Armed Bandit** system that uses reinforcement learning to automatically select the best skill/tool for each user query. Instead of static rule-based selection, the agent learns over time which skills produce better results.
+HiTechClaw includes a **Multi-Armed Bandit** system that uses reinforcement learning to automatically select the best skill/tool for each user query. Instead of static rule-based selection, the agent learns over time which skills produce better results.
 
 ### How It Works
 
@@ -165,8 +165,8 @@ Each skill is treated as an "arm" in a multi-armed bandit problem. When a skill 
 ### Usage Example
 
 ```typescript
-import { SkillManager } from '@xclaw-ai/core';
-import { BanditSelector } from '@xclaw-ai/ml';
+import { SkillManager } from '@hitechclaw-ai/core';
+import { BanditSelector } from '@hitechclaw-ai/ml';
 
 // Create a bandit with UCB1 strategy
 const bandit = new BanditSelector('tenant-123', { strategy: 'ucb1' });

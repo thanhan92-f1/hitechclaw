@@ -1,33 +1,33 @@
 // ============================================================
-// @xclaw-ai/chat-sdk/mcp — MCP Server for xClaw Chat SDK
+// @hitechclaw-ai/chat-sdk/mcp — MCP Server for HiTechClaw Chat SDK
 // ============================================================
 //
-// Exposes xClaw Chat SDK as MCP tools so any AI agent (Claude,
-// Copilot, etc.) can interact with xClaw programmatically.
+// Exposes HiTechClaw Chat SDK as MCP tools so any AI agent (Claude,
+// Copilot, etc.) can interact with HiTechClaw programmatically.
 //
 // Usage:
-//   XCLAW_BASE_URL=https://api.xclaw.io XCLAW_TOKEN=... npx @xclaw-ai/chat-sdk mcp
+//   HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx @hitechclaw-ai/chat-sdk mcp
 //
 //   Or in MCP config:
-//   { "command": "npx", "args": ["@xclaw-ai/chat-sdk", "mcp"], "env": { ... } }
+//   { "command": "npx", "args": ["@hitechclaw-ai/chat-sdk", "mcp"], "env": { ... } }
 //
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
-import { XClawClient } from '../client.js';
+import { HiTechClawClient } from '../client.js';
 import type { StreamEvent } from '../types.js';
 
-export function createMcpServer(client: XClawClient): McpServer {
+export function createMcpServer(client: HiTechClawClient): McpServer {
     const server = new McpServer({
-        name: 'xclaw-chat-sdk',
+        name: 'hitechclaw-chat-sdk',
         version: '1.0.0',
     });
 
     // ─── Tool: chat ─────────────────────────────────────────
     server.tool(
-        'xclaw_chat',
-        'Send a message to xClaw AI agent and get a response. Supports domain specialization and web search.',
+        'hitechclaw_chat',
+        'Send a message to HiTechClaw AI agent and get a response. Supports domain specialization and web search.',
         {
             message: z.string().describe('The message to send to the AI agent'),
             sessionId: z.string().optional().describe('Session ID for conversation continuity. Omit to auto-generate.'),
@@ -53,7 +53,7 @@ export function createMcpServer(client: XClawClient): McpServer {
 
     // ─── Tool: chat_stream ──────────────────────────────────
     server.tool(
-        'xclaw_chat_stream',
+        'hitechclaw_chat_stream',
         'Send a message with streaming response. Returns the complete response after streaming finishes.',
         {
             message: z.string().describe('The message to send'),
@@ -96,7 +96,7 @@ export function createMcpServer(client: XClawClient): McpServer {
 
     // ─── Tool: list_sessions ────────────────────────────────
     server.tool(
-        'xclaw_list_sessions',
+        'hitechclaw_list_sessions',
         'List all chat sessions for the authenticated user.',
         {},
         async () => {
@@ -112,7 +112,7 @@ export function createMcpServer(client: XClawClient): McpServer {
 
     // ─── Tool: get_messages ─────────────────────────────────
     server.tool(
-        'xclaw_get_messages',
+        'hitechclaw_get_messages',
         'Get all messages in a specific chat session.',
         {
             sessionId: z.string().describe('The session ID to retrieve messages for'),
@@ -130,7 +130,7 @@ export function createMcpServer(client: XClawClient): McpServer {
 
     // ─── Tool: delete_session ───────────────────────────────
     server.tool(
-        'xclaw_delete_session',
+        'hitechclaw_delete_session',
         'Delete a chat session and all its messages.',
         {
             sessionId: z.string().describe('The session ID to delete'),
@@ -148,7 +148,7 @@ export function createMcpServer(client: XClawClient): McpServer {
 
     // ─── Tool: feedback ─────────────────────────────────────
     server.tool(
-        'xclaw_feedback',
+        'hitechclaw_feedback',
         'Submit a correction/feedback for an AI response to improve future answers (self-learning).',
         {
             originalQuestion: z.string().describe('The original user question'),
@@ -169,8 +169,8 @@ export function createMcpServer(client: XClawClient): McpServer {
 
     // ─── Tool: login ────────────────────────────────────────
     server.tool(
-        'xclaw_login',
-        'Authenticate with xClaw server and get an access token.',
+        'hitechclaw_login',
+        'Authenticate with HiTechClaw server and get an access token.',
         {
             email: z.string().email().describe('User email'),
             password: z.string().describe('User password'),
@@ -193,10 +193,10 @@ export function createMcpServer(client: XClawClient): McpServer {
     // ─── Resource: SDK Documentation ────────────────────────
     server.resource(
         'sdk-docs',
-        'xclaw://docs/chat-sdk',
+        'hitechclaw://docs/chat-sdk',
         async () => ({
             contents: [{
-                uri: 'xclaw://docs/chat-sdk',
+                uri: 'hitechclaw://docs/chat-sdk',
                 mimeType: 'text/markdown',
                 text: SDK_DOCS,
             }],
@@ -206,37 +206,37 @@ export function createMcpServer(client: XClawClient): McpServer {
     return server;
 }
 
-const SDK_DOCS = `# @xclaw-ai/chat-sdk — API Reference
+const SDK_DOCS = `# @hitechclaw-ai/chat-sdk — API Reference
 
 ## Available MCP Tools
 
-### xclaw_chat
+### hitechclaw_chat
 Send a message and get a complete response.
 - \`message\` (required): The user message
 - \`sessionId\` (optional): For conversation continuity
 - \`domainId\` (optional): Domain specialization (healthcare, developer, finance, etc.)
 - \`webSearch\` (optional): Enable real-time web search
 
-### xclaw_chat_stream
+### hitechclaw_chat_stream
 Send a message with streaming. Returns complete response after stream finishes.
-Same parameters as xclaw_chat.
+Same parameters as hitechclaw_chat.
 
-### xclaw_list_sessions
+### hitechclaw_list_sessions
 List all chat sessions. No parameters.
 
-### xclaw_get_messages
+### hitechclaw_get_messages
 Get messages in a session.
 - \`sessionId\` (required): Session ID
 
-### xclaw_delete_session
+### hitechclaw_delete_session
 Delete a session.
 - \`sessionId\` (required): Session ID
 
-### xclaw_feedback
+### hitechclaw_feedback
 Submit correction feedback for AI self-learning.
 - \`messageId\`, \`correction\`, \`sessionId\` (all required)
 
-### xclaw_login
+### hitechclaw_login
 Authenticate with credentials.
 - \`email\`, \`password\` (required)
 

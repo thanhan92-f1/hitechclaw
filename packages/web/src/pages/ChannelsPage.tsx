@@ -352,7 +352,7 @@ export function ChannelsPage() {
                                                                 const linked = agentConfigs.find(a => a._id === ch.agentConfigId);
                                                                 return linked ? (
                                                                     <p className="text-xs mt-0.5 flex items-center gap-1" style={{ color: 'var(--color-primary-light)' }}>
-                                                                        <img src="/logo.png" alt="xClaw" className="w-2.5 h-2.5" /> {linked.name}
+                                                                        <img src="/logo.png" alt="HiTechClaw" className="w-2.5 h-2.5" /> {linked.name}
                                                                     </p>
                                                                 ) : null;
                                                             })()}
@@ -593,7 +593,7 @@ export function ChannelsPage() {
                                 {agentConfigs.length > 0 && (
                                     <div>
                                         <label className="block text-xs font-medium mb-1" style={{ color: 'var(--color-fg-muted)' }}>
-                                            <img src="/logo.png" alt="xClaw" className="w-3 h-3 inline mr-1" />
+                                            <img src="/logo.png" alt="HiTechClaw" className="w-3 h-3 inline mr-1" />
                                             Agent Config
                                         </label>
                                         <select
@@ -713,7 +713,7 @@ export function ChannelsPage() {
                                     {agentConfigs.length > 0 && (
                                         <div>
                                             <label className="block text-xs font-medium mb-1" style={{ color: 'var(--color-fg-muted)' }}>
-                                                <img src="/logo.png" alt="xClaw" className="w-3 h-3 inline mr-1" />
+                                                <img src="/logo.png" alt="HiTechClaw" className="w-3 h-3 inline mr-1" />
                                                 Agent Config
                                             </label>
                                             <select

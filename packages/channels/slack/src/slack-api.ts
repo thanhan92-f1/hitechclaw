@@ -1,5 +1,5 @@
 /**
- * Slack Web API wrapper — minimal implementation for xClaw channel plugin.
+ * Slack Web API wrapper — minimal implementation for HiTechClaw channel plugin.
  * Uses plain HTTP calls to avoid heavy SDK dependencies.
  */
 

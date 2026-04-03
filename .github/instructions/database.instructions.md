@@ -1,5 +1,5 @@
 ---
-description: "Use when working with database schema, migrations, seed data, MongoDB collections, or Drizzle ORM queries in xClaw"
+description: "Use when working with database schema, migrations, seed data, MongoDB collections, or Drizzle ORM queries in HiTechClaw"
 applyTo: "packages/db/**"
 ---
 # Database Instructions
@@ -30,7 +30,7 @@ applyTo: "packages/db/**"
 
 - Seed logic in `packages/db/src/seed.ts`
 - Must be **idempotent**: always check existence before inserting
-- Default credentials: `admin@xclaw.io` / `password123`
+- Default credentials: `admin@hitechclaw.io` / `password123`
 - Passwords hashed with PBKDF2 (via `packages/gateway/src/auth.ts`)
 
 ## Adding New Tables

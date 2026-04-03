@@ -13,7 +13,7 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | null>(null);
 
-const STORAGE_KEY = 'xclaw-locale';
+const STORAGE_KEY = 'hitechclaw-locale';
 
 function getInitialLocale(): Locale {
   try {

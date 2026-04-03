@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { memoryEntriesCollection } from '@xclaw-ai/db';
+import { memoryEntriesCollection } from '@hitechclaw-ai/db';
 
 /**
  * Persistent Memory — Cross-session user preferences, facts, and learned context.
@@ -49,7 +49,7 @@ export class PersistentMemory {
 
   // ─── Helpers ───────────────────────────────────────────────────
 
-  private toEntry(doc: import('@xclaw-ai/db').MongoMemoryEntry): PersistentEntry {
+  private toEntry(doc: import('@hitechclaw-ai/db').MongoMemoryEntry): PersistentEntry {
     return {
       id: doc._id,
       userId: doc.userId ?? '',

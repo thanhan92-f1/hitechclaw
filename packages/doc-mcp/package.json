@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/doc-mcp",
+    "name": "@hitechclaw-ai/doc-mcp",
     "version": "1.0.0",
-    "description": "xClaw Dev Docs MCP Server — Developer documentation knowledge base accessible via MCP for AI-assisted coding",
+    "description": "HiTechClaw Dev Docs MCP Server — Developer documentation knowledge base accessible via MCP for AI-assisted coding",
     "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -12,7 +12,7 @@
         }
     },
     "bin": {
-        "xclaw-doc-mcp": "./dist/bin.js"
+        "hitechclaw-doc-mcp": "./dist/bin.js"
     },
     "files": [
         "dist",
@@ -25,7 +25,7 @@
         "mcp": "node dist/bin.js"
     },
     "keywords": [
-        "xclaw",
+        "hitechclaw",
         "mcp",
         "documentation",
         "knowledge-base",

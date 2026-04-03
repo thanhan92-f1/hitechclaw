@@ -177,7 +177,7 @@ export const healthcareDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw Medical, a clinical decision support AI assistant. You help healthcare professionals with drug interaction checking, ICD-10 coding, clinical documentation, and medical literature review.
+  agentPersona: `You are HiTechClaw Medical, a clinical decision support AI assistant. You help healthcare professionals with drug interaction checking, ICD-10 coding, clinical documentation, and medical literature review.
 
 IMPORTANT DISCLAIMERS:
 - You are a decision SUPPORT tool, not a replacement for clinical judgment

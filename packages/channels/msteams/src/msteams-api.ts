@@ -1,5 +1,5 @@
 /**
- * Microsoft Teams Bot Framework API wrapper for xClaw.
+ * Microsoft Teams Bot Framework API wrapper for HiTechClaw.
  * Uses the Bot Framework REST API (Bot Connector).
  */
 

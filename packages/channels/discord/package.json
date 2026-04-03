@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/channel-discord",
+    "name": "@hitechclaw-ai/channel-discord",
     "version": "2.0.1",
-    "description": "xClaw Discord channel plugin",
+    "description": "HiTechClaw Discord channel plugin",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@xclaw-ai/shared": "*",
+        "@hitechclaw-ai/shared": "*",
         "ws": "^8.18.0"
     },
     "devDependencies": {

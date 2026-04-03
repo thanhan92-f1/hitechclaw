@@ -11,7 +11,7 @@ export function SettingsSecurityPage() {
                 <div className="grid grid-cols-2 gap-2">
                     <ConfigCard label={t('settings.security.method')} value="JWT" unit="" desc="JSON Web Token HS256" />
                     <ConfigCard label={t('settings.security.tokenExpiry')} value="24h" unit="" desc="Access token lifetime" />
-                    <ConfigCard label={t('settings.security.issuer')} value="xClaw" unit="" desc="Token issuer claim" />
+                    <ConfigCard label={t('settings.security.issuer')} value="HiTechClaw" unit="" desc="Token issuer claim" />
                     <ConfigCard label={t('settings.security.algorithm')} value="HS256" unit="" desc="HMAC SHA-256 signing" />
                 </div>
             </Section>

@@ -160,11 +160,11 @@ export function Layout() {
                         <>
                             <img
                                 src="/logo.png"
-                                alt="xClaw"
+                                alt="HiTechClaw"
                                 className="w-8 h-8 rounded-lg"
                                 style={{ boxShadow: '0 2px 10px rgba(99,102,241,0.25)' }}
                             />
-                            <span className="text-lg font-bold tracking-tight" style={{ color: '#f4f4f5' }}>xClaw</span>
+                            <span className="text-lg font-bold tracking-tight" style={{ color: '#f4f4f5' }}>HiTechClaw</span>
                             <span
                                 className="text-[10px] px-1.5 py-0.5 rounded-full font-semibold"
                                 style={{ background: 'rgba(99,102,241,0.12)', color: '#818cf8' }}

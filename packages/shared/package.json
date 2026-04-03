@@ -1,7 +1,7 @@
 {
-    "name": "@xclaw-ai/shared",
+    "name": "@hitechclaw-ai/shared",
     "version": "2.1.0",
-    "description": "xClaw shared types, schemas, and constants",
+    "description": "HiTechClaw shared types, schemas, and constants",
     "type": "module",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

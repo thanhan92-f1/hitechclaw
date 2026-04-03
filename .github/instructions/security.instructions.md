@@ -1,5 +1,5 @@
 ---
-description: "Use when working with security scanning, vulnerability management, secret detection, AI guardrails, container hardening, or security incident response in xClaw"
+description: "Use when working with security scanning, vulnerability management, secret detection, AI guardrails, container hardening, or security incident response in HiTechClaw"
 applyTo: ["packages/core/src/guardrails/**", "deploy/scripts/security-*.sh", "deploy/scripts/secret-*.sh", "deploy/runbooks/security-*.md", ".trivyignore", ".gitleaksignore"]
 ---
 # Security & DevSecOps Instructions
@@ -55,7 +55,7 @@ Located at `deploy/runbooks/security-incident.md`. Follow for:
 
 ## Container Security
 
-- Server runs as `xclaw` user (UID 1001) — never root
+- Server runs as `hitechclaw` user (UID 1001) — never root
 - Trivy scans in CI block CRITICAL vulnerabilities
 - Production: no database ports exposed, resource limits enforced
 - All images multi-stage built (minimal attack surface)

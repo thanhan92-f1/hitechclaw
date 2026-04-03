@@ -1,6 +1,6 @@
 ---
 title: Slack
-description: Connect xClaw to your Slack workspace for AI-powered team assistance.
+description: Connect HiTechClaw to your Slack workspace for AI-powered team assistance.
 ---
 
 ## Prerequisites
@@ -13,7 +13,7 @@ description: Connect xClaw to your Slack workspace for AI-powered team assistanc
 ### 1. Create a Slack App
 
 1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App**
-2. Choose **From scratch**, name it (e.g., "xClaw AI"), select your workspace
+2. Choose **From scratch**, name it (e.g., "HiTechClaw AI"), select your workspace
 3. Navigate to **OAuth & Permissions** → add these Bot Token Scopes:
    - `chat:write` — Send messages
    - `channels:history` — Read channel messages
@@ -25,10 +25,10 @@ description: Connect xClaw to your Slack workspace for AI-powered team assistanc
 ### 2. Enable Events (recommended)
 
 1. Go to **Event Subscriptions** → enable
-2. Set **Request URL** to your xClaw webhook: `https://your-domain/api/channels/slack/events`
+2. Set **Request URL** to your HiTechClaw webhook: `https://your-domain/api/channels/slack/events`
 3. Subscribe to bot events: `message.channels`, `message.im`, `app_mention`
 
-### 3. Configure in xClaw
+### 3. Configure in HiTechClaw
 
 1. Navigate to **Channels** → **Add Channel** → **Slack**
 2. Enter your **Bot Token** and **Signing Secret**

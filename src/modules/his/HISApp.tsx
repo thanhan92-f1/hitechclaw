@@ -12,7 +12,7 @@ import { EncounterPage } from './pages/EncounterPage.js';
 import { KnowledgePage } from './pages/KnowledgePage.js';
 import { UserManagementPage } from './pages/UserManagementPage.js';
 import { ReportsPage } from './pages/ReportsPage.js';
-import { XClawWidget } from './components/XClawWidget.js';
+import { HiTechClawWidget } from './components/HiTechClawWidget.js';
 import { hisLogin, hisLogout, hisGetMe, setAuthToken } from './api.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -286,7 +286,7 @@ export function HISApp() {
 
                 <div className="px-5 py-3 text-[10px]" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', color: 'rgba(148,163,184,0.6)' }}>
                     HL7 FHIR R5 Compliant<br />
-                    HIS Mini v1.0 — xClaw
+                    HIS Mini v1.0 — HiTechClaw
                 </div>
             </aside>
 
@@ -303,7 +303,7 @@ export function HISApp() {
                 {page === 'reports' && <ReportsPage />}
             </main>
 
-            <XClawWidget patientContext={currentPatient} />
+            <HiTechClawWidget patientContext={currentPatient} />
         </div>
     );
 }

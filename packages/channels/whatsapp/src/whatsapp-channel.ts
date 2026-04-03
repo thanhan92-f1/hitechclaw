@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@xclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
 import { WhatsAppApi } from './whatsapp-api.js';
 import type { WhatsAppWebhookPayload } from './whatsapp-api.js';
 
@@ -10,7 +10,7 @@ export interface WhatsAppChannelConfig {
 }
 
 /**
- * WhatsApp channel adapter for xClaw.
+ * WhatsApp channel adapter for HiTechClaw.
  *
  * Uses the official Meta WhatsApp Business Cloud API.
  * Messages are received via webhook (configured in the gateway)

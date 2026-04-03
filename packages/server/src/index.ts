@@ -1,5 +1,5 @@
 import { serve } from '@hono/node-server';
-import type { ChatOptions } from '@xclaw-ai/core';
+import type { ChatOptions } from '@hitechclaw-ai/core';
 import {
     Agent,
     AnthropicAdapter,
@@ -22,16 +22,16 @@ import {
     PluginManager,
     RagEngine,
     TaskManager,
-} from '@xclaw-ai/core';
-import type { MongoChannelConnection } from '@xclaw-ai/db';
-import { agentConfigsCollection, channelConnectionsCollection, connectMongo, estimateCost, getMongo, llmLogsCollection, messagesCollection, mongoMonitoringStore, runMigrations, sandboxAuditLogsCollection, seedInitialData, sessionsCollection } from '@xclaw-ai/db';
-import { allDomainPacks } from '@xclaw-ai/domains';
-import { AgentManager, createGateway, getTenantLanguageInstruction, startWorkflowScheduler, TenantService } from '@xclaw-ai/gateway';
-import { allIntegrations, IntegrationRegistry } from '@xclaw-ai/integrations';
-import { MLEngine } from '@xclaw-ai/ml';
-import { OCSFEventLogger, PolicyWatcher, SandboxManager, TenantSandboxManager } from '@xclaw-ai/sandbox';
-import type { AgentConfig, GatewayConfig } from '@xclaw-ai/shared';
-import { reportGenSkill, textToFhirSkill } from '@xclaw-ai/skills';
+} from '@hitechclaw-ai/core';
+import type { MongoChannelConnection } from '@hitechclaw-ai/db';
+import { agentConfigsCollection, channelConnectionsCollection, connectMongo, estimateCost, getMongo, llmLogsCollection, messagesCollection, mongoMonitoringStore, runMigrations, sandboxAuditLogsCollection, seedInitialData, sessionsCollection } from '@hitechclaw-ai/db';
+import { allDomainPacks } from '@hitechclaw-ai/domains';
+import { AgentManager, createGateway, getTenantLanguageInstruction, startWorkflowScheduler, TenantService } from '@hitechclaw-ai/gateway';
+import { allIntegrations, IntegrationRegistry } from '@hitechclaw-ai/integrations';
+import { MLEngine } from '@hitechclaw-ai/ml';
+import { OCSFEventLogger, PolicyWatcher, SandboxManager, TenantSandboxManager } from '@hitechclaw-ai/sandbox';
+import type { AgentConfig, GatewayConfig } from '@hitechclaw-ai/shared';
+import { reportGenSkill, textToFhirSkill } from '@hitechclaw-ai/skills';
 import dotenv from 'dotenv';
 import { ChannelManager } from './channel-manager.js';
 import { loadKnowledgePacks } from './knowledge-loader.js';
@@ -43,7 +43,7 @@ const {
   PORT = '5001',
   HOST = '0.0.0.0',
   CORS_ORIGINS = 'http://localhost:3000,http://localhost:3001,http://localhost:3002',
-  JWT_SECRET = 'xclaw-dev-secret-change-me',
+  JWT_SECRET = 'hitechclaw-dev-secret-change-me',
   LLM_PROVIDER = 'ollama',
   LLM_MODEL: LLM_MODEL_ENV,
   OPENAI_API_KEY = '',
@@ -52,7 +52,7 @@ const {
   HUGGINGFACE_API_KEY = '',
   DEEPSEEK_API_KEY = '',
   GROQ_API_KEY = '',
-  AGENT_NAME = 'xClaw Assistant',
+  AGENT_NAME = 'HiTechClaw Assistant',
   AGENT_SYSTEM_PROMPT = '',
   IMAGE_GEN_PROVIDER = 'placeholder',
   GEMINI_API_KEY = '',
@@ -82,7 +82,7 @@ const {
 const LLM_MODEL = LLM_MODEL_ENV || (LLM_PROVIDER === 'ollama' ? 'qwen2.5:14b' : 'gpt-4o-mini');
 
 // Vietnamese system prompt for doctor support
-const DEFAULT_SYSTEM_PROMPT = `You are xClaw, an open-source AI agent platform that adapts to any industry. You are highly capable, helpful, and concise.
+const DEFAULT_SYSTEM_PROMPT = `You are HiTechClaw, an open-source AI agent platform that adapts to any industry. You are highly capable, helpful, and concise.
 
 You can operate with different domain packs (healthcare, developer, finance, marketing, education, research, devops, legal, HR, sales, e-commerce) and integrate with external services (Gmail, GitHub, Slack, Notion, etc.).
 
@@ -122,7 +122,7 @@ function buildRoutingInstruction(opts: { hasImages: boolean; wantsWebSearch: boo
 }
 
 async function main() {
-  console.log('🐾 xClaw v2.1.0 — Open Platform Starting...');
+  console.log('🐾 HiTechClaw v2.1.0 — Open Platform Starting...');
 
   // Run PostgreSQL migrations (idempotent)
   try {
@@ -537,7 +537,7 @@ async function main() {
     imageGen,
   });
 
-  // Plugins are loaded from external submodule (xclaw-plugins)
+  // Plugins are loaded from external submodule (hitechclaw-plugins)
   console.log(`   Plugins:   ${pluginManager.listActive().length} loaded`);
 
   // ─── Shared message handler factory for all channel plugins ─────────────
@@ -547,7 +547,7 @@ async function main() {
   const makeChannelHandler = (
     platform: string,
     send: (channelId: string, content: string, replyTo?: string) => Promise<void>,
-  ) => async (incoming: { channelId: string; userId: string; content: string; attachments?: import('@xclaw-ai/shared').Attachment[]; metadata?: Record<string, unknown> }) => {
+  ) => async (incoming: { channelId: string; userId: string; content: string; attachments?: import('@hitechclaw-ai/shared').Attachment[]; metadata?: Record<string, unknown> }) => {
     const prefix = platform.substring(0, 3);
     const sessionId = `${prefix}-${incoming.channelId}-${incoming.userId}`;
     const debugKey = `${platform}-${incoming.channelId}-${incoming.userId}`;
@@ -819,7 +819,7 @@ async function main() {
   const approvalManager = new ApprovalManager();
   console.log('   Approvals:  HITL approval manager ready (5m expiry)');
 
-  // ─── Coordinator Agent (optional — enabled by XCLAW_COORDINATOR_MODE=1) ──
+  // ─── Coordinator Agent (optional — enabled by HITECHCLAW_COORDINATOR_MODE=1) ──
   let coordinatorAgent: CoordinatorAgent | undefined;
   let taskManager: TaskManager | undefined;
   if (isCoordinatorModeEnabled()) {
@@ -859,7 +859,7 @@ async function main() {
   serve(
     { fetch: app.fetch, hostname: gatewayConfig.host, port: gatewayConfig.port },
     (info) => {
-      console.log(`🚀 xClaw server running at http://${info.address}:${info.port}`);
+      console.log(`🚀 HiTechClaw server running at http://${info.address}:${info.port}`);
       console.log(`   Provider: ${LLM_PROVIDER} / Model: ${LLM_MODEL}`);
       console.log(`   Health:   http://${info.address}:${info.port}/health`);
       console.log(`   RAG:      ${OPENAI_API_KEY ? 'OpenAI embeddings' : 'Local embeddings (dev mode)'}`);
@@ -871,6 +871,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('❌ Failed to start xClaw:', err);
+  console.error('❌ Failed to start HiTechClaw:', err);
   process.exit(1);
 });

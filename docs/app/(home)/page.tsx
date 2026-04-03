@@ -113,7 +113,7 @@ export default function HomePage() {
             >
               <img
                 src="/logo.png"
-                alt="xClaw"
+                alt="HiTechClaw Logo"
                 width={88}
                 height={88}
                 style={{ borderRadius: 21, display: 'block' }}
@@ -126,7 +126,7 @@ export default function HomePage() {
             className="text-6xl md:text-8xl font-extrabold tracking-tighter mb-4 animate-fade-in-up delay-200"
             style={{ opacity: 0, letterSpacing: '-0.04em' }}
           >
-            <span className="text-gradient">xClaw</span>
+            <span className="text-gradient">HiTechClaw</span>
           </h1>
           <p className="text-xl md:text-2xl font-semibold text-fd-muted-foreground mb-3 animate-fade-in-up delay-300" style={{ opacity: 0 }}>
             AI Agent Platform
@@ -148,7 +148,7 @@ export default function HomePage() {
                 <code>
                   <span className="text-fd-muted-foreground">$</span>{' '}
                   <span className="text-emerald-400">git clone</span>{' '}
-                  <span className="text-white/90">https://github.com/xdev-asia/xClaw.git</span>
+                  <span className="text-white/90">https://github.com/thanhan92f-f1/hitechclaw.git</span>
                 </code>
               </div>
               <div>
@@ -181,7 +181,7 @@ export default function HomePage() {
               </svg>
             </Link>
             <Link
-              href="https://github.com/xdev-asia/xClaw"
+              href="https://github.com/thanhan92f-f1/hitechclaw"
               className="inline-flex items-center gap-2 px-9 py-4 text-base font-semibold text-fd-foreground transition-all hover:scale-[1.02] active:scale-[0.98]"
               style={{
                 background: 'var(--glass-bg)',
@@ -315,15 +315,15 @@ export default function HomePage() {
         <div className="section-divider mb-10" />
         <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-fd-muted-foreground">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="xClaw" width={24} height={24} className="rounded-md" />
+            <img src="/logo.png" alt="HiTechClaw Logo" width={24} height={24} className="rounded-md" />
             <span>
-              MIT © <a href="https://github.com/xdev-asia" className="hover:text-fd-foreground transition-colors">xDev Asia</a>
+              MIT © <a href="https://github.com/thanhan92f-f1/hitechclaw" className="hover:text-fd-foreground transition-colors">HiTechClaw</a>
             </span>
           </div>
           <p>
             Built with ❤️ by{' '}
-            <a href="https://xdev.asia" className="hover:text-fd-foreground transition-colors">
-              xDev.asia
+            <a href="https://hitechclaw.com" className="hover:text-fd-foreground transition-colors">
+              HiTechClaw
             </a>
           </p>
         </div>

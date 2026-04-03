@@ -1,6 +1,6 @@
 {
     "servers": {
-        "xclaw-dev-docs": {
+        "hitechclaw-dev-docs": {
             "type": "stdio",
             "command": "npx",
             "args": [

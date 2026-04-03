@@ -3,7 +3,7 @@ title: WebSocket API
 description: Real-time WebSocket events and client-server communication.
 ---
 
-xClaw uses WebSocket for real-time communication between the server and clients. The server bridges internal EventBus events to connected WebSocket clients.
+HiTechClaw uses WebSocket for real-time communication between the server and clients. The server bridges internal EventBus events to connected WebSocket clients.
 
 ## Connection
 
@@ -67,7 +67,7 @@ The response comes back as an `agent:response` event.
 const ws = new WebSocket('ws://localhost:18789/ws');
 
 ws.onopen = () => {
-  console.log('Connected to xClaw');
+  console.log('Connected to HiTechClaw');
   
   // Send a chat message
   ws.send(JSON.stringify({

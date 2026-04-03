@@ -4,13 +4,13 @@ import type {
     A2ATask,
     A2ATaskResult,
     ToolDefinition
-} from '@xclaw-ai/shared';
+} from '@hitechclaw-ai/shared';
 import { randomUUID } from 'node:crypto';
 import { Agent } from '../agent/agent.js';
 import { EventBus } from '../agent/event-bus.js';
 
 /**
- * A2AServer — Exposes an xClaw Agent as an A2A-compatible service.
+ * A2AServer — Exposes an HiTechClaw Agent as an A2A-compatible service.
  *
  * Wraps an Agent instance and provides a standardized interface
  * for remote agents to send tasks and receive results.

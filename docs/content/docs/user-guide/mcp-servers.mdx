@@ -7,7 +7,7 @@ description: Manage Model Context Protocol servers for extending agent capabilit
 
 ![MCP Servers](/screenshots/19-mcp.png)
 
-The MCP Servers page lets you manage Model Context Protocol (MCP) servers — external tool providers that extend xClaw agent capabilities with real-world integrations.
+The MCP Servers page lets you manage Model Context Protocol (MCP) servers — external tool providers that extend HiTechClaw agent capabilities with real-world integrations.
 
 ---
 
@@ -29,7 +29,7 @@ Two action buttons in the header:
 
 ## Pre-configured Servers
 
-xClaw ships with 5 built-in MCP servers:
+HiTechClaw ships with 5 built-in MCP servers:
 
 | Server | Description | Transport | Status |
 |--------|-------------|-----------|--------|
@@ -103,7 +103,7 @@ MCP servers are configured in the Docker environment:
 | `BRAVE_API_KEY` | Brave Search API key | `BSAxxxxxxxxxxxx` |
 | `MCP_TRANSPORT` | Default transport type | `stdio` |
 
-These are set in `docker-compose.yml` under the `xclaw` service environment section.
+These are set in `docker-compose.yml` under the `hitechclaw` service environment section.
 
 ---
 
@@ -112,5 +112,5 @@ These are set in `docker-compose.yml` under the `xclaw` service environment sect
 - Check the **Tools** tab to see which tools are available — agents can only use tools from connected servers
 - Use **Refresh** after adding a new server to update the tool list
 - The 39 built-in tools cover most common tasks — only add custom servers for specialized needs
-- MCP servers run as child processes — if xClaw restarts, servers auto-reconnect
+- MCP servers run as child processes — if HiTechClaw restarts, servers auto-reconnect
 - Monitor server status regularly; a red indicator means the server process crashed

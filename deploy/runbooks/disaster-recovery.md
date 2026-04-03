@@ -4,7 +4,7 @@
 
 | Priority | System | RPO | RTO |
 |----------|--------|-----|-----|
-| P0 | API Server (xclaw) | 0 (stateless) | 5 min |
+| P0 | API Server (hitechclaw) | 0 (stateless) | 5 min |
 | P0 | Web Frontend | 0 (stateless) | 5 min |
 | P1 | PostgreSQL | 24 hours | 30 min |
 | P1 | MongoDB | 24 hours | 30 min |
@@ -33,18 +33,18 @@ docker compose ps  # Check health status
 
 # 3. Restore PostgreSQL (if data lost)
 PGPASSWORD="$PG_PASSWORD" pg_restore \
-  -h localhost -p 5432 -U xclaw -d xclaw \
+  -h localhost -p 5432 -U hitechclaw -d hitechclaw \
   --clean --if-exists \
-  < backups/postgres/xclaw_pg_YYYYMMDD_HHMMSS.dump
+  < backups/postgres/hitechclaw_pg_YYYYMMDD_HHMMSS.dump
 
 # 4. Restore MongoDB (if data lost)
 mongorestore \
-  --uri="mongodb://localhost:27017/xclaw" \
+  --uri="mongodb://localhost:27017/hitechclaw" \
   --gzip --drop \
-  backups/mongodb/xclaw_mongo_YYYYMMDD_HHMMSS/
+  backups/mongodb/hitechclaw_mongo_YYYYMMDD_HHMMSS/
 
 # 5. Start application services
-docker compose up -d xclaw web
+docker compose up -d hitechclaw web
 
 # 6. Verify recovery
 ./deploy/scripts/health-check.sh
@@ -63,10 +63,10 @@ docker compose restart postgres
 
 # If data volume corrupted — restore from backup
 docker compose down postgres
-docker volume rm xclaw_pgdata
+docker volume rm hitechclaw_pgdata
 docker compose up -d postgres
 # Wait for healthy, then restore:
-PGPASSWORD="$PG_PASSWORD" pg_restore -h localhost -p 5432 -U xclaw -d xclaw \
+PGPASSWORD="$PG_PASSWORD" pg_restore -h localhost -p 5432 -U hitechclaw -d hitechclaw \
   < backups/postgres/latest.dump
 ```
 
@@ -78,19 +78,19 @@ docker compose restart mongodb
 
 # If data volume corrupted:
 docker compose down mongodb
-docker volume rm xclaw_mongodata
+docker volume rm hitechclaw_mongodata
 docker compose up -d mongodb
-mongorestore --uri="mongodb://localhost:27017/xclaw" --gzip --drop \
+mongorestore --uri="mongodb://localhost:27017/hitechclaw" --gzip --drop \
   backups/mongodb/latest/
 ```
 
 ## Recovery: Application Failure
 
-If the xclaw server keeps crashing:
+If the hitechclaw server keeps crashing:
 
 ```bash
 # 1. Check logs
-docker compose logs --tail 200 xclaw
+docker compose logs --tail 200 hitechclaw
 
 # 2. Common causes:
 #    - Database connection refused → restart DB services
@@ -98,7 +98,7 @@ docker compose logs --tail 200 xclaw
 #    - OOM killed → increase memory limit in docker-compose.prod.yml
 
 # 3. Rollback to previous version
-./deploy/scripts/rollback.sh xclaw <previous-tag>
+./deploy/scripts/rollback.sh hitechclaw <previous-tag>
 ```
 
 ## Data Integrity Checks
@@ -107,14 +107,14 @@ After any recovery, verify data:
 
 ```bash
 # PostgreSQL — check table counts
-docker compose exec postgres psql -U xclaw -d xclaw -c "
+docker compose exec postgres psql -U hitechclaw -d hitechclaw -c "
   SELECT 'tenants' as tbl, count(*) FROM tenants
   UNION ALL SELECT 'users', count(*) FROM users
   UNION ALL SELECT 'roles', count(*) FROM roles;
 "
 
 # MongoDB — check collection counts
-docker compose exec mongodb mongosh xclaw --eval "
+docker compose exec mongodb mongosh hitechclaw --eval "
   ['sessions', 'messages', 'memory_entries', 'agent_configs'].forEach(c => {
     print(c + ': ' + db[c].countDocuments());
   });

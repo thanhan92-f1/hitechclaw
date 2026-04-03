@@ -1,5 +1,5 @@
 // ============================================================
-// @xclaw-ai/chat-sdk — Types
+// @hitechclaw-ai/chat-sdk — Types
 // ============================================================
 
 // ─── Stream Events ──────────────────────────────────────────
@@ -61,8 +61,8 @@ export interface ChatSession {
 
 // ─── Config ─────────────────────────────────────────────────
 
-export interface XClawConfig {
-    /** xClaw server base URL (e.g., "https://api.xclaw.io") */
+export interface HiTechClawConfig {
+    /** HiTechClaw server base URL (e.g., "https://api.hitechclaw.io") */
     baseUrl: string;
     /** Authentication token (Bearer) */
     token?: string;

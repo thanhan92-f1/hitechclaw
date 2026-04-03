@@ -23,10 +23,10 @@ export default defineConfig({
         target: 'http://localhost:4000',
         changeOrigin: true,
       },
-      '/xclaw-api': {
+      '/hitechclaw-api': {
         target: 'http://localhost:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/xclaw-api/, ''),
+        rewrite: (path) => path.replace(/^\/hitechclaw-api/, ''),
       },
     },
   },

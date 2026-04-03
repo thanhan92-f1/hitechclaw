@@ -1,14 +1,14 @@
 ---
 title: DevOps Standard
-description: DevOps standards and operational guide for the xClaw AI Agent Platform
+description: DevOps standards and operational guide for the HiTechClaw AI Agent Platform
 ---
 
-# DevOps Standard — xClaw AI Agent Platform
+# DevOps Standard — HiTechClaw AI Agent Platform
 
 ## 1. Directory Structure
 
 ```
-xClaw/
+HiTechClaw/
 ├── docker-compose.yml              # Dev environment
 ├── docker-compose.prod.yml         # Production overrides
 ├── Dockerfile                      # Server (multi-stage, non-root)
@@ -68,7 +68,7 @@ xClaw/
 
 Triggers: push to `main`, tags `v*`
 
-- Builds `xclaw-server` and `xclaw-web` images
+- Builds `hitechclaw-server` and `hitechclaw-web` images
 - Pushes to GHCR with tags: `latest`, `v2.1.0`, `sha-abc1234`
 - Multi-platform: `linux/amd64` + `linux/arm64`
 - GHA build cache for fast rebuilds
@@ -139,7 +139,7 @@ Deep health response:
 
 ```bash
 # PostgreSQL
-pg_restore -h $PG_HOST -U xclaw -d xclaw < backup.dump
+pg_restore -h $PG_HOST -U hitechclaw -d hitechclaw < backup.dump
 
 # MongoDB
 mongorestore --uri="$MONGODB_URL" --gzip --drop dump/
@@ -148,7 +148,7 @@ mongorestore --uri="$MONGODB_URL" --gzip --drop dump/
 ## 6. Security
 
 ### Container Security
-- Non-root user `xclaw` (UID 1001) in server Dockerfile
+- Non-root user `hitechclaw` (UID 1001) in server Dockerfile
 - Trivy scan in CI (blocks on CRITICAL vulnerabilities)
 - `.dockerignore` excludes node_modules, .git, .env
 - Base images updated via Dependabot
@@ -199,7 +199,7 @@ Script pulls images → restarts services → health check
   ↓ (pass)
 Deploy complete ✅
   ↓ (fail)
-./deploy/scripts/rollback.sh xclaw <previous-tag>
+./deploy/scripts/rollback.sh hitechclaw <previous-tag>
 ```
 
 ## 9. Copilot Integration
@@ -254,7 +254,7 @@ All services log JSON to stdout. Docker captures and rotates (50MB × 5).
 {
   "timestamp": "2026-03-22T10:00:00.000Z",
   "level": "info",
-  "service": "xclaw-server",
+  "service": "hitechclaw-server",
   "traceId": "abc123",
   "tenantId": "tenant_01",
   "message": "Agent execution completed",
@@ -327,17 +327,17 @@ Zero-downtime rolling restart via Docker Compose. Suitable for most releases.
 
 ```bash
 # 1. Deploy to "green" stack alongside "blue"
-docker compose -f docker-compose.prod.yml -p xclaw-green up -d
+docker compose -f docker-compose.prod.yml -p hitechclaw-green up -d
 
 # 2. Smoke test green
-./deploy/scripts/health-check.sh https://green.xclaw.internal
+./deploy/scripts/health-check.sh https://green.hitechclaw.internal
 
 # 3. Switch Nginx upstream to green
 nginx -s reload
 
 # 4. Keep blue running for 30 min (fast rollback window)
 # 5. Stop blue after confirmation
-docker compose -p xclaw-blue down
+docker compose -p hitechclaw-blue down
 ```
 
 ### Canary Deploy (high-risk changes)
@@ -345,9 +345,9 @@ docker compose -p xclaw-blue down
 Route 10% of traffic to new version via Nginx:
 
 ```nginx
-upstream xclaw_backend {
-  server xclaw-blue:3000 weight=9;   # 90% existing
-  server xclaw-green:3000 weight=1;  # 10% canary
+upstream hitechclaw_backend {
+  server hitechclaw-blue:3000 weight=9;   # 90% existing
+  server hitechclaw-green:3000 weight=1;  # 10% canary
 }
 ```
 
@@ -395,7 +395,7 @@ NEW_SECRET=$(openssl rand -hex 32)
 # Edit deploy/env/.env.production
 
 # 3. Rolling restart (zero-downtime)
-docker compose -f docker-compose.prod.yml up -d --no-deps xclaw
+docker compose -f docker-compose.prod.yml up -d --no-deps hitechclaw
 
 # 4. Verify health
 ./deploy/scripts/health-check.sh
@@ -407,7 +407,7 @@ Certificates auto-renewed via Certbot (Let's Encrypt). Manual check:
 
 ```bash
 # Check expiry
-openssl x509 -enddate -noout -in /etc/letsencrypt/live/xclaw.io/cert.pem
+openssl x509 -enddate -noout -in /etc/letsencrypt/live/hitechclaw.io/cert.pem
 
 # Force renewal
 certbot renew --force-renewal
@@ -424,7 +424,7 @@ Alert 30 days before expiry.
 ```bash
 # PostgreSQL — restore to test container
 docker run --rm -e POSTGRES_PASSWORD=test postgres:18 \
-  pg_restore --verbose -d xclaw_test < latest.dump
+  pg_restore --verbose -d hitechclaw_test < latest.dump
 
 # MongoDB — restore to test container
 docker run --rm mongo:7 \

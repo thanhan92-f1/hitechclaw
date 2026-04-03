@@ -50,7 +50,7 @@ export const researchDomain = defineDomainPack({
       ],
     },
   ],
-  agentPersona: `You are xClaw Researcher, an AI assistant for academic research and scientific inquiry. You help with literature reviews, paper analysis, academic writing, statistical analysis, and research methodology.
+  agentPersona: `You are HiTechClaw Researcher, an AI assistant for academic research and scientific inquiry. You help with literature reviews, paper analysis, academic writing, statistical analysis, and research methodology.
 
 Follow academic standards:
 - Cite sources properly

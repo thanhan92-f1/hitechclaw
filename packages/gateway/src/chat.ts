@@ -1,10 +1,10 @@
-import type { AdditionalTool, GuardrailContext } from '@xclaw-ai/core';
-import { AgentFileMemory, GuardrailPipeline, LLMRateLimiter, OutputSanitizer, PromptInjectionDetector, streamToSSE, TopicScopeGuard } from '@xclaw-ai/core';
-import { and, eq, estimateCost, getDB, llmLogsCollection, messagesCollection, sessionsCollection, workflows, type MongoMessage, type MongoSession } from '@xclaw-ai/db';
-import type { DomainPack } from '@xclaw-ai/domains';
-import { tavilyWebSearch } from '@xclaw-ai/integrations';
-import type { StreamEvent, ToolDefinition, ToolParameter, Workflow } from '@xclaw-ai/shared';
-import { ChatRequestSchema } from '@xclaw-ai/shared';
+import type { AdditionalTool, GuardrailContext } from '@hitechclaw-ai/core';
+import { AgentFileMemory, GuardrailPipeline, LLMRateLimiter, OutputSanitizer, PromptInjectionDetector, streamToSSE, TopicScopeGuard } from '@hitechclaw-ai/core';
+import { and, eq, estimateCost, getDB, llmLogsCollection, messagesCollection, sessionsCollection, workflows, type MongoMessage, type MongoSession } from '@hitechclaw-ai/db';
+import type { DomainPack } from '@hitechclaw-ai/domains';
+import { tavilyWebSearch } from '@hitechclaw-ai/integrations';
+import type { StreamEvent, ToolDefinition, ToolParameter, Workflow } from '@hitechclaw-ai/shared';
+import { ChatRequestSchema } from '@hitechclaw-ai/shared';
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 import { getInstalledDomainIds } from './domains.js';
@@ -333,7 +333,7 @@ async function checkWorkflowTriggers(
 
 // Wraps agent stream with meta events for debug info
 async function* wrapStreamWithMeta(
-  agent: import('@xclaw-ai/core').Agent,
+  agent: import('@hitechclaw-ai/core').Agent,
   ctx: GatewayContext,
   sid: string,
   fullMessage: string,
@@ -343,7 +343,7 @@ async function* wrapStreamWithMeta(
   tenantSettings?: TenantSettingsInfo,
   logMeta?: { tenantId: string; userId: string },
   additionalTools?: AdditionalTool[],
-  guardCtx?: import('@xclaw-ai/core').GuardrailContext,
+  guardCtx?: import('@hitechclaw-ai/core').GuardrailContext,
 ): AsyncGenerator<StreamEvent> {
   const timing: Record<string, number> = {};
 

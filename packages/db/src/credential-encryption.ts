@@ -30,7 +30,7 @@ function getEncryptionKey(): string {
     if (process.env.NODE_ENV === 'production') {
       throw new Error('CREDENTIAL_ENCRYPTION_KEY must be set in production');
     }
-    return 'xclaw-dev-credential-key-do-not-use-in-prod';
+    return 'hitechclaw-dev-credential-key-do-not-use-in-prod';
   }
   return key;
 }

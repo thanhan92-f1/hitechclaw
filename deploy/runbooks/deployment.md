@@ -5,8 +5,8 @@
 | Environment | Branch | Compose | Domain |
 |-------------|--------|---------|--------|
 | Development | feature/* | `docker-compose.yml` | localhost |
-| Staging | develop | `docker-compose.yml` + `docker-compose.prod.yml` | staging.xclaw.xdev.asia |
-| Production | main (tags) | `docker-compose.yml` + `docker-compose.prod.yml` | xclaw.xdev.asia |
+| Staging | develop | `docker-compose.yml` + `docker-compose.prod.yml` | staging.hitechclaw.com |
+| Production | main (tags) | `docker-compose.yml` + `docker-compose.prod.yml` | hitechclaw.com |
 
 ## Quick Deploy
 
@@ -42,7 +42,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml pull
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
 # Or restart only a specific service
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps xclaw
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps hitechclaw
 ```
 
 ### 3. Post-deploy Verification
@@ -52,7 +52,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps 
 ./deploy/scripts/health-check.sh http://localhost:5001
 
 # Check logs for errors
-docker compose logs -f --tail 100 xclaw
+docker compose logs -f --tail 100 hitechclaw
 
 # Verify key endpoints
 curl -s http://localhost:5001/health/deep | python3 -m json.tool
@@ -69,10 +69,10 @@ curl -s http://localhost:5001/health/deep | python3 -m json.tool
 
 | Tag Pattern | Meaning | Example |
 |-------------|---------|---------|
-| `latest` | Latest main branch build | `ghcr.io/xdev-asia/xclaw-server:latest` |
-| `v*.*.*` | Release version | `ghcr.io/xdev-asia/xclaw-server:v2.1.0` |
-| `sha-*` | Specific commit | `ghcr.io/xdev-asia/xclaw-server:sha-abc1234` |
-| `develop` | Latest develop branch | `ghcr.io/xdev-asia/xclaw-server:develop` |
+| `latest` | Latest main branch build | `ghcr.io/thanhan92-f1/hitechclaw-server:latest` |
+| `v*.*.*` | Release version | `ghcr.io/thanhan92f-f1/hitechclaw-server:v2.1.0` |
+| `sha-*` | Specific commit | `ghcr.io/thanhan92-f1/hitechclaw-server:sha-abc1234` |
+| `develop` | Latest develop branch | `ghcr.io/thanhan92-f1/hitechclaw-server:develop` |
 
 ## Database Migrations
 
@@ -87,7 +87,7 @@ Migrations run automatically on server startup via `runMigrations()`. For produc
 
 | Service | Internal Port | External Port (dev) | External Port (prod) |
 |---------|--------------|--------------------|--------------------|
-| xclaw (API) | 5001 | 5001 | 5001 |
+| hitechclaw (API) | 5001 | 5001 | 5001 |
 | web (Nginx) | 80 | 3000 | 3000 |
 | PostgreSQL | 5432 | 5432 | — (internal only) |
 | MongoDB | 27017 | 27018 | — (internal only) |

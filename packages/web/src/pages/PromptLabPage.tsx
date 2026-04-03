@@ -181,7 +181,7 @@ function PlaygroundTab({ initial }: { initial: Template | null }) {
         setTesting(true);
         setTestOutput('');
         try {
-            const token = localStorage.getItem('xclaw_token');
+            const token = localStorage.getItem('hitechclaw_token');
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {

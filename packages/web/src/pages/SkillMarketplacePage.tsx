@@ -33,47 +33,47 @@ const CATEGORIES = [
 const SAMPLE_SKILLS: SkillPack[] = [
     {
         id: 'web-search', name: 'Web Search', description: 'Search the web using Tavily, Brave, or Bing with AI-optimized results.',
-        version: '2.0.0', author: 'xClaw Core', category: 'productivity', rating: 4.8, downloads: 12500, installed: true,
+        version: '2.0.0', author: 'HiTechClaw Core', category: 'productivity', rating: 4.8, downloads: 12500, installed: true,
         icon: '🔍', tags: ['search', 'web', 'tavily'],
     },
     {
         id: 'code-interpreter', name: 'Code Interpreter', description: 'Execute Python, JavaScript, and TypeScript code in a sandboxed environment.',
-        version: '1.5.0', author: 'xClaw Core', category: 'development', rating: 4.9, downloads: 9800, installed: true,
+        version: '1.5.0', author: 'HiTechClaw Core', category: 'development', rating: 4.9, downloads: 9800, installed: true,
         icon: '💻', tags: ['code', 'python', 'sandbox'],
     },
     {
         id: 'medical-icd10', name: 'ICD-10 Lookup', description: 'Look up ICD-10 diagnosis codes with Vietnamese descriptions.',
-        version: '2.0.0', author: 'xClaw Healthcare', category: 'healthcare', rating: 4.7, downloads: 3200, installed: true,
+        version: '2.0.0', author: 'HiTechClaw Healthcare', category: 'healthcare', rating: 4.7, downloads: 3200, installed: true,
         icon: '🏥', tags: ['medical', 'icd10', 'diagnosis'],
     },
     {
         id: 'drug-checker', name: 'Drug Interaction Checker', description: 'Check drug interactions, contraindications, and dosing guidelines.',
-        version: '2.0.0', author: 'xClaw Healthcare', category: 'healthcare', rating: 4.6, downloads: 2100, installed: true,
+        version: '2.0.0', author: 'HiTechClaw Healthcare', category: 'healthcare', rating: 4.6, downloads: 2100, installed: true,
         icon: '💊', tags: ['medical', 'drug', 'pharmacology'],
     },
     {
         id: 'shirtgen', name: 'TeeForge.AI', description: 'Generate custom t-shirt designs with AI. Includes try-on, marketplace, and print specs.',
-        version: '1.0.0', author: 'xClaw Plugins', category: 'ai', rating: 4.5, downloads: 1800, installed: true,
+        version: '1.0.0', author: 'HiTechClaw Plugins', category: 'ai', rating: 4.5, downloads: 1800, installed: true,
         icon: '👕', tags: ['ai', 'design', 'ecommerce'],
     },
     {
         id: 'image-gen', name: 'Image Generation', description: 'Generate images using DALL-E 3, Stable Diffusion, or Midjourney.',
-        version: '1.0.0', author: 'xClaw Core', category: 'ai', rating: 4.7, downloads: 8500, installed: false,
+        version: '1.0.0', author: 'HiTechClaw Core', category: 'ai', rating: 4.7, downloads: 8500, installed: false,
         icon: '🎨', tags: ['ai', 'image', 'dalle'],
     },
     {
         id: 'gmail-integration', name: 'Gmail', description: 'Read, send, and manage emails through Gmail API.',
-        version: '1.2.0', author: 'xClaw Integrations', category: 'integration', rating: 4.4, downloads: 5600, installed: false,
+        version: '1.2.0', author: 'HiTechClaw Integrations', category: 'integration', rating: 4.4, downloads: 5600, installed: false,
         icon: '📧', tags: ['email', 'google', 'gmail'],
     },
     {
         id: 'notion-sync', name: 'Notion Sync', description: 'Sync knowledge base with Notion databases and pages.',
-        version: '1.1.0', author: 'xClaw Integrations', category: 'integration', rating: 4.3, downloads: 4200, installed: false,
+        version: '1.1.0', author: 'HiTechClaw Integrations', category: 'integration', rating: 4.3, downloads: 4200, installed: false,
         icon: '📝', tags: ['notion', 'wiki', 'sync'],
     },
     {
         id: 'github-tools', name: 'GitHub', description: 'Manage repos, issues, PRs, and actions through GitHub API.',
-        version: '1.3.0', author: 'xClaw Integrations', category: 'integration', rating: 4.6, downloads: 7100, installed: false,
+        version: '1.3.0', author: 'HiTechClaw Integrations', category: 'integration', rating: 4.6, downloads: 7100, installed: false,
         icon: '🐙', tags: ['github', 'git', 'devops'],
     },
     {

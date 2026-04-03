@@ -1,9 +1,9 @@
 ---
 title: Creating Skills
-description: Build custom AI agent skill packs for xClaw.
+description: Build custom AI agent skill packs for HiTechClaw.
 ---
 
-This guide walks you through creating a custom skill pack for xClaw.
+This guide walks you through creating a custom skill pack for HiTechClaw.
 
 ## Skill Structure
 
@@ -12,7 +12,7 @@ A skill pack consists of a manifest definition with tools. Each tool has a name,
 ## Quick Example
 
 ```typescript
-import { defineSkill } from '@xclaw-ai/core';
+import { defineSkill } from '@hitechclaw-ai/core';
 
 export const weatherSkill = defineSkill({
   id: 'weather',
@@ -140,7 +140,7 @@ export const skills = [
 Register skills dynamically at runtime:
 
 ```typescript
-import { Agent } from '@xclaw-ai/core';
+import { Agent } from '@hitechclaw-ai/core';
 
 const agent = new Agent(config);
 agent.skillManager.register(weatherSkill);
@@ -149,11 +149,11 @@ agent.skillManager.activate('weather');
 
 ## Plugin Distribution
 
-Package your skill as an npm module with a `xclaw.plugin.json` manifest:
+Package your skill as an npm module with a `hitechclaw.plugin.json` manifest:
 
-```json title="xclaw.plugin.json"
+```json title="hitechclaw.plugin.json"
 {
-  "name": "@xclaw-ai/skill-weather",
+  "name": "@hitechclaw-ai/skill-weather",
   "version": "1.0.0",
   "description": "Weather service skill",
   "type": "skill",
