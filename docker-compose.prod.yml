@@ -1,8 +1,8 @@
 # ============================================================
 # HiTechClaw Production Docker Compose
-# Local production build
+# Production deploy with prebuilt registry images
 # Usage:
-#   docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#   docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d
 # ============================================================
 
 services:
@@ -81,10 +81,8 @@ services:
 
   # ─── HiTechClaw Server ───────────────────────────────────
   hitechclaw:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: hitechclaw-server:prod
+    image: ${HITECHCLAW_SERVER_IMAGE:-hitechclaw/hitechclaw-server:latest}
+    build: !reset null
     restart: unless-stopped
     env_file:
       - .env.prod
@@ -126,10 +124,8 @@ services:
 
   # ─── Web Frontend ───────────────────────────────────────
   web:
-    build:
-      context: .
-      dockerfile: packages/web/Dockerfile
-    image: hitechclaw-web:prod
+    image: ${HITECHCLAW_WEB_IMAGE:-hitechclaw/hitechclaw-web:latest}
+    build: !reset null
     restart: unless-stopped
     ports:
       - "0.0.0.0:3101:80"
