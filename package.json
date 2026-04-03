@@ -21,7 +21,8 @@
         "packages/chat-sdk",
         "packages/doc-mcp",
         "packages/zalo-miniapp",
-        "docs"
+        "docs",
+        "packages/*"
     ],
     "scripts": {
         "dev": "concurrently -k \"npm run dev:server\" \"npm run dev:web\"",

@@ -1,7 +1,7 @@
 {
     "name": "@hitechclaw/web",
     "version": "2.0.0",
-    "private": true,
+    "private": false,
     "description": "HiTechClaw web dashboard",
     "type": "module",
     "scripts": {

@@ -1,7 +1,7 @@
 {
     "name": "@hitechclaw/zalo-miniapp",
     "version": "1.0.0",
-    "private": true,
+    "private": false,
     "description": "HiTechClaw AI Chat — Zalo Mini App",
     "browserslist": [
         "Android >= 5",

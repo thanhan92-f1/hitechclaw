@@ -21,6 +21,25 @@ export interface DocMcpServerOptions {
     version?: string;
 }
 
+const searchDocsInputSchema: Record<string, z.ZodTypeAny> = {
+    query: z.string().describe(
+        'Search query — can be keywords, questions, or topics. Examples: "gateway route pattern", "drizzle schema", "MCP integration", "ESM import convention"',
+    ),
+    limit: z.number().optional().default(5).describe('Maximum number of results to return (default: 5)'),
+};
+
+const getDocInputSchema: Record<string, z.ZodTypeAny> = {
+    id: z.string().describe(
+        'Document ID (path without extension). Example: "conventions/typescript", "architecture/overview"',
+    ),
+};
+
+const listDocsInputSchema: Record<string, z.ZodTypeAny> = {
+    category: z.string().optional().describe(
+        'Category name to filter by. Omit to list all documents. Example: "conventions", "architecture"',
+    ),
+};
+
 export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     const {
         docsRoot,
@@ -32,18 +51,23 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     store.loadAll();
 
     const server = new McpServer({ name, version });
+    const registerTool = server.registerTool.bind(server) as (
+        name: string,
+        config: {
+            description?: string;
+            inputSchema?: Record<string, z.ZodTypeAny>;
+        },
+        cb: (args: any) => Promise<{ content: Array<{ type: 'text'; text: string }> }> | { content: Array<{ type: 'text'; text: string }> },
+    ) => unknown;
 
     // ─── Tool: search_docs ──────────────────────────────────
-    server.tool(
+    registerTool(
         'search_docs',
-        'Search the HiTechClaw developer documentation knowledge base. Use this to find coding conventions, architecture patterns, API documentation, code examples, and troubleshooting guides. Returns matched documents with relevance scores and snippets.',
         {
-            query: z.string().describe(
-                'Search query — can be keywords, questions, or topics. Examples: "gateway route pattern", "drizzle schema", "MCP integration", "ESM import convention"',
-            ),
-            limit: z.number().optional().default(5).describe('Maximum number of results to return (default: 5)'),
+            description: 'Search the HiTechClaw developer documentation knowledge base. Use this to find coding conventions, architecture patterns, API documentation, code examples, and troubleshooting guides. Returns matched documents with relevance scores and snippets.',
+            inputSchema: searchDocsInputSchema,
         },
-        async ({ query, limit }) => {
+        async ({ query, limit }: { query: string; limit?: number }) => {
             store.loadAll(); // Reload to pick up any changes
             const results = store.search(query, limit);
 
@@ -75,15 +99,13 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     );
 
     // ─── Tool: get_doc ──────────────────────────────────────
-    server.tool(
+    registerTool(
         'get_doc',
-        'Retrieve the full content of a specific documentation page by its ID or path. Use after search_docs to get complete documentation.',
         {
-            id: z.string().describe(
-                'Document ID (path without extension). Example: "conventions/typescript", "architecture/overview"',
-            ),
+            description: 'Retrieve the full content of a specific documentation page by its ID or path. Use after search_docs to get complete documentation.',
+            inputSchema: getDocInputSchema,
         },
-        async ({ id }) => {
+        async ({ id }: { id: string }) => {
             store.loadAll();
             const doc = store.getDoc(id);
 
@@ -111,10 +133,11 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     );
 
     // ─── Tool: list_doc_categories ──────────────────────────
-    server.tool(
+    registerTool(
         'list_doc_categories',
-        'List all documentation categories and their document counts. Use this to discover what documentation is available before searching.',
-        {},
+        {
+            description: 'List all documentation categories and their document counts. Use this to discover what documentation is available before searching.',
+        },
         async () => {
             store.loadAll();
             const stats = store.getStats();
@@ -142,15 +165,13 @@ export function createDocMcpServer(options: DocMcpServerOptions): McpServer {
     );
 
     // ─── Tool: list_docs ────────────────────────────────────
-    server.tool(
+    registerTool(
         'list_docs',
-        'List all documents in a specific category. Returns titles, IDs, and tags for each document.',
         {
-            category: z.string().optional().describe(
-                'Category name to filter by. Omit to list all documents. Example: "conventions", "architecture"',
-            ),
+            description: 'List all documents in a specific category. Returns titles, IDs, and tags for each document.',
+            inputSchema: listDocsInputSchema,
         },
-        async ({ category }) => {
+        async ({ category }: { category?: string }) => {
             store.loadAll();
             const docs = store.listDocs(category);
 

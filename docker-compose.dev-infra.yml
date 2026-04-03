@@ -1,7 +1,7 @@
 services:
-  # ─── PostgreSQL (config/structured data) ─────────────────
   postgres:
     image: postgres:18-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: hitechclaw
       POSTGRES_PASSWORD: hitechclaw
@@ -15,11 +15,10 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
 
-  # ─── MongoDB (AI/chat sessions, memory, messages) ────────
   mongodb:
     image: mongo:7
+    restart: unless-stopped
     ports:
       - "27018:27017"
     volumes:
@@ -29,11 +28,10 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
 
-  # ─── Redis (cache/rate-limit/session) ────────────────────
   redis:
     image: redis:8-alpine
+    restart: unless-stopped
     ports:
       - "6379:6379"
     command: ["redis-server", "--appendonly", "yes"]
@@ -44,7 +42,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
 
 volumes:
   pgdata_dev:
