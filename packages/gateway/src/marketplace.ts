@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import type { DomainPack } from '@hitechclaw-ai/domains';
+import type { DomainPack } from '@hitechclaw/domains';
 import { getInstalledDomainIds } from './domains.js';
 
 export interface MarketplaceItem {

@@ -5,7 +5,7 @@
 // security events for sandbox operations. These events can be
 // forwarded to SIEM systems.
 
-import type { SandboxAuditEntry } from '@hitechclaw-ai/shared';
+import type { SandboxAuditEntry } from '@hitechclaw/shared';
 
 /**
  * OCSF Activity ID for sandbox events.

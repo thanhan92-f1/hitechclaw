@@ -8,13 +8,13 @@ HiTechClaw is a multi-industry AI Agent Platform developed by xDev Asia. The pla
 
 HiTechClaw uses a monorepo architecture with the following packages:
 
-- **@hitechclaw-ai/core**: Agent engine, LLM adapters (OpenAI, Anthropic, Ollama, Google), streaming
-- **@hitechclaw-ai/shared**: TypeScript types, Zod schemas, constants
-- **@hitechclaw-ai/gateway**: Hono-based REST API server with JWT authentication
-- **@hitechclaw-ai/server**: Application bootstrap and configuration
-- **@hitechclaw-ai/web**: React 19 frontend with Tailwind CSS
-- **@hitechclaw-ai/ml**: Machine Learning and AutoML engine
-- **@hitechclaw-ai/skill-hub**: Skill marketplace and management
+- **@hitechclaw/core**: Agent engine, LLM adapters (OpenAI, Anthropic, Ollama, Google), streaming
+- **@hitechclaw/shared**: TypeScript types, Zod schemas, constants
+- **@hitechclaw/gateway**: Hono-based REST API server with JWT authentication
+- **@hitechclaw/server**: Application bootstrap and configuration
+- **@hitechclaw/web**: React 19 frontend with Tailwind CSS
+- **@hitechclaw/ml**: Machine Learning and AutoML engine
+- **@hitechclaw/skill-hub**: Skill marketplace and management
 
 ## Key Features
 

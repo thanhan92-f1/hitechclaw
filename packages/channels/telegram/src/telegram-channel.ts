@@ -1,4 +1,4 @@
-import type { Attachment, ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
+import type { Attachment, ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw/shared';
 import type { TelegramMessage, TelegramUpdate, TelegramVoice } from './telegram-api.js';
 import { TelegramApi } from './telegram-api.js';
 

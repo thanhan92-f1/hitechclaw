@@ -8,7 +8,7 @@ import {
   messagesCollection,
   llmLogsCollection,
   handoffSessionsCollection,
-} from '@hitechclaw-ai/db';
+} from '@hitechclaw/db';
 
 export function createAnalyticsRoutes() {
   const app = new Hono();

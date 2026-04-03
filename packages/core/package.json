@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/core",
+    "name": "@hitechclaw/core",
     "version": "2.2.0",
     "description": "HiTechClaw core engine — Agent, LLM router, memory, tools, graph, streaming, tracing",
     "type": "module",
@@ -16,8 +16,8 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*",
-        "@hitechclaw-ai/db": "*",
+        "@hitechclaw/shared": "*",
+        "@hitechclaw/db": "*",
         "@langchain/core": "^0.3.0",
         "@langchain/langgraph": "^0.2.0",
         "openai": "^4.80.0",

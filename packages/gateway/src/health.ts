@@ -1,4 +1,4 @@
-import { getDB, getMongo } from '@hitechclaw-ai/db';
+import { getDB, getMongo } from '@hitechclaw/db';
 import { sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 

@@ -1,4 +1,4 @@
-import type { LLMAdapter } from '@hitechclaw-ai/core';
+import type { LLMAdapter } from '@hitechclaw/core';
 import {
     Agent,
     AnthropicAdapter,
@@ -15,9 +15,9 @@ import {
     PerplexityAdapter,
     TaskManager,
     XAIAdapter
-} from '@hitechclaw-ai/core';
-import { agentConfigsCollection, type MongoAgentConfig } from '@hitechclaw-ai/db';
-import type { AgentConfig, CoordinatorConfig } from '@hitechclaw-ai/shared';
+} from '@hitechclaw/core';
+import { agentConfigsCollection, type MongoAgentConfig } from '@hitechclaw/db';
+import type { AgentConfig, CoordinatorConfig } from '@hitechclaw/shared';
 
 /**
  * AgentManager — converts MongoAgentConfig → Agent instances with caching.

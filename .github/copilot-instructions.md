@@ -6,7 +6,7 @@ HiTechClaw is a TypeScript monorepo (npm workspaces) for a general-purpose multi
 
 ## Monorepo Structure
 
-- `packages/shared` — Foundation types (`@hitechclaw-ai/shared`), imported by every other package
+- `packages/shared` — Foundation types (`@hitechclaw/shared`), imported by every other package
 - `packages/core` — Agent engine, SkillManager, ToolRegistry, LLM, memory, workflow
 - `packages/db` — Dual-database layer: Drizzle ORM (PostgreSQL) + MongoDB driver
 - `packages/skills` — Built-in skills using `defineSkill()` helper
@@ -41,8 +41,8 @@ Plugins are **not** inside `packages/`. They live in external repos linked as gi
 
 ## Coding Patterns
 
-- Define shared types/interfaces in `@hitechclaw-ai/shared`, import with `import type { ... }`
-- Skills use `defineSkill()` from `@hitechclaw-ai/core`
+- Define shared types/interfaces in `@hitechclaw/shared`, import with `import type { ... }`
+- Skills use `defineSkill()` from `@hitechclaw/core`
 - Gateway routes use Hono with `try/catch` and `err instanceof Error ? err.message : 'Failed'`
 - State management: Zustand stores in `packages/web/src/stores/`
 - Seed data must be **idempotent** — always check existence before inserting

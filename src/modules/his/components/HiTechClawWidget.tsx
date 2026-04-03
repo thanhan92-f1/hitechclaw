@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type FormEvent } from 'react';
 import { MessageSquare, X, Minimize2, Maximize2, Loader2, Send, Bot, Trash2 } from 'lucide-react';
-import { loginHiTechClaw, chatHiTechClaw } from '../api';
+import { chatHiTechClaw, ensureHiTechClawTokenInteractive } from '../api';
 import type { PatientContext } from '../App';
 
 interface ChatMessage {
@@ -90,10 +90,9 @@ export function HiTechClawWidget({ patientContext }: { patientContext: PatientCo
 
     const ensureToken = async (): Promise<string> => {
         if (token) return token;
-        const res = await loginHiTechClaw('doctor@his.local', 'doctor123');
-        if ('error' in res) throw new Error(res.error);
-        setToken(res.token);
-        return res.token;
+        const ensuredToken = await ensureHiTechClawTokenInteractive();
+        setToken(ensuredToken);
+        return ensuredToken;
     };
 
     const buildMessage = (userText: string): string => {

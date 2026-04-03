@@ -1,10 +1,10 @@
-import type { Agent, ApprovalManager, CoordinatorAgent, EvalFramework, MonitoringService, MultiAgentOrchestrator, OllamaAdapter, PluginManager, RagEngine, TaskManager } from '@hitechclaw-ai/core';
-import { eq, getDB } from '@hitechclaw-ai/db';
-import type { DomainPack } from '@hitechclaw-ai/domains';
-import type { IntegrationRegistry } from '@hitechclaw-ai/integrations';
-import type { MLEngine } from '@hitechclaw-ai/ml';
-import type { SandboxManager, TenantSandboxManager } from '@hitechclaw-ai/sandbox';
-import type { GatewayConfig, IWorkflowEngine } from '@hitechclaw-ai/shared';
+import type { Agent, ApprovalManager, CoordinatorAgent, EvalFramework, MonitoringService, MultiAgentOrchestrator, OllamaAdapter, PluginManager, RagEngine, TaskManager } from '@hitechclaw/core';
+import { eq, getDB } from '@hitechclaw/db';
+import type { DomainPack } from '@hitechclaw/domains';
+import type { IntegrationRegistry } from '@hitechclaw/integrations';
+import type { MLEngine } from '@hitechclaw/ml';
+import type { SandboxManager, TenantSandboxManager } from '@hitechclaw/sandbox';
+import type { GatewayConfig, IWorkflowEngine } from '@hitechclaw/shared';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
@@ -93,7 +93,7 @@ export function createGateway(ctx: GatewayContext) {
   // Public: tenant list for login page selector
   app.get('/tenants/list', async (c) => {
     const db = getDB();
-    const { tenants: tenantsTable } = await import('@hitechclaw-ai/db');
+    const { tenants: tenantsTable } = await import('@hitechclaw/db');
     const rows = await db.select({ slug: tenantsTable.slug, name: tenantsTable.name })
       .from(tenantsTable)
       .where(eq(tenantsTable.status, 'active'));

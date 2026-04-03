@@ -1,5 +1,5 @@
 #!/bin/bash
-# Publish all @hitechclaw-ai packages to npm in dependency order
+# Publish all @hitechclaw packages to npm in dependency order
 # Usage: ./scripts/publish-all.sh <OTP_CODE>
 
 set -e
@@ -22,7 +22,7 @@ PACKAGES=(
   "packages/chat-sdk"
 )
 
-echo "🚀 Publishing all @hitechclaw-ai packages to npm..."
+echo "🚀 Publishing all @hitechclaw packages to npm..."
 echo ""
 
 for pkg in "${PACKAGES[@]}"; do
@@ -39,6 +39,7 @@ for pkg in "${PACKAGES[@]}"; do
   if npm view "${NAME}@${VERSION}" --registry https://registry.npmjs.org >/dev/null 2>&1; then
     echo "⚠️  $NAME@$VERSION already exists, skipping"
   else
+    npm run build --workspace "$pkg" --if-present
     echo "📦 Publishing $NAME@$VERSION..."
     npm publish --workspace "$pkg" --access public --otp="$OTP" 2>&1 | tail -1
     echo "✅ $NAME@$VERSION published"

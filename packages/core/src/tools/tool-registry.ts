@@ -1,4 +1,4 @@
-import type { ToolDefinition, ToolCall, ToolResult } from '@hitechclaw-ai/shared';
+import type { ToolDefinition, ToolCall, ToolResult } from '@hitechclaw/shared';
 
 export type ToolHandler = (args: Record<string, unknown>) => Promise<unknown>;
 

@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk/react — Barrel Export
+// @hitechclaw/chat-sdk/react — Barrel Export
 // ============================================================
 
 export { HiTechClawProvider, useHiTechClawClient } from './provider.js';

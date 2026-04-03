@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk — Core Client
+// @hitechclaw/chat-sdk — Core Client
 // ============================================================
 
 import type {

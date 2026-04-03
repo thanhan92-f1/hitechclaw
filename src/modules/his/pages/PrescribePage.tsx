@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Pill, Search, AlertTriangle, CheckCircle, ShieldAlert, Loader2, ChevronDown, X, Bot, Sparkles } from 'lucide-react';
-import { getPatients, getMedications, createPrescription, checkClinicalAlert, loginHiTechClaw, aiCheckPrescription, getPatientAllergies } from '../api';
+import { getPatients, getMedications, createPrescription, checkClinicalAlert, ensureHiTechClawTokenInteractive, aiCheckPrescription, getPatientAllergies } from '../api';
 
 interface Patient { id: string; name: { text: string }[]; identifier: { value: string }[] }
 interface Medication {
@@ -39,7 +39,6 @@ export function PrescribePage() {
     const [aiChecking, setAiChecking] = useState(false);
     const [aiResult, setAiResult] = useState<string | null>(null);
     const [showAiPanel, setShowAiPanel] = useState(false);
-    const [hitechclawToken, setHitechclawToken] = useState<string | null>(null);
     const [hitechclawSessionId, setHitechclawSessionId] = useState<string | undefined>(undefined);
 
     // Load data
@@ -73,21 +72,14 @@ export function PrescribePage() {
         setAiResult(null);
         setShowAiPanel(true);
         try {
-            // Auto-login if no token
-            let token = hitechclawToken;
-            if (!token) {
-                const auth = await loginHiTechClaw('doctor@his.local', 'doctor123');
-                if ('error' in auth) throw new Error(auth.error);
-                token = auth.token;
-                setHitechclawToken(token);
-            }
+            const token = await ensureHiTechClawTokenInteractive();
             // Fetch patient allergies
             const allergyData = await getPatientAllergies(selectedPatient.id);
             const allergyNames = (allergyData.allergies || []).map((a: { code: { coding: { display: string }[] } }) => a.code.coding[0]?.display).filter(Boolean);
             const medName = selectedMed.code.coding[0]?.display;
             const ingredients = selectedMed.ingredient.map((i) => i.item.concept.coding[0]?.display).filter(Boolean);
 
-            const res = await aiCheckPrescription(token!, selectedPatient.name[0]?.text, allergyNames, medName, ingredients, `${dosage}, ${frequency}, ${route}`, hitechclawSessionId);
+            const res = await aiCheckPrescription(token, selectedPatient.name[0]?.text, allergyNames, medName, ingredients, `${dosage}, ${frequency}, ${route}`, hitechclawSessionId);
             setAiResult(res.content || 'Không nhận được phản hồi từ AI.');
             if (res.sessionId) setHitechclawSessionId(res.sessionId);
         } catch (err: unknown) {

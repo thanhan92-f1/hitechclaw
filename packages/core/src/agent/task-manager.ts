@@ -3,7 +3,7 @@
 // Inspired by claude-code Task.ts + tasks/ pattern
 // ============================================================
 
-import type { AgentTask, AgentTaskStatus, AgentTaskType } from '@hitechclaw-ai/shared';
+import type { AgentTask, AgentTaskStatus, AgentTaskType } from '@hitechclaw/shared';
 import { randomUUID } from 'node:crypto';
 
 export function isTerminalTaskStatus(status: AgentTaskStatus): boolean {

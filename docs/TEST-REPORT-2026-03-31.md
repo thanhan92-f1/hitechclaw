@@ -55,7 +55,7 @@
 
 | # | Lỗi                                             | File                           | Fix                                                   |
 | - | ----------------------------------------------- | ------------------------------ | ----------------------------------------------------- |
-| 1 | `@hitechclaw-ai/chat-sdk` export resolution failed   | `packages/web/Dockerfile`      | Thêm `npx tsc -b packages/chat-sdk` trước vite build  |
+| 1 | `@hitechclaw/chat-sdk` export resolution failed   | `packages/web/Dockerfile`      | Thêm `npx tsc -b packages/chat-sdk` trước vite build  |
 | 2 | langgraph TypeScript strict type errors (4 lỗi) | `langgraph-workflow-engine.ts` | Cast dynamic node IDs `as any`                        |
 | 3 | Missing `data/dev-docs/` directory              | Dockerfile COPY                | Tạo directory + README.md                             |
 | 4 | `host.docker.internal` not resolving (Linux)    | `docker-compose.yml`           | Thêm `extra_hosts: host.docker.internal:host-gateway` |

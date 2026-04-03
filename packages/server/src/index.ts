@@ -1,5 +1,5 @@
 import { serve } from '@hono/node-server';
-import type { ChatOptions } from '@hitechclaw-ai/core';
+import type { ChatOptions } from '@hitechclaw/core';
 import {
     Agent,
     AnthropicAdapter,
@@ -22,21 +22,26 @@ import {
     PluginManager,
     RagEngine,
     TaskManager,
-} from '@hitechclaw-ai/core';
-import type { MongoChannelConnection } from '@hitechclaw-ai/db';
-import { agentConfigsCollection, channelConnectionsCollection, connectMongo, estimateCost, getMongo, llmLogsCollection, messagesCollection, mongoMonitoringStore, runMigrations, sandboxAuditLogsCollection, seedInitialData, sessionsCollection } from '@hitechclaw-ai/db';
-import { allDomainPacks } from '@hitechclaw-ai/domains';
-import { AgentManager, createGateway, getTenantLanguageInstruction, startWorkflowScheduler, TenantService } from '@hitechclaw-ai/gateway';
-import { allIntegrations, IntegrationRegistry } from '@hitechclaw-ai/integrations';
-import { MLEngine } from '@hitechclaw-ai/ml';
-import { OCSFEventLogger, PolicyWatcher, SandboxManager, TenantSandboxManager } from '@hitechclaw-ai/sandbox';
-import type { AgentConfig, GatewayConfig } from '@hitechclaw-ai/shared';
-import { reportGenSkill, textToFhirSkill } from '@hitechclaw-ai/skills';
+} from '@hitechclaw/core';
+import type { MongoChannelConnection } from '@hitechclaw/db';
+import { agentConfigsCollection, channelConnectionsCollection, connectMongo, estimateCost, getMongo, llmLogsCollection, messagesCollection, mongoMonitoringStore, runMigrations, sandboxAuditLogsCollection, seedInitialData, sessionsCollection } from '@hitechclaw/db';
+import { allDomainPacks } from '@hitechclaw/domains';
+import { AgentManager, createGateway, getTenantLanguageInstruction, startWorkflowScheduler, TenantService } from '@hitechclaw/gateway';
+import { allIntegrations, IntegrationRegistry } from '@hitechclaw/integrations';
+import { MLEngine } from '@hitechclaw/ml';
+import { OCSFEventLogger, PolicyWatcher, SandboxManager, TenantSandboxManager } from '@hitechclaw/sandbox';
+import type { AgentConfig, GatewayConfig } from '@hitechclaw/shared';
+import { reportGenSkill, textToFhirSkill } from '@hitechclaw/skills';
 import dotenv from 'dotenv';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { ChannelManager } from './channel-manager.js';
 import { loadKnowledgePacks } from './knowledge-loader.js';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: resolve(__dirname, '../../../.env') });
 
 // Load env
 const {
@@ -547,7 +552,7 @@ async function main() {
   const makeChannelHandler = (
     platform: string,
     send: (channelId: string, content: string, replyTo?: string) => Promise<void>,
-  ) => async (incoming: { channelId: string; userId: string; content: string; attachments?: import('@hitechclaw-ai/shared').Attachment[]; metadata?: Record<string, unknown> }) => {
+  ) => async (incoming: { channelId: string; userId: string; content: string; attachments?: import('@hitechclaw/shared').Attachment[]; metadata?: Record<string, unknown> }) => {
     const prefix = platform.substring(0, 3);
     const sessionId = `${prefix}-${incoming.channelId}-${incoming.userId}`;
     const debugKey = `${platform}-${incoming.channelId}-${incoming.userId}`;

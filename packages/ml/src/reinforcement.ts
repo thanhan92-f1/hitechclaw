@@ -1,5 +1,5 @@
 /**
- * @hitechclaw-ai/ml — Reinforcement Learning: Multi-Armed Bandit
+ * @hitechclaw/ml — Reinforcement Learning: Multi-Armed Bandit
  *
  * Strategies: Epsilon-Greedy, UCB1, Thompson Sampling
  * Use case: skill/tool selection based on user feedback & tool success rates.

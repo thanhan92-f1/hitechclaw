@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw/shared';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);

@@ -7,13 +7,13 @@
 
 ## ✅ Recently Completed (This Session)
 
--   [x] **Multi-agent hierarchy (Google ADK-inspired)** --- `AgentHierarchy` class with parent/child relationships and `transfer_to_agent` delegation, `SequentialWorkflowAgent`, `ParallelWorkflowAgent`, `LoopWorkflowAgent`, `createWorkflowAgent()` factory in `@hitechclaw-ai/core`
+-   [x] **Multi-agent hierarchy (Google ADK-inspired)** --- `AgentHierarchy` class with parent/child relationships and `transfer_to_agent` delegation, `SequentialWorkflowAgent`, `ParallelWorkflowAgent`, `LoopWorkflowAgent`, `createWorkflowAgent()` factory in `@hitechclaw/core`
 
 -   [x] **A2A Protocol** --- `A2AServer`, `RemoteA2AAgent`, `A2ARegistry` for cross-service agent-to-agent communication in `packages/core/src/a2a/`
 
 -   [x] **transfer_to_agent tool** --- LLM-driven agent delegation: injected into agent tool set when `allowTransfer=true`, orchestrator detects and routes in `Agent.chat()` / `chatStream()`
 
--   [x] **Multi-agent types** --- `SubAgentRef`, `WorkflowAgentType`, `WorkflowAgentConfig`, `WorkflowAgentResult`, `AgentTransferRequest`, `A2AAgentCard`, `A2ACapability`, `A2ATask`, `A2ATaskResult`, `A2AArtifact` added to `@hitechclaw-ai/shared`; `AgentConfig` extended with `subAgents` + `allowTransfer`
+-   [x] **Multi-agent types** --- `SubAgentRef`, `WorkflowAgentType`, `WorkflowAgentConfig`, `WorkflowAgentResult`, `AgentTransferRequest`, `A2AAgentCard`, `A2ACapability`, `A2ATask`, `A2ATaskResult`, `A2AArtifact` added to `@hitechclaw/shared`; `AgentConfig` extended with `subAgents` + `allowTransfer`
 
 -   [x] **Agent Builder: Provider selector** --- 12-provider dropdown (`openai`, `anthropic`, `ollama`, `google`, `groq`, `mistral`, `deepseek`, `xai`, `openrouter`, `perplexity`, `huggingface`, `custom`) with auto-default model per provider, **★ Tenant Default** badge, non-tenant provider warning
 

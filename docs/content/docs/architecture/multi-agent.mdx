@@ -7,7 +7,7 @@ HiTechClaw supports multi-agent orchestration — multiple AI agents working tog
 
 ## Overview
 
-The multi-agent system consists of 3 core modules in `@hitechclaw-ai/core`:
+The multi-agent system consists of 3 core modules in `@hitechclaw/core`:
 
 | Module | File | Purpose |
 |--------|------|---------|
@@ -95,7 +95,7 @@ Workflow agents compose multiple agents into execution patterns. Unlike visual w
 Executes sub-agents one after another. Each agent receives the previous agent's output via shared state.
 
 ```typescript
-import { createWorkflowAgent } from '@hitechclaw-ai/core';
+import { createWorkflowAgent } from '@hitechclaw/core';
 
 const pipeline = createWorkflowAgent({
   id: 'research-pipeline',
@@ -226,7 +226,7 @@ interface A2ATaskResult {
 ### Usage Example
 
 ```typescript
-import { A2AServer, A2ARegistry, RemoteA2AAgent } from '@hitechclaw-ai/core';
+import { A2AServer, A2ARegistry, RemoteA2AAgent } from '@hitechclaw/core';
 
 // Expose a local agent as A2A service
 const registry = new A2ARegistry();

@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/domains",
+    "name": "@hitechclaw/domains",
     "version": "2.1.1",
     "description": "HiTechClaw Domain Packs — Industry-specific skills, tools, and agent personas",
     "type": "module",
@@ -16,7 +16,7 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*",
+        "@hitechclaw/shared": "*",
         "zod": "^3.24.0"
     }
 }

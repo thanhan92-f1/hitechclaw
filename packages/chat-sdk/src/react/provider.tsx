@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk/react — React Context & Provider
+// @hitechclaw/chat-sdk/react — React Context & Provider
 // ============================================================
 
 import { createContext, useContext, useMemo, useRef, useEffect } from 'react';

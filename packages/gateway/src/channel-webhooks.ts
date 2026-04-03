@@ -1,4 +1,4 @@
-import { channelConnectionsCollection } from '@hitechclaw-ai/db';
+import { channelConnectionsCollection } from '@hitechclaw/db';
 import { Hono } from 'hono';
 import type { GatewayContext } from './gateway.js';
 

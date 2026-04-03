@@ -2,7 +2,7 @@ import type {
     AgentResult,
     WorkflowAgentConfig,
     WorkflowAgentResult,
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import { randomUUID } from 'node:crypto';
 import { Agent } from './agent.js';
 import { EventBus } from './event-bus.js';

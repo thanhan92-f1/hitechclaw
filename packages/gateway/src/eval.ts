@@ -1,5 +1,5 @@
-import type { Agent, EvalFramework } from '@hitechclaw-ai/core';
-import type { EvalTestCase } from '@hitechclaw-ai/shared';
+import type { Agent, EvalFramework } from '@hitechclaw/core';
+import type { EvalTestCase } from '@hitechclaw/shared';
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 import type { AgentManager } from './agent-manager.js';

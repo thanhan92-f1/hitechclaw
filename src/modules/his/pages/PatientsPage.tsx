@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Users, Plus, Search, Phone, MapPin, AlertTriangle, X, Shield, Bot, Sparkles, Loader2, FileText } from 'lucide-react';
-import { getPatients, getPatient, createPatient, addAllergy, deleteAllergy, getPrescriptions, getEncounters, loginHiTechClaw, aiReadPatientRecord } from '../api';
+import { getPatients, getPatient, createPatient, addAllergy, deleteAllergy, getPrescriptions, getEncounters, ensureHiTechClawTokenInteractive, aiReadPatientRecord } from '../api';
 import type { PatientContext } from '../App';
 
 interface Patient {
@@ -33,7 +33,6 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
     const [aiLoading, setAiLoading] = useState(false);
     const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);
     const [showAiPanel, setShowAiPanel] = useState(false);
-    const [hitechclawToken, setHitechclawToken] = useState<string | null>(null);
     const [aiQuestion, setAiQuestion] = useState('');
 
     const load = () => getPatients(search || undefined).then((d) => setPatients(d.patients));
@@ -67,13 +66,7 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
         setAiAnalysis(null);
         setShowAiPanel(true);
         try {
-            let token = hitechclawToken;
-            if (!token) {
-                const auth = await loginHiTechClaw('doctor@his.local', 'doctor123');
-                if ('error' in auth) throw new Error(auth.error);
-                token = auth.token;
-                setHitechclawToken(token);
-            }
+            const token = await ensureHiTechClawTokenInteractive();
             // Gather full patient data
             const [rxData, encounterData] = await Promise.all([
                 getPrescriptions(detail.patient.id),
@@ -99,7 +92,7 @@ export function PatientsPage({ onPatientSelect }: { onPatientSelect?: (p: Patien
                     reason: enc.reasonCode?.[0]?.text,
                 })),
             };
-            const res = await aiReadPatientRecord(token!, patientData, question || undefined);
+            const res = await aiReadPatientRecord(token, patientData, question || undefined);
             setAiAnalysis(res.content || 'Không nhận được phản hồi từ AI.');
         } catch (err: unknown) {
             const msg = err instanceof Error ? err.message : 'Lỗi kết nối HiTechClaw';

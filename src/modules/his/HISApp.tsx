@@ -155,23 +155,8 @@ function LoginScreen({ onLogin }: { onLogin: (user: AuthUser) => void }) {
 
                 {/* Demo accounts */}
                 <div className="mt-6 p-3 rounded-lg" style={{ background: 'var(--his-bg)', border: '1px solid var(--his-border)' }}>
-                    <div className="text-[11px] font-semibold mb-2" style={{ color: 'var(--his-fg-muted)' }}>Tài khoản demo:</div>
-                    <div className="grid grid-cols-2 gap-1 text-[11px]" style={{ color: 'var(--his-fg-muted)' }}>
-                        {[
-                            { email: 'admin@his.local', pw: 'admin123', role: 'Admin' },
-                            { email: 'doctor@his.local', pw: 'doctor123', role: 'Bác sĩ' },
-                            { email: 'nurse@his.local', pw: 'nurse123', role: 'Điều dưỡng' },
-                            { email: 'pharmacist@his.local', pw: 'pharma123', role: 'Dược sĩ' },
-                            { email: 'director@his.local', pw: 'director123', role: 'Giám đốc' },
-                        ].map(a => (
-                            <button key={a.email}
-                                onClick={() => { setEmail(a.email); setPassword(a.pw); }}
-                                className="text-left px-2 py-1.5 rounded cursor-pointer hover:opacity-80 transition-opacity"
-                                style={{ background: 'var(--his-bg-card)' }}>
-                                <div className="font-medium" style={{ color: 'var(--his-primary)' }}>{a.role}</div>
-                                <div>{a.email}</div>
-                            </button>
-                        ))}
+                    <div className="text-[11px]" style={{ color: 'var(--his-fg-muted)' }}>
+                        Vui lòng tự nhập thông tin đăng nhập.
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
-import type { ConversationDetailResponse, ConversationSummary, StreamEvent } from '@hitechclaw-ai/chat-sdk';
-import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
+import type { ConversationDetailResponse, ConversationSummary, StreamEvent } from '@hitechclaw/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw/chat-sdk';
 
 const API_BASE = '';
 
@@ -55,6 +55,27 @@ export async function login(email: string, password: string, tenantSlug?: string
   return data;
 }
 
+export async function register(payload: {
+  name: string;
+  email: string;
+  password: string;
+  tenantSlug: string;
+  roleName?: 'owner' | 'member';
+  tenantName?: string;
+}) {
+  const res = await apiFetch('/auth/register', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({ error: 'Registration failed' }));
+    throw new Error(data.error || 'Registration failed');
+  }
+
+  return res.json();
+}
+
 export async function getMe() {
   const res = await apiFetch('/auth/me');
   if (!res.ok) throw new Error('Not authenticated');
@@ -90,7 +111,7 @@ export async function getRBACPermissions() {
 export async function inviteUser(email: string, name: string, role: string) {
   const res = await apiFetch('/auth/invite', {
     method: 'POST',
-    body: JSON.stringify({ email, name, role }),
+    body: JSON.stringify({ email, name, roleName: role }),
   });
   if (!res.ok) {
     const data = await res.json();
@@ -149,7 +170,7 @@ export async function getHealth() {
   return res.json();
 }
 
-// ─── Chat (via @hitechclaw-ai/chat-sdk) ──────────────────────────
+// ─── Chat (via @hitechclaw/chat-sdk) ──────────────────────────
 
 export async function sendChat(message: string, sessionId: string, domainId?: string, agentConfigId?: string) {
   return hitechclaw.chat(message, { sessionId, domainId, agentConfigId });
@@ -228,7 +249,7 @@ export async function submitChatFeedback(
   return hitechclaw.feedback({ originalQuestion, aiAnswer, feedback, correction });
 }
 
-// ─── Conversation History (via @hitechclaw-ai/chat-sdk) ──────────
+// ─── Conversation History (via @hitechclaw/chat-sdk) ──────────
 
 export async function getConversations(): Promise<ConversationSummary[]> {
   return hitechclaw.listSessions();

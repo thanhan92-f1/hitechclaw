@@ -1,22 +1,22 @@
 ---
 title: Chat SDK
-description: "@hitechclaw-ai/chat-sdk — React, React Native & Node.js SDK for HiTechClaw AI Agent Platform"
+description: "@hitechclaw/chat-sdk — React, React Native & Node.js SDK for HiTechClaw AI Agent Platform"
 ---
 
 The official SDK for integrating HiTechClaw chat into any JavaScript/TypeScript application. Supports React hooks, React Native, Node.js, and MCP server integration.
 
 ```bash
-npm install @hitechclaw-ai/chat-sdk
+npm install @hitechclaw/chat-sdk
 ```
 
 ## Package Exports
 
 | Import Path | Description |
 |---|---|
-| `@hitechclaw-ai/chat-sdk` | Core `HiTechClawClient` + all types |
-| `@hitechclaw-ai/chat-sdk/react` | React hooks (`useChat`, `useSessions`, `HiTechClawProvider`) |
-| `@hitechclaw-ai/chat-sdk/react-native` | React Native compatibility layer |
-| `@hitechclaw-ai/chat-sdk/mcp` | MCP server for AI coding assistants |
+| `@hitechclaw/chat-sdk` | Core `HiTechClawClient` + all types |
+| `@hitechclaw/chat-sdk/react` | React hooks (`useChat`, `useSessions`, `HiTechClawProvider`) |
+| `@hitechclaw/chat-sdk/react-native` | React Native compatibility layer |
+| `@hitechclaw/chat-sdk/mcp` | MCP server for AI coding assistants |
 
 ---
 
@@ -25,7 +25,7 @@ npm install @hitechclaw-ai/chat-sdk
 Wrap your app with `HiTechClawProvider`, then use `useChat` in any child component:
 
 ```tsx
-import { HiTechClawProvider, useChat } from '@hitechclaw-ai/chat-sdk/react';
+import { HiTechClawProvider, useChat } from '@hitechclaw/chat-sdk/react';
 
 function App() {
   return (
@@ -63,7 +63,7 @@ function Chat() {
 ## Quick Start — React Native
 
 ```tsx
-import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
+import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw/chat-sdk/react-native';
 
 const config = createReactNativeConfig({
   baseUrl: 'https://api.hitechclaw.io',
@@ -88,7 +88,7 @@ export default function App() {
 Use `HiTechClawClient` directly in Node.js, Bun, Deno, or any JavaScript runtime:
 
 ```typescript
-import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw/chat-sdk';
 
 const client = new HiTechClawwClient({
   baseUrl: 'https://api.hitechclaw.io',
@@ -343,7 +343,7 @@ Add to your MCP client configuration:
   "mcpServers": {
     "hitechclaw": {
       "command": "npx",
-      "args": ["@hitechclaw-ai/chat-sdk", "--base-url", "http://localhost:18789", "--token", "your-jwt"]
+      "args": ["@hitechclaw/chat-sdk", "--base-url", "http://localhost:18789", "--token", "your-jwt"]
     }
   }
 }
@@ -374,7 +374,7 @@ Add to your MCP client configuration:
 All SDK methods throw `hitechclawError` on failure:
 
 ```typescript
-import { HiTechClawError } from '@hitechclaw-ai/chat-sdk';
+import { HiTechClawError } from '@hitechclaw/chat-sdk';
 
 try {
   await client.chat('Hello');
@@ -412,5 +412,5 @@ import type {
   LoginRequest,
   LoginResponse,
   UploadResponse,
-} from '@hitechclaw-ai/chat-sdk';
+} from '@hitechclaw/chat-sdk';
 ```

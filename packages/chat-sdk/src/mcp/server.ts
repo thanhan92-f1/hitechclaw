@@ -1,15 +1,15 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk/mcp — MCP Server for HiTechClaw Chat SDK
+// @hitechclaw/chat-sdk/mcp — MCP Server for HiTechClaw Chat SDK
 // ============================================================
 //
 // Exposes HiTechClaw Chat SDK as MCP tools so any AI agent (Claude,
 // Copilot, etc.) can interact with HiTechClaw programmatically.
 //
 // Usage:
-//   HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx @hitechclaw-ai/chat-sdk mcp
+//   HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx @hitechclaw/chat-sdk mcp
 //
 //   Or in MCP config:
-//   { "command": "npx", "args": ["@hitechclaw-ai/chat-sdk", "mcp"], "env": { ... } }
+//   { "command": "npx", "args": ["@hitechclaw/chat-sdk", "mcp"], "env": { ... } }
 //
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -206,7 +206,7 @@ export function createMcpServer(client: HiTechClawClient): McpServer {
     return server;
 }
 
-const SDK_DOCS = `# @hitechclaw-ai/chat-sdk — API Reference
+const SDK_DOCS = `# @hitechclaw/chat-sdk — API Reference
 
 ## Available MCP Tools
 

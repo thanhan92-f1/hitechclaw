@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/sandbox — OpenShell Integration for HiTechClaw
+// @hitechclaw/sandbox — OpenShell Integration for HiTechClaw
 // ============================================================
 
 // Sandbox Manager (lifecycle management)
@@ -47,4 +47,4 @@ export type {
   NetworkPolicyRule,
   ProcessPolicy,
   InferencePolicy,
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';

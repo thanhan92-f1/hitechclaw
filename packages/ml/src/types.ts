@@ -1,5 +1,5 @@
 /**
- * @hitechclaw-ai/ml — Core types for ML/AutoML engine.
+ * @hitechclaw/ml — Core types for ML/AutoML engine.
  */
 
 // ─── Dataset Types ──────────────────────────────────────────

@@ -1,4 +1,4 @@
-import type { AgentEvent, EventHandler } from '@hitechclaw-ai/shared';
+import type { AgentEvent, EventHandler } from '@hitechclaw/shared';
 
 type WildcardPattern = string;
 

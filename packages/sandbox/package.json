@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/sandbox",
+    "name": "@hitechclaw/sandbox",
     "version": "2.1.0",
     "description": "HiTechClaw sandbox — OpenShell integration for isolated agent tool execution",
     "type": "module",
@@ -16,6 +16,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*"
+        "@hitechclaw/shared": "*"
     }
 }

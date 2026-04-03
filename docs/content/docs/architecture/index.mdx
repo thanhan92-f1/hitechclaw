@@ -26,19 +26,19 @@ The monorepo contains 14 npm workspace packages:
 
 | Package | Purpose | Key Dependencies |
 |---------|---------|-----------------|
-| `@hitechclaw-ai/shared` | Type definitions (1196+ lines), constants, schemas | None |
-| `@hitechclaw-ai/db` | Database layer | `@hitechclaw-ai/shared` |
-| `@hitechclaw-ai/core` | Agent engine: LLM, memory, tools, RAG, tracing, streaming, multi-agent | `@hitechclaw-ai/shared` |
-| `@hitechclaw-ai/integrations` | Third-party service integrations | `@hitechclaw-ai/shared`, `@hitechclaw-ai/db` |
-| `@hitechclaw-ai/domains` | Domain-specific logic packs | `@hitechclaw-ai/shared`, `@hitechclaw-ai/db` |
-| `@hitechclaw-ai/ml` | Machine learning, AutoML, reinforcement learning (bandit) | `@hitechclaw-ai/shared`, `@hitechclaw-ai/core` |
-| `@hitechclaw-ai/skills` | AI agent skill packs (tools) | `@hitechclaw-ai/shared`, `@hitechclaw-ai/core` |
-| `@hitechclaw-ai/skill-hub` | Skill marketplace registry | `@hitechclaw-ai/shared`, `@hitechclaw-ai/core` |
-| `@hitechclaw-ai/gateway` | Express + WebSocket API server | `@hitechclaw-ai/core`, all providers |
-| `@hitechclaw-ai/channels/*` | Telegram (grammY), Discord (discord.js) | `@hitechclaw-ai/gateway` |
-| `@hitechclaw-ai/cli` | Command-line interface | `@hitechclaw-ai/core` |
-| `@hitechclaw-ai/server` | Server entry point | `@hitechclaw-ai/gateway` |
-| `@hitechclaw-ai/web` | React frontend | Standalone (API client) |
+| `@hitechclaw/shared` | Type definitions (1196+ lines), constants, schemas | None |
+| `@hitechclaw/db` | Database layer | `@hitechclaw/shared` |
+| `@hitechclaw/core` | Agent engine: LLM, memory, tools, RAG, tracing, streaming, multi-agent | `@hitechclaw/shared` |
+| `@hitechclaw/integrations` | Third-party service integrations | `@hitechclaw/shared`, `@hitechclaw/db` |
+| `@hitechclaw/domains` | Domain-specific logic packs | `@hitechclaw/shared`, `@hitechclaw/db` |
+| `@hitechclaw/ml` | Machine learning, AutoML, reinforcement learning (bandit) | `@hitechclaw/shared`, `@hitechclaw/core` |
+| `@hitechclaw/skills` | AI agent skill packs (tools) | `@hitechclaw/shared`, `@hitechclaw/core` |
+| `@hitechclaw/skill-hub` | Skill marketplace registry | `@hitechclaw/shared`, `@hitechclaw/core` |
+| `@hitechclaw/gateway` | Express + WebSocket API server | `@hitechclaw/core`, all providers |
+| `@hitechclaw/channels/*` | Telegram (grammY), Discord (discord.js) | `@hitechclaw/gateway` |
+| `@hitechclaw/cli` | Command-line interface | `@hitechclaw/core` |
+| `@hitechclaw/server` | Server entry point | `@hitechclaw/gateway` |
+| `@hitechclaw/web` | React frontend | Standalone (API client) |
 
 ## Agent Core Components
 
@@ -75,7 +75,7 @@ The `Agent` class is the central orchestrator. It wires up 6 core subsystems + 3
 
 ## Type System
 
-All shared types are in `@hitechclaw-ai/shared` (`src/types/index.ts`, 1196+ lines). Key type categories:
+All shared types are in `@hitechclaw/shared` (`src/types/index.ts`, 1196+ lines). Key type categories:
 
 | Category | Types | Description |
 |----------|-------|-------------|

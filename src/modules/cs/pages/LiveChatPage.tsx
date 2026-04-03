@@ -16,19 +16,39 @@ export function LiveChatPage() {
     const [input, setInput] = useState('');
     const [streaming, setStreaming] = useState(false);
     const [token, setToken] = useState<string | null>(null);
+    const [aiEmail, setAiEmail] = useState('');
+    const [aiPassword, setAiPassword] = useState('');
+    const [authLoading, setAuthLoading] = useState(false);
+    const [authError, setAuthError] = useState('');
     const [sessionId] = useState(() => `cs-${Date.now()}`);
     const scrollRef = useRef<HTMLDivElement>(null);
     const cancelRef = useRef<(() => void) | null>(null);
 
     useEffect(() => {
-        loginHiTechClaw('admin@hitechclaw.io', 'password123').then(res => {
-            if ('token' in res) setToken(res.token);
-        }).catch(() => { /* ignore */ });
-    }, []);
-
-    useEffect(() => {
         scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
     }, [messages]);
+
+    const handleConnect = async () => {
+        if (!aiEmail.trim() || !aiPassword.trim()) {
+            setAuthError('Vui lòng nhập email và mật khẩu HiTechClaw.');
+            return;
+        }
+        setAuthLoading(true);
+        setAuthError('');
+        try {
+            const res = await loginHiTechClaw(aiEmail.trim(), aiPassword);
+            if ('token' in res && res.token) {
+                setToken(res.token);
+                setAiPassword('');
+                return;
+            }
+            setAuthError(res.error || 'Đăng nhập HiTechClaw thất bại.');
+        } catch {
+            setAuthError('Không thể kết nối tới HiTechClaw AI.');
+        } finally {
+            setAuthLoading(false);
+        }
+    };
 
     const handleSend = async () => {
         const text = input.trim();
@@ -116,9 +136,39 @@ export function LiveChatPage() {
             {/* Input */}
             <div className="px-6 py-4 border-t" style={{ borderColor: 'var(--cs-border)' }}>
                 {!token && (
-                    <div className="text-[11px] text-center mb-2 px-3 py-1.5 rounded-lg"
-                        style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b' }}>
-                        Đang kết nối HiTechClaw AI...
+                    <div className="mb-3 p-3 rounded-lg border" style={{ borderColor: 'var(--cs-border)', background: 'var(--cs-surface-alt)' }}>
+                        <div className="text-[11px] mb-2" style={{ color: 'var(--cs-fg-muted)' }}>
+                            Kết nối HiTechClaw AI để bắt đầu chat
+                        </div>
+                        <div className="grid gap-2 grid-cols-1 md:grid-cols-3">
+                            <input
+                                type="email"
+                                value={aiEmail}
+                                onChange={e => setAiEmail(e.target.value)}
+                                placeholder="Email HiTechClaw"
+                                className="px-3 py-2 rounded-lg text-[12px] outline-none"
+                                style={{ background: 'var(--cs-surface)', border: '1px solid var(--cs-border)', color: 'var(--cs-fg)' }}
+                            />
+                            <input
+                                type="password"
+                                value={aiPassword}
+                                onChange={e => setAiPassword(e.target.value)}
+                                placeholder="Mật khẩu"
+                                className="px-3 py-2 rounded-lg text-[12px] outline-none"
+                                style={{ background: 'var(--cs-surface)', border: '1px solid var(--cs-border)', color: 'var(--cs-fg)' }}
+                            />
+                            <button
+                                onClick={handleConnect}
+                                disabled={authLoading || !aiEmail.trim() || !aiPassword.trim()}
+                                className="px-3 py-2 rounded-lg text-[12px] font-medium text-white cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                                style={{ background: 'var(--cs-primary)' }}
+                            >
+                                {authLoading ? 'Đang kết nối...' : 'Kết nối AI'}
+                            </button>
+                        </div>
+                        {authError && (
+                            <div className="text-[11px] mt-2" style={{ color: '#ef4444' }}>{authError}</div>
+                        )}
                     </div>
                 )}
                 <div className="flex gap-2">

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { TraceSpan, SpanEvent } from '@hitechclaw-ai/shared';
+import type { TraceSpan, SpanEvent } from '@hitechclaw/shared';
 
 export class Tracer {
   private spans: TraceSpan[] = [];

@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk/react — useSessions Hook
+// @hitechclaw/chat-sdk/react — useSessions Hook
 // ============================================================
 
 import { useState, useCallback, useEffect } from 'react';

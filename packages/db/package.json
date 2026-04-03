@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/db",
+    "name": "@hitechclaw/db",
     "version": "2.2.0",
     "description": "HiTechClaw database layer — Drizzle ORM + PostgreSQL",
     "type": "module",
@@ -16,16 +16,20 @@
         }
     },
     "scripts": {
-        "build": "tsc -b && cp -r src/migrations dist/migrations",
+        "build": "tsc -b && node -e \"const fs=require('node:fs');fs.cpSync('src/migrations','dist/migrations',{ recursive: true });\"",
         "dev": "tsc -b --watch",
         "generate": "npx drizzle-kit@0.31.10 generate",
-        "migrate": "npx drizzle-kit@0.31.10 migrate",
+        "migrate": "tsx src/migrate.ts",
         "studio": "npx drizzle-kit@0.31.10 studio"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*",
+        "@hitechclaw/shared": "*",
+        "dotenv": "^16.4.0",
         "drizzle-orm": "^0.39.0",
         "mongodb": "^7.1.0",
         "postgres": "^3.4.0"
+    },
+    "devDependencies": {
+        "tsx": "^4.19.0"
     }
 }

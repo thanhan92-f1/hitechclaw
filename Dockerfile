@@ -111,6 +111,6 @@ COPY --from=builder /app/data/dev-docs ./data/dev-docs
 RUN chown -R hitechclaw:hitechclaw ./data
 
 USER hitechclaw
-EXPOSE 3000
+EXPOSE 5001
 
 CMD ["node", "packages/server/dist/index.js"]

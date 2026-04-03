@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/doc-mcp — Document Store & Indexing Engine
+// @hitechclaw/doc-mcp — Document Store & Indexing Engine
 // ============================================================
 //
 // File-based documentation knowledge base with full-text search.

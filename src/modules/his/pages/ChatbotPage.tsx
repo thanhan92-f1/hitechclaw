@@ -5,7 +5,7 @@ import {
     BarChart3, History, X, Sparkles,
 } from 'lucide-react';
 import {
-    loginHiTechClaw, chatHiTechClaw, getChatSessions, createChatSession,
+    getHiTechClawAuthToken, ensureHiTechClawTokenInteractive, chatHiTechClaw, getChatSessions, createChatSession,
     deleteChatSession, getChatMessages, saveChatMessage, rateChatMessage,
     getChatContext, getChatStats,
 } from '../api';
@@ -229,7 +229,7 @@ const QUICK_PROMPTS = [
 // ═══════════════════════════════════════════════════
 
 export function ChatbotPage() {
-    // Auth - auto-login to HiTechClaw
+    // Auth
     const [token, setToken] = useState<string | null>(null);
 
     // Messages
@@ -265,16 +265,10 @@ export function ChatbotPage() {
 
     useEffect(() => { loadSessions(); loadStats(); }, [loadSessions, loadStats]);
 
-    // ─── Auto-login to HiTechClaw ───
+    // ─── Restore saved HiTechClaw token ───
     useEffect(() => {
-        (async () => {
-            try {
-                const res = await loginHiTechClaw('doctor@his.local', 'doctor123');
-                if ('token' in res && res.token) {
-                    setToken(res.token);
-                }
-            } catch { /* HiTechClaw not available */ }
-        })();
+        const saved = getHiTechClawAuthToken();
+        if (saved) setToken(saved);
     }, []);
 
     // ─── Load messages for active session ───
@@ -349,13 +343,20 @@ export function ChatbotPage() {
             userMsg.id = savedUser.message?.id;
 
             // ─── AI Chat (HiTechClaw) ───
+            let activeToken = token;
             if (!token) {
-                setMessages(prev => [...prev, {
-                    role: 'assistant',
-                    content: '⚠️ Chưa kết nối được tới HiTechClaw AI. Hãy kiểm tra HiTechClaw server đang chạy (port 3000).',
-                    timestamp: new Date(),
-                }]);
-                return;
+                try {
+                    const ensuredToken = await ensureHiTechClawTokenInteractive();
+                    setToken(ensuredToken);
+                    activeToken = ensuredToken;
+                } catch {
+                    setMessages(prev => [...prev, {
+                        role: 'assistant',
+                        content: '⚠️ Chưa kết nối được tới HiTechClaw AI. Vui lòng đăng nhập HiTechClaw để tiếp tục.',
+                        timestamp: new Date(),
+                    }]);
+                    return;
+                }
             }
 
             // Get context from history for better AI understanding
@@ -373,7 +374,7 @@ export function ChatbotPage() {
                 ? `${contextPrefix}${msg}\n\nHãy trả lời bằng mermaid code block (\`\`\`mermaid). Nếu cần giải thích thêm thì viết bên ngoài code block.`
                 : `${contextPrefix}${msg}`;
 
-            const res = await chatHiTechClaw(token, enhancedMsg, hitechclawSessionId);
+            const res = await chatHiTechClaw(activeToken, enhancedMsg, hitechclawSessionId);
             setHitechclawSessionId(res.sessionId);
 
             const assistantMsg: Message = {

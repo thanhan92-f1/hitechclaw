@@ -10,7 +10,7 @@
 
 import { Hono } from 'hono';
 import type { GatewayContext } from './gateway.js';
-import type { OllamaAdapter } from '@hitechclaw-ai/core';
+import type { OllamaAdapter } from '@hitechclaw/core';
 
 export function createModelsRoutes(ctx: GatewayContext) {
   const app = new Hono();

@@ -8,7 +8,7 @@
 //   session → in-memory only (not persisted to disk)
 // ============================================================
 
-import type { AgentMemoryScope } from '@hitechclaw-ai/shared';
+import type { AgentMemoryScope } from '@hitechclaw/shared';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join, normalize } from 'node:path';

@@ -11,7 +11,7 @@ import type {
     AgentConfig,
     AgentDefinition,
     CoordinatorConfig
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import type { ChatOptions } from '../llm/llm-router.js';
 import {
     BUILT_IN_AGENT_DEFINITIONS,

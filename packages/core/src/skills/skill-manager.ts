@@ -1,4 +1,4 @@
-import type { SkillManifest, ToolDefinition } from '@hitechclaw-ai/shared';
+import type { SkillManifest, ToolDefinition } from '@hitechclaw/shared';
 import type { ToolHandler } from '../tools/tool-registry.js';
 
 export interface SkillDefinition {
@@ -8,7 +8,7 @@ export interface SkillDefinition {
   deactivate?: () => Promise<void>;
 }
 
-/** Interface for pluggable skill selection strategies (e.g. BanditSelector from @hitechclaw-ai/ml) */
+/** Interface for pluggable skill selection strategies (e.g. BanditSelector from @hitechclaw/ml) */
 export interface SkillSelector {
   addArm(armId: string): void;
   removeArm(armId: string): void;

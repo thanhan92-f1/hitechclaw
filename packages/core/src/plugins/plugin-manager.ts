@@ -10,7 +10,7 @@ import type {
   PluginContext,
   PluginRegistryEntry,
   PluginStatus,
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 
 export interface PluginManagerDeps {
   /** MongoDB db instance for creating plugin collections */

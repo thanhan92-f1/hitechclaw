@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk — Main Entry Point
+// @hitechclaw/chat-sdk — Main Entry Point
 // ============================================================
 
 // Core client

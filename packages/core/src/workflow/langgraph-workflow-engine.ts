@@ -25,7 +25,7 @@ import type {
     WorkflowNode,
     WorkflowNodeType,
     WorkflowSandboxConfig,
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import { randomUUID } from 'node:crypto';
 import vm from 'node:vm';
 import type { EventBus } from '../agent/event-bus.js';

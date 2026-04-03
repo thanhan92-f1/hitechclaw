@@ -79,8 +79,8 @@ export async function getFaqCategories() {
   return res.json();
 }
 
-// ── HiTechClaw Chat (via @hitechclaw-ai/chat-sdk) ──
-import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
+// ── HiTechClaw Chat (via @hitechclaw/chat-sdk) ──
+import { HiTechClawClient } from '@hitechclaw/chat-sdk';
 
 const HITECHCLAW_BASE = '/hitechclaw-api';
 const hitechclawClient = new HiTechClawClient({ baseUrl: HITECHCLAW_BASE });
