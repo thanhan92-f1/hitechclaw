@@ -359,6 +359,37 @@ docker compose logs -f hitechclaw
 docker compose down
 ```
 
+### Docker (infra-only for local coding)
+
+Use this mode when you want to run API/Web directly on host (hot reload) and only keep databases/cache in Docker.
+
+```bash
+# Start PostgreSQL + MongoDB + Redis only
+docker compose -f docker-compose.dev-infra.yml up -d
+
+# View infra logs
+docker compose -f docker-compose.dev-infra.yml logs -f
+
+# Stop infra
+docker compose -f docker-compose.dev-infra.yml down
+```
+
+Infra ports:
+
+| Service      | Port   |
+|-------------|--------|
+| **postgres** | `5451` |
+| **mongodb**  | `27018` |
+| **redis**    | `6379` |
+
+Use these `.env` values for host-based server/web development:
+
+```env
+DATABASE_URL=postgresql://hitechclaw:hitechclaw@localhost:5451/hitechclaw
+MONGODB_URL=mongodb://localhost:27018/hitechclaw
+REDIS_URL=redis://localhost:6379
+```
+
 ### Local Dev (without Docker)
 
 > Yêu cầu: Node.js ≥ 20, npm ≥ 10, PostgreSQL, MongoDB, Redis đã chạy sẵn.

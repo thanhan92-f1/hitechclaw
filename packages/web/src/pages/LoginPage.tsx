@@ -2,7 +2,9 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { Loader2, Sparkles, Zap, Shield, Globe, Building2 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useI18n } from '../i18n';
-import { getTenantList } from '../lib/api';
+import { getTenantList, register as registerUser } from '../lib/api';
+
+type AuthMode = 'login' | 'register';
 
 const FEATURES = [
     { icon: Sparkles, label: 'Multi-LLM AI Engine', desc: 'OpenAI, Anthropic, Ollama & more' },
@@ -14,8 +16,13 @@ const FEATURES = [
 export function LoginPage() {
     const { login } = useAuth();
     const { t } = useI18n();
-    const [email, setEmail] = useState('superadmin@hitechclaw.io');
-    const [password, setPassword] = useState('password123');
+    const [mode, setMode] = useState<AuthMode>('login');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [registerRole, setRegisterRole] = useState<'member' | 'owner'>('member');
+    const [tenantName, setTenantName] = useState('');
     const [tenantSlug, setTenantSlug] = useState('');
     const [tenants, setTenants] = useState<Array<{ slug: string; name: string }>>([]);
     const [isSuperAdmin, setIsSuperAdmin] = useState(true);
@@ -29,15 +36,64 @@ export function LoginPage() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setError('');
-        if (!isSuperAdmin && !tenantSlug) {
-            setError(t('auth.selectTenant'));
+
+        if (mode === 'login') {
+            if (!isSuperAdmin && !tenantSlug) {
+                setError(t('auth.selectTenant'));
+                return;
+            }
+
+            setLoading(true);
+            try {
+                await login(email.trim(), password, isSuperAdmin ? undefined : tenantSlug);
+            } catch {
+                setError(t('auth.invalidCredentials'));
+            } finally {
+                setLoading(false);
+            }
             return;
         }
+
+        const normalizedTenantSlug = tenantSlug.trim().toLowerCase();
+        if (!name.trim()) {
+            setError('Name is required');
+            return;
+        }
+        if (!normalizedTenantSlug) {
+            setError('Tenant slug is required');
+            return;
+        }
+        if (registerRole === 'owner' && !tenantName.trim()) {
+            setError('Tenant name is required for owner registration');
+            return;
+        }
+        if (password.length < 8) {
+            setError('Password must be at least 8 characters');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+
         setLoading(true);
         try {
-            await login(email, password, isSuperAdmin ? undefined : tenantSlug);
-        } catch {
-            setError(t('auth.invalidCredentials'));
+            await registerUser({
+                name: name.trim(),
+                email: email.trim(),
+                password,
+                tenantSlug: normalizedTenantSlug,
+                roleName: registerRole,
+                tenantName: registerRole === 'owner' ? tenantName.trim() : undefined,
+            });
+
+            await login(
+                email.trim(),
+                password,
+                registerRole === 'member' ? normalizedTenantSlug : undefined,
+            );
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Registration failed');
         } finally {
             setLoading(false);
         }
@@ -157,36 +213,92 @@ export function LoginPage() {
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-5">
-                            {/* Login type toggle */}
+                            {/* Auth mode toggle */}
                             <div className="flex gap-1 p-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)' }}>
                                 <button
                                     type="button"
-                                    onClick={() => { setIsSuperAdmin(true); setEmail('superadmin@hitechclaw.io'); }}
-                                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
+                                    onClick={() => { setMode('login'); setError(''); }}
+                                    className="flex-1 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
                                     style={{
-                                        background: isSuperAdmin ? 'rgba(99,102,241,0.15)' : 'transparent',
-                                        color: isSuperAdmin ? '#818cf8' : '#71717a',
+                                        background: mode === 'login' ? 'rgba(99,102,241,0.15)' : 'transparent',
+                                        color: mode === 'login' ? '#818cf8' : '#71717a',
                                     }}
                                 >
-                                    <Shield size={13} />
-                                    Super Admin
+                                    {t('auth.signIn')}
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => { setIsSuperAdmin(false); setEmail('admin@hitechclaw.io'); }}
-                                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
+                                    onClick={() => { setMode('register'); setError(''); setIsSuperAdmin(false); }}
+                                    className="flex-1 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
                                     style={{
-                                        background: !isSuperAdmin ? 'rgba(99,102,241,0.15)' : 'transparent',
-                                        color: !isSuperAdmin ? '#818cf8' : '#71717a',
+                                        background: mode === 'register' ? 'rgba(99,102,241,0.15)' : 'transparent',
+                                        color: mode === 'register' ? '#818cf8' : '#71717a',
                                     }}
                                 >
-                                    <Building2 size={13} />
-                                    Tenant
+                                    Register
                                 </button>
                             </div>
 
+                            {/* Login type toggle */}
+                            {mode === 'login' && (
+                                <div className="flex gap-1 p-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)' }}>
+                                    <button
+                                        type="button"
+                                        onClick={() => { setIsSuperAdmin(true); }}
+                                        className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
+                                        style={{
+                                            background: isSuperAdmin ? 'rgba(99,102,241,0.15)' : 'transparent',
+                                            color: isSuperAdmin ? '#818cf8' : '#71717a',
+                                        }}
+                                    >
+                                        <Shield size={13} />
+                                        Super Admin
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => { setIsSuperAdmin(false); }}
+                                        className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
+                                        style={{
+                                            background: !isSuperAdmin ? 'rgba(99,102,241,0.15)' : 'transparent',
+                                            color: !isSuperAdmin ? '#818cf8' : '#71717a',
+                                        }}
+                                    >
+                                        <Building2 size={13} />
+                                        Tenant
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Register role toggle */}
+                            {mode === 'register' && (
+                                <div className="flex gap-1 p-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)' }}>
+                                    <button
+                                        type="button"
+                                        onClick={() => setRegisterRole('member')}
+                                        className="flex-1 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
+                                        style={{
+                                            background: registerRole === 'member' ? 'rgba(99,102,241,0.15)' : 'transparent',
+                                            color: registerRole === 'member' ? '#818cf8' : '#71717a',
+                                        }}
+                                    >
+                                        Member
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setRegisterRole('owner')}
+                                        className="flex-1 px-3 py-2 rounded-md text-[12px] font-medium transition-all"
+                                        style={{
+                                            background: registerRole === 'owner' ? 'rgba(99,102,241,0.15)' : 'transparent',
+                                            color: registerRole === 'owner' ? '#818cf8' : '#71717a',
+                                        }}
+                                    >
+                                        Owner
+                                    </button>
+                                </div>
+                            )}
+
                             {/* Tenant selector (shown only for tenant login) */}
-                            {!isSuperAdmin && (
+                            {mode === 'login' && !isSuperAdmin && (
                                 <div>
                                     <label
                                         className="block text-[11px] font-semibold tracking-wider mb-2"
@@ -208,6 +320,64 @@ export function LoginPage() {
                                 </div>
                             )}
 
+                            {/* Registration fields */}
+                            {mode === 'register' && (
+                                <>
+                                    <div>
+                                        <label
+                                            className="block text-[11px] font-semibold tracking-wider mb-2"
+                                            style={{ color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                                        >
+                                            Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            className="login-input w-full px-4 py-3 rounded-xl text-sm outline-none"
+                                            placeholder="Your full name"
+                                            required
+                                        />
+                                    </div>
+
+                                    {registerRole === 'owner' && (
+                                        <div>
+                                            <label
+                                                className="block text-[11px] font-semibold tracking-wider mb-2"
+                                                style={{ color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                                            >
+                                                Tenant Name
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={tenantName}
+                                                onChange={(e) => setTenantName(e.target.value)}
+                                                className="login-input w-full px-4 py-3 rounded-xl text-sm outline-none"
+                                                placeholder="Acme Corp"
+                                                required
+                                            />
+                                        </div>
+                                    )}
+
+                                    <div>
+                                        <label
+                                            className="block text-[11px] font-semibold tracking-wider mb-2"
+                                            style={{ color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                                        >
+                                            Tenant Slug
+                                        </label>
+                                        <input
+                                            type="text"
+                                            value={tenantSlug}
+                                            onChange={(e) => setTenantSlug(e.target.value.toLowerCase())}
+                                            className="login-input w-full px-4 py-3 rounded-xl text-sm outline-none"
+                                            placeholder="your-tenant-slug"
+                                            required
+                                        />
+                                    </div>
+                                </>
+                            )}
+
                             <div>
                                 <label
                                     className="block text-[11px] font-semibold tracking-wider mb-2"
@@ -224,6 +394,25 @@ export function LoginPage() {
                                     required
                                 />
                             </div>
+
+                            {mode === 'register' && (
+                                <div>
+                                    <label
+                                        className="block text-[11px] font-semibold tracking-wider mb-2"
+                                        style={{ color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                                    >
+                                        Confirm Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        className="login-input w-full px-4 py-3 rounded-xl text-sm outline-none"
+                                        placeholder="••••••••"
+                                        required
+                                    />
+                                </div>
+                            )}
                             <div>
                                 <label
                                     className="block text-[11px] font-semibold tracking-wider mb-2"
@@ -263,7 +452,7 @@ export function LoginPage() {
                                 {loading ? (
                                     <Loader2 size={18} className="animate-spin mx-auto" />
                                 ) : (
-                                    t('auth.signIn')
+                                    mode === 'login' ? t('auth.signIn') : 'Register'
                                 )}
                             </button>
                         </form>

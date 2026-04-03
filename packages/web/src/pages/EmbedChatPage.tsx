@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { setToken, getToken, login as apiLogin, getMe } from '../lib/api';
+import { setToken, getToken, clearToken, getMe } from '../lib/api';
 import { ChatPage } from './ChatPage';
 
 /**
  * Embed-only chat page for iframe embedding.
- * Accepts ?token=JWT or auto-login with dev credentials.
+ * Accepts ?token=JWT or a valid existing local token.
  * Renders ChatPage without Layout/Sidebar.
  */
 export function EmbedChatPage() {
@@ -31,17 +31,12 @@ export function EmbedChatPage() {
                     setReady(true);
                     return;
                 } catch {
-                    // Token expired, continue to auto-login
+                    clearToken();
                 }
             }
 
-            // 3. Auto-login (dev mode)
-            try {
-                await apiLogin('embed@his.local', 'embed');
-                setReady(true);
-            } catch {
-                setError('Không thể kết nối HiTechClaw. Vui lòng thử lại.');
-            }
+            // 3. No valid auth token
+            setError('Missing or invalid token. Please provide ?token=<JWT> for embedded chat.');
         };
         init();
     }, [searchParams]);

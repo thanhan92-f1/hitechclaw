@@ -230,57 +230,101 @@ export function createAuthRoutes(ctx: GatewayContext) {
     });
   });
 
-  // POST /auth/register — self-registration (creates tenant + owner)
+  // POST /auth/register — self-registration
+  // - roleName=owner (default): creates a new tenant + owner account
+  // - roleName=member: joins an existing tenant as member
   app.post('/register', async (c) => {
     const body = await c.req.json();
-    const { name, email, password, tenantName, tenantSlug } = body;
+    const { name, email, password, tenantName, tenantSlug, roleName } = body as {
+      name?: string;
+      email?: string;
+      password?: string;
+      tenantName?: string;
+      tenantSlug?: string;
+      roleName?: string;
+    };
 
-    if (!name || !email || !password || !tenantName || !tenantSlug) {
-      return c.json({ error: 'name, email, password, tenantName, and tenantSlug are required' }, 400);
+    const requestedRole = roleName === 'member' ? 'member' : 'owner';
+
+    if (!name || !email || !password || !tenantSlug) {
+      return c.json({ error: 'name, email, password, and tenantSlug are required' }, 400);
+    }
+    if (requestedRole === 'owner' && !tenantName) {
+      return c.json({ error: 'tenantName is required for owner registration' }, 400);
     }
     if (!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(tenantSlug)) {
       return c.json({ error: 'tenantSlug must be lowercase alphanumeric with hyphens' }, 400);
     }
 
     const db = getDB();
-
-    // Check slug availability
-    const [existingTenant] = await db.select().from(tenants).where(eq(tenants.slug, tenantSlug)).limit(1);
-    if (existingTenant) {
-      return c.json({ error: 'Tenant slug already taken' }, 409);
-    }
-
     const now = new Date();
-    const tenantId = crypto.randomUUID();
     const userId = crypto.randomUUID();
     const passwordHash = await hashPassword(password);
 
-    // Create tenant
-    await db.insert(tenants).values({
-      id: tenantId, name: tenantName, slug: tenantSlug,
-      plan: 'free', status: 'active', metadata: {},
-      createdAt: now, updatedAt: now,
-    });
+    let resolvedTenantId = '';
+    let resolvedTenantName = '';
+    let resolvedTenantSlug = tenantSlug;
 
-    // Create default settings
-    const { tenantSettings } = await import('@hitechclaw/db');
-    await db.insert(tenantSettings).values({
-      id: crypto.randomUUID(), tenantId,
-      createdAt: now, updatedAt: now,
-    });
+    if (requestedRole === 'owner') {
+      // Check slug availability for new tenant
+      const [existingTenant] = await db.select().from(tenants).where(eq(tenants.slug, tenantSlug)).limit(1);
+      if (existingTenant) {
+        return c.json({ error: 'Tenant slug already taken' }, 409);
+      }
 
-    // Create owner user
+      const tenantId = crypto.randomUUID();
+      resolvedTenantId = tenantId;
+      resolvedTenantName = tenantName!;
+
+      // Create tenant
+      await db.insert(tenants).values({
+        id: tenantId, name: tenantName!, slug: tenantSlug,
+        plan: 'free', status: 'active', metadata: {},
+        createdAt: now, updatedAt: now,
+      });
+
+      // Create default settings
+      const { tenantSettings } = await import('@hitechclaw/db');
+      await db.insert(tenantSettings).values({
+        id: crypto.randomUUID(), tenantId,
+        createdAt: now, updatedAt: now,
+      });
+    } else {
+      // Member registration: join existing active tenant
+      const [tenant] = await db.select().from(tenants).where(eq(tenants.slug, tenantSlug)).limit(1);
+      if (!tenant || tenant.status !== 'active') {
+        return c.json({ error: 'Tenant not found or inactive' }, 404);
+      }
+
+      const [existingUser] = await db.select({ id: users.id }).from(users)
+        .where(and(eq(users.tenantId, tenant.id), eq(users.email, email)))
+        .limit(1);
+      if (existingUser) {
+        return c.json({ error: 'User with this email already exists in this tenant' }, 409);
+      }
+
+      resolvedTenantId = tenant.id;
+      resolvedTenantName = tenant.name;
+      resolvedTenantSlug = tenant.slug;
+    }
+
+    // Create user
     await db.insert(users).values({
-      id: userId, tenantId, name, email, passwordHash,
-      role: 'owner', status: 'active',
+      id: userId, tenantId: resolvedTenantId, name, email, passwordHash,
+      role: requestedRole, status: 'active',
       lastLoginAt: now, createdAt: now, updatedAt: now,
     });
 
-    // Seed default roles & assign owner role
-    await seedDefaultRoles(tenantId);
-    await assignRoleToUser(userId, 'owner', tenantId);
+    // Seed default roles & assign selected role
+    await seedDefaultRoles(resolvedTenantId);
+    await assignRoleToUser(userId, requestedRole, resolvedTenantId);
 
-    const token = await new jose.SignJWT({ email, role: 'owner', tenantId, isSuperAdmin: false })
+    const token = await new jose.SignJWT({
+      email,
+      role: requestedRole,
+      tenantId: resolvedTenantId,
+      isSuperAdmin: false,
+    })
       .setProtectedHeader({ alg: 'HS256' })
       .setSubject(userId)
       .setIssuedAt()
@@ -290,8 +334,8 @@ export function createAuthRoutes(ctx: GatewayContext) {
     return c.json({
       token,
       expiresIn: 86400,
-      user: { id: userId, name, email, role: 'owner', tenantId },
-      tenant: { id: tenantId, name: tenantName, slug: tenantSlug },
+      user: { id: userId, name, email, role: requestedRole, tenantId: resolvedTenantId },
+      tenant: { id: resolvedTenantId, name: resolvedTenantName, slug: resolvedTenantSlug },
     }, 201);
   });
 

@@ -119,22 +119,8 @@ function LoginScreen({ onLogin }: { onLogin: (user: CsUser) => void }) {
                 </form>
 
                 <div className="mt-6 p-3 rounded-lg" style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)' }}>
-                    <div className="text-[11px] font-semibold mb-2" style={{ color: 'rgba(148,163,184,0.6)' }}>Tài khoản demo:</div>
-                    <div className="grid grid-cols-2 gap-1 text-[11px]" style={{ color: 'rgba(148,163,184,0.7)' }}>
-                        {[
-                            { email: 'manager@cs.local', pw: 'manager123', role: 'Manager' },
-                            { email: 'agent@cs.local', pw: 'agent123', role: 'Agent' },
-                            { email: 'senior@cs.local', pw: 'senior123', role: 'Senior Agent' },
-                            { email: 'viewer@cs.local', pw: 'viewer123', role: 'Viewer' },
-                        ].map(a => (
-                            <button key={a.email}
-                                onClick={() => { setEmail(a.email); setPassword(a.pw); }}
-                                className="text-left px-2 py-1.5 rounded cursor-pointer hover:opacity-80 transition-opacity"
-                                style={{ background: '#1e293b' }}>
-                                <div className="font-medium" style={{ color: '#a855f7' }}>{a.role}</div>
-                                <div>{a.email}</div>
-                            </button>
-                        ))}
+                    <div className="text-[11px]" style={{ color: 'rgba(148,163,184,0.7)' }}>
+                        Vui lòng tự nhập thông tin đăng nhập.
                     </div>
                 </div>
             </div>

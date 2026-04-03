@@ -143,6 +143,16 @@ export async function updateEncounter(id: string, data: { subjective?: string; o
 
 // ── HiTechClaw Chat ──
 const HITECHCLAW_BASE = '/hitechclaw-api';
+const HITECHCLAW_TOKEN_KEY = 'his_hitechclaw_token';
+
+export function setHiTechClawAuthToken(token: string | null) {
+  if (token) sessionStorage.setItem(HITECHCLAW_TOKEN_KEY, token);
+  else sessionStorage.removeItem(HITECHCLAW_TOKEN_KEY);
+}
+
+export function getHiTechClawAuthToken() {
+  return sessionStorage.getItem(HITECHCLAW_TOKEN_KEY);
+}
 
 export async function loginHiTechClaw(email: string, password: string): Promise<{ token: string } | { error: string }> {
   const res = await fetch(`${HITECHCLAW_BASE}/auth/login`, {
@@ -151,6 +161,23 @@ export async function loginHiTechClaw(email: string, password: string): Promise<
     body: JSON.stringify({ email, password }),
   });
   return res.json();
+}
+
+export async function ensureHiTechClawTokenInteractive(): Promise<string> {
+  const savedToken = getHiTechClawAuthToken();
+  if (savedToken) return savedToken;
+
+  const email = typeof window !== 'undefined' ? window.prompt('Nhập email HiTechClaw AI')?.trim() : '';
+  if (!email) throw new Error('Bạn chưa đăng nhập HiTechClaw AI.');
+
+  const password = typeof window !== 'undefined' ? window.prompt(`Nhập mật khẩu cho ${email}`) ?? '' : '';
+  if (!password) throw new Error('Bạn chưa đăng nhập HiTechClaw AI.');
+
+  const auth = await loginHiTechClaw(email, password);
+  if ('error' in auth) throw new Error(auth.error);
+
+  setHiTechClawAuthToken(auth.token);
+  return auth.token;
 }
 
 export async function chatHiTechClaw(token: string, message: string, sessionId?: string, domainId?: string): Promise<{ content: string; sessionId: string }> {

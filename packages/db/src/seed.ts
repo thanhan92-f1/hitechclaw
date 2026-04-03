@@ -92,8 +92,8 @@ const PLATFORM_TENANT = {
 
 const SUPER_ADMIN = {
   name: 'Super Admin',
-  email: 'superadmin@hitechclaw.io',
-  password: 'password123',
+  email: 'contact@hitechclaw.com',
+  password: 'Quangnam92f1@@@',
   role: 'super_admin' as const,
 };
 
@@ -108,8 +108,8 @@ const DEFAULT_TENANT = {
 
 const DEFAULT_ADMIN = {
   name: 'Admin',
-  email: 'admin@hitechclaw.io',
-  password: 'password123',
+  email: 'admin@hitechclaw.com',
+  password: 'Quangnam92f1@@@',
   role: 'owner' as const,
 };
 

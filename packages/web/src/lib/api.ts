@@ -55,6 +55,27 @@ export async function login(email: string, password: string, tenantSlug?: string
   return data;
 }
 
+export async function register(payload: {
+  name: string;
+  email: string;
+  password: string;
+  tenantSlug: string;
+  roleName?: 'owner' | 'member';
+  tenantName?: string;
+}) {
+  const res = await apiFetch('/auth/register', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({ error: 'Registration failed' }));
+    throw new Error(data.error || 'Registration failed');
+  }
+
+  return res.json();
+}
+
 export async function getMe() {
   const res = await apiFetch('/auth/me');
   if (!res.ok) throw new Error('Not authenticated');
@@ -90,7 +111,7 @@ export async function getRBACPermissions() {
 export async function inviteUser(email: string, name: string, role: string) {
   const res = await apiFetch('/auth/invite', {
     method: 'POST',
-    body: JSON.stringify({ email, name, role }),
+    body: JSON.stringify({ email, name, roleName: role }),
   });
   if (!res.ok) {
     const data = await res.json();

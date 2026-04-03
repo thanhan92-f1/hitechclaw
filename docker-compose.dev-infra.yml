@@ -1,0 +1,52 @@
+services:
+  # ─── PostgreSQL (config/structured data) ─────────────────
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: hitechclaw
+      POSTGRES_PASSWORD: hitechclaw
+      POSTGRES_DB: hitechclaw
+    ports:
+      - "5451:5432"
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hitechclaw -d hitechclaw"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ─── MongoDB (AI/chat sessions, memory, messages) ────────
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodata_dev:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ─── Redis (cache/rate-limit/session) ────────────────────
+  redis:
+    image: redis:8-alpine
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata_dev:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata_dev:
+  mongodata_dev:
+  redisdata_dev:
