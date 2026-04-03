@@ -36,7 +36,7 @@ jobs:
           NEXT_PUBLIC_DOCS_URL: https://xclaw.xdev.asia
 
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Set image name
         id: image
