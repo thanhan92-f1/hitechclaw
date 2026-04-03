@@ -4,7 +4,7 @@
  */
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import type { RagEngine } from '@hitechclaw-ai/core';
+import type { RagEngine } from '@hitechclaw/core';
 
 interface KnowledgePack {
   _meta: {

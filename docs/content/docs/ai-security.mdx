@@ -65,7 +65,7 @@ User Input
 Orchestrates input and output guardrails in sequence. Fail-fast: first failing guardrail blocks the request.
 
 ```typescript
-import { GuardrailPipeline, PromptInjectionDetector, OutputSanitizer, TopicScopeGuard } from '@hitechclaw-ai/core';
+import { GuardrailPipeline, PromptInjectionDetector, OutputSanitizer, TopicScopeGuard } from '@hitechclaw/core';
 
 const pipeline = new GuardrailPipeline();
 pipeline.addInputGuardrail(new PromptInjectionDetector());
@@ -147,7 +147,7 @@ const collections = rag.listCollections('tenant-123');
 Sliding-window rate limiter per tenant, running in-memory:
 
 ```typescript
-import { LLMRateLimiter } from '@hitechclaw-ai/core';
+import { LLMRateLimiter } from '@hitechclaw/core';
 
 const limiter = new LLMRateLimiter(60, 60_000); // 60 requests per 60 seconds
 

@@ -10,7 +10,7 @@ import type {
   SandboxInstance,
   SandboxPolicy,
   TenantSandboxConfig,
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import type { SandboxManager } from './sandbox-manager.js';
 import { BUILTIN_POLICIES } from './policy-builder.js';
 

@@ -1,8 +1,8 @@
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 import { HTTPException } from 'hono/http-exception';
-import type { TenantSandboxConfig } from '@hitechclaw-ai/shared';
-import { getDB, tenants, tenantSettings, users, eq, and } from '@hitechclaw-ai/db';
+import type { TenantSandboxConfig } from '@hitechclaw/shared';
+import { getDB, tenants, tenantSettings, users, eq, and } from '@hitechclaw/db';
 import { seedDefaultRoles, assignRoleToUser } from './rbac.js';
 
 // ─── Types ──────────────────────────────────────────────────

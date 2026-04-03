@@ -12,7 +12,7 @@ import type {
   SandboxConfig,
   SandboxPolicy,
   SandboxExecutionResult,
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import type { SandboxManager } from './sandbox-manager.js';
 
 /** Tool handler function type */

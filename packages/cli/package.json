@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/cli",
+    "name": "@hitechclaw/cli",
     "version": "2.0.1",
     "description": "HiTechClaw CLI",
     "type": "module",
@@ -11,6 +11,6 @@
         "dev": "tsx src/index.ts"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*"
+        "@hitechclaw/shared": "*"
     }
 }

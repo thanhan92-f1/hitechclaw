@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/channel-zalo",
+    "name": "@hitechclaw/channel-zalo",
     "version": "2.0.0",
     "description": "HiTechClaw Zalo OA channel plugin",
     "type": "module",
@@ -10,6 +10,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*"
+        "@hitechclaw/shared": "*"
     }
 }

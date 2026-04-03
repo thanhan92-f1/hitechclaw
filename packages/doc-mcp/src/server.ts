@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/doc-mcp — MCP Server for Dev Documentation
+// @hitechclaw/doc-mcp — MCP Server for Dev Documentation
 // ============================================================
 //
 // Exposes developer documentation knowledge base as MCP tools.

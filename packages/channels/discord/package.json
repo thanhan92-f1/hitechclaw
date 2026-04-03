@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/channel-discord",
+    "name": "@hitechclaw/channel-discord",
     "version": "2.0.1",
     "description": "HiTechClaw Discord channel plugin",
     "type": "module",
@@ -10,7 +10,7 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*",
+        "@hitechclaw/shared": "*",
         "ws": "^8.18.0"
     },
     "devDependencies": {

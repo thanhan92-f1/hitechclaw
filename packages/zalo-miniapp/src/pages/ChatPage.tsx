@@ -4,7 +4,7 @@ import type { Message } from '../components/MessageList';
 import { ChatInput } from '../components/ChatInput';
 import { TypingIndicator } from '../components/TypingIndicator';
 import hitechclaw from '../lib/api';
-import type { StreamCallbacks } from '@hitechclaw-ai/chat-sdk';
+import type { StreamCallbacks } from '@hitechclaw/chat-sdk';
 
 interface ChatPageProps {
     sessionId: string;

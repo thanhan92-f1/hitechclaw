@@ -1,4 +1,4 @@
-import type { LLMConfig, LLMMessage, LLMResponse, ResponseFormat, StreamEvent, ToolDefinition } from '@hitechclaw-ai/shared';
+import type { LLMConfig, LLMMessage, LLMResponse, ResponseFormat, StreamEvent, ToolDefinition } from '@hitechclaw/shared';
 
 export interface LLMAdapter {
   readonly provider: string;

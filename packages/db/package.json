@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/db",
+    "name": "@hitechclaw/db",
     "version": "2.2.0",
     "description": "HiTechClaw database layer — Drizzle ORM + PostgreSQL",
     "type": "module",
@@ -23,7 +23,7 @@
         "studio": "npx drizzle-kit@0.31.10 studio"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*",
+        "@hitechclaw/shared": "*",
         "drizzle-orm": "^0.39.0",
         "mongodb": "^7.1.0",
         "postgres": "^3.4.0"

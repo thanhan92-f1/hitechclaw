@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/channel-slack",
+    "name": "@hitechclaw/channel-slack",
     "version": "2.0.0",
     "description": "HiTechClaw Slack channel plugin using Bolt SDK",
     "type": "module",
@@ -10,6 +10,6 @@
         "dev": "tsc -b --watch"
     },
     "dependencies": {
-        "@hitechclaw-ai/shared": "*"
+        "@hitechclaw/shared": "*"
     }
 }

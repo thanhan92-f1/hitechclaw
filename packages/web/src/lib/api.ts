@@ -1,5 +1,5 @@
-import type { ConversationDetailResponse, ConversationSummary, StreamEvent } from '@hitechclaw-ai/chat-sdk';
-import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
+import type { ConversationDetailResponse, ConversationSummary, StreamEvent } from '@hitechclaw/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw/chat-sdk';
 
 const API_BASE = '';
 
@@ -149,7 +149,7 @@ export async function getHealth() {
   return res.json();
 }
 
-// ─── Chat (via @hitechclaw-ai/chat-sdk) ──────────────────────────
+// ─── Chat (via @hitechclaw/chat-sdk) ──────────────────────────
 
 export async function sendChat(message: string, sessionId: string, domainId?: string, agentConfigId?: string) {
   return hitechclaw.chat(message, { sessionId, domainId, agentConfigId });
@@ -228,7 +228,7 @@ export async function submitChatFeedback(
   return hitechclaw.feedback({ originalQuestion, aiAnswer, feedback, correction });
 }
 
-// ─── Conversation History (via @hitechclaw-ai/chat-sdk) ──────────
+// ─── Conversation History (via @hitechclaw/chat-sdk) ──────────
 
 export async function getConversations(): Promise<ConversationSummary[]> {
   return hitechclaw.listSessions();

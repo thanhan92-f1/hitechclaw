@@ -5,7 +5,7 @@
 // Provides a Python ML bridge for running training/inference
 // inside sandboxed containers with GPU access.
 
-import type { SandboxConfig, SandboxPolicy } from '@hitechclaw-ai/shared';
+import type { SandboxConfig, SandboxPolicy } from '@hitechclaw/shared';
 import type { SandboxManager } from './sandbox-manager.js';
 import { POLICY_PERMISSIVE, registerBuiltinPolicy } from './policy-builder.js';
 

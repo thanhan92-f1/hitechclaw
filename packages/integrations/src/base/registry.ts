@@ -6,7 +6,7 @@ import type {
   IntegrationContext,
   ActionResult,
 } from './types.js';
-import type { ToolDefinition, ToolCall, ToolResult } from '@hitechclaw-ai/shared';
+import type { ToolDefinition, ToolCall, ToolResult } from '@hitechclaw/shared';
 
 /**
  * IntegrationRegistry — Manages all integration definitions and connections.

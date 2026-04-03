@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import type { IntegrationRegistry } from '@hitechclaw-ai/integrations';
+import type { IntegrationRegistry } from '@hitechclaw/integrations';
 
 export function createIntegrationRoutes(registry: IntegrationRegistry) {
   const app = new Hono();

@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/chat-sdk",
+    "name": "@hitechclaw/chat-sdk",
     "version": "1.2.0",
     "description": "HiTechClaw Chat SDK — React & React Native client for HiTechClaw AI Agent Platform",
     "type": "module",

@@ -1,4 +1,4 @@
-import type { ApprovalRequest, ApprovalStatus, ToolCall, ToolDefinition } from '@hitechclaw-ai/shared';
+import type { ApprovalRequest, ApprovalStatus, ToolCall, ToolDefinition } from '@hitechclaw/shared';
 import { randomUUID } from 'node:crypto';
 import { EventBus } from './event-bus.js';
 

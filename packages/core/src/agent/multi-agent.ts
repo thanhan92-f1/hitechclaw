@@ -2,7 +2,7 @@ import type {
     AgentResult,
     MultiAgentResult,
     MultiAgentTask
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import { Agent } from './agent.js';
 import { EventBus } from './event-bus.js';
 

@@ -5,7 +5,7 @@
 // LLM formats into a human-readable answer.
 // ─────────────────────────────────────────────────────────────
 
-import { defineSkill } from '@hitechclaw-ai/core';
+import { defineSkill } from '@hitechclaw/core';
 
 // Base URL is resolved at runtime (env var or default)
 function hisBaseUrl(): string {

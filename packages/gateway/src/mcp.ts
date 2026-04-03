@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
-import type { DomainPack } from '@hitechclaw-ai/domains';
-import type { Agent } from '@hitechclaw-ai/core';
+import type { DomainPack } from '@hitechclaw/domains';
+import type { Agent } from '@hitechclaw/core';
 import { MCPClientManager, type MCPServerConfig } from './mcp-client.js';
 
 // ─── MCP Server Registry ────────────────────────────────────

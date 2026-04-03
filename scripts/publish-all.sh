@@ -1,5 +1,5 @@
 #!/bin/bash
-# Publish all @hitechclaw-ai packages to npm in dependency order
+# Publish all @hitechclaw packages to npm in dependency order
 # Usage: ./scripts/publish-all.sh <OTP_CODE>
 
 set -e
@@ -22,7 +22,7 @@ PACKAGES=(
   "packages/chat-sdk"
 )
 
-echo "🚀 Publishing all @hitechclaw-ai packages to npm..."
+echo "🚀 Publishing all @hitechclaw packages to npm..."
 echo ""
 
 for pkg in "${PACKAGES[@]}"; do

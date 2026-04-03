@@ -1,17 +1,17 @@
-# @hitechclaw-ai/chat-sdk
+# @hitechclaw/chat-sdk
 
 > React & React Native SDK for [HiTechClaw AI Agent Platform](https://github.com/xdev-asia-labs/hitechclaw) — streaming chat, session management, and MCP integration.
 
 ## Installation
 
 ```bash
-npm install @hitechclaw-ai/chat-sdk
+npm install @hitechclaw/chat-sdk
 ```
 
 ## Quick Start — React
 
 ```tsx
-import { HiTechClawProvider, useChat } from '@hitechclaw-ai/chat-sdk/react';
+import { HiTechClawProvider, useChat } from '@hitechclaw/chat-sdk/react';
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function Chat() {
 ## Quick Start — React Native
 
 ```tsx
-import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
+import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw/chat-sdk/react-native';
 
 const config = createReactNativeConfig({
   baseUrl: 'https://api.hitechclaw.io',
@@ -64,7 +64,7 @@ export default function App() {
 ## Core Client (No React)
 
 ```typescript
-import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
+import { HiTechClawClient } from '@hitechclaw/chat-sdk';
 
 const client = new HiTechClawClient({
   baseUrl: 'https://api.hitechclaw.io',
@@ -180,7 +180,7 @@ Add to your MCP configuration (e.g., `.vscode/mcp.json`, `claude_desktop_config.
   "servers": {
     "hitechclaw": {
       "command": "node",
-      "args": ["node_modules/@hitechclaw-ai/chat-sdk/dist/mcp/bin.js"],
+      "args": ["node_modules/@hitechclaw/chat-sdk/dist/mcp/bin.js"],
       "env": {
         "HITECHCLAW_BASE_URL": "https://api.hitechclaw.io",
         "HITECHCLAW_TOKEN": "your-jwt-token"
@@ -211,8 +211,8 @@ HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx hitechcla
 ### Programmatic MCP Server
 
 ```typescript
-import { HiTechClawClient } from '@hitechclaw-ai/chat-sdk';
-import { createMcpServer } from '@hitechclaw-ai/chat-sdk/mcp';
+import { HiTechClawClient } from '@hitechclaw/chat-sdk';
+import { createMcpServer } from '@hitechclaw/chat-sdk/mcp';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
 const client = new HiTechClawClient({ baseUrl: '...', token: '...' });
@@ -231,7 +231,7 @@ import type {
   StreamEvent,
   TokenUsage,
   HiTechClawConfig,
-} from '@hitechclaw-ai/chat-sdk';
+} from '@hitechclaw/chat-sdk';
 ```
 
 ## License

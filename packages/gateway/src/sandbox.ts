@@ -3,11 +3,11 @@
 // ============================================================
 
 import { Hono } from 'hono';
-import type { TenantSandboxManager } from '@hitechclaw-ai/sandbox';
-import type { SandboxManager } from '@hitechclaw-ai/sandbox';
-import { BUILTIN_POLICIES } from '@hitechclaw-ai/sandbox';
-import { GPU_SANDBOX_IMAGES } from '@hitechclaw-ai/sandbox';
-import { sandboxAuditLogsCollection } from '@hitechclaw-ai/db';
+import type { TenantSandboxManager } from '@hitechclaw/sandbox';
+import type { SandboxManager } from '@hitechclaw/sandbox';
+import { BUILTIN_POLICIES } from '@hitechclaw/sandbox';
+import { GPU_SANDBOX_IMAGES } from '@hitechclaw/sandbox';
+import { sandboxAuditLogsCollection } from '@hitechclaw/db';
 
 export function createSandboxRoutes(
   sandboxManager: SandboxManager,

@@ -28,8 +28,8 @@ const PLUGIN_TEMPLATE_FILES: Record<string, string | ((name: string) => string)>
       pages: [],
     },
     dependencies: {
-      '@hitechclaw-ai/core': '*',
-      '@hitechclaw-ai/shared': '*',
+      '@hitechclaw/core': '*',
+      '@hitechclaw/shared': '*',
     },
   }, null, 2),
 

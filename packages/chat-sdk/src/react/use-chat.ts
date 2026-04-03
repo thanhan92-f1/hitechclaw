@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk/react — useChat Hook
+// @hitechclaw/chat-sdk/react — useChat Hook
 // ============================================================
 
 import { useState, useCallback, useRef } from 'react';

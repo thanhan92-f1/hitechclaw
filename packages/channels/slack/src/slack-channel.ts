@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw/shared';
 import { SlackApi } from './slack-api.js';
 import type { SlackMessage } from './slack-api.js';
 

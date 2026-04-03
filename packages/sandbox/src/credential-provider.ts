@@ -6,7 +6,7 @@
 // Credentials never touch the sandbox filesystem.
 
 import { randomUUID } from 'node:crypto';
-import type { SandboxProvider } from '@hitechclaw-ai/shared';
+import type { SandboxProvider } from '@hitechclaw/shared';
 import type { SandboxManager } from './sandbox-manager.js';
 
 /** Raw credential data from integration_connections table */

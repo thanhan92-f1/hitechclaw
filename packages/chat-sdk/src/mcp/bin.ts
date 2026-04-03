@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // ============================================================
-// @hitechclaw-ai/chat-sdk MCP Server — Standalone entry point
+// @hitechclaw/chat-sdk MCP Server — Standalone entry point
 // ============================================================
 //
-// Run:  HITECHCLAW_BASE_URL=https://... HITECHCLAW_TOKEN=... npx @hitechclaw-ai/chat-sdk mcp
+// Run:  HITECHCLAW_BASE_URL=https://... HITECHCLAW_TOKEN=... npx @hitechclaw/chat-sdk mcp
 //       node dist/mcp/bin.js
 //
 
@@ -16,7 +16,7 @@ const token = process.env['HITECHCLAW_TOKEN'];
 
 if (!baseUrl) {
     console.error('Error: HITECHCLAW_BASE_URL environment variable is required');
-    console.error('Example: HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx @hitechclaw-ai/chat-sdk mcp');
+    console.error('Example: HITECHCLAW_BASE_URL=https://api.hitechclaw.io HITECHCLAW_TOKEN=... npx @hitechclaw/chat-sdk mcp');
     process.exit(1);
 }
 

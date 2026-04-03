@@ -54,7 +54,7 @@ export const tenantSettings = pgTable('tenant_settings', {
     cpuLimit: '0.5',
     memoryLimit: '512Mi',
     gpuEnabled: false,
-  }), // TenantSandboxConfig from @hitechclaw-ai/shared
+  }), // TenantSandboxConfig from @hitechclaw/shared
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 }, (table) => [

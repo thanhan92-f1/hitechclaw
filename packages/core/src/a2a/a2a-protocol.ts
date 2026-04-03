@@ -4,7 +4,7 @@ import type {
     A2ATask,
     A2ATaskResult,
     ToolDefinition
-} from '@hitechclaw-ai/shared';
+} from '@hitechclaw/shared';
 import { randomUUID } from 'node:crypto';
 import { Agent } from '../agent/agent.js';
 import { EventBus } from '../agent/event-bus.js';

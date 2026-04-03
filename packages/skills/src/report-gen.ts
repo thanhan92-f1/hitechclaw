@@ -4,7 +4,7 @@
 // Calls the gateway /api/report/* endpoints internally.
 // ─────────────────────────────────────────────────────────
 
-import { defineSkill } from '@hitechclaw-ai/core';
+import { defineSkill } from '@hitechclaw/core';
 
 function gatewayBase(): string {
   return process.env.GATEWAY_INTERNAL_URL || 'http://localhost:3000';

@@ -6,16 +6,16 @@
  * dynamically via this manager.
  */
 
-import { DiscordChannel } from '@hitechclaw-ai/channel-discord';
-import { FacebookChannel } from '@hitechclaw-ai/channel-facebook';
-import { MSTeamsChannel } from '@hitechclaw-ai/channel-msteams';
-import { SlackChannel } from '@hitechclaw-ai/channel-slack';
-import { TelegramChannel } from '@hitechclaw-ai/channel-telegram';
-import { WhatsAppChannel } from '@hitechclaw-ai/channel-whatsapp';
-import { ZaloChannel } from '@hitechclaw-ai/channel-zalo';
-import type { MongoChannelConnection } from '@hitechclaw-ai/db';
-import { channelConnectionsCollection } from '@hitechclaw-ai/db';
-import type { Attachment, ChannelPlugin, ChatPlatform } from '@hitechclaw-ai/shared';
+import { DiscordChannel } from '@hitechclaw/channel-discord';
+import { FacebookChannel } from '@hitechclaw/channel-facebook';
+import { MSTeamsChannel } from '@hitechclaw/channel-msteams';
+import { SlackChannel } from '@hitechclaw/channel-slack';
+import { TelegramChannel } from '@hitechclaw/channel-telegram';
+import { WhatsAppChannel } from '@hitechclaw/channel-whatsapp';
+import { ZaloChannel } from '@hitechclaw/channel-zalo';
+import type { MongoChannelConnection } from '@hitechclaw/db';
+import { channelConnectionsCollection } from '@hitechclaw/db';
+import type { Attachment, ChannelPlugin, ChatPlatform } from '@hitechclaw/shared';
 
 export type MessageHandler = (
   platform: string,

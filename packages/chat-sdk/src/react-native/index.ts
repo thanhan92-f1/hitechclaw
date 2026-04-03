@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/chat-sdk/react-native — React Native Compatibility
+// @hitechclaw/chat-sdk/react-native — React Native Compatibility
 // ============================================================
 //
 // React Native's fetch doesn't support ReadableStream natively.
@@ -7,7 +7,7 @@
 // re-exports all React hooks (they work identically).
 //
 // Usage:
-//   import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
+//   import { HiTechClawProvider, useChat, createReactNativeConfig } from '@hitechclaw/chat-sdk/react-native';
 //
 //   const config = createReactNativeConfig({ baseUrl: 'https://api.hitechclaw.io', token: '...' });
 //   <HiTechClawProvider config={config}><App /></HiTechClawProvider>
@@ -55,7 +55,7 @@ export function parseSSELines(raw: string): Array<{ event?: string; data: string
  *
  * @example
  * ```tsx
- * import { createReactNativeConfig } from '@hitechclaw-ai/chat-sdk/react-native';
+ * import { createReactNativeConfig } from '@hitechclaw/chat-sdk/react-native';
  *
  * const config = createReactNativeConfig({
  *   baseUrl: 'https://api.hitechclaw.io',

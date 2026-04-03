@@ -1,4 +1,4 @@
-# @hitechclaw-ai/doc-mcp
+# @hitechclaw/doc-mcp
 
 MCP Server cho kho tài liệu developer của HiTechClaw platform. Khi VS Code AI (Copilot, Claude, etc.) code, nó sẽ tự động gọi MCP server này để tìm tài liệu liên quan trong kho.
 

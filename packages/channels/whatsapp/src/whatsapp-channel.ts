@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw/shared';
 import { WhatsAppApi } from './whatsapp-api.js';
 import type { WhatsAppWebhookPayload } from './whatsapp-api.js';
 

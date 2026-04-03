@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw/shared';
 import type { FacebookWebhookEvent } from './facebook-api.js';
 import { FacebookApi } from './facebook-api.js';
 

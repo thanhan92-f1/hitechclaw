@@ -1,8 +1,8 @@
 // ============================================================
-// @hitechclaw-ai/skill-hub — Skill Registry SDK
+// @hitechclaw/skill-hub — Skill Registry SDK
 // ============================================================
 // Provides types and helpers for the HiTechClaw skill marketplace.
-// The actual API server lives in @hitechclaw-ai/gateway/marketplace.
+// The actual API server lives in @hitechclaw/gateway/marketplace.
 
 export const version = '2.0.0';
 

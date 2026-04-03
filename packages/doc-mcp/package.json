@@ -1,5 +1,5 @@
 {
-    "name": "@hitechclaw-ai/doc-mcp",
+    "name": "@hitechclaw/doc-mcp",
     "version": "1.0.0",
     "description": "HiTechClaw Dev Docs MCP Server — Developer documentation knowledge base accessible via MCP for AI-assisted coding",
     "type": "module",

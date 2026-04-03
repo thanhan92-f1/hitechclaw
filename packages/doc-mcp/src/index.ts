@@ -1,5 +1,5 @@
 // ============================================================
-// @hitechclaw-ai/doc-mcp — Entry Point & Barrel Export
+// @hitechclaw/doc-mcp — Entry Point & Barrel Export
 // ============================================================
 
 export { createDocMcpServer } from './server.js';

@@ -4,9 +4,9 @@
 // Runs a lightweight poll every minute to evaluate cron expressions
 // against enabled workflows, without requiring external cron libraries.
 
-import { getDB, workflows, workflowExecutions, eq, and } from '@hitechclaw-ai/db';
-import type { IWorkflowEngine } from '@hitechclaw-ai/shared';
-import type { Workflow, WorkflowNode, WorkflowEdge } from '@hitechclaw-ai/shared';
+import { getDB, workflows, workflowExecutions, eq, and } from '@hitechclaw/db';
+import type { IWorkflowEngine } from '@hitechclaw/shared';
+import type { Workflow, WorkflowNode, WorkflowEdge } from '@hitechclaw/shared';
 import { randomUUID } from 'node:crypto';
 
 // ---------------------------------------------------------------------------

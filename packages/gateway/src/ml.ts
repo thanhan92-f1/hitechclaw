@@ -2,7 +2,7 @@
  * ML/AutoML API routes for the gateway.
  */
 import { Hono } from 'hono';
-import type { MLEngine } from '@hitechclaw-ai/ml';
+import type { MLEngine } from '@hitechclaw/ml';
 
 export function createMLRoutes(engine: MLEngine) {
   const ml = new Hono();

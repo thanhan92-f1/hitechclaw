@@ -5,7 +5,7 @@ import {
     sessionsCollection,
     type MongoAgentConfig,
     type MongoChannelConnection,
-} from '@hitechclaw-ai/db';
+} from '@hitechclaw/db';
 import { Hono } from 'hono';
 import { randomUUID } from 'node:crypto';
 import type { GatewayContext } from './gateway.js';

@@ -1,4 +1,4 @@
-import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw-ai/shared';
+import type { ChannelPlugin, IncomingMessage, OutgoingMessage } from '@hitechclaw/shared';
 import { ZaloApi } from './zalo-api.js';
 import type { ZaloWebhookEvent } from './zalo-api.js';
 

@@ -110,18 +110,18 @@ The server auto-detects Ollama at `http://localhost:11434`.
 ```
 HiTechClaw/
 ├── packages/
-│   ├── shared/          # @hitechclaw-ai/shared — Foundation types
-│   ├── core/            # @hitechclaw-ai/core — Agent engine, LLM, RAG, workflow, monitoring
-│   ├── db/              # @hitechclaw-ai/db — Drizzle ORM (PG) + MongoDB driver
-│   ├── gateway/         # @hitechclaw-ai/gateway — Hono HTTP server, REST API, auth
-│   ├── server/          # @hitechclaw-ai/server — Entry point, startup orchestration
-│   ├── integrations/    # @hitechclaw-ai/integrations — 11 service connectors
-│   ├── domains/         # @hitechclaw-ai/domains — 13 industry domain packs
-│   ├── skills/          # @hitechclaw-ai/skills — Built-in skills (defineSkill)
-│   ├── skill-hub/       # @hitechclaw-ai/skill-hub — Marketplace, MCP adapters
-│   ├── ml/              # @hitechclaw-ai/ml — 12 ML algorithms, AutoML
-│   ├── cli/             # @hitechclaw-ai/cli — CLI (commander.js)
-│   ├── doc-mcp/         # @hitechclaw-ai/doc-mcp — Dev Docs MCP server
+│   ├── shared/          # @hitechclaw/shared — Foundation types
+│   ├── core/            # @hitechclaw/core — Agent engine, LLM, RAG, workflow, monitoring
+│   ├── db/              # @hitechclaw/db — Drizzle ORM (PG) + MongoDB driver
+│   ├── gateway/         # @hitechclaw/gateway — Hono HTTP server, REST API, auth
+│   ├── server/          # @hitechclaw/server — Entry point, startup orchestration
+│   ├── integrations/    # @hitechclaw/integrations — 11 service connectors
+│   ├── domains/         # @hitechclaw/domains — 13 industry domain packs
+│   ├── skills/          # @hitechclaw/skills — Built-in skills (defineSkill)
+│   ├── skill-hub/       # @hitechclaw/skill-hub — Marketplace, MCP adapters
+│   ├── ml/              # @hitechclaw/ml — 12 ML algorithms, AutoML
+│   ├── cli/             # @hitechclaw/cli — CLI (commander.js)
+│   ├── doc-mcp/         # @hitechclaw/doc-mcp — Dev Docs MCP server
 │   ├── web/             # React + Tailwind frontend
 │   └── channels/        # Channel plugins
 │       ├── telegram/    # Telegram bot
