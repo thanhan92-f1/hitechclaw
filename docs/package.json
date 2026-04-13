@@ -20,7 +20,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
-    "@takumi-rs/image-response": "^0.72.0",
+    "@takumi-rs/image-response": "^1.0.8",
     "fumadocs-core": "16.6.17",
     "fumadocs-mdx": "14.2.10",
     "fumadocs-ui": "16.6.17",
